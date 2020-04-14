@@ -1,0 +1,76 @@
+#head {
+	border-bottom: 2px solid black;
+	display: flex;
+}
+
+.head-item{
+	width: 290px;
+	height: 100px;
+}
+
+#head-img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+}
+
+.shangpingqu {
+	padding-top: 20px;
+	padding-left: 50px;
+}
+
+.qu {
+	padding-top: 20px;
+	padding-left: 50px;
+}
+
+.add {
+	display: block;
+	padding-top: 30px;
+	padding-left: 50px;
+}
+
+
+.content {
+	display: flex;
+}
+
+.content-left {
+	border-right: 1px solid black;
+	width: 65%;
+	height: 420px;
+	overflow: scroll;
+}
+
+.content-right {
+	width: 35%;
+}
+
+.comodity-item {
+	display: inline-block;
+	height: 152px;
+	width: 270px;
+	margin: 45px;
+	border: 1px solid dodgerblue;
+}
+
+.comodity-img {
+	width: 150px;
+}
+
+.item-text {
+	
+}
+
+.sum {
+	background-color: gainsboro;
+	width: 250px;
+	margin: auto;
+	margin-top: 30px;
+	text-align: center;
+	padding: 10px;
+}
+
+.history {
+	margin: 20px;
+}
