@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="css/yggl.css"/>
+    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.css"/>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="public/js/vue.js"></script>
+    <script type="text/javascript" src="public/js/jquery-1.12.4.js" ></script>
 </head>
 <body>
-
+<header id="header">
+    <h2>超市管理系统</h2>
+</header>
+<div id="center">
+    <div id="left">
+        <ul class="list-group">
+            <a href="#"><li class="list-group-item">个人中心</li>
+                <a href="#"><li class="list-group-item">商品管理</li>
+                    <a href="#"><li class="list-group-item active">员工管理</li>
+        </ul>
+    </div>
+    <div id="right">
+        <div id="above">
+            <div id="plogo"><img src="image/mango.jpg" alt=""></div>
+            <div id="branch"><div class="dropdown">
+                <button class="dropbtn">请选择你的部门</button>
+                <div class="dropdown-content">
+                    <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index])">{{ item }}</a>
+                </div>
+            </div>
+            </div>
+            <div id="hello"><h3>{{ name }},你好</h3></div>
+            <div id="choice" v-model="elbranch"><h3>你选择的部门:&nbsp&nbsp&nbsp&nbsp{{ elbranch }}</h3></div>
+        </div>
+        <div id="below">
+            <div id="employeeinfo">
+                <table border="1" width=90% height=400px v-show="employee_name.length">
+                    <tr>
+                        <th>员工姓名</th>
+                        <th>工作</th>
+                        <th>今日打卡情况</th>
+                    </tr>
+                    <tr v-for="(item,index) in employee_name" v-for="(item,index) in employee_job" v-for="(item,index) in employee_signin">
+                        <td>{{ employee_name[index] }}</td>
+                        <td>{{ employee_job[index] }}</td>
+                        <td>{{ employee_signin[index] }}</td>
+                    </tr>
+                </table>
+            </div>
+            <br><br>
+            <div id="opearation">
+                <input type="text" v-model="curname" placeholder="新增员工姓名">
+                <input type="text" v-model="curjob" placeholder="新增员工工作">
+                <input type="button" value="确认新增" @click="addEmployee(curname,curjob)">
+                <br><br><br>
+                <input type="text" v-model="number" placeholder="请输入员工编号">
+                <input type="button" value="删除员工" @click="removeEmployee(number-1)">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <!-- 可加版权 -->
+</div>
+<script>
+    var app = new Vue({
+        el:"#above",
+        data:{
+            name:"张三",
+            elbranch:"",
+            branch:['奶制品','蔬果'],
+        },
+        methods:{
+            changeBranch:function(elbranch){
+                this.elbranch=elbranch;
+            }
+        }
+    })
+</script>
+<script>
+    var app = new Vue({
+        el:"#below",
+        data:{
+            number:'',
+            dfsignin:'是',
+            employee_name:['张三','李四','王五'],
+            employee_job:['称量','理货','加工'],
+            employee_signin:['是','否','是'],
+            curname:'',
+            curjob:''
+        },
+        methods:{
+            addEmployee:function(name,job){
+                this.employee_name.push(name);
+                this.employee_job.push(job);
+                this.employee_signin.push(this.dfsignin);
+            },
+            removeEmployee:function(index){
+                this.employee_name.splice(index,1);
+                this.employee_job.splice(index,1);
+                this.employee_signin.splice(index,1);
+            }
+        }
+    })
+</script>
 </body>
 </html>
