@@ -1,0 +1,147 @@
+body {
+	overflow: hidden;
+}
+/* header part */
+#header{
+	position: relative;
+	margin-top: 0;
+	text-align:center;
+	background: rgb(252, 248, 7);
+    height: 80px;
+}
+
+#header h2{
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-weight: 500;
+	color: rgb(223, 8, 8);
+}
+/* center part */
+#center{
+	height: 800px;
+}
+
+#left{
+    margin-top: 40px;
+    margin-left: 25px;
+	background: white;
+	float: left;
+	width: 15%;
+    height: 80%;
+}
+
+#left ul{
+	width: 100%;
+}
+
+#left ul li{
+	list-style-type: none;
+	padding-bottom: 10px;
+}
+
+#left a{
+	padding:5px 15px;
+	font-size:20px;
+	text-decoration:none;
+	margin-left:10px;
+	display:block;
+}
+
+#right{
+    float: left;
+    margin-left: 30px;
+    margin-top: 40px;
+    width: 80%;
+    height: 100%;
+    border: solid 1px;
+}
+
+#above{
+    height: 185px;
+}
+
+#plogo{
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+#hello{
+    float: right;
+    margin-top: 20px;
+    margin-right: 80px;
+}
+
+#branch{
+    float: right;
+    margin-top: 30px;
+    margin-right: 180px;
+}
+
+/* 下拉按钮样式 */
+.dropbtn {
+    background-color: rgb(10, 93, 248);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 容器 <div> - 需要定位下拉内容 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* 下拉内容 (默认隐藏) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* 下拉菜单的链接 */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* 鼠标移上去后修改下拉菜单链接颜色 */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* 在鼠标移上去后显示下拉菜单 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 当下拉内容显示后修改下拉按钮的背景颜色 */
+.dropdown:hover .dropbtn {
+    background-color: #fc0707;
+}
+
+#choice{
+    float: right;
+    margin-top: 100px;
+    margin-right: -100px;
+}
+
+/* employee information */
+#below{
+    margin-left: 120px;
+}
+
+#employeeinfo{
+    width: 90%;
+    height: 400px;
+}
+
+#operation{
+    margin-top: 60px;
+}

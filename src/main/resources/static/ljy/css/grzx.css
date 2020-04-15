@@ -1,0 +1,68 @@
+body {
+	overflow: hidden;
+}
+
+#header{
+	position: relative;
+	margin-top: 0;
+	text-align:center;
+	background: rgba(45,45,45,1  );
+	height: 100px;
+	
+
+}
+#header h2{
+	position: absolute;
+
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+}
+
+
+#center{
+	height: 550px;
+	
+}
+#left{
+	background: rgba(30,34,35,1);
+	float: left;
+	width: 15%;
+	height: 550px;
+	color: white;
+
+}
+
+#left ul{
+	width: 100%;
+}
+#left ul li{
+	list-style-type: none;
+	padding-bottom: 10px;
+}
+#left a{
+	padding:5px 15px;
+	font-size:20px;
+	text-decoration:none;
+	margin-left:10px;
+	display:block;
+
+}
+
+.nav-item {
+	color: orange;
+}
+.nav-item:hover {
+	color: orange;
+}
+.nav-item:focus {
+	color: orange;
+}
+
+
+/*个人中心*/
+#right{
+	width: 85%;
+	height: 550px;
+	float: left;
+}
