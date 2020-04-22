@@ -1,0 +1,320 @@
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
+}
+
+body, html{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+/******************header******************/
+.header{
+	height: 16%;
+	width: 100%;
+	border: solid 2px rgb(130,130,130);
+}
+
+.header p{
+	font-size: 30px;    
+	text-align: center;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+/*******************center********************/
+.center{
+	height: 84%;
+	width: 100%;
+}
+
+.center_of_left{
+	float: left;
+	width: 17.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+.center_of_right{
+	float: left;
+	width: 82.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#top{
+	height: 24%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+.img-circle{
+	height: 40%;
+	width: 40%;
+}
+
+#identify{
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+
+#name_pos{
+	border: solid 1px rgb(130,130,130);
+	border-radius: 10%;
+	width: 50%;
+	position: relative;	
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#catelog{
+	text-align: center;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 20%;
+}
+
+#catelog p{
+	margin-bottom: 3%;
+	font-size: 23px;
+}
+
+#region{
+	font-size: 20px;
+	text-align: center;
+	border: solid 1px rgb(130, 130, 130);
+	width: 50%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.img-thumbnail{
+	margin: 5px;
+	width: 63%;
+	height: 63%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#Lower_shelf{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 70%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+}
+
+#Commodity_Description{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 70%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+}
+
+#left{
+	float: left;
+	width: 30%;
+}
+
+#center{
+	float: left;
+	margin-left: 10%;
+}
+
+#right{
+	float: left;
+	margin-left: 15%;
+}
+
+#Commodity_Name{
+	margin-top: 5%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 150%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#Inventory{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 150%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#Quantity_to_be_bought{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 150%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#Unit_Price{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 150%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#month_total{
+	margin-top: 10%;
+	margin-left: 5px;
+	font-size: 20px;
+	line-height: 250%;
+	width: 150%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#modify{
+	margin-top: 20%;
+	font-size: 20px;
+	line-height: 250%;
+	width: 200%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#to_deal{
+	margin-top: 20%;
+	font-size: 20px;
+	line-height: 250%;
+	width: 200%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+
+#increase{
+	float: left;
+	margin-top: 20%;
+	font-size: 20px;
+	line-height: 250%;
+	width: 50%;
+	text-align: center;
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#reduce{
+	float: left;
+	margin-top: 20%;
+	font-size: 20px;
+	line-height: 250%;
+	width: 50%;
+	text-align: center;
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
+
+#change_unit_price{
+	margin-top: 20%;
+	font-size: 20px;
+	line-height: 250%;
+	width: 200%;
+	text-align: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border: solid 1px rgb(130,130,130);
+	border-radius: 5px;
+}
