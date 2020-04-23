@@ -55,7 +55,6 @@ body {
     margin-top: 40px;
     width: 80%;
     height: 100%;
-    border: solid 1px;
 }
 
 #above{
@@ -80,7 +79,7 @@ body {
     margin-right: 180px;
 }
 
-/* ÏÂÀ­°´Å¥ÑùÊ½ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½Ê½ */
 .dropbtn {
     background-color: rgb(10, 93, 248);
     color: white;
@@ -90,13 +89,13 @@ body {
     cursor: pointer;
 }
 
-/* ÈÝÆ÷ <div> - ÐèÒª¶¨Î»ÏÂÀ­ÄÚÈÝ */
+/* ï¿½ï¿½ï¿½ï¿½ <div> - ï¿½ï¿½Òªï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* ÏÂÀ­ÄÚÈÝ (Ä¬ÈÏÒþ²Ø) */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -105,7 +104,7 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-/* ÏÂÀ­²Ëµ¥µÄÁ´½Ó */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -113,15 +112,15 @@ body {
     display: block;
 }
 
-/* Êó±êÒÆÉÏÈ¥ºóÐÞ¸ÄÏÂÀ­²Ëµ¥Á´½ÓÑÕÉ« */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É« */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
-/* ÔÚÊó±êÒÆÉÏÈ¥ºóÏÔÊ¾ÏÂÀ­²Ëµ¥ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* µ±ÏÂÀ­ÄÚÈÝÏÔÊ¾ºóÐÞ¸ÄÏÂÀ­°´Å¥µÄ±³¾°ÑÕÉ« */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½É« */
 .dropdown:hover .dropbtn {
     background-color: #fc0707;
 }
@@ -144,4 +143,28 @@ body {
 
 #operation{
     margin-top: 60px;
+}
+
+/* table */
+table.imagetable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+}
+table.imagetable th {
+    background:#b5cfd2;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+table.imagetable td {
+    background:#dcddc0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
 }
