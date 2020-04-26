@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>商品购入</title>
+		<link rel="stylesheet" type="text/css" href="css/commodityManagement.css"/>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="header clearfix">
+			<p>超市商品管理系统</p>
+		</div>
+		<div class="content">
+			<div class="content_left">
+				<div id="commodity_purchase">
+					<p><a href="commodityPurchase.html" target="_blank">商品购入</a></p>
+				</div>
+				<div id="commodity_sold">
+					<p><a href="commoditySold.html" target="_blank">商品售卖</a></p>
+				</div>
+				<div id="system_out">
+					<p><a href="#">退出系统</a></p>
+				</div>
+			</div>
+			<div class="content_right">
+				<div class="content_right_up">
+					<div id="commodityNumber">
+						商品编号
+						<input type="text" placeholder="123"/>
+					</div>
+					<div id="commodityName">
+						商品名称
+						<input type="text" placeholder="苹果"/>
+					</div>
+					<div id="commoditySearch">
+						<button type="button">搜索</button>
+					</div>
+				</div>
+				<div class="content_right_down">
+					<table class="table">
+						<caption>商品购入表</caption>
+   						<thead>
+      						<tr>
+         						<th>编号</th>
+         						<th>名称</th>
+         						<th>数量</th>
+         						<th>金额</th>
+         						<th>供应商</th>
+         						<th>描述</th>
+         						<th>时间</th>
+      						</tr>
+   						</thead>
+   						<tbody>
+      						<tr>
+         						<td>233</td>
+								<td>鲈鱼</td>
+								<td>6</td>
+								<td>1080</td>
+								<td>大堰塘生态养殖</td>
+								<td>海鲜</td>
+								<td>2020-3-17</td>
+      						</tr>
+      						<tr>
+         						<td>999</td>
+								<td>梨儿</td>
+								<td>2</td>
+								<td>532</td>
+								<td>坨凌奥果园</td>
+								<td>水果</td>
+								<td>2020-3-17</td>
+      						</tr>
+      						<tr>
+      							<td>666</td>
+								<td>菠菜</td>
+								<td>3</td>
+								<td>789</td>
+								<td>石板大棚基地</td>
+								<td>蔬菜</td>
+								<td>2020-3-17</td>
+      						</tr>
+      						<tr>
+      							<td>333</td>
+								<td>猪肉</td>
+								<td>12</td>
+								<td>10000</td>
+								<td>石板养猪场</td>
+								<td>肉</td>
+								<td>2020-3-17</td>
+      						</tr>
+   						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
