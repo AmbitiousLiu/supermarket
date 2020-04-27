@@ -8,26 +8,24 @@
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
 	</head>
 	<body>
-		<header id="header">
-			<h2>超市管理系统</h2></header>
-			
-		<div id="center">
-			<div id="left">
-				<ul>
-					<li>
-						<a href="#">个人中心</a>
-					</li>
-					<li>
-						<a href="#" class="nav-item">商品管理&gt;</a>
-					</li>
-					<li>
-						<a href="#">员工管理</a>
-					</li>
-				</ul>
+		<div class="header">
+			<p>超市管理系统</p>
+		</div>
+		<div class="center">
+			<div class="center_of_left">
+				<div id="Personal_management">
+					<p><a href="#" >个人中心&gt;</a></p>
+				</div>
+				<div id="Commodity_management">
+					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
+				</div>
+				<div id="Staff_management">
+					<p>	<a href="#">员工管理&gt;</a></p>
+				</div>
 			</div>
 		
 		
-			<div id="right">
+			<div id="center_of_right">
 				<div id="head">
 					<div class="head-item">
 						<img src="img/haiwenxiang.jpg" id="head-img"/>
@@ -35,7 +33,14 @@
 					</div>
 					<div class="head-item">
 						<div class="shangpingqu">商品区：</div>
-						<div class="qu">瓜果区</div>
+						<div class="qu">
+							<select name="select">
+								<option value="all" selected="selected">全部区/瓜果区/生鲜区……</option>
+								<option value="fruit">水果区</option>
+								<option value="vegetable">蔬菜区</option>
+								<option value="fresh">生鲜区</option>
+							</select>
+						</div>
 					</div>
 					<div class="head-item">
 						<div class="shangpingqu">空闲商品架：</div>

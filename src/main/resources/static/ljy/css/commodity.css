@@ -38,7 +38,7 @@
 .content-left {
 	border-right: 1px solid black;
 	width: 65%;
-	height: 420px;
+	height: 500px;
 	overflow: scroll;
 }
 
@@ -50,7 +50,7 @@
 	display: inline-block;
 	height: 152px;
 	width: 270px;
-	margin: 45px;
+	margin: 40px;
 	border: 1px solid dodgerblue;
 }
 

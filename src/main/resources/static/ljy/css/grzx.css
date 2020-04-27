@@ -1,52 +1,90 @@
-body {
-	overflow: hidden;
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
 }
 
-#header{
+body, html{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+.header{
+	height: 16%;
+	width: 100%;
+	border: solid 2px rgb(130,130,130);
+}
+
+.header p{
+	font-size: 30px;    
+	text-align: center;
 	position: relative;
-	margin-top: 0;
-	text-align:center;
-	background: rgba(45,45,45,1  );
-	height: 100px;
-	
-
-}
-#header h2{
-	position: absolute;
-
 	left: 50%;
-	transform: translateX(-50%);
-	color: white;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
 }
 
-
-#center{
-	height: 550px;
-	
-}
-#left{
-	background: rgba(30,34,35,1);
-	float: left;
-	width: 15%;
-	height: 550px;
-	color: white;
-
-}
-
-#left ul{
+/*******************center********************/
+.center{
+	height: 84%;
 	width: 100%;
 }
-#left ul li{
-	list-style-type: none;
-	padding-bottom: 10px;
-}
-#left a{
-	padding:5px 15px;
-	font-size:20px;
-	text-decoration:none;
-	margin-left:10px;
-	display:block;
 
+.center_of_left{
+	float: left;
+	width: 17.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+.center_of_right{
+	float: left;
+	width: 82.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
 }
 
 .nav-item {
@@ -61,8 +99,8 @@ body {
 
 
 /*个人中心*/
-#right{
+/*#right{
 	width: 85%;
 	height: 550px;
 	float: left;
-}
+}*/
