@@ -10,16 +10,20 @@
     <script type="text/javascript" src="public/js/jquery-1.12.4.js" ></script>
 </head>
 <body>
-<header id="header">
-    <h2>超市管理系统</h2>
+<header class="header">
+    <p>超市管理系统</p>
 </header>
-<div id="center">
-    <div id="left">
-        <ul class="list-group">
-            <a href="#"><li class="list-group-item">个人中心</li>
-                <a href="#"><li class="list-group-item">商品管理</li>
-                    <a href="#"><li class="list-group-item active">员工管理</li>
-        </ul>
+<div class="center">
+    <div class="center_of_left">
+        <div id="Personal_management">
+            <p><a href="#" >个人中心&gt;</a></p>
+        </div>
+        <div id="Commodity_management">
+            <p><a href="#">商品管理&gt;</a></p>
+        </div>
+        <div id="Staff_management">
+            <p>	<a href="#">员工管理&gt;</a></p>
+        </div>
     </div>
     <div id="right">
         <div id="above">
@@ -32,30 +36,31 @@
             </div>
             </div>
             <div id="hello"><h3>{{ name }},你好</h3></div>
-            <div id="choice" v-model="elbranch"><h3>你选择的区域:&nbsp&nbsp&nbsp&nbsp{{ elbranch }}</h3></div>
+            <div id="choice" v-model="elbranch"><h4>你选择的区域:&nbsp&nbsp&nbsp&nbsp{{ elbranch }}</h></div>
         </div>
         <div id="below">
             <div id="employeeinfo">
-                <table class="imagetable" border="1" width=90% height=60px v-show="employee_name.length">
-                    <tr>
-                        <th>员工姓名</th>
-                        <th>工作</th>
-                        <th>今日打卡情况</th>
-                    </tr>
-                </table>
-                <table class="imagetable" id="table_result">
-                    <tbody>
-                        <tr height=100%  v-for="(item,index) in employee_name" v-for="(item,index) in employee_job" v-for="(item,index) in employee_signin">
-                            <td width=410px height=65px>{{ employee_name[index] }}</td>
-                            <td width=253px>{{ employee_job[index] }}</td>
-                            <td width=564px>{{ employee_signin[index] }}</td>
+                <div class="em_intro">
+                    <table class="imagetable" width=100% height=60px v-show="employee_name.length">
+                        <tr>
+                            <th width=33%>员工姓名</th>
+                            <th width=34%>工作</th>
+                            <th width=33%>今日打卡情况</th>
                         </tr>
-                    </tbody>
-                </table>
+                    </table>
+                </div>
+                <div class="em_detail">
+                    <table class="imagetable" id="table_result" height=100% width=100%>
+                        <tr v-for="(item,index) in employee_name" v-for="(item,index) in employee_job" v-for="(item,index) in employee_signin">
+                            <td width=232px width=33%>{{ employee_name[index] }}</td>
+                            <td width=239px width=34%>{{ employee_job[index] }}</td>
+                            <td width=231px width=33%>{{ employee_signin[index] }}</td>
+                        </tr>
+                    </table>
+                </div>
                 <br>
                 <div id="barcon" name="barcon"></div>
-            </div>
-            <br><br>
+            </div>  
             <div id="opearation">
                 <input type="text" v-model="curname" placeholder="新增员工姓名">
                 <input type="text" v-model="curjob" placeholder="新增员工工作">

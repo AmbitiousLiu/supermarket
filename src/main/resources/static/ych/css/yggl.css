@@ -1,7 +1,33 @@
-body {
-	overflow: hidden;
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
+}
+
+body, html{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
 }
 /* header part */
+.header{
+	height: 16%;
+	width: 100%;
+	border: solid 2px rgb(130,130,130);
+}
+
+.header p{
+	font-size: 30px;    
+	text-align: center;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
 #header{
 	position: relative;
 	margin-top: 0;
@@ -19,46 +45,79 @@ body {
 	color: rgb(223, 8, 8);
 }
 /* center part */
-#center{
-	height: 800px;
-}
-
-#left{
-    margin-top: 40px;
-    margin-left: 25px;
-	background: white;
-	float: left;
-	width: 15%;
-    height: 80%;
-}
-
-#left ul{
+.center{
+	height: 84%;
 	width: 100%;
 }
 
-#left ul li{
-	list-style-type: none;
-	padding-bottom: 10px;
+.center_of_left{
+	float: left;
+    width: 17.5%;
+	/* width: 17.5%; */
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
 }
 
-#left a{
-	padding:5px 15px;
-	font-size:20px;
-	text-decoration:none;
-	margin-left:10px;
-	display:block;
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management a {
+	color: orange;
+}
+.center_of_left a:hover {
+	color: orange;
+}
+.center_of_left a:focus {
+	color: orange;
 }
 
 #right{
     float: left;
     margin-left: 30px;
     margin-top: 40px;
-    width: 80%;
+    width: 75%;
     height: 100%;
 }
 
 #above{
     height: 185px;
+    /* border: solid 5px; */
 }
 
 #plogo{
@@ -70,13 +129,13 @@ body {
 #hello{
     float: right;
     margin-top: 20px;
-    margin-right: 80px;
+    margin-right: 40px;
 }
 
 #branch{
     float: right;
     margin-top: 30px;
-    margin-right: 180px;
+    margin-right: 60px;
 }
 
 /* ������ť��ʽ */
@@ -133,16 +192,29 @@ body {
 
 /* employee information */
 #below{
-    margin-left: 120px;
+    margin-left: 100px;
+    margin-right: 100px;
+    /* border: solid 5px; */
 }
 
 #employeeinfo{
-    width: 90%;
-    height: 400px;
+    width: 80%;
+    height: 240px;
+    /* border: solid 5px; */
+}
+
+.em_intro{
+    width: 100%;
+    /* border: solid 5px; */
+}
+
+.em_detail{
+    width: 100%;
+    /* border: solid 2px; */
 }
 
 #operation{
-    margin-top: 60px;
+    margin-bottom: 80px;
 }
 
 /* table */
