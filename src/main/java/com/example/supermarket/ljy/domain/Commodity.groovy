@@ -5,7 +5,8 @@ import lombok.Data
 import java.sql.Date
 
 /**
- * @author jleo* @date 2020/4/27
+ * @author jleo
+ * @date 2020/4/27
  */
 @Data
 class Commodity {

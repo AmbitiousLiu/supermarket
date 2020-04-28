@@ -21,4 +21,12 @@ class CommodityInitService {
     String getAllCommodities() {
         JSON.toJSONString(commodityMapper.getAllCommodities())
     }
+
+    String getCommoditiesBySort(String sort) {
+        JSON.toJSONString(commodityMapper.getCommoditiesBySort(sort))
+    }
+
+    String getCommodityByCnum(String cnum) {
+        JSON.toJSONString(commodityMapper.getCommodityByCnum(cnum))
+    }
 }
