@@ -1,5 +1,5 @@
 package com.example.supermarket.sry.web;
-import com.example.supermarket.sry.service.DealInitService;
+import com.example.supermarket.sry.service.Deal_CommodityInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/deal")
-class DealInitController {
+class Deal_CommodityInitController {
 
     @Autowired
-    public DealInitService dealInitService;
+    public Deal_CommodityInitService dealCommodityInitService;
 
     /**
      * GET:/commodity/deal ('content ?: ""' means return "" if content is null)
      * @param response: json string of commodities's data
      * @return
      */
-    @GetMapping(value = "/deal")
+    @GetMapping(value = "/commodity")
     public void initCommodity(HttpServletResponse response) throws IOException {
-        String content = dealInitService.getAllCommodities();
+        String content = dealCommodityInitService.getAllCommodities();
         response.setContentType("text/json;charset=utf-8");
         if (content == null) {
             response.getWriter().write("");
@@ -42,16 +42,16 @@ class DealInitController {
      * @param response: json string if commodities's data
      * @return
      */
-    @PostMapping(value = "/deal")
+    @PostMapping(value = "/commodity")
     public void initCommodityByParam(@RequestParam(value = "cnum", required = false) String cnum,
                                                             @RequestParam(value = "sort", required = false) String sort,
                                                             HttpServletResponse response)  throws IOException  {
         String content;
         if (cnum != null) {
-            content = dealInitService.getCommodityByCnum(cnum);
+            content = dealCommodityInitService.getCommodityByCnum(cnum);
         } else {
             if (sort != null) {
-                content = dealInitService.getCommoditiesBySort(sort);
+                content = dealCommodityInitService.getCommoditiesBySort(sort);
             } else {
                 content = "";
             }
