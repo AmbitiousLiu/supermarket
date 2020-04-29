@@ -15,16 +15,18 @@ import java.io.IOException;
 public class PersonInitController {
     @Autowired PersonInitService personInitService;
 
-    @PostMapping(value = "/getInfo") void initPerson(HttpServletResponse response, @SessionAttribute(value = "useId" ,required = true)String useId)throws IOException {
-        String content = personInitService.getAllInfo(useId);
+    @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response)throws IOException {
+        String content = personInitService.getAllInfo("2");
         response.setContentType("text/json;charset=utf-8");
+        System.out.println(1);
         response.getWriter().write(content==null ?"":content);
 
     }
 
-    @PostMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestParam(value = "person" ,required = true) Person person)throws IOException{
+    @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestParam(value = "person" ,required = true) Person person)throws IOException{
         Integer integer = personInitService.modifyAllInfo(person);
         response.setContentType("text/json;charset=utf-8");
+        System.out.println(2);
         response.getWriter().write(integer == 0 ?"1":"0");
     }
 

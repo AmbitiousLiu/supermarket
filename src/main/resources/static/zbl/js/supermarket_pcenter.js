@@ -3,19 +3,22 @@ $(function(){
 
 
 	$.post(
-	"/Info/getInfo",
+	"http://localhost:8080/Info/getInfo",
 	{},
 	function(data){
+
 		var json = eval(data);
-		$("#name_pos").text(json.name+"/"+"json.position")
-		$("#gender").text(json.gender);
-		$("#position").text(json.position);
-		$("#age").text(json.age);
-		$("#stunum").text(json.stu_num);
-		$("#seniority").text(json.seniority);
-		$("#region").text(json.region);
-		$("#salary").text(json.salary);
-	}
+
+		$("#name_pos").text(json[0].name+"/"+json[0].position)
+		$("#gender").val(json[0].gender);
+		$("#position").val(json[0].position);
+		$("#age").val(json[0].age);
+		$("#stu_num").val(json[0].stu_num);
+		$("#seniority").val(json[0].seniority);
+		$("#region").val(json[0].region);
+		$("#salary").val(json[0].salary);
+	},
+		"json"
 	
 )
 	
@@ -28,9 +31,10 @@ $(function(){
 		var region = $("#modi_region");
 		var position = $("#modi_pos");
 		var stu_num = $("#modi_num");
+		alert(1);
 		
 		$.post(
-			"/Info/modifyInfo",
+			"http://localhost:8080/Info/modifyInfo",
 			{"person" : {
 				"name" : name,
 				"age" : age,
@@ -47,7 +51,8 @@ $(function(){
 				}else{
 					alert("修改成功！");
 				}
-			}
+			},
+			"json"
 			
 		)
 		

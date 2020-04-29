@@ -12,7 +12,7 @@ import java.util.List;
 public interface PersonMapper {
 
     @Select("select * from stuff" +
-            " where  supermarket_stuff.stu_num = #{useId}")
+            " where stuff.stu_num = #{useId}")
     List<Person>getAllInfo(String useId);
 
     @Update("update stuff " +
