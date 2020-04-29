@@ -11,16 +11,15 @@ import java.util.List;
 @Mapper
 public interface PersonMapper {
 
-    @Select("select * from supermarket_stuff,supermarket_user,supermarket_position" +
-            " where supermarket_stuff.stu_num = supermarket_user.stu_num " +
-            "and supermarket_stuff.position = supermarket_position.position " +
-            "and useId = #{useId}")
+    @Select("select * from supermarket_stuff,supermarket_position" +
+            " where supermarket_stuff.stu_num = supermarket_position.stu_num " +
+            "and supermarket_stuff.stu_num = #{useId}")
     List<Person>getAllInfo(String useId);
 
     @Update("update person " +
-            "set name = #{name},gender = #{gender},region = #{gender}," +
-            "position = #{position},stunum = #{stunum},birth = #{birth}," +
-            "emBirth = #{emBirth} where useId = #{useId}")
-    Integer modifyAllInfo();
+            "set name = #{person.name},gender = #{person.gender},region = #{person.gender}," +
+            "position = #{person.position},stunum = #{person.stunum},birth = #{person.birth}," +
+            "emBirth = #{person.emBirth} where stu_num = #{person.stu_num}")
+    Integer modifyAllInfo(Person person);
 
 }

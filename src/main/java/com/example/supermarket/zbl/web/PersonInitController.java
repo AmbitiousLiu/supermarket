@@ -1,5 +1,6 @@
 package com.example.supermarket.zbl.web;
 
+import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,10 @@ public class PersonInitController {
 
     }
 
-    @GetMapping(value = "/modifyInfo") void modifyPerson(){
-
+    @GetMapping(value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestParam(value = "person" ,required = true) Person person)throws IOException{
+        Integer integer = personInitService.modifyAllInfo(person);
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(integer==0 ?"修改成功！":"修改失败！");
     }
+
 }

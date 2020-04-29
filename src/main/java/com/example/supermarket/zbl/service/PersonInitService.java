@@ -1,6 +1,7 @@
 package com.example.supermarket.zbl.service;
 
 import com.alibaba.fastjson.JSON;
+import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.mapper.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,6 @@ public class PersonInitService {
     public String getAllInfo(String useId){
        return   JSON.toJSONString(personMapper.getAllInfo(useId));
     }
-    public String  modifyAllInfo(){return  null;}
+    public Integer modifyAllInfo(Person person){ return  personMapper.modifyAllInfo(person);}
 
 }
