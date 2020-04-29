@@ -15,7 +15,7 @@ import java.io.IOException;
 public class PersonInitController {
     @Autowired PersonInitService personInitService;
 
-    @PostMapping(value = "/getInfo") void initPerson(HttpServletResponse response, @RequestParam(value = "useId" ,required = true)String useId)throws IOException {
+    @PostMapping(value = "/getInfo") void initPerson(HttpServletResponse response, @SessionAttribute(value = "useId" ,required = true)String useId)throws IOException {
         String content = personInitService.getAllInfo(useId);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content==null ?"":content);
@@ -25,7 +25,7 @@ public class PersonInitController {
     @PostMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestParam(value = "person" ,required = true) Person person)throws IOException{
         Integer integer = personInitService.modifyAllInfo(person);
         response.setContentType("text/json;charset=utf-8");
-        response.getWriter().write(integer==0 ?"修改成功！":"修改失败！");
+        response.getWriter().write(integer == 0 ?"1":"0");
     }
 
 }
