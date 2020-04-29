@@ -15,7 +15,7 @@ public interface PersonMapper {
             " where supermarket_stuff.stu_num = supermarket_user.stu_num " +
             "and supermarket_stuff.position = supermarket_position.position " +
             "and useId = #{useId}")
-    List<Person>getAllInfo();
+    List<Person>getAllInfo(String useId);
 
     @Update("update person " +
             "set name = #{name},gender = #{gender},region = #{gender}," +
