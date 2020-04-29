@@ -1,0 +1,28 @@
+package com.example.supermarket.zbl.web;
+
+import com.example.supermarket.zbl.service.PersonInitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@RestController
+@RequestMapping(value = "/Info")
+public class PersonInitController {
+    @Autowired PersonInitService personInitService;
+
+    @GetMapping(value = "/getInfo") void initPerson(HttpServletResponse response)throws IOException {
+        String content = personInitService.getAllInfo();
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content==null ?"":content);
+
+    }
+
+    @GetMapping(value = "/modifyInfo") void modifyPerson(){
+
+    }
+}
