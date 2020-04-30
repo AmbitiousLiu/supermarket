@@ -3,8 +3,6 @@ package com.example.supermarket.ych.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.ych.domain.Employee;
 import com.example.supermarket.ych.mapper.EmployeeMapper;
-import com.example.supermarket.zbl.domain.Person;
-import com.example.supermarket.zbl.mapper.PersonMapper;
 
 import javax.annotation.Resource;
 

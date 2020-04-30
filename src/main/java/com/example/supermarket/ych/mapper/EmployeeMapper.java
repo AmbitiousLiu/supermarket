@@ -1,7 +1,6 @@
 package com.example.supermarket.ych.mapper;
 
 import com.example.supermarket.ych.domain.Employee;
-import com.example.supermarket.zbl.domain.Person;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
