@@ -16,9 +16,9 @@ public interface PersonMapper {
     List<Person>getAllInfo(String useId);
 
     @Update("update stuff " +
-            "set name = #{person.name},gender = #{person.gender},region = #{person.gender}," +
-            "position = #{person.position},stu_num = #{person.stunum}" +
-            " where stu_num = #{person.stu_num}")
-    Integer modifyAllInfo(Person person);
+            "set name = #{name},gender = #{gender},region = #{region}," +
+            "position = #{position},age = #{age}" +
+            " where stuff.stu_num = #{stu_num}")
+    Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age);
 
 }

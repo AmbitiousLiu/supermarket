@@ -24,36 +24,45 @@ $(function(){
 	
 	$("#modify").click(function(){
 		
-		var name = $("#modi_name");
-		var gender = $("#modi_gender");
-		var age = $("#modi_age");
-		var seniority = $("#modi_senoirity");
-		var region = $("#modi_region");
-		var position = $("#modi_pos");
-		var stu_num = $("#modi_num");
-		alert(1);
-		
-		$.post(
-			"http://localhost:8080/Info/modifyInfo",
-			{"person" : {
-				"name" : name,
-				"age" : age,
-				"gender" : gender,
-				"seniority" : seniority,
-				"region" : region,
-				"stu_num" : stu_num,
-				"position" : position,
-				"salary" : "0"
-			}},
-			function(data){
-				if(data == "0"){
-					alert("修改失败！");
-				}else{
-					alert("修改成功！");
-				}
-			},
-			"json"
-			
+		var name = $("#modi_name").val();
+		var gender = $("#modi_gender").val();
+		var age = $("#modi_age").val();
+		var seniority = $("#modi_senoirity").val();
+		var region = $("#modi_region").val();
+		var position = $("#modi_pos").val();
+		var stu_num = $("#modi_num").val();
+
+
+
+
+
+
+
+		var person ={
+			"name": name,
+			"age": age,
+			"gender": gender,
+			"seniority": seniority,
+			"region": region,
+			"stu_num": stu_num,
+			"position": position,
+			"salary": "0"
+		};
+		alert(JSON.stringify(person));
+		$.ajax({
+				type: "post",
+				url: "http://localhost:8080/Info/modifyInfo",
+				contentType:'application/json',
+				data: JSON.stringify(person) ,
+				success: function (data) {
+					if (data == "0") {
+						alert("修改失败！");
+					} else {
+						alert("修改成功！");
+					}
+				},
+				dataType: 'json'
+			}
 		)
 		
 	})
