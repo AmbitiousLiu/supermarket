@@ -27,4 +27,8 @@ public class Deal_CommodityInitService {
     public String getCommodityByCnum(String cnum) {
         return JSON.toJSONString(dealCommodityMapper.getCommodityByCnum(cnum));
     }
+
+    public String deleteCommodityByCnum(String cnum){
+        return JSON.toJSONString(dealCommodityMapper.deleteCommodityByCnum(cnum));
+    }
 }
