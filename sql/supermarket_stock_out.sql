@@ -34,6 +34,9 @@ CREATE TABLE `stock_out` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- 建立outdate字段索引
+alter table stock_out add index idx_outdate_stockout(outdate);
+
 --
 -- Dumping data for table `stock_out`
 --
