@@ -25,12 +25,12 @@ public class PersonInitController {
     }
 
     @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestBody Person person )throws IOException{
-        System.out.println(person.getName());
+
 
         Integer integer = personInitService.modifyAllInfo(person.getName(),person.getGender(),person.getRegion(),person.getPosition(),person.getStu_num(),person.getAge());
-        System.out.println(person.getName());
+
         response.setContentType("text/json;charset=utf-8");
-        System.out.println(2);
+
         response.getWriter().write(integer == 0 ?"0":"1");
     }
 

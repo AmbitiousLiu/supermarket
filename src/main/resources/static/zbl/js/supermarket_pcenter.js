@@ -48,7 +48,7 @@ $(function(){
 			"position": position,
 			"salary": "0"
 		};
-		alert(JSON.stringify(person));
+
 		$.ajax({
 				type: "post",
 				url: "http://localhost:8080/Info/modifyInfo",
