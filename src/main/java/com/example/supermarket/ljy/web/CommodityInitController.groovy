@@ -1,6 +1,7 @@
 package com.example.supermarket.ljy.web
 
 import com.example.supermarket.ljy.service.CommodityInitService
+import com.example.supermarket.ljy.service.StockOutService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
+import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 /**
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse
 class CommodityInitController {
 
     @Autowired CommodityInitService commodityInitService
+    @Autowired StockOutService stockOutService
 
     /**
      * GET:/commodity/commodity ('content ?: ""' means return "" if content is null)
@@ -53,6 +56,24 @@ class CommodityInitController {
         }
         response.setContentType("text/json;charset=utf-8")
         response.getWriter().write(content ?: "")
+    }
+
+    @GetMapping(value = "/initStockOut")
+    initStockOut(HttpServletRequest request, HttpServletResponse response) {
+        def session = request.getSession();
+        if (session == null) {
+            return
+        }
+        String position = session.getAttribute("position")
+        if (position == null) {
+            return
+        }
+        response.setContentType("text/json;charset=utf-8")
+        if (position.equals("president")) {
+            response.getWriter().write(stockOutService.initStockOut())
+        } else if (position.equals("manager")) {
+            response.getWriter().write(stockOutService.initStockOutByPerson(session.getAttribute("stu_num").toString()))
+        }
     }
 
 }
