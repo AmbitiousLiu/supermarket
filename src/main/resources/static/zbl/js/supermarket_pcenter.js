@@ -98,7 +98,8 @@ $(function(){
 
 
 	$("#modify").click(function(){
-		
+
+
 		var name = $("#modi_name").val();
 		var gender = $("#modi_gender").val();
 		var age = $("#modi_age").val();
@@ -133,11 +134,15 @@ $(function(){
 						alert("修改失败！");
 					} else {
 						alert("修改成功！");
+						window.location.reload();
+
 					}
 				},
 				dataType: 'json'
 			}
 		)
+
+		
 		
 	})
 
