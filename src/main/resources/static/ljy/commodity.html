@@ -6,7 +6,14 @@
 		<link rel="stylesheet" type="text/css" href="css/grzx.css"/>
 		<link rel="stylesheet" href="css/commodity.css" />
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 	</head>
+	
+	<script type="text/javascript">
+		
+	</script>
+	
 	<body>
 		<div class="header">
 			<p>超市管理系统</p>
@@ -50,103 +57,24 @@
 				</div>
 				
 				<div class="content">
-					<div class="content-left">
-						<div class="comodity-item">
+					<div class="content-left" id="commodity">
+						
+						<div class="comodity-item" v-for="item in items">
 							<div style="display: flex;">
 								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
+									<img :src="`http://localhost:8080/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
 								</div>
 								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
+									<div class="item-text">商品号：{{item.cnum}}</div>
+									<div class="item-text">商品名：{{item.name}}</div>
+									<div class="item-text">单价：{{item.price}}</div>
+									<div class="item-text">类别：{{item.sort}}</div>
+									<div class="item-text">生产日期：{{item.p_date}}</div>
+									<div class="item-text">保质期至：{{item.safe_date}}</div>
 								</div>
 							</div>
 						</div>
-						<div class="comodity-item">
-							<div style="display: flex;">
-								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
-								</div>
-							</div>
-						</div>
-						<div class="comodity-item">
-							<div style="display: flex;">
-								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
-								</div>
-							</div>
-						</div>
-						<div class="comodity-item">
-							<div style="display: flex;">
-								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
-								</div>
-							</div>
-						</div>
-						<div class="comodity-item">
-							<div style="display: flex;">
-								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
-								</div>
-							</div>
-						</div>
-						<div class="comodity-item">
-							<div style="display: flex;">
-								<div>
-									<img src="img/haiwenxiang.jpg" class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品名：</div>
-									<div class="item-text">单价：</div>
-									<div class="item-text">库存量：</div>
-									<div class="item-text">待进货量：</div>
-									<div class="item-text">月销售量：</div>
-									<div class="item-text">月销售额：</div>
-									<div class="item-text">月利润：</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					
 					<div class="content-right">
@@ -159,10 +87,7 @@
 						<div class="sum">
 							<div class="history">历史出库单：</div>
 							<div class="history">
-								<a href="#">2020.1.1 -> 商品名</a><br />
-								<a href="#">2020.1.1 -> 商品名</a><br />
-								<a href="#">2020.1.1 -> 商品名</a><br />
-								<a href="#">2020.1.1 -> 商品名</a>
+								<a :href="stock.url" v-for="stock in stocks">{{stock.outdate}} -> {{stock.pname}}</a><br />
 							</div>
 							<div class="history">
 								<a href="#">查看更多历史出库单-></a>
@@ -177,4 +102,34 @@
 		</div>
 		
 	</body>
+	
+	<script type="text/javascript">
+		
+		var v1 = new Vue({
+			el: '#commodity',
+			data: {
+				items: []
+			},
+			mounted() {
+					this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET, 
+				   		url: "/commodity/commodity", 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			console.log(datas)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.items = datas
+				   		}
+			   		})
+				}
+			}
+		})
+		
+	</script>
+	
 </html>
