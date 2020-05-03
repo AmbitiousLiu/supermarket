@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse
  * @date 2020/4/29
  */
 @RestController
-@RequestMapping(value = "image")
+@RequestMapping(value = "/image")
 class ImageController {
 
     @RequestMapping(value = "/person")
-    void getPersonalImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    void getPersonalImage(HttpServletRequest request,
+                          HttpServletResponse response) throws IOException {
         def session = request.getSession()
         String value
         if (session != null) {
@@ -37,7 +38,8 @@ class ImageController {
     }
 
     @RequestMapping(value = "/commodity")
-    void getCommodityImage(@RequestParam(value = "cnum", required = false) String value, HttpServletResponse response) throws IOException {
+    void getCommodityImage(@RequestParam(value = "cnum", required = false) String value,
+                           HttpServletResponse response) throws IOException {
         "".equals(value) ? value = "default" : value
         def fis = new FileInputStream(new File("images/commodity/" + (value ?: "default") + ".jpg"))
         int len = 0
@@ -51,7 +53,8 @@ class ImageController {
     }
 
     @RequestMapping(value = "/update/person")
-    boolean updatePersonalImage(MultipartFile file,HttpServletRequest request) {
+    boolean updatePersonalImage(MultipartFile file,
+                                HttpServletRequest request) {
         def session = request.getSession()
         if (session == null) {
             return false
@@ -60,6 +63,9 @@ class ImageController {
             return false
         }
         String name = session.getAttribute("stu_num")
+        if (name == null) {
+            return false
+        }
         String outputFile="images/person/"+name+".jpg"
         File outFile = new File(outputFile)
         outFile.createNewFile()
@@ -71,7 +77,8 @@ class ImageController {
     }
 
     @RequestMapping(value = "/update/commodity")
-    boolean updateCommodityImage(MultipartFile file, @RequestParam(value = "cnum", required = false) String value) {
+    boolean updateCommodityImage(MultipartFile file,
+                                 @RequestParam(value = "cnum", required = false) String value) {
         if (value == null || value == "") {
             return false
         }

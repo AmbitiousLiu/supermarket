@@ -1,6 +1,7 @@
 package com.example.supermarket.sry.mapper;
 
 import com.example.supermarket.sry.domain.Deal_Commodity;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -30,4 +31,16 @@ public interface Deal_CommodityMapper {
      */
     @Select("select * from commodity where cnum = #{cnum}")
     Deal_Commodity getCommodityByCnum(String cnum);
+
+    /**
+     * delete commodity by the cnum
+     * @param  cnum
+     */
+    @Delete("delete from commodity where cnum = #{cnum}")
+    Integer deleteCommodityByCnum(String cnum);
+
+    /**
+     * update commodity by the cnum
+     * @param cnum
+     */
 }

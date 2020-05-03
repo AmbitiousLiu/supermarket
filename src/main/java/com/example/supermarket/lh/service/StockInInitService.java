@@ -15,8 +15,8 @@ public class StockInInitService {
     StockInMapper stockInMapper;
 
 
-    public String getAllInfo(String num){
+    public String getAllInfo(String inNum){
 
-        return   JSON.toJSONString(stockInMapper.getAllInfo(num));
+        return   JSON.toJSONString(stockInMapper.getAllInfo(inNum));
     }
 }

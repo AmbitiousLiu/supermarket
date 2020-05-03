@@ -16,34 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `stock_out`
+-- Table structure for table `stuff`
 --
 
-DROP TABLE IF EXISTS `stock_out`;
+DROP TABLE IF EXISTS `stuff`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `stock_out` (
-  `num` varchar(15) NOT NULL,
-  `pname` varchar(15) NOT NULL,
-  `cnum` varchar(15) NOT NULL,
-  `outdate` date NOT NULL,
-  `price` smallint(4) NOT NULL,
-  `sum` smallint(5) NOT NULL,
+CREATE TABLE `employee` (
   `stu_num` varchar(15) NOT NULL,
-  PRIMARY KEY (`num`)
+  `name` varchar(10) NOT NULL,
+  'work' varchar(20) NOT NULL ,
+  'sign' boolean NOT NULL ,
+  `region` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`stu_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
--- 建立outdate字段索引
-alter table stock_out add index idx_outdate_stockout(outdate);
-
 --
--- Dumping data for table `stock_out`
+-- Dumping data for table `stuff`
 --
 
-LOCK TABLES `stock_out` WRITE;
-/*!40000 ALTER TABLE `stock_out` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stock_out` ENABLE KEYS */;
+LOCK TABLES `stuff` WRITE;
+/*!40000 ALTER TABLE `stuff` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stuff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29 15:54:21
+-- Dump completed on 2020-04-29 15:54:19
