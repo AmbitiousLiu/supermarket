@@ -5,6 +5,7 @@ import com.example.supermarket.sry.mapper.Deal_CommodityMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 
 @Service
 public class Deal_CommodityInitService {
@@ -30,5 +31,9 @@ public class Deal_CommodityInitService {
 
     public String deleteCommodityByCnum(String cnum){
         return JSON.toJSONString(dealCommodityMapper.deleteCommodityByCnum(cnum));
+    }
+
+    public String updateCommodityByCnum(String cnum, String name, String sort, Date p_date, Date safe_date, Integer price, Integer sale_count){
+        return JSON.toJSONString(dealCommodityMapper.updateCommodityByCnum(cnum, sort, name, p_date, safe_date, price, sale_count));
     }
 }
