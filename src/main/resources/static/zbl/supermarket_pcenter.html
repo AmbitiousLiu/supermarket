@@ -5,6 +5,7 @@
 		<title>个人中心</title>
 		<link rel="stylesheet" type="text/css" href="css/pcenter.css"/>
 		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css"/>
+		<script src="../public/js/ajaxUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../public/js/vue.js"></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
 
@@ -25,12 +26,12 @@
 					<p>	<a href="#">员工管理&gt;</a></p>
 				</div>
 			</div>
-			<div class="center_of_right">
+			<div id="center_of_right" class="center_of_right">
 				<div id="top">
 					<div id="identify">
 						<p><img src="img/timg.jpeg" class="img-circle"></p>
 						<div id="name_pos">
-							苏若愚/管理员
+							{{vname}}
 						</div>
 					</div>
 						
@@ -38,43 +39,43 @@
 						<div class = "infotop">
 							<span >
 								性别：
-							</span> <input type="" name="gender" id="gender" value="" />
+							</span> <input type="" name="gender" id="gender"  v-model="vgender" readonly/>
 						</div>
 						<div class ="infobottom">
 							<span >
 								年龄：
-							</span> <input type="" name="age" id="age" value="" />
+							</span> <input type="" name="age" id="age"  v-model="vage" readonly/>
 						</div>
 					</div>
 					<div id="third" class="info">
 						<div class = "infotop">
 							<span >
 								职位：
-							</span> <input type="" name="position" id="position" value="" />
+							</span> <input type="" name="position" id="position"  v-model="vposition" readonly/>
 						</div>
 						<div class ="infobottom">
 							<span >
 								工号：
-							</span> <input type="" name="stu_num" id="stu_num" value="" />
+							</span> <input type="" name="stu_num" id="stu_num"  v-model="vstu_num" readonly/>
 						</div>
 					</div>
 					<div id="forth" class="info">
 						<div class = "infotop">
 							<span >
 								负责区域：
-							</span> <input type="" name="region" id="region" value="" />
+							</span> <input type="" name="region" id="region"  v-model="vregion" readonly/>
 						</div>
 						<div class ="infobottom">
 							<span >
 								工龄：
-							</span> <input type="" name="seniority" id="seniority" value="" />
+							</span> <input type="" name="seniority" id="seniority"  v-model="vseniority" readonly/>
 						</div>
 					</div>
 					<div id="last" class="info">
 						<div class = "infotop">
 							<span >
 								当前工资：
-							</span> <input type="" name="salary" id="salary" value="" />
+							</span> <input type="" name="salary" id="salary"  v-model="vsalary" readonly/>
 						</div>
 						<div class ="infobottom">
 						
@@ -86,32 +87,33 @@
 					<div id="modify_choice">
 						<div class="modiinfo">
 							<span>姓名:</span>
-							<input type="text" name="modi_name" id="modi_name" value="" />
+							<input type="text" name="modi_name" id="modi_name" value="" v-model="mname" />
 						</div>
 						<div class="modiinfo">
 							<span>性别:</span>
-							<input type="text" name="modi_gender" id="modi_gender" value="" />
+							<input type="text" name="modi_gender" id="modi_gender" value="" v-model="mgender"/>
 						</div>
 						<div class="modiinfo">
 							<span>年龄:</span>
-							<input type="text" name="modi_age" id="modi_age" value="" />
+							<input type="text" name="modi_age" id="modi_age" value="" v-model="mage"/>
 						</div>
 						<div class="modiinfo">
 							<span>工龄:</span>
-							<input type="text" name="modi_seniority" id="modi_senoirity" value="" />
+							<input type="text" name="modi_seniority" id="modi_senoirity" value="" v-model="mseniority"/>
 						</div>
 						<div class="modiinfo">
 							<span>负责区域:</span>
-							<input type="text" name="modi_region" id="modi_region" value="" />
+							<input type="text" name="modi_region" id="modi_region" value="" v-model="mregion"/>
 						</div>
 						<div class="modiinfo">
 							<span>职位:</span>
-							<input type="text" name="modi_pos" id="modi_pos" value="" />
+							<input type="text" name="modi_pos" id="modi_pos" value="" v-model="mposition"/>
 						</div>
 						<div class="modiinfo">
 							<span>工号:</span>
-							<input type="text" name="modi_num" id="modi_num" value="" />
+							<input type="text" name="modi_pos" id="modi_num" value="" v-model="mstu_num" readonly/>
 						</div>
+					
 						
 					</div>
 					<button id="modify">修改</button>
