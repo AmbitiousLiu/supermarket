@@ -8,10 +8,10 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface StockOutMapper {
+public interface StockOutAddMapper {
 
-    @Select("select * from stock_in" +
-            " where  num = #{num} ")
-    List<StockOut>getAllInfo(String num);
+    @Select("select * from stock_out" +
+            " where  num = #{outNum} ")
+    List<StockOut>getAllInfo(String outNum);
 
 }
