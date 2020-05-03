@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/Info")
+@RequestMapping(value = "/number")
 public class StockInInitController {
     @Autowired StockInInitService stockInInitService;
 
