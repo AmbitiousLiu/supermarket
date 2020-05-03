@@ -54,7 +54,7 @@
 					<div class="content-left" id="commodity">
 						
 						<div class="comodity-item" v-for="item in items">
-							<div style="display: flex;">
+							<div style="display: flex;" @click="link(item.cnum)">
 								<div>
 									<img :src="`http://localhost:8080/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
 								</div>
@@ -120,6 +120,9 @@
 				   			this.items = datas
 				   		}
 			   		})
+				},
+				link(cnum) {
+					window.open("http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum);
 				}
 			}
 		})

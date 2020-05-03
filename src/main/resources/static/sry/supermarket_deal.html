@@ -31,7 +31,7 @@
 	<div class="center_of_right">
 		<div id="top">
 			<div id="identify">
-				<p><img src="img/timg.jpeg" class="img-circle"></p>
+				<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
 				<div id="name_pos">
 					苏若愚/管理员
 				</div>
@@ -45,20 +45,20 @@
 		</div>
 		<div id="butoom">
 			<div id="left">
-				<img src="img/shucai.jpg" class="img-thumbnail">
+				<img src="img/shucai.jpg" class="img-thumbnail" id="cimg">
 				<div id="Lower_shelf">
 					下架
 				</div>
 			</div>
 			<div id="center">
 				<div id="Commodity_Name">
-					<p v-for="item in items">{{item.name}}</p>
+					<p id="cname">商品名：{{cname}}</p>
 				</div>
 				<div id="Inventory">
 					<!--库存量<p v-for="store in stores">{{store.sum}}</p>-->
 				</div>
 				<div id="Unit_Price">
-					<p v-for="item in items">{{item.price}}</p>
+					<p id="cprice">商品价格：{{cprice}}</p>
 				</div>
 				<div id="month_total">
 					月销售量/月销售总额/月利润
@@ -77,27 +77,32 @@
 </div>
 </body>
 <script type="text/javascript">
+	
+	var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	var cnum = unescape(r[2]); //返回参数值
+	
+	document.getElementById("cimg").src = "http://localhost:8080/image/commodity?cnum="+cnum;
+	
 	var v1 = new Vue({
 		el: "#center",
 		data:{
-			items:[]
+			cname: "name",
+			cprice: "price"
 		},
-		created(){
+		mounted(){
 			this.getData();
 		},
 		methods:{
 			getData(){
-				var Request = new Object();
-				Request = GetRequest();
-				var cnum = Request['cnum'];
-				this.cnum = cnum
 				ajax({
 					method: HTTP_METHOD.GET,
 					url: "/deal/commodityByCnum?cnum="+cnum,
 					async: true,
 					type: HTTP_RESPONSE_TYPE.JSON,
 					callback: (datas) => {
-						this.items = datas
+						this.cname = datas.name
+						this.cprice = datas.price
 					}
 				})
 			}
