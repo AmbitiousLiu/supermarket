@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse
  * @date 2020/4/29
  */
 @RestController
-@RequestMapping(value = "image")
+@RequestMapping(value = "/image")
 class ImageController {
 
     @RequestMapping(value = "/person")

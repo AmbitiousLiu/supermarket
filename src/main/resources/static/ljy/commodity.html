@@ -2,17 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title></title>
+		<title>commodity</title>
 		<link rel="stylesheet" type="text/css" href="css/grzx.css"/>
 		<link rel="stylesheet" href="css/commodity.css" />
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
 	</head>
-	
-	<script type="text/javascript">
-		
-	</script>
 	
 	<body>
 		<div class="header">
@@ -35,17 +32,14 @@
 			<div id="center_of_right">
 				<div id="head">
 					<div class="head-item">
-						<img src="img/haiwenxiang.jpg" id="head-img"/>
-						<span class="name">名字/身份</span>
+						<img src="http://localhost:8080/image/person" id="head-img"/>
+						<span class="name" id="userName">名字</span>/<span class="name" id="userPosition">身份</span>
 					</div>
 					<div class="head-item">
 						<div class="shangpingqu">商品区：</div>
 						<div class="qu">
 							<select name="select">
-								<option value="all" selected="selected">全部区/瓜果区/生鲜区……</option>
-								<option value="fruit">水果区</option>
-								<option value="vegetable">蔬菜区</option>
-								<option value="fresh">生鲜区</option>
+								<option value="all" selected="selected" id="region">全部区/瓜果区/生鲜区……</option>
 							</select>
 						</div>
 					</div>
@@ -86,8 +80,8 @@
 						</div>
 						<div class="sum">
 							<div class="history">历史出库单：</div>
-							<div class="history">
-								<a :href="stock.url" v-for="stock in stocks">{{stock.outdate}} -> {{stock.pname}}</a><br />
+							<div class="history" id="history">
+								<a :href="`http://localhost:8080/stockOut/detail?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.pname}}</a><br />
 							</div>
 							<div class="history">
 								<a href="#">查看更多历史出库单-></a>
@@ -129,6 +123,64 @@
 				}
 			}
 		})
+		
+		var v2 = new Vue({
+			el: '#history',
+			data: {
+				stocks: []
+			},
+			mounted() {
+					this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET, 
+				   		url: "/commodity/initStockOut", 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.stocks = datas
+				   		}
+			   		})
+				}
+			}
+		})
+		
+		
+		window.onload = function() {
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/userName", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			$("#userName").innerHTML = data
+		   		}
+	   		})
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/userPosition", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			$("#userPosition").innerHTML = data
+		   		}
+	   		})
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/region", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			$("#region").innerHTML = data
+		   		}
+	   		})
+		}
 		
 	</script>
 	

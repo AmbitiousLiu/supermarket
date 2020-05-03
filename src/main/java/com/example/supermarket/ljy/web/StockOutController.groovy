@@ -21,7 +21,7 @@ class StockOutController {
 
     def SIZE = 10
 
-    @RequestMapping(value = "history")
+    @RequestMapping(value = "/history")
     moreStockOut(HttpServletRequest request,
                  HttpServletResponse response,
                  @RequestParam(value = "page", required = true) String page) {
@@ -41,7 +41,7 @@ class StockOutController {
         }
     }
 
-    @RequestMapping(value = "detail")
+    @RequestMapping(value = "/detail")
     checkStockOut(@RequestParam(value = "num", required = true) String num,
                   HttpServletResponse response) {
         response.setContentType("text/json;charset=utf-8")

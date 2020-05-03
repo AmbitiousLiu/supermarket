@@ -44,7 +44,6 @@ class CommodityInitController {
         def content = commodityInitService.getAllCommodities()
         response.setContentType("text/json;charset=utf-8")
         response.getWriter().write(content)
-        println 123
     }
 
     @GetMapping(value = "/initStockOut")
@@ -63,6 +62,27 @@ class CommodityInitController {
         } else if (position.equals("manager")) {
             response.getWriter().write(stockOutService.initStockOutByPerson(session.getAttribute("stu_num").toString()))
         }
+    }
+
+    @GetMapping(value = "/region")
+    initRegion(HttpServletRequest request) {
+        def session = request.getSession()
+        String region = session.getAttribute("region")
+        return region ?: ""
+    }
+
+    @GetMapping(value = "/userName")
+    initUserName(HttpServletRequest request) {
+        def session = request.getSession()
+        String name = session.getAttribute("name")
+        return name ?: ""
+    }
+
+    @GetMapping(value = "/userPosition")
+    initUserPosition(HttpServletRequest request) {
+        def session = request.getSession()
+        String position = session.getAttribute("position")
+        return position ?: ""
     }
 
 }
