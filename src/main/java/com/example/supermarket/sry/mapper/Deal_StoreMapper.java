@@ -11,7 +11,7 @@ public interface Deal_StoreMapper {
 
     /**
      * get store by the cnum
-     * @param sort
+     * @param cnum
      * @return
      */
     @Select("select sum from store where cnum = #{cnum}")

@@ -59,14 +59,24 @@ class Deal_CommodityInitController {
     /**
      * GET:/deal/Commodity
      * @param cnum: it's not required
+     * @param sort: it's not required
      * @param response: json string if commodities's data
      * @return
      */
     @GetMapping(value = "/commodityByCnum")
-    public void initCommodityByParam(@RequestParam(value = "cnum") String cnum,
+    public void initCommodityByParam(@RequestParam(value = "cnum", required = false) String cnum,
+                                                            @RequestParam(value = "sort", required = false) String sort,
                                                             HttpServletResponse response)  throws IOException  {
         String content;
-        content = dealCommodityInitService.getCommodityByCnum(cnum);
+        if (cnum != null) {
+            content = dealCommodityInitService.getCommodityByCnum(cnum);
+        } else {
+            if (sort != null) {
+                content = dealCommodityInitService.getCommoditiesBySort(sort);
+            } else {
+                content = "";
+            }
+        }
         response.setContentType("text/json;charset=utf-8");
         if (content == null) {
             response.getWriter().write("");

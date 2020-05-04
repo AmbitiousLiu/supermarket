@@ -46,7 +46,7 @@
 		<div id="butoom">
 			<div id="left">
 				<img src="img/shucai.jpg" class="img-thumbnail" id="cimg">
-				<div id="Lower_shelf">
+				<div id="Lower_shelf" onclick="del()">
 					下架
 				</div>
 			</div>
@@ -108,6 +108,47 @@
 			}
 		}
 	})
+	
+	function del(){
+		var jsonstr = {"cnum":cnum};
+		var r=confirm("确认下架该商品？");
+		if(r){
+		   $.ajax({
+		    url:"/deal/delete?cnum="+cnum,
+		    type:"DELETE",
+		    contentType:"application/json",//设置请求参数类型为json字符串
+		    data:JSON.stringify(jsonstr),//将json对象转换成json字符串发送
+		    dataType:"text",
+		    success:function(){
+				alert("删除成功!");
+				window.location.href="/ljy/commodity.html";
+		    },        
+		   });
+		}
+
+	}
+	/*var v2 = new Vue({
+			el: "#center",
+			data: {
+				csum: "sum",
+			},
+			mounted() {
+				this.getSum();
+			},
+			methods: {
+				getSum() {
+					ajax({
+						method: HTTP_METHOD.GET,
+						url: "/deal/store?cnum=" + cnum,
+						async: true,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => {
+							this.csum = datas.sum
+						}
+					})
+				}
+			}
+	})*/
 </script>
 </html>
 

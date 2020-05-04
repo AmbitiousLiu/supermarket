@@ -31,7 +31,7 @@ public interface Deal_CommodityMapper {
      * @param cnum
      * @return one commodity
      */
-    @Select("select * from commodity where cnum = #{cnum}")
+    @Select("select * from commodity,store where commodity.cnum = #{cnum} and store.cnum = #{cnum}")
     Deal_Commodity getCommodityByCnum(String cnum);
 
     /**
