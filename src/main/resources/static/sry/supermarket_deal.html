@@ -81,7 +81,7 @@
 	var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
 	var cnum = unescape(r[2]); //返回参数值
-	
+	alert(cnum);
 	document.getElementById("cimg").src = "http://localhost:8080/image/commodity?cnum="+cnum;
 	
 	var v1 = new Vue({

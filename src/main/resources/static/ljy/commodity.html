@@ -84,7 +84,7 @@
 								<a :href="`http://localhost:8080/stockOut/detail?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.pname}}</a><br />
 							</div>
 							<div class="history">
-								<a href="#">查看更多历史出库单-></a>
+								<a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
 							</div>
 						</div>
 						
@@ -122,7 +122,7 @@
 			   		})
 				},
 				link(cnum) {
-					window.open("http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum);
+					window.location.href = "http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum;
 				}
 			}
 		})
