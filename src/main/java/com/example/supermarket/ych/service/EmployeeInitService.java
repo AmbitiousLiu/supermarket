@@ -17,5 +17,5 @@ public class EmployeeInitService {
         return JSON.toJSONString(employeeMapper.getAllInfo(region));
     }
 
-//    public Integer modifyAllInfo(Employee employee){ return employeeMapper.modifyAllInfo(employee);}
+    public Integer modifyAllInfo(Employee employee){ return employeeMapper.modifyAllInfo(employee);}
 }

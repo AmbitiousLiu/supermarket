@@ -8,13 +8,13 @@ import java.util.List;
 @Mapper
 public interface EmployeeMapper {
 
-    @Select("select region, stu_num, name from stuff" +
-            " where stuff.region = #{region}")
+    @Select("select region, stu_num, name, work, sign from employee" +
+            " where employee.region = #{region}")
     List<Employee>getAllInfo(String region);
 
-//    @Insert("insert into employee(employee_num,employee_name,employee_work,employee_sign)" +
-//            " values (#{employee.epe_num},#{employee.epe_name},#{employee.epe_work,employee_sign})")
-//
-//    @Delete("delete from employee_info where employee_num = #{employee.epe_num}")
-//    Integer modifyAllInfo(Employee employee);
+    @Insert("insert into employee(region, stu_num, name, work, sign)" +
+            " values (#{employee.region}, #{employee.stu_num}, #{employee.name}, #{employee.work}, #{employee.sign})")
+
+    @Delete("delete from employee where stu_num = #{employee.stu_num}")
+    Integer modifyAllInfo(Employee employee);
 }
