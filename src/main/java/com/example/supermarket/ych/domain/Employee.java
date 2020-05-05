@@ -35,7 +35,7 @@ public class Employee {
 
     public void setName(String name) { this.name = name; }
 
-    public String setWork() { return work; }
+    public String getWork() { return work; }
 
     public void setWork(String work) { this.work = work; }
 
