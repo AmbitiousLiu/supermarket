@@ -6,6 +6,7 @@ import com.example.supermarket.ych.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 @Service
 public class EmployeeInitService {
@@ -17,5 +18,7 @@ public class EmployeeInitService {
         return JSON.toJSONString(employeeMapper.getAllInfo(region));
     }
 
-//    public Integer modifyAllInfo(Employee employee){ return employeeMapper.modifyAllInfo(employee);}
+    public Integer modifyAllInfo(String region, String stu_num, String name, String work, Boolean sign){
+        return employeeMapper.modifyAllInfo(region, stu_num, name, work, sign);
+    }
 }

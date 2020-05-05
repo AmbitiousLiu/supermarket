@@ -28,34 +28,22 @@ class CommodityInitController {
      * @param response: json string of commodities's data
      * @return
      */
-    @GetMapping(value = "/commodity") initCommodity(HttpServletResponse response) {
+    @GetMapping(value = "/commodity") initCommodity(HttpServletRequest request, HttpServletResponse response) {
+//        def session = request.getSession()
+//        String position = session.getAttribute("position")
+//        def content
+//        if (position == "president") {
+//            content = commodityInitService.getAllCommodities()
+//        } else if (position == "manager") {
+//            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
+//        } else {
+//            return
+//        }
+//        response.setContentType("text/json;charset=utf-8")
+//        response.getWriter().write(content ?: "")
         def content = commodityInitService.getAllCommodities()
         response.setContentType("text/json;charset=utf-8")
-        response.getWriter().write(content ?: "")
-    }
-
-    /**
-     * POST:/commodity/commodity
-     * @param cnum: it's not required
-     * @param sort: it's not required
-     * @param response: json string if commodities's data
-     * @return
-     */
-    @PostMapping(value = "/commodity") initCommodityByParam(@RequestParam(value = "cnum", required = false) String cnum,
-                                                            @RequestParam(value = "sort", required = false) String sort,
-                                                            HttpServletResponse response) {
-        def content
-        if (cnum != null) {
-            content = commodityInitService.getCommodityByCnum(cnum)
-        } else {
-            if (sort != null) {
-                content = commodityInitService.getCommoditiesBySort(sort)
-            } else {
-                content = ""
-            }
-        }
-        response.setContentType("text/json;charset=utf-8")
-        response.getWriter().write(content ?: "")
+        response.getWriter().write(content)
     }
 
     @GetMapping(value = "/initStockOut")
@@ -74,6 +62,27 @@ class CommodityInitController {
         } else if (position.equals("manager")) {
             response.getWriter().write(stockOutService.initStockOutByPerson(session.getAttribute("stu_num").toString()))
         }
+    }
+
+    @GetMapping(value = "/region")
+    initRegion(HttpServletRequest request) {
+        def session = request.getSession()
+        String region = session.getAttribute("region")
+        return region ?: ""
+    }
+
+    @GetMapping(value = "/userName")
+    initUserName(HttpServletRequest request) {
+        def session = request.getSession()
+        String name = session.getAttribute("name")
+        return name ?: ""
+    }
+
+    @GetMapping(value = "/userPosition")
+    initUserPosition(HttpServletRequest request) {
+        def session = request.getSession()
+        String position = session.getAttribute("position")
+        return position ?: ""
     }
 
 }

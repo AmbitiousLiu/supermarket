@@ -16,17 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `stuff`
+-- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `stuff`;
+DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `employee` (
   `stu_num` varchar(15) NOT NULL,
   `name` varchar(10) NOT NULL,
-  'work' varchar(20) NOT NULL ,
-  'sign' boolean NOT NULL ,
+  `work` varchar(20) NOT NULL ,
+  `sign` boolean NOT NULL ,
   `region` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`stu_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -36,9 +36,9 @@ CREATE TABLE `employee` (
 -- Dumping data for table `stuff`
 --
 
-LOCK TABLES `stuff` WRITE;
-/*!40000 ALTER TABLE `stuff` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stuff` ENABLE KEYS */;
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

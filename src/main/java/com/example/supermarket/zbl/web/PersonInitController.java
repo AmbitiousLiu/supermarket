@@ -1,9 +1,10 @@
 package com.example.supermarket.zbl.web;
 
+import com.example.supermarket.ljy.domain.Commodity;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,11 +24,14 @@ public class PersonInitController {
 
     }
 
-    @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestParam(value = "person" ,required = true) Person person)throws IOException{
-        Integer integer = personInitService.modifyAllInfo(person);
+    @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestBody Person person )throws IOException{
+
+
+        Integer integer = personInitService.modifyAllInfo(person.getName(),person.getGender(),person.getRegion(),person.getPosition(),person.getStu_num(),person.getAge());
+
         response.setContentType("text/json;charset=utf-8");
-        System.out.println(2);
-        response.getWriter().write(integer == 0 ?"1":"0");
+
+        response.getWriter().write(integer == 0 ?"0":"1");
     }
 
 }

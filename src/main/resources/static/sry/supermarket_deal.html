@@ -1,93 +1,154 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>商品处理</title>
-		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="supermarket_deal.css"/>
-		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<div class="header">
-			<p>超市管理系统</p>
+<head>
+	<meta charset="utf-8">
+	<title>商品处理</title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/supermarket_deal.css"/>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../public/js/vue.js" ></script>
+	<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+	<script src="js/param.js"></script>
+</head>
+<body>
+<div class="header">
+	<p>超市管理系统</p>
+</div>
+<div class="center">
+	<div class="center_of_left">
+		<div id="Personal_management">
+			<p>个人中心</p>
 		</div>
-		<div class="center">
-			<div class="center_of_left">
-				<div id="Personal_management">
-					<p>个人中心</p>
-				</div>
-				<div id="Commodity_management">
-					<p>商品管理</p>
-				</div>
-				<div id="Staff_management">
-					<p>员工管理</p>
+		<div id="Commodity_management">
+			<p>商品管理</p>
+		</div>
+		<div id="Staff_management">
+			<p>员工管理</p>
+		</div>
+	</div>
+	<div class="center_of_right">
+		<div id="top">
+			<div id="identify">
+				<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
+				<div id="name_pos">
+					苏若愚/管理员
 				</div>
 			</div>
-			<div class="center_of_right">
-				<div id="top">
-					<div id="identify">
-						<p><img src="img/timg.jpeg" class="img-circle"></p>
-						<div id="name_pos">
-							苏若愚/管理员
-						</div>
-					</div>
-					<div id="catelog">
-						<p>商品区</p>
-						<div id="region">
-							全部/瓜果区/生鲜区/。。。
-						</div>
-					</div>
-				</div>
-				<div id="butoom">
-					<div id="left">
-						<img src="img/shucai.jpg" class="img-thumbnail">
-						<div id="Lower_shelf">
-							下架
-						</div>
-						<div id="Commodity_Description">
-							商品描述
-						</div>
-					</div>
-					<div id="center">
-						<div id="Commodity_Name">
-							商品名
-						</div>
-						<div id="Inventory">
-							库存量
-						</div>
-						<div id="Quantity_to_be_bought">
-							待进货量
-						</div>
-						<div id="Unit_Price">
-							（进价）/单价
-						</div>
-						<div id="month_total">
-							月销售量/月销售总额/月利润
-						</div>
-					</div>
-					<div id="right">
-						<div id="modify">
-							修改
-						</div>
-						<div id="to_deal">
-							去处理->
-						</div>
-						<div class="operation clearfix">
-							<div id="increase">
-								新增
-							</div>
-							<div id="reduce">
-								减少
-							</div>
-						</div>
-						<div id="change_unit_price">
-							修改单价
-						</div>
-					</div>
+			<div id="catelog">
+				<p>商品区</p>
+				<div id="region">
+					全部/瓜果区/生鲜区/。。。
 				</div>
 			</div>
 		</div>
-	</body>
+		<div id="butoom">
+			<div id="left">
+				<img src="img/shucai.jpg" class="img-thumbnail" id="cimg">
+				<div id="Lower_shelf" onclick="del()">
+					下架
+				</div>
+			</div>
+			<div id="center">
+				<div id="Commodity_Name">
+					<p id="cname">商品名：{{cname}}</p>
+				</div>
+				<div id="Inventory">
+					<!--库存量<p v-for="store in stores">{{store.sum}}</p>-->
+				</div>
+				<div id="Unit_Price">
+					<p id="cprice">商品价格：{{cprice}}</p>
+				</div>
+				<div id="month_total">
+					月销售量/月销售总额/月利润
+				</div>
+			</div>
+			<div id="right">
+				<div id="modify">
+					修改
+				</div>
+				<div id="change_unit_price">
+					修改单价
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	
+	var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	var cnum = unescape(r[2]); //返回参数值
+	document.getElementById("cimg").src = "http://localhost:8080/image/commodity?cnum="+cnum;
+	
+	var v1 = new Vue({
+		el: "#center",
+		data:{
+			cname: "name",
+			cprice: "price"
+		},
+		mounted(){
+			this.getData();
+		},
+		methods:{
+			getData(){
+				ajax({
+					method: HTTP_METHOD.GET,
+					url: "/deal/commodityByCnum?cnum="+cnum,
+					async: true,
+					type: HTTP_RESPONSE_TYPE.JSON,
+					callback: (datas) => {
+						this.cname = datas.name
+						this.cprice = datas.price
+					}
+				})
+			}
+		}
+	})
+	
+	function del(){
+		var jsonstr = {"cnum":cnum};
+		var r=confirm("确认下架该商品？");
+		if(r){
+		   $.ajax({
+		    url:"/deal/delete?cnum="+cnum,
+		    type:"DELETE",
+		    contentType:"application/json",//设置请求参数类型为json字符串
+		    data:JSON.stringify(jsonstr),//将json对象转换成json字符串发送
+		    dataType:"text",
+		    success:function(){
+				alert("删除成功!");
+				window.location.href="/ljy/commodity.html";
+		    },        
+		   });
+		}
+
+	}
+	/*var v2 = new Vue({
+			el: "#center",
+			data: {
+				csum: "sum",
+			},
+			mounted() {
+				this.getSum();
+			},
+			methods: {
+				getSum() {
+					ajax({
+						method: HTTP_METHOD.GET,
+						url: "/deal/store?cnum=" + cnum,
+						async: true,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => {
+							this.csum = datas.sum
+						}
+					})
+				}
+			}
+	})*/
+</script>
 </html>
+
+
