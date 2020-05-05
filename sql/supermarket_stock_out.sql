@@ -24,18 +24,13 @@ DROP TABLE IF EXISTS `stock_out`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `stock_out` (
   `num` varchar(15) NOT NULL,
-  `pname` varchar(15) NOT NULL,
   `cnum` varchar(15) NOT NULL,
   `outdate` date NOT NULL,
-  `price` smallint(4) NOT NULL,
   `sum` smallint(5) NOT NULL,
   `stu_num` varchar(15) NOT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
--- 建立outdate字段索引
-alter table stock_out add index idx_outdate_stockout(outdate);
 
 --
 -- Dumping data for table `stock_out`
@@ -43,6 +38,7 @@ alter table stock_out add index idx_outdate_stockout(outdate);
 
 LOCK TABLES `stock_out` WRITE;
 /*!40000 ALTER TABLE `stock_out` DISABLE KEYS */;
+INSERT INTO `stock_out` VALUES ('001','001','2020-05-03',123,'123'),('002','002','2020-05-02',123,'123');
 /*!40000 ALTER TABLE `stock_out` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29 15:54:21
+-- Dump completed on 2020-05-05 16:48:44

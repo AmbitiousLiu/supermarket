@@ -44,8 +44,13 @@
 						</div>
 					</div>
 					<div class="head-item">
+						<div class="up">
+							<button class="btn btn-info" id="c_up">上架商品</button>
+						</div>
+					</div>
+					<div class="head-item">
 						<div class="add">
-							<button class="btn btn-info">新增商品</button>
+							<button class="btn btn-info" id="c_in">购入商品</button>
 						</div>
 					</div>
 				</div>
@@ -160,7 +165,9 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#userName").innerHTML = data
+		   			if (data != "") {
+		   				document.getElementById("region")
+		   			}
 		   		}
 	   		})
 			
@@ -170,7 +177,9 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#userPosition").innerHTML = data
+		   			if (data != "") {
+		   				document.getElementById("userPosition").innerHTML = data;
+		   			}
 		   		}
 	   		})
 			
@@ -180,10 +189,23 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#region").innerHTML = data
+		   			if (data == "") {
+		   				document.getElementById("region").innerHTML = "全部区";
+		   			} else {
+		   				document.getElementById("region").innerHTML = data;
+		   			}
 		   		}
 	   		})
 		}
+
+		document.getElementById("c_up").onclick = function() {
+			window.location.href = "http://localhost:8080/zbl/supermarket_spgl_add.html";
+		}
+		
+		document.getElementById("c_in").onclick = function() {
+			window.location.href = "http://localhost:8080/###";
+		}
+		
 		
 	</script>
 	
