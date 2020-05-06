@@ -18,13 +18,13 @@
 		<div class="center">
 			<div class="center_of_left">
 				<div id="Personal_management">
-					<p><a href="#" >个人中心&gt;</a></p>
+					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
 				</div>
 				<div id="Commodity_management">
 					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
-					<p>	<a href="#">员工管理&gt;</a></p>
+					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 				</div>
 			</div>
 		
@@ -66,8 +66,8 @@
 								<div>
 									<div class="item-text">商品号：{{item.cnum}}</div>
 									<div class="item-text">商品名：{{item.name}}</div>
-									<div class="item-text">单价：{{item.price}}</div>
 									<div class="item-text">类别：{{item.sort}}</div>
+									<div class="item-text">单价：{{item.price_out}}</div>
 									<div class="item-text">生产日期：{{item.p_date}}</div>
 									<div class="item-text">保质期至：{{item.safe_date}}</div>
 								</div>
@@ -86,7 +86,7 @@
 						<div class="sum">
 							<div class="history">历史出库单：</div>
 							<div class="history" id="history">
-								<a :href="`http://localhost:8080/stockOut/detail?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.pname}}</a><br />
+								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}</a><br />
 							</div>
 							<div class="history">
 								<a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
@@ -208,7 +208,7 @@
 		}
 		
 		document.getElementById("c_in").onclick = function() {
-			window.location.href = "http://localhost:8080/###";
+			window.location.href = "http://localhost:8080/lh/addcommodity.html";
 		}
 		
 		

@@ -24,12 +24,13 @@ class StockOutService {
 
     String moreStockOutByPerson(String stu_num, int page, int size) {
         int begin = (page - 1) * size
-        return JSON.toJSONString(stockOutMapper.MoreStockOutByPerson(stu_num, begin, size))
+        println stu_num
+        return JSON.toJSONString(stockOutMapper.moreStockOutByPerson(stu_num, begin, size))
     }
 
     String moreStockOut(int page, int size) {
         int begin = (page - 1) * size
-        return JSON.toJSONString(stockOutMapper.MoreStockOut(begin, size))
+        return JSON.toJSONString(stockOutMapper.moreStockOut(begin, size))
     }
 
     String stockOutDetail(String num) {

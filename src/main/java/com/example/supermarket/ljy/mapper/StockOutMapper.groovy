@@ -18,10 +18,10 @@ interface StockOutMapper {
     List<Stock_out> initStockOut()
 
     @Select("select * from stock_out where stu_num = #{stu_num} order by outdate limit #{begin}, #{size}")
-    List<Stock_out> MoreStockOutByPerson(String stu_num, int begin, int size)
+    List<Stock_out> moreStockOutByPerson(String stu_num, Integer begin, Integer size)
 
     @Select("select * from stock_out order by outdate limit #{begin}, #{size}")
-    List<Stock_out> MoreStockOut(int begin, int size)
+    List<Stock_out> moreStockOut(int begin, int size)
 
     @Select("select * from stock_out where num = #{num}")
     Stock_out stockOutDetail(String num)

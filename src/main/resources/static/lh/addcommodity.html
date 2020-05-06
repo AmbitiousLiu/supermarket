@@ -6,27 +6,30 @@
     <title>商品入库</title>
     <link rel="stylesheet" type="text/css" href="css/addcommodity.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/grzx.css" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/imageup.js">	</script>
+    <script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 </head>
 <body>
-<div class="header clearfix">
-    <p>超市商品管理系统</p>
-</div>
-<div class="content">
-    <div class="content_left">
-        <div id="commodity_purchase">
-            <p><a href="commodityPurchase.html" target="_blank">商品入库</a></p>
-        </div>
-        <div id="commodity_sold">
-            <p><a href="commoditySold.html" target="_blank">商品出库</a></p>
-        </div>
-        <div id="system_out">
-            <p><a href="#">退出系统</a></p>
-        </div>
-    </div>
-    <div class="content_right">
+<div class="header">
+			<p>超市管理系统</p>
+		</div>
+		<div class="center">
+			<div class="center_of_left">
+				<div id="Personal_management">
+					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
+				</div>
+				<div id="Commodity_management">
+					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
+				</div>
+				<div id="Staff_management">
+					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
+				</div>
+			</div>
+		
+		<div class="content_right">
         <div class="content_right_down">
             <form action="" method="post" enctype="multipart/form-data">
                 <div id="up">
@@ -34,9 +37,12 @@
                         <div id="upimg">
                             <img src="" id="show" >
                         </div>
-                        <div id="upfile">
-                            <input id="file" class="filepath" onchange="changepic(this)" type="file">
-                        </div>
+                        <form id="image" action="" method="post" enctype="multipart/form-data">
+                        	<div id="upfile">
+                            	<input id="file" class="filepath" onchange="changepic(this)" type="file">
+                        	</div>
+                        </form>
+                        
                     </div>
                     <div id="up_right">
                         <div id="input_1">
@@ -59,18 +65,41 @@
                             <label >数量:</label>
                             <input type="text" name="sum" id="sum" value="" />
                         </div>
-                        <div id="input_6">
-                            <label >经手人:</label>
-                            <input type="text" name="stu_num" id="stu_num" value="" />
-                        </div>
                     </div>
                 </div>
                 <div id="down">
-                    <input type="submit" name="" id="" value="提交" />
+                    <input type="button" class="btn btn-default" name="" id="submit" value="提交" />
                 </div>
             </form>
         </div>
     </div>
-</div>
+			
+			
+		</div>
+		
 </body>
+
+<script type="text/javascript">
+	
+	document.getElementById("submit").onclick = function() {
+		document.getElementById("image").action = "http://localhost:8080/image/update/commodity?cnum=" + document.getElementById("cnum").value;
+		document.getElementById("image").submit();
+		ajax({
+			method: HTTP_METHOD.POST, 
+	   		url: "/stockIn/add", 
+	   		async: true, 
+	   		params: "num=" + document.getElementById("num").value + 
+	   				"&pname=" + document.getElementById("pname").value + 
+	   				"&cnum=" + document.getElementById("cnum").value + 
+	   				"&indate=" + document.getElementById("indate").value + 
+	   				"&sum=" + document.getElementById("sum").value,
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: function(data) {
+	   			alert("入库成功！");
+   			}
+		})
+	}
+	
+</script>
+
 </html>

@@ -15,7 +15,7 @@ interface CommodityMapper {
      * get all commodities
      * @return
      */
-    @Select("select * from commodity")
+    @Select("select * from commodity where shelf_count > 0")
     List<Commodity> getAllCommodities()
 
     /**
@@ -23,7 +23,7 @@ interface CommodityMapper {
      * @param sort
      * @return
      */
-    @Select("select * from commodity where sort = #{sort}")
+    @Select("select * from commodity where sort = #{sort} and shelf_count > 0")
     List<Commodity> getCommoditiesBySort(String sort)
 
     /**

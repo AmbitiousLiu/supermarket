@@ -1,20 +1,16 @@
 package com.example.supermarket.ws.domain;
 
+import lombok.Data;
+
+@Data
 public class Stuff {
-    private String stu_num;
-    private String password;
-
-    public Stuff(String stu_num, String password) {
-        this.stu_num = stu_num;
-        this.password = password;
-    }
-
-    public Stuff()
-    {
-
-    }
-    public String getStu_num() {return stu_num;}
-    public void setStu_num(String stu_num){this.stu_num = stu_num;}
-    public String getPassword(){return password;}
-    public void setPassword(String password){this.password = password;}
+    public String stu_num;
+    public String password;
+    public String name;
+    public String gender;
+    public Integer age;
+    public Integer seniority;
+    public Integer salary;
+    public String position;
+    public String region;
 }
