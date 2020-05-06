@@ -44,8 +44,13 @@
 						</div>
 					</div>
 					<div class="head-item">
+						<div class="up">
+							<button class="btn btn-info" id="c_up">上架商品</button>
+						</div>
+					</div>
+					<div class="head-item">
 						<div class="add">
-							<button class="btn btn-info">新增商品</button>
+							<button class="btn btn-info" id="c_in">购入商品</button>
 						</div>
 					</div>
 				</div>
@@ -73,7 +78,7 @@
 					
 					<div class="content-right">
 						<div class="sum">
-							<div class="">总商品量：</div>
+							<div class="">总商品量：<span id="c_count"></span></div>
 							<div class="">总销售量：</div>
 							<div class="">总销售额：</div>
 							<div class="">总利润：</div>
@@ -105,7 +110,8 @@
 				items: []
 			},
 			mounted() {
-					this.getInfo();
+				this.getInfo();
+				this.pushInfo();
 			},
 			methods: {
 				getInfo() {
@@ -123,6 +129,10 @@
 				},
 				link(cnum) {
 					window.location.href = "http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum;
+				},
+				pushInfo() {
+					document.getElementById("c_count").innerHTML = this.items.length
+					
 				}
 			}
 		})
@@ -160,7 +170,9 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#userName").innerHTML = data
+		   			if (data != "") {
+		   				document.getElementById("region")
+		   			}
 		   		}
 	   		})
 			
@@ -170,7 +182,9 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#userPosition").innerHTML = data
+		   			if (data != "") {
+		   				document.getElementById("userPosition").innerHTML = data;
+		   			}
 		   		}
 	   		})
 			
@@ -180,10 +194,23 @@
 		   		async: true, 
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
-		   			$("#region").innerHTML = data
+		   			if (data == "") {
+		   				document.getElementById("region").innerHTML = "全部区";
+		   			} else {
+		   				document.getElementById("region").innerHTML = data;
+		   			}
 		   		}
 	   		})
 		}
+
+		document.getElementById("c_up").onclick = function() {
+			window.location.href = "http://localhost:8080/zbl/supermarket_spgl_add.html";
+		}
+		
+		document.getElementById("c_in").onclick = function() {
+			window.location.href = "http://localhost:8080/###";
+		}
+		
 		
 	</script>
 	

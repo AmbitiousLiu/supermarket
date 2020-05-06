@@ -24,10 +24,15 @@
 	padding-left: 50px;
 }
 
+.up {
+	display: block;
+	padding-top: 30px;
+	padding-left: 100px;
+}
+
 .add {
 	display: block;
 	padding-top: 30px;
-	padding-left: 200px;
 }
 
 
@@ -38,7 +43,7 @@
 .content-left {
 	border-right: 1px solid black;
 	width: 65%;
-	height: 500px;
+	height: 420px;
 	overflow: scroll;
 }
 

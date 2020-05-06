@@ -6,13 +6,15 @@ import java.sql.Date
 
 /**
  * @author jleo
- * @date 2020/4/30
+ * @date 2020/5/5
  */
 @Data
-class Stock_out {
-    String num
+class Sell {
+
     String cnum
-    Date outdate
-    Integer sum
-    String stu_num
+    Integer count
+    Date date
+    Integer price_in
+    Integer price_out
+
 }

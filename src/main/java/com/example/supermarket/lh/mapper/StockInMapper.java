@@ -11,7 +11,7 @@ import java.util.List;
 public interface StockInMapper {
 
     @Select("select * from stock_in" +
-            " where  num = #{inNum}")
-    List<StockIn>getAllInfo(String inNum);
+            " where  num = #{num}")
+    List<StockIn>getAllInfo(String num);
 
 }
