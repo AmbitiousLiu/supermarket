@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>商品入库</title>
+    <link rel="stylesheet" type="text/css" href="css/addcommodity.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/imageup.js">	</script>
+</head>
+<body>
+<div class="header clearfix">
+    <p>超市商品管理系统</p>
+</div>
+<div class="content">
+    <div class="content_left">
+        <div id="commodity_purchase">
+            <p><a href="commodityPurchase.html" target="_blank">商品入库</a></p>
+        </div>
+        <div id="commodity_sold">
+            <p><a href="commoditySold.html" target="_blank">商品出库</a></p>
+        </div>
+        <div id="system_out">
+            <p><a href="#">退出系统</a></p>
+        </div>
+    </div>
+    <div class="content_right">
+        <div class="content_right_down">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div id="up">
+                    <div id="up_left">
+                        <div id="upimg">
+                            <img src="" id="show" >
+                        </div>
+                        <div id="upfile">
+                            <input id="file" class="filepath" onchange="changepic(this)" type="file">
+                        </div>
+                    </div>
+                    <div id="up_right">
+                        <div id="input_1">
+                            <label >入库单单号:</label>
+                            <input type="text" name="num" id="num" value="" />
+                        </div>
+                        <div id="input_2">
+                            <label >供应商名称:</label>
+                            <input type="text" name="pname" id="pname" value="" />
+                        </div>
+                        <div id="input_3">
+                            <label >商品号:</label>
+                            <input type="text" name="cnum" id="cnum" value="" />
+                        </div>
+                        <div id="input_4">
+                            <label >入库日期:</label>
+                            <input type="date" name="indate" id="indate" value="" />
+                        </div>
+                        <div id="input_5">
+                            <label >数量:</label>
+                            <input type="text" name="sum" id="sum" value="" />
+                        </div>
+                        <div id="input_6">
+                            <label >经手人:</label>
+                            <input type="text" name="stu_num" id="stu_num" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div id="down">
+                    <input type="submit" name="" id="" value="提交" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
