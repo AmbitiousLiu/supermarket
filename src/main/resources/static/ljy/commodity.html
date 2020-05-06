@@ -78,7 +78,7 @@
 					
 					<div class="content-right">
 						<div class="sum">
-							<div class="">总商品量：</div>
+							<div class="">总商品量：<span id="c_count"></span></div>
 							<div class="">总销售量：</div>
 							<div class="">总销售额：</div>
 							<div class="">总利润：</div>
@@ -110,7 +110,8 @@
 				items: []
 			},
 			mounted() {
-					this.getInfo();
+				this.getInfo();
+				this.pushInfo();
 			},
 			methods: {
 				getInfo() {
@@ -128,6 +129,10 @@
 				},
 				link(cnum) {
 					window.location.href = "http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum;
+				},
+				pushInfo() {
+					document.getElementById("c_count").innerHTML = this.items.length
+					
 				}
 			}
 		})
