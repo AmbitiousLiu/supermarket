@@ -129,6 +129,7 @@ $(function(){
 				url: "http://localhost:8080/Info/modifyInfo",
 				contentType:'application/json',
 				data: JSON.stringify(person) ,
+
 				success: function (data) {
 					if (data == "0") {
 						alert("修改失败！");
