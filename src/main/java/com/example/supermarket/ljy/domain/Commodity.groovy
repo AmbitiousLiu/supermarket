@@ -15,5 +15,8 @@ class Commodity {
     String sort
     Date p_date
     Date safe_date
-    Integer price
+    Integer stock_count
+    Integer shelf_count
+    Integer price_in
+    Integer price_out
 }

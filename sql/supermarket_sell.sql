@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `store`
+-- Table structure for table `sell`
 --
 
-DROP TABLE IF EXISTS `store`;
+DROP TABLE IF EXISTS `sell`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `store` (
+CREATE TABLE `sell` (
   `cnum` varchar(15) NOT NULL,
-  `cname` varchar(15) NOT NULL,
-  `sum` smallint(5) NOT NULL,
+  `count` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `price_in` smallint(4) NOT NULL,
+  `price_out` smallint(4) NOT NULL,
   PRIMARY KEY (`cnum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `store`
+-- Dumping data for table `sell`
 --
 
-LOCK TABLES `store` WRITE;
-/*!40000 ALTER TABLE `store` DISABLE KEYS */;
-/*!40000 ALTER TABLE `store` ENABLE KEYS */;
+LOCK TABLES `sell` WRITE;
+/*!40000 ALTER TABLE `sell` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sell` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29 15:54:19
+-- Dump completed on 2020-05-05 16:58:25

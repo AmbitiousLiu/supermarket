@@ -19,7 +19,7 @@ public class PersonInitController {
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response)throws IOException {
         String content = personInitService.getAllInfo("2");
         response.setContentType("text/json;charset=utf-8");
-        System.out.println(1);
+//        System.out.println(1);
         response.getWriter().write(content==null ?"":content);
 
     }

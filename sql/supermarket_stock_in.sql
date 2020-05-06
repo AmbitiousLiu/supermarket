@@ -27,7 +27,6 @@ CREATE TABLE `stock_in` (
   `pname` varchar(15) NOT NULL,
   `cnum` varchar(15) NOT NULL,
   `indate` date NOT NULL,
-  `price` smallint(4) NOT NULL,
   `sum` smallint(5) NOT NULL,
   `stu_num` varchar(15) NOT NULL,
   PRIMARY KEY (`num`)
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29 15:54:20
+-- Dump completed on 2020-05-05 16:58:30
