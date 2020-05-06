@@ -14,6 +14,8 @@ public class EmployeeInitService {
     @Resource
     EmployeeMapper employeeMapper;
 
+    public String getAllRegion() { return JSON.toJSONString(employeeMapper.getAllRegion()); }
+
     public String getAllInfo(String region){
         return JSON.toJSONString(employeeMapper.getAllInfo(region));
     }

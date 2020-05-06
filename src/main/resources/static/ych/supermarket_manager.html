@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/bootstrap.css"/>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="public/js/vue.js"></script>
+    <script src="public/js/ajaxUtil.js"></script>
     <script type="text/javascript" src="public/js/jquery-1.12.4.js" ></script>
     <script src="js/supermarket_yggl.js"></script>
 </head>
@@ -32,12 +33,12 @@
             <div id="branch"><div class="dropdown">
                 <button class="dropbtn">请选择你的管辖区域</button>
                 <div class="dropdown-content">
-                    <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index])">{{ item }}</a>
+                    <span @click = "getInfo()"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>
                 </div>
             </div>
             </div>
             <div id="hello"><h3>{{ name }},你好</h3></div>
-            <div id="choice" v-model="elbranch"><h4>你选择的区域:&nbsp&nbsp&nbsp&nbsp{{ elbranch }}</h></div>
+            <div id="choice"><h4>你选择的区域:&nbsp&nbsp&nbsp&nbsp{{ elbranch }}</h4></div>
         </div>
         <div id="below">
             <div id="employeeinfo">
@@ -62,7 +63,7 @@
                     </table>
                 </div>
                 <br>
-                <div id="barcon" name="barcon"></div>
+                <div id="barcon" name="barcon" v-show="employee_name.length"></div>
             </div>  
             <div id="opearation">
                 <input type="text" v-model="curname" placeholder="新增员工姓名">
@@ -75,52 +76,6 @@
         </div>
     </div>
 </div>
-<div id="footer">
-    <!-- 可加版权 -->
-</div>
-<script>
-    var app = new Vue({
-        el:"#above",
-        data:{
-            name:"张三",
-            elbranch:"",
-            branch:['奶制品','蔬果','水产'],
-        },
-        methods:{
-            changeBranch:function(elbranch){
-                this.elbranch=elbranch;
-            }
-        }
-    })
-</script>
-<script>
-    var app = new Vue({
-        el:"#below",
-        data:{
-            number:'',
-            dfsignin:'是',
-            employee_num:['928001','928002','928003','928004','928005'],
-            employee_name:['张三','李四','王五','小六','小七'],
-            employee_job:['称量','理货','加工','打酱油','吆喝'],
-            employee_signin:['是','否','是','否','是'],
-            curname:'',
-            curjob:''
-        },
-        methods:{
-            addEmployee:function(name,job){
-                this.employee_name.push(name);
-                this.employee_job.push(job);
-                this.employee_signin.push(this.dfsignin);
-            },
-            removeEmployee:function(index){
-                this.employee_num.splice(index,1);
-                this.employee_name.splice(index,1);
-                this.employee_job.splice(index,1);
-                this.employee_signin.splice(index,1);
-            }
-        }
-    })
-</script>
 <script>
     goPage(1,3);
     function goPage(pno, psize) {

@@ -16,10 +16,18 @@ public class EmployeeInitController {
     @Autowired
     EmployeeInitService employeeInitService;
 
-    @RequestMapping (value = "/getInfo") void initEmployee(HttpServletResponse response)throws IOException {
-        String content = employeeInitService.getAllInfo("fruit");
+    @RequestMapping (value = "/getAllRegion") void selectRegion(HttpServletResponse response)throws IOException {
+        String content = employeeInitService.getAllRegion();
         response.setContentType("text/json;charset=utf-8");
         System.out.println(1);
+        response.getWriter().write(content==null ?"":content);
+    }
+
+    @RequestMapping (value = "/getAllInfo") void initEmployee(HttpServletResponse response, @RequestParam(value = "region") String region)throws IOException {
+        System.out.println(region);
+        String content = employeeInitService.getAllInfo(region);
+        response.setContentType("text/json;charset=utf-8");
+        System.out.println(content);
         response.getWriter().write(content==null ?"":content);
     }
 
