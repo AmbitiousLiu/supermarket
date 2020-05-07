@@ -31,15 +31,15 @@ public class EmployeeInitController {
         response.getWriter().write(content==null ?"":content);
     }
 
-    @RequestMapping (value = "/modifyInfo") void modifyEmployee(HttpServletResponse response, @RequestBody Employee employee)throws IOException{
-        Integer integer = employeeInitService.modifyAllInfo(employee.getRegion(), employee.getStu_num(), employee.getName(), employee.getWork(), employee.getSign());
-
+    @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response, @RequestBody Employee employee)throws IOException{
+        Integer integer = employeeInitService.insertInfo(employee.getRegion(), employee.getStu_num(), employee.getName(), employee.getWork(), employee.getSign());
         response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(integer == 0 ?"1":"0");
+    }
 
-//        response.getWriter().write(integer==0 ?"操作成功！":"操作失败！");
-
-//        System.out.println(2);
-
+    @RequestMapping (value = "/deleteInfo") void deleteEmployee(HttpServletResponse response, @RequestBody String stu_num)throws IOException{
+        Integer integer = employeeInitService.deleteInfo(stu_num);
+        response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(integer == 0 ?"1":"0");
     }
 }

@@ -18,10 +18,10 @@
 <div class="center">
     <div class="center_of_left">
         <div id="Personal_management">
-            <p><a href="#" >个人中心&gt;</a></p>
+            <p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
         </div>
         <div id="Commodity_management">
-            <p><a href="#">商品管理&gt;</a></p>
+            <p><a href="http://localhost:8080/ljy/commodity.html">商品管理&gt;</a></p>
         </div>
         <div id="Staff_management">
             <p>	<a href="#">员工管理&gt;</a></p>
@@ -65,13 +65,14 @@
                 <br>
                 <div id="barcon" name="barcon" v-show="employee_name.length"></div>
             </div>  
-            <div id="opearation">
-                <input type="text" v-model="curname" placeholder="新增员工姓名">
-                <input type="text" v-model="curjob" placeholder="新增员工工作">
-                <input type="button" id="add" value="确认新增" @click="addEmployee(curname,curjob)">
+            <div id="opearation" v-show="employee_name.length">
+                <input type="text" name="stu_num" v-model="curnum" placeholder="新增员工工号">
+                <input type="text" name="name" v-model="curname" placeholder="新增员工姓名">
+                <input type="text" name="work" v-model="curjob" placeholder="新增员工工作">
+                <input @click="addEmployee()" type="button" id="add" value="确认新增">
                 <br><br><br>
-                <input type="text" v-model="number" placeholder="请输入员工编号">
-                <input type="button" id="remove" value="删除员工" @click="removeEmployee(number-1)">
+                <input v-show="employee_name.length" type="text" v-model="number" placeholder="请输入员工编号">
+                <input v-show="employee_name.length" @click="removeEmployee(numb)" type="button" id="remove" value="删除员工" @click="removeEmployee(number-1)">
             </div>
         </div>
     </div>

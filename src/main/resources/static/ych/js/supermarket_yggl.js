@@ -13,7 +13,7 @@ $(function(){
 
 
             number:[],
-            dfsignin: '是',
+            dfsignin: '1',
             // employee_num:['928001','928002','928003','928004','928005'],
             employee_num: [],
             // employee_name:['张三','李四','王五','小六','小七'],
@@ -50,9 +50,11 @@ $(function(){
                     }
                 })
             },
+
             changeBranch:function(elbranch){
                 this.elbranch=elbranch;
             },
+
             getInfo:function() {
                 let region = $("#choice").text().split(":")[1].replace(/(^\s*)/g,"");
                 ajax({
@@ -65,6 +67,13 @@ $(function(){
                     callback: (data)=> {
                     var alljson = eval(data);
                         // alert(alljson[0].name);
+                        // window.location.reload();
+                        // 清空employee列表
+                        this.employee_num.length = 0;
+                        this.employee_name.length = 0;
+                        this.employee_job.length = 0;
+                        this.employee_signin.length = 0;
+
                         for (var  i = 0 ; i < alljson.length; i++){
                             this.employee_name.push(alljson[i].name);
                             if (alljson[i].sign == true){
@@ -75,43 +84,51 @@ $(function(){
                             this.employee_num.push(alljson[i].stu_num);
                             this.employee_job.push(alljson[i].work);
                         }
-                    // $.each(JSON.stringify(alljson),function (i,element) {
-
-                    // })
                     // alert(this.employee_num);
                     }
                 })
-                // $.ajax({
-                //     method:HTTP_METHOD.POST,
-                //     type:"post",
-                //     url:"http://localhost:8080/Info_employee/getAllInfo",
-                //     contentType:'application/json',
-                //     data:  "region =" + reg,
-                //
-                //     callback: function(data){
-                //
-                //     },
-                //     // callback: (data)=>{
-                //     //
-                //     //
-                //     // },
-                //    dataType: "json"
-                // })
             },
 
-            addEmployee:function(name,job){
-                this.employee_name.push(name);
-                this.employee_job.push(job);
+            addEmployee:function(){
+                // 记当前的区域
+                let region = $("#choice").text().split(":")[1].replace(/(^\s*)/g,"");
+                const stu_num = $("#stu_num").val();
+                const ename = $("#name").val();
+                const work = $("#work").val();
+                var employee = {
+                    "region": region,
+                    "stu_num": stu_num,
+                    "name": ename,
+                    "work": work,
+                    "sign": true,
+                };
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8080/Info_employee/insertInfo",
+                    contentType:'application/json',
+                    data: JSON.stringify(employee),
+                    success: function (data) {
+                        if (data == "0") {
+                            alert("操作失败！");
+                        } else {
+                            alert("操作成功！");
+                            window.location.reload();
+                        }
+                    },
+                    dataType: 'json'
+                })
+                this.employee_num.push(stu_num);
+                this.employee_name.push(ename);
+                this.employee_job.push(work);
                 this.employee_signin.push(this.dfsignin);
             },
 
-            removeEmployee:function(index){
+            removeEmployee:function(index) {
                 this.employee_num.splice(index,1);
                 this.employee_name.splice(index,1);
                 this.employee_job.splice(index,1);
                 this.employee_signin.splice(index,1);
             }
-
         }
     })
 
