@@ -22,8 +22,8 @@ $(function(){
             employee_job: [],
             // employee_signin:['是','否','是','否','是'],
             employee_signin: [],
-            curname:'',
-            curjob:''
+            // curname:'',
+            // curjob:''
         },
         mounted(){
             this.getRegion();
@@ -92,9 +92,9 @@ $(function(){
             addEmployee:function(){
                 // 记当前的区域
                 let region = $("#choice").text().split(":")[1].replace(/(^\s*)/g,"");
-                const stu_num = $("#stu_num").val();
-                const ename = $("#name").val();
-                const work = $("#work").val();
+                const stu_num = $("#istu_num").val();
+                const ename = $("#iname").val();
+                const work = $("#iwork").val();
                 var employee = {
                     "region": region,
                     "stu_num": stu_num,
@@ -109,10 +109,7 @@ $(function(){
                     data: JSON.stringify(employee),
                     success: function (data) {
                         if (data == "0") {
-                            alert("操作失败！");
-                        } else {
                             alert("操作成功！");
-                            window.location.reload();
                         }
                     },
                     dataType: 'json'
@@ -120,48 +117,37 @@ $(function(){
                 this.employee_num.push(stu_num);
                 this.employee_name.push(ename);
                 this.employee_job.push(work);
-                this.employee_signin.push(this.dfsignin);
+                // this.employee_signin.push(this.dfsignin);
+                if (this.dfsignin){
+                    this.employee_signin.push("已打卡");
+                }else{
+                    this.employee_signin.push("未打卡");
+                }
             },
 
             removeEmployee:function(index) {
+                var stu_num = $("#remove").val();
+                $.ajax({
+                        type: "post",
+                        url: "http://localhost:8080/Info_employee/deleteInfo",
+                        contentType:'application/json',
+                        data: JSON.stringify(num) ,
+                        success: function (data) {
+                            if (data == "0") {
+                                alert("修改失败！");
+                            } else {
+                                alert("修改成功！");
+                                // window.location.reload();
+                            }
+                        },
+                        dataType: 'json'
+                    }
+                )
                 this.employee_num.splice(index,1);
                 this.employee_name.splice(index,1);
                 this.employee_job.splice(index,1);
                 this.employee_signin.splice(index,1);
             }
         }
-    })
-
-    $("#remove").click(function () {
-        var region = $("#choice").val();
-        var stu_num = $("#stu_num").val();
-        var name = $("#name").val();
-        var work = $("#work").val();
-        var sign = $("#sign").val();
-
-        var employee = {
-            "region": region,
-            "stu_num": stu_num,
-            "name": name,
-            "work": work,
-            "sign": sign
-        };
-
-        $.ajax({
-                type: "post",
-                url: "http://localhost:8080/Info_employee/modifyInfo",
-                contentType:'application/json',
-                data: JSON.stringify(employee) ,
-                success: function (data) {
-                    if (data == "0") {
-                        alert("修改失败！");
-                    } else {
-                        alert("修改成功！");
-                        window.location.reload();
-                    }
-                },
-                dataType: 'json'
-            }
-        )
     })
 })
