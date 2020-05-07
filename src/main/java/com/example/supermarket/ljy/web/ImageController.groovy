@@ -1,5 +1,7 @@
 package com.example.supermarket.ljy.web
 
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -86,9 +88,9 @@ class ImageController {
         return true
     }
 
-    @RequestMapping(value = "/update/commodity")
-    boolean updateCommodityImage(MultipartFile file,
-                                 @RequestParam(value = "cnum", required = false) String value) {
+    @PostMapping(value = "/update/commodity")
+    boolean updateCommodityImage(@RequestBody MultipartFile file,
+                                 @RequestParam(value = "cnum") String value) {
         if (value == null || value == "") {
             return false
         }
