@@ -18,7 +18,7 @@ class ImageController {
 
     @RequestMapping(value = "/person")
     void getPersonalImage(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+                          HttpServletResponse response) {
         def session = request.getSession()
         String value
         if (session != null) {
@@ -26,7 +26,12 @@ class ImageController {
         } else {
             value = "default"
         }
-        def fis = new FileInputStream(new File("images/person/" + (value ?: "default") + ".jpg"))
+        def fis
+        try {
+            fis = new FileInputStream(new File("images/person/" + (value ?: "default") + ".jpg"))
+        } catch (IOException e) {
+            fis = new FileInputStream(new File("images/person/" + "default" + ".jpg"))
+        }
         int len = 0
         response.setContentType("multipart/form-data")
         def out = response.getOutputStream()
@@ -39,9 +44,14 @@ class ImageController {
 
     @RequestMapping(value = "/commodity")
     void getCommodityImage(@RequestParam(value = "cnum", required = false) String value,
-                           HttpServletResponse response) throws IOException {
+                           HttpServletResponse response) {
         "".equals(value) ? value = "default" : value
-        def fis = new FileInputStream(new File("images/commodity/" + (value ?: "default") + ".jpg"))
+        def fis
+        try {
+            fis = new FileInputStream(new File("images/commodity/" + (value ?: "default") + ".jpg"))
+        } catch (IOException e) {
+            fis = new FileInputStream(new File("images/commodity/" + "default" + ".jpg"))
+        }
         int len = 0
         response.setContentType("multipart/form-data")
         def out = response.getOutputStream()
