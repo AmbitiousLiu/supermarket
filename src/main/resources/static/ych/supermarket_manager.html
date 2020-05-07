@@ -66,13 +66,13 @@
                 <div id="barcon" name="barcon" v-show="employee_name.length"></div>
             </div>  
             <div id="opearation" v-show="employee_name.length">
-                <input type="text" name="stu_num" v-model="curnum" placeholder="新增员工工号">
-                <input type="text" name="name" v-model="curname" placeholder="新增员工姓名">
-                <input type="text" name="work" v-model="curjob" placeholder="新增员工工作">
+                <input type="text" name="stu_num" id="istu_num" placeholder="新增员工工号">
+                <input type="text" name="name" id="iname" placeholder="新增员工姓名">
+                <input type="text" name="work" id="iwork" placeholder="新增员工工作">
                 <input @click="addEmployee()" type="button" id="add" value="确认新增">
                 <br><br><br>
-                <input v-show="employee_name.length" type="text" v-model="number" placeholder="请输入员工编号">
-                <input v-show="employee_name.length" @click="removeEmployee(numb)" type="button" id="remove" value="删除员工" @click="removeEmployee(number-1)">
+                <input v-show="employee_name.length" type="text" id="dstu_num" v-model="number" placeholder="请输入员工编号">
+                <input v-show="employee_name.length" type="button" id="remove" value="删除员工" @click="removeEmployee(number)">
             </div>
         </div>
     </div>
