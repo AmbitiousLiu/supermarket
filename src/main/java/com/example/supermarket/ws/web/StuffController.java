@@ -29,6 +29,7 @@ public class StuffController {
        if(stuff == null)
        {
            response.sendRedirect("/ws/login.html");
+           return;
        }
        // 设置session，方便后续使用
        HttpSession session = request.getSession();
