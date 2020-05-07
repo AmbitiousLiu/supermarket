@@ -1,4 +1,5 @@
 package com.example.supermarket.sry.web;
+import com.example.supermarket.sry.Redis.Redis;
 import com.example.supermarket.sry.service.Deal_CommodityInitService;
 import com.example.supermarket.sry.service.Deal_StuffInitService;
 import org.apache.ibatis.annotations.Delete;
@@ -18,7 +19,7 @@ class Deal_CommodityInitController {
 
     @Autowired public Deal_CommodityInitService dealCommodityInitService;
     @Autowired public Deal_StuffInitService dealStuffInitService;
-
+    Redis redis = new Redis();
     /**
      * GET:/deal/Commodity ('content ?: ""' means return "" if content is null)
      * @param response: json string of commodities's data
@@ -26,7 +27,14 @@ class Deal_CommodityInitController {
      */
     @GetMapping(value = "/commodity")
     public void initCommodity(HttpServletResponse response) throws IOException {
-        String content = dealCommodityInitService.getAllCommodities();
+        String content;
+        if(redis.exists("cnum_")){
+            content = redis.get("cnum_");
+        }else{
+            content = dealCommodityInitService.getAllCommodities();
+            redis.set("cnum_",content);
+            redis.expire("cnum_", 3600);
+        }
         response.setContentType("text/json;charset=utf-8");
         if (content == null) {
             response.getWriter().write("");
@@ -45,6 +53,7 @@ class Deal_CommodityInitController {
         String content;
         if(cnum != null){
             content = dealCommodityInitService.deleteCommodityByCnum(cnum);
+            redis.expire("cnum_"+cnum, 0);
         } else{
             content = "Have no cnum";
         }
@@ -59,14 +68,20 @@ class Deal_CommodityInitController {
     /**
      * GET:/deal/Commodity
      * @param cnum: it's not required
-     * @param sort: it's not required
      * @param response: json string if commodities's data
      * @return
      */
     @GetMapping(value = "/commodityByCnum")
     public void initCommodityByParam(@RequestParam(value = "cnum") String cnum,
                                                             HttpServletResponse response)  throws IOException  {
-        String content = dealCommodityInitService.getCommodityByCnum(cnum);
+        String content = null;
+        if(redis.exists("cnum_"+cnum)){
+            content = redis.get("cnum_"+cnum);
+        }else{
+            content = dealCommodityInitService.getCommodityByCnum(cnum);
+            redis.set("cnum_"+cnum,content);
+            redis.expire("cnum_"+cnum, 3600);
+        }
         response.setContentType("text/json;charset=utf-8");
         if (content == null) {
             response.getWriter().write("");
@@ -78,25 +93,18 @@ class Deal_CommodityInitController {
     /**
      * @param cnum: it is required
      * @param name: it is not required
-     * @param sort: it is not required
-     * @param p_date: it is not required
-     * @param safe_date: it is not required
-     * @param price: it is not required
-     * @param sale_count: it is not required
+     * @param price_out: it is not required
      * @param response: json string if commodities's data
      */
-    @PutMapping("/update")
-    public void updateCommodityByCnum(@RequestParam(value = "cnum", required = true) String cnum,
-                                      @RequestParam(value = "name", required = false) String sort,
-                                        @RequestParam(value = "sort", required = false) String name,
-                                      @RequestParam(value = "p_date", required = false) Date p_date,
-                                      @RequestParam(value = "safe_date", required = false) Date safe_date,
-                                      @RequestParam(value = "price", required = false) Integer price,
-                                      @RequestParam(value = "sale_count", required = false) Integer sale_count,
+    @PutMapping(value = "/update")
+    public void updateCommodityByCnum(@RequestParam(value = "cnum", required = false) String cnum,
+                                        @RequestParam(value = "name", required = false) String name,
+                                      @RequestParam(value = "price_out", required = false) Integer price_out,
                                       HttpServletResponse response) throws IOException{
         String content;
         if (cnum != null) {
-            content = dealCommodityInitService.updateCommodityByCnum(cnum, sort, name, p_date, safe_date, price, sale_count);
+            content = dealCommodityInitService.updateCommodityByCnum(cnum, name, price_out);
+            redis.expire("cnum_"+cnum, 0);
         } else {
             content = "";
         }
@@ -108,7 +116,7 @@ class Deal_CommodityInitController {
         }
     }
 
-    @GetMapping("/initPerson")
+    @GetMapping(value = "/initPerson")
     public void initPerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         if (session == null) {
