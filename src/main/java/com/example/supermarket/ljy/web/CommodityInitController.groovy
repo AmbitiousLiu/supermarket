@@ -29,21 +29,18 @@ class CommodityInitController {
      * @return
      */
     @GetMapping(value = "/commodity") initCommodity(HttpServletRequest request, HttpServletResponse response) {
-//        def session = request.getSession()
-//        String position = session.getAttribute("position")
-//        def content
-//        if (position == "president") {
-//            content = commodityInitService.getAllCommodities()
-//        } else if (position == "manager") {
-//            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
-//        } else {
-//            return
-//        }
-//        response.setContentType("text/json;charset=utf-8")
-//        response.getWriter().write(content ?: "")
-        def content = commodityInitService.getAllCommodities()
+        def session = request.getSession()
+        String position = session.getAttribute("position")
+        def content
+        if (position == "president") {
+            content = commodityInitService.getAllCommodities()
+        } else if (position == "manager") {
+            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
+        } else {
+            return
+        }
         response.setContentType("text/json;charset=utf-8")
-        response.getWriter().write(content)
+        response.getWriter().write(content ?: "")
     }
 
     @GetMapping(value = "/initStockOut")

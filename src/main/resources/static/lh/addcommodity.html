@@ -37,7 +37,7 @@
                         <div id="upimg">
                             <img src="" id="show" >
                         </div>
-                        <form id="image" action="" method="post" enctype="multipart/form-data">
+                        <form id="image" method="post" enctype="multipart/form-data">
                         	<div id="upfile">
                             	<input id="file" class="filepath" onchange="changepic(this)" type="file">
                         	</div>
@@ -82,7 +82,9 @@
 <script type="text/javascript">
 	
 	document.getElementById("submit").onclick = function() {
+		alert("123");
 		document.getElementById("image").action = "http://localhost:8080/image/update/commodity?cnum=" + document.getElementById("cnum").value;
+		alert(document.getElementById("image").action);
 		document.getElementById("image").submit();
 		ajax({
 			method: HTTP_METHOD.POST, 
