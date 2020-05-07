@@ -78,14 +78,11 @@
 					<div class="content-right">
 						<div class="sum">
 							<div class="">总商品量：<span id="c_count"></span></div>
-							<div class="">总销售量：</div>
-							<div class="">总销售额：</div>
-							<div class="">总利润：</div>
 						</div>
 						<div class="sum">
 							<div class="history">历史出库单：</div>
-							<div class="history" id="history">
-								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}</a><br />
+							<div class="history" id="history" v-for="stock in stocks">
+								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" >{{stock.outdate}} -> {{stock.cnum}}</a><br />
 							</div>
 							<div class="history">
 								<a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
