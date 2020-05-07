@@ -19,19 +19,11 @@ public interface Deal_CommodityMapper {
     List<Deal_Commodity> getAllCommodities();
 
     /**
-     * get commodities by the sort
-     * @param sort
-     * @return
-     */
-    @Select("select * from commodity where sort = #{sort}")
-    List<Deal_Commodity> getCommoditiesBySort(String sort);
-
-    /**
      * get commodity by the cnum
      * @param cnum
      * @return one commodity
      */
-    @Select("select * from commodity,store where commodity.cnum = #{cnum} and store.cnum = #{cnum}")
+    @Select("select * from commodity where cnum = #{cnum}")
     Deal_Commodity getCommodityByCnum(String cnum);
 
     /**
@@ -45,12 +37,8 @@ public interface Deal_CommodityMapper {
      * update commodity by the cnum
      * @param cnum
      * @param name
-     * @param sort
-     * @param p_date
-     * @param safe_date
-     * @param price
-     * @param sale_count
+     * @param price_out
      */
-    @Update("update commodity set name = #{name}, sort = #{sort}, p_date = #{p_date}, safe_date = #{safe_date}, price = #{price}, sale_count = #{sale_count} where cnum = #{cnum}")
-    Integer updateCommodityByCnum(String cnum, String name, String sort, Date p_date, Date safe_date, Integer price, Integer sale_count);
+    @Update("update commodity set name = #{name}, price_out = #{price_out} where cnum = #{cnum}")
+    Integer updateCommodityByCnum(String cnum, String name, Integer price_out);
 }

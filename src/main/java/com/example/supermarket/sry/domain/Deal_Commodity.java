@@ -11,6 +11,8 @@ public class Deal_Commodity {
 		String sort;
 		Date p_date;
 		Date safe_date;
-		Integer price;
-		Integer sale_count;
+		Integer stock_count;
+		Integer shelf_count;
+		Integer price_in;
+		Integer price_out;
 }
