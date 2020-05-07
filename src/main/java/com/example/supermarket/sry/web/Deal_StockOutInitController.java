@@ -1,5 +1,6 @@
 package com.example.supermarket.sry.web;
 
+import com.example.supermarket.sry.Redis.Redis;
 import com.example.supermarket.sry.service.Deal_StockOutInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "/deal")
 public class Deal_StockOutInitController {
+    Redis redis = new Redis();
     @Autowired
     Deal_StockOutInitService deal_StockOutInitService;
 
@@ -26,8 +28,16 @@ public class Deal_StockOutInitController {
     public void initCommodityByParam(@RequestParam(value = "num", required = false) String num,
                                      HttpServletResponse response)  throws IOException{
         String content;
+
         if (num != null) {
-            content = deal_StockOutInitService.getStockOutByNum(num);
+
+            if(redis.exists("num_"+num)){
+                content = redis.get("num_"+num);
+            }else{
+                content = deal_StockOutInitService.getStockOutByNum(num);
+                redis.set("cnum_"+num,content);
+                redis.expire("cnum_"+num, 3600);
+            }
         } else {
             content = "";
         }

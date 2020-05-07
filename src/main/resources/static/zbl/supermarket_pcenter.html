@@ -20,21 +20,21 @@
 					<p><a href="#" >个人中心&gt;</a></p>
 				</div>
 				<div id="Commodity_management">
-					<p><a href="#">商品管理&gt;</a></p>
+					<p><a href="http://localhost:8080/ljy/commodity.html">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
-					<p>	<a href="#">员工管理&gt;</a></p>
+					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 				</div>
 			</div>
 			<div id="center_of_right" class="center_of_right">
 				<div id="top">
 					<div id="identify">
-						<p><img src="img/timg.jpeg" class="img-circle"></p>
+						<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
 						<div id="name_pos">
 							{{vname}}
 						</div>
 					</div>
-						
+
 					<div id="second" class="info">
 						<div class = "infotop">
 							<span >
@@ -78,7 +78,7 @@
 							</span> <input type="" name="salary" id="salary"  v-model="vsalary" readonly/>
 						</div>
 						<div class ="infobottom">
-						
+
 						</div>
 					</div>
 				</div>
@@ -99,7 +99,7 @@
 						</div>
 						<div class="modiinfo">
 							<span>工龄:</span>
-							<input type="text" name="modi_seniority" id="modi_senoirity" value="" v-model="mseniority"/>
+							<input type="text" name="modi_seniority" id="modi_senoirity" value="" v-model="mseniority" readonly/>
 						</div>
 						<div class="modiinfo">
 							<span>负责区域:</span>
@@ -113,15 +113,16 @@
 							<span>工号:</span>
 							<input type="text" name="modi_pos" id="modi_num" value="" v-model="mstu_num" readonly/>
 						</div>
-					
-						
+
+
 					</div>
 					<button id="modify">修改</button>
-					
+
 				</div>
-			
+
 		</div>
 		</div>
 		<script src="js/supermarket_pcenter.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>
+<!--src="http://localhost:8080/image/person"-->

@@ -5,6 +5,7 @@ import com.example.supermarket.sry.mapper.Deal_CommodityMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import redis.clients.jedis.Jedis;
 import java.sql.Date;
 
 @Service
@@ -20,12 +21,9 @@ public class Deal_CommodityInitService {
     public String getAllCommodities() {
         return JSON.toJSONString(dealCommodityMapper.getAllCommodities());
     }
-
-    public String getCommoditiesBySort(String sort) {
-        return JSON.toJSONString(dealCommodityMapper.getCommoditiesBySort(sort));
-    }
     
     public String getCommodityByCnum(String cnum) {
+
         return JSON.toJSONString(dealCommodityMapper.getCommodityByCnum(cnum));
     }
 
@@ -33,7 +31,7 @@ public class Deal_CommodityInitService {
         return JSON.toJSONString(dealCommodityMapper.deleteCommodityByCnum(cnum));
     }
 
-    public String updateCommodityByCnum(String cnum, String name, String sort, Date p_date, Date safe_date, Integer price, Integer sale_count){
-        return JSON.toJSONString(dealCommodityMapper.updateCommodityByCnum(cnum, sort, name, p_date, safe_date, price, sale_count));
+    public String updateCommodityByCnum(String cnum, String name, Integer price_out){
+        return JSON.toJSONString(dealCommodityMapper.updateCommodityByCnum(cnum, name, price_out));
     }
 }

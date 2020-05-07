@@ -1,22 +1,20 @@
 package com.example.supermarket.lh.service;
 
-import com.alibaba.fastjson.JSON;
-import com.example.supermarket.lh.domain.StockIn;
 import com.example.supermarket.lh.mapper.StockInMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 
 @Service
-public class StockInInitService {
+public class StockInService {
 
     @Resource
-    StockInMapper stockInMapper;
+    public StockInMapper stockInMapper;
 
-
-    public String getAllInfo(String inNum){
-
-        return   JSON.toJSONString(stockInMapper.getAllInfo(inNum));
+    public void addStock(String num, String pname, String cnum, Date indate, int sum, String stu_num) {
+        stockInMapper.addStock(num, pname, cnum, indate, sum, stu_num);
     }
+
 }

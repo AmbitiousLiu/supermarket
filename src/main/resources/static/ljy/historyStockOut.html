@@ -20,13 +20,13 @@
 		<div class="center">
 			<div class="center_of_left">
 				<div id="Personal_management">
-					<p><a href="#" >个人中心&gt;</a></p>
+					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
 				</div>
 				<div id="Commodity_management">
 					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
-					<p>	<a href="#">员工管理&gt;</a></p>
+					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 				</div>
 			</div>
 		
@@ -47,7 +47,7 @@
 							<td>{{item.cnum}}</td>
 							<td>{{item.outdate}}</td>
 							<td>
-								<a :href="`http://localhost:8080/sry/StockOut_details?num=${item.num}`">详情</a>
+								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${item.num}`">详情</a>
 							</td>
 						</tr>
 					</tbody>
@@ -65,11 +65,9 @@
 	
 	<script type="text/javascript">
 		
-		var page = Number(function() {
-        	var reg = new RegExp("(^|&)" + "page" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        	if (r != null) return unescape(r[2]); return null; //返回参数值
-    	})
+    	var reg = new RegExp("(^|&)" + "page" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    	var page =  unescape(r[2]);
 		
 		$("#page").innerHTML = page
 		

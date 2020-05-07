@@ -1,17 +1,16 @@
 package com.example.supermarket.lh.mapper;
 
-
-import com.example.supermarket.lh.domain.StockIn;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
+import java.sql.Date;
 
 @Mapper
 public interface StockInMapper {
 
-    @Select("select * from stock_in" +
-            " where  num = #{num}")
-    List<StockIn>getAllInfo(String num);
+    @Insert("insert into stock_in(num,pname,cnum,indate,sum,stu_num)" +
+            "values (#{num},#{pname},#{cnum},#{indate}," +
+            "#{sum},#{stu_num})")
+    Integer addStock(String num, String pname, String cnum, Date indate, int sum, String stu_num);
 
 }
