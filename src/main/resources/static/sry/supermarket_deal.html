@@ -32,16 +32,15 @@
 		<div id="top">
 			<div id="identify">
 				<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
-				<div id="name_pos">
-					苏若愚/管理员
+				<div class="name_pos" >
+					<p style="display: inline;" id="userName">名字</p>
+					<p id="userPosition" style="display: inline;">/职位</p>
 				</div>
 			</div>
 			<div id="catelog">
 				<p>商品区</p>
 				<div id="region">
-					<select name="select">
-						<option value="all" selected="selected" id="region">全部区/瓜果区/生鲜区……</option>
-					</select>
+					全部/瓜果区/生鲜区/。。。
 				</div>
 			</div>
 		</div>
@@ -201,6 +200,46 @@
 			}); 
 		}); 
 	});
+	window.onload = function() {
+		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/deal/userName", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: (data) => { 
+	   			if (data != "") {
+	   				document.getElementById("userName").innerHTML = data;
+	   			}
+	   		}
+		})
+		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/deal/userPosition", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: (data) => { 
+	   			if (data != "") {
+	   				document.getElementById("userPosition").innerHTML = data;
+	   			}
+	   		}
+		})
+		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/deal/region", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: (data) => { 
+	   			if (data == "") {
+	   				document.getElementById("region").innerHTML = "全部区";
+	   			} else {
+	   				document.getElementById("region").innerHTML = data;
+	   			}
+	   		}
+		})
+	}
 	/*var v2 = new Vue({
 			el: "#center",
 			data: {

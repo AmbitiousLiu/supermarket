@@ -12,6 +12,8 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 @RestController
 @RequestMapping(value = "/deal")
@@ -20,6 +22,8 @@ class Deal_CommodityInitController {
     @Autowired public Deal_CommodityInitService dealCommodityInitService;
     @Autowired public Deal_StuffInitService dealStuffInitService;
     Redis redis = new Redis();
+    private static final Log log =
+            LogFactory.getLog(Deal_CommodityInitController.class);
     /**
      * GET:/deal/Commodity ('content ?: ""' means return "" if content is null)
      * @param response: json string of commodities's data
@@ -28,6 +32,7 @@ class Deal_CommodityInitController {
     @GetMapping(value = "/commodity")
     public void initCommodity(HttpServletResponse response) throws IOException {
         String content;
+        log.info("我的查询服务开始...................");
         if(redis.exists("cnum_")){
             content = redis.get("cnum_");
         }else{
@@ -74,9 +79,16 @@ class Deal_CommodityInitController {
     @GetMapping(value = "/commodityByCnum")
     public void initCommodityByParam(@RequestParam(value = "cnum") String cnum,
                                                             HttpServletResponse response)  throws IOException  {
-        String content = null;
+        String content;
         if(redis.exists("cnum_"+cnum)){
             content = redis.get("cnum_"+cnum);
+            System.out.println(content);
+            if(content.equals("null")){
+                redis.expire("cnum_"+cnum, 0);
+                content = dealCommodityInitService.getCommodityByCnum(cnum);
+                redis.set("cnum_"+cnum,content);
+                redis.expire("cnum_"+cnum, 3600);
+            }
         }else{
             content = dealCommodityInitService.getCommodityByCnum(cnum);
             redis.set("cnum_"+cnum,content);
@@ -116,18 +128,24 @@ class Deal_CommodityInitController {
         }
     }
 
-    @GetMapping(value = "/initPerson")
-    public void initPerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping(value = "/region")
+    String initRegion(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session == null) {
-            return;
-        }
-        Object position = session.getAttribute("position");
-        /*if (position == null) {
-            return;
-        }*/
-        response.setContentType("text/json;charset=utf-8");
-        System.out.println(session.getAttribute("stu_num").toString());
-        response.getWriter().write(dealStuffInitService.getStufvesByStu_num(session.getAttribute("stu_num").toString()));
+        String region = (String) session.getAttribute("region");
+        return region;
+    }
+
+    @GetMapping(value = "/userName")
+    String initUserName(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        return name;
+    }
+
+    @GetMapping(value = "/userPosition")
+    String initUserPosition(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String position = (String) session.getAttribute("position");
+        return position;
     }
 }
