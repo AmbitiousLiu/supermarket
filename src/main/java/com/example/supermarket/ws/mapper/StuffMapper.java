@@ -10,4 +10,7 @@ public interface StuffMapper {
     @Select("select * from stuff where stu_num = #{stu_num} and password = #{password}")
     Stuff findStuff(String stu_num,String password);
 
+    @Select("select * from stuff where stu_num = #{stu_num}")
+    Stuff findStuffByName(String stu_num);
+
 }
