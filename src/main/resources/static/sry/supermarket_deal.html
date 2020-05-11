@@ -40,7 +40,7 @@
 			<div id="catelog">
 				<p>商品区</p>
 				<div id="region">
-					全部/瓜果区/生鲜区/。。。
+					{{sort}}
 				</div>
 			</div>
 		</div>
@@ -111,6 +111,30 @@
 						this.cprice = datas.price_out
 						this.lirun = datas.price_out - datas.price_in
 						this.store = datas.stock_count
+						console.log(datas)
+					}
+				})
+			}
+		}
+	})
+	
+	var v2 = new Vue({
+		el: "#region",
+		data:{
+			sort: "全部/瓜果区/生鲜区/。。。"
+		},
+		mounted(){
+			this.getInfo();
+		},
+		methods:{
+			getInfo(){
+				ajax({
+					method: HTTP_METHOD.GET,
+					url: "/deal/commodityByCnum?cnum="+cnum,
+					async: true,
+					type: HTTP_RESPONSE_TYPE.JSON,
+					callback: (datas) => {
+						this.sort = datas.sort
 						console.log(datas)
 					}
 				})
@@ -222,20 +246,6 @@
 	   		callback: (data) => { 
 	   			if (data != "") {
 	   				document.getElementById("userPosition").innerHTML = data;
-	   			}
-	   		}
-		})
-		
-		ajax({
-			method: HTTP_METHOD.GET, 
-	   		url: "/deal/region", 
-	   		async: true, 
-	   		type: HTTP_RESPONSE_TYPE.TEXT, 
-	   		callback: (data) => { 
-	   			if (data == "") {
-	   				document.getElementById("region").innerHTML = "全部区";
-	   			} else {
-	   				document.getElementById("region").innerHTML = data;
 	   			}
 	   		}
 		})

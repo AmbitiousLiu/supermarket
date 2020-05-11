@@ -12,8 +12,7 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 @RestController
 @RequestMapping(value = "/deal")
@@ -22,8 +21,7 @@ class Deal_CommodityInitController {
     @Autowired public Deal_CommodityInitService dealCommodityInitService;
     @Autowired public Deal_StuffInitService dealStuffInitService;
     Redis redis = new Redis();
-    private static final Log log =
-            LogFactory.getLog(Deal_CommodityInitController.class);
+    private static Logger logger = Logger.getLogger(Deal_CommodityInitController.class);
     /**
      * GET:/deal/Commodity ('content ?: ""' means return "" if content is null)
      * @param response: json string of commodities's data
@@ -32,17 +30,19 @@ class Deal_CommodityInitController {
     @GetMapping(value = "/commodity")
     public void initCommodity(HttpServletResponse response) throws IOException {
         String content;
-        log.info("我的查询服务开始...................");
         if(redis.exists("cnum_")){
+            logger.info("Info Message, Use Redis to select value in cache");
             content = redis.get("cnum_");
         }else{
             content = dealCommodityInitService.getAllCommodities();
             redis.set("cnum_",content);
             redis.expire("cnum_", 3600);
+            logger.info("Info Message, Use Mysql to select value in mysql");
         }
         response.setContentType("text/json;charset=utf-8");
         if (content == null) {
             response.getWriter().write("");
+            logger.error("Error Message, No Commodities in database");
         } else {
             response.getWriter().write(content);
         }
@@ -82,21 +82,24 @@ class Deal_CommodityInitController {
         String content;
         if(redis.exists("cnum_"+cnum)){
             content = redis.get("cnum_"+cnum);
-            System.out.println(content);
             if(content.equals("null")){
                 redis.expire("cnum_"+cnum, 0);
                 content = dealCommodityInitService.getCommodityByCnum(cnum);
                 redis.set("cnum_"+cnum,content);
                 redis.expire("cnum_"+cnum, 3600);
+                logger.info("Info Message, Update Redis to save cnum: " + cnum +" in cache");
             }
+            logger.info("Info Message, Use Redis to select cnum: " + cnum +" in cache");
         }else{
             content = dealCommodityInitService.getCommodityByCnum(cnum);
             redis.set("cnum_"+cnum,content);
             redis.expire("cnum_"+cnum, 3600);
+            logger.info("Info Message, Use Mysql to select cnum: " + cnum +" in Mysql");
         }
         response.setContentType("text/json;charset=utf-8");
-        if (content == null) {
+        if (content.equals("null")) {
             response.getWriter().write("");
+            logger.info("Error Message, Can't find cnum: " + cnum +" in Mysql");
         } else {
             response.getWriter().write(content);
         } 
