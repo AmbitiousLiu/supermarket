@@ -24,9 +24,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .loginPage("/ws/login.html")
-                .loginProcessingUrl("/doLogin")
+                .loginPage("/ws/login.html").permitAll()
+                .loginProcessingUrl("/doLogin").permitAll()
                 .failureUrl("/ws/fault.html").permitAll()
+                .successForwardUrl("/zbl/supermarket_pcenter.html").permitAll()
                 .successHandler(userAuthenticationSuccessHandler)
                 .and()
                 .authorizeRequests()
