@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>商品入库</title>
+    <link rel="stylesheet" type="text/css" href="css/warehousing.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/imageup.js">	</script>
+    <script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+</head>
+<body>
+		<div class="header">
+			<p>超市管理系统</p>
+		</div>
+		<div class="center">
+			<div class="center_of_left">
+				<div id="Personal_management">
+					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
+				</div>
+				<div id="Commodity_management">
+					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
+				</div>
+				<div id="Staff_management">
+					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
+				</div>
+			</div>
+			<div class="center_of_right">
+				<div id="center_up">
+					<div id="operator">
+						<p><strong>经手人:</strong></p>
+						<select name="">
+							<option value="1">liuhai</option>
+							<option value="2">liujianyong</option>
+							<option value="3">shuruoyu</option>
+						</select>
+						<input type="button" name="" id="submit" value="提交" />
+					</div>
+				</div>
+				<div id="center_goods">
+					<div id="goods">
+						<ul>
+							<li>
+								<div id="app1" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>苹果</h3>
+									<p class="ms">供应商:<span id="pname">大果园</span></p>
+									<p class="bh">商品编号:<span id="cnum">001</span></p>
+									<button id="show1">选择&gt;&gt;</button>
+								</div>
+								<div id="vapp1" class="ycapp">
+									<span id="">
+										<div class="put">
+											<div class="put_1">
+												<label >入库单单号:</label>
+                            					<input type="text" name="num" id="num" value="" />
+											</div>
+                            				<div class="put_2">
+                            					<label >数量:</label>
+                            					<input type="text" name="sum" id="sum" value="" />
+                            				</div>
+                            				<div class="put_3">
+                            					<label >入库日期:</label>
+                            					<input type="date" name="indate" id="indate" value="" />
+                            				</div>
+                        				</div>
+										<button id="hide1">close</button>
+									</span>
+								</div>
+							</li>
+							<li>
+								<div id="app2" class="goodsbox">
+									<img src="img/l.jpg"/>
+									<h3>番茄</h3>
+									<p class="ms">供应商:<span id="pname">菜园子</span></p>
+									<p class="bh">商品编号:<span id="cnum">002</span></p>
+									<button id="show2">选择&gt;&gt;</button>
+								</div>
+								<div id="vapp2" class="ycapp">
+									<span id="">
+										<div class="put">
+											<div class="put_1">
+												<label >入库单单号:</label>
+                            					<input type="text" name="num" id="num" value="" />
+											</div>
+                            				<div class="put_2">
+                            					<label >数量:</label>
+                            					<input type="text" name="sum" id="sum" value="" />
+                            				</div>
+                            				<div class="put_3">
+                            					<label >入库日期:</label>
+                            					<input type="date" name="indate" id="indate" value="" />
+                            				</div>
+                        				</div>
+										<button id="hide2">close</button>
+									</span>
+								</div>
+							</li>
+							<li>
+								<div id="app3" class="goodsbox">
+									<img src="img/1605222038842215.jpg"/>
+									<h3>草鱼</h3>
+									<p class="ms">供应商:<span id="pname">鱼塘</span></p>
+									<p class="bh">商品编号:<span id="cnum">003</span></p>
+									<button id="show3">选择&gt;&gt;</button>
+								</div>
+								<div id="vapp3" class="ycapp">
+									<span id="">
+										<div class="put">
+											<div class="put_1">
+												<label >入库单单号:</label>
+                            					<input type="text" name="num" id="num" value="" />
+											</div>
+                            				<div class="put_2">
+                            					<label >数量:</label>
+                            					<input type="text" name="sum" id="sum" value="" />
+                            				</div>
+                            				<div class="put_3">
+                            					<label >入库日期:</label>
+                            					<input type="date" name="indate" id="indate" value="" />
+                            				</div>
+                        				</div>
+										<button id="hide3">close</button>
+									</span>
+								</div>
+							</li>
+							<li>
+								<div id="" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>猪肉</h3>
+									<p class="ms">供应商:<span id="pname">养殖场</span></p>
+									<p class="bh">商品编号:<span id="cnum">004</span></p>
+									<button id="show4">选择&gt;&gt;</button>
+								</div>
+							</li>
+							<li>
+								<div id="" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>梨儿</h3>
+									<p class="ms">供应商:<span id="pname">大果园</span></p>
+									<p class="bh">商品编号:<span id="cnum">005</span></p>
+									<button id="show5">选择&gt;&gt;</button>
+								</div>
+							</li>
+							<li>
+								<div id="" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>橘子</h3>
+									<p class="ms">供应商:<span id="pname">大果园</span></p>
+									<p class="bh">商品编号:<span id="cnum">006</span></p>
+									<button id="show6">选择&gt;&gt;</button>
+								</div>
+							</li>
+							<li>
+								<div id="" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>白萝卜</h3>
+									<p class="ms">供应商:<span id="pname">菜园子</span></p>
+									<p class="bh">商品编号:<span id="cnum">007</span></p>
+									<button id="show7">选择&gt;&gt;</button>
+								</div>
+							</li>
+							<li>
+								<div id="" class="goodsbox">
+									<img src="img/1K30641L-11.jpg"/>
+									<h3>羊肉</h3>
+									<p class="ms">供应商:<span id="pname">养殖场</span></p>
+									<p class="bh">商品编号:<span id="cnum">008</span></p>
+									<button id="show8">选择&gt;&gt;</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+</body>
+
+<script type="text/javascript">
+	
+	document.getElementById("submit").onclick = function() {
+		alert("123");
+		//$("#image").action = "http://localhost:8080/image/update/commodity?cnum=" //+ document.getElementById("cnum").value;
+		//alert(document.getElementById("image").action);
+		//document.getElementById("image").submit();
+
+		ajax({
+			method: HTTP_METHOD.POST, 
+	   		url: "/stockIn/add", 
+	   		async: true, 
+	   		params: "num=" + document.getElementById("num").value + 
+	   				"&pname=" + document.getElementById("pname").value + 
+	   				"&cnum=" + document.getElementById("cnum").value + 
+	   				"&indate=" + document.getElementById("indate").value + 
+	   				"&sum=" + document.getElementById("sum").value,
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: function(data) {
+	   			alert("入库成功！");
+   			}
+		})
+	}
+	 $(document).ready(function(){
+  		$("#hide1").click(function(){
+    		$("#vapp1").hide();
+  			});
+  		$("#app1").click(function(){
+    		$("#vapp1").show();
+  		});
+	});
+	$(document).ready(function(){
+  		$("#hide2").click(function(){
+    		$("#vapp2").hide();
+  			});
+  		$("#app2").click(function(){
+    		$("#vapp2").show();
+  		});
+	});
+	$(document).ready(function(){
+  		$("#hide3").click(function(){
+    		$("#vapp3").hide();
+  			});
+  		$("#app3").click(function(){
+    		$("#vapp3").show();
+  		});
+	});
+</script>
+
+</html>
