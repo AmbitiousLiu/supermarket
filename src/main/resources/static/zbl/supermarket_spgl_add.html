@@ -92,14 +92,11 @@
 						<div id="history">
 							<span id="his"><h4>历史出库单</h4></span>
 							<ul>
-								<li><a href="#">20201.1->商品名</a></li>
-								<li><a href="#">20201.2->商品名</a></li>
-								<li><a href="#">20201.3->商品名</a></li>
-								<li><a href="#">20201.4->商品名</a></li>
-				
-								
+								<li><a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a></li>
+
+
 							</ul>
-							<span><h4><a href="">查看更多出库单...</a></h4></span>
+							<span><h4><a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
 						</div>
 						
 					</div>
@@ -112,6 +109,29 @@
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		var v2 = new Vue({
+			el: '#history',
+			data: {
+				stocks: []
+			},
+			mounted() {
+				this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET,
+						url: "/commodity/initStockOut",
+						async: true,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+							this.stocks = datas
+						}
+					})
+				}
+			}
+		})
 
 		window.onload = function() {
 
