@@ -32,9 +32,9 @@ class CommodityInitController {
         def session = request.getSession()
         String position = session.getAttribute("position")
         def content
-        if (position == "总经理" || position == "副经理") {
+        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
             content = commodityInitService.getAllCommodities()
-        } else if (position == "库房管理人员") {
+        } else if (position == "ROLE_库房管理人员") {
             content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
         } else {
             return
@@ -54,9 +54,9 @@ class CommodityInitController {
             return
         }
         response.setContentType("text/json;charset=utf-8")
-        if (position == "总经理" || position == "副经理") {
+        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
             response.getWriter().write(stockOutService.initStockOut())
-        } else if (position == "库房管理人员") {
+        } else if (position == "ROLE_库房管理人员") {
             response.getWriter().write(stockOutService.initStockOutByPerson(session.getAttribute("stu_num").toString()))
         }
     }

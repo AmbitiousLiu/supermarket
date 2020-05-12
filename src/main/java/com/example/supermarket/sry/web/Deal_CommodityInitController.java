@@ -40,8 +40,9 @@ class Deal_CommodityInitController {
             logger.info("Info Message, Use Mysql to select value in mysql");
         }
         response.setContentType("text/json;charset=utf-8");
-        if (content == null) {
+        if (content.equals("null")) {
             response.getWriter().write("");
+            redis.expire("cnum_", 0);
             logger.error("Error Message, No Commodities in database");
         } else {
             response.getWriter().write(content);
@@ -55,17 +56,18 @@ class Deal_CommodityInitController {
      */
     @DeleteMapping(value = "/delete")
     public void deleteCommodityByParam(@RequestParam(value = "cnum", required = true) String cnum,HttpServletResponse response) throws IOException{
-        String content;
+        String content = null;
         if(cnum != null){
             content = dealCommodityInitService.deleteCommodityByCnum(cnum);
             redis.expire("cnum_"+cnum, 0);
         } else{
-            content = "Have no cnum";
+            logger.error("Error Message, You must input a cnum");
         }
         response.setContentType("text/json;charset=utf-8");
-        if(content.length() <= 1){
-            response.getWriter().write("Delete success");
+        if(content.equals("1")){
+            logger.info("Info Message, cnum:"+ cnum +" Delete Success");
         } else{
+            logger.error("Error Message, The cnum you input is not exists in database");
             response.getWriter().write(content);
         }
     }
@@ -116,18 +118,20 @@ class Deal_CommodityInitController {
                                         @RequestParam(value = "name", required = false) String name,
                                       @RequestParam(value = "price_out", required = false) Integer price_out,
                                       HttpServletResponse response) throws IOException{
-        String content;
+        String content = null;
         if (cnum != null) {
             content = dealCommodityInitService.updateCommodityByCnum(cnum, name, price_out);
             redis.expire("cnum_"+cnum, 0);
         } else {
-            content = "";
+            logger.error("Error Message, You must input a cnum");
         }
         response.setContentType("text/json;charset=utf-8");
-        if (content == null) {
-            response.getWriter().write("");
-        } else {
+        if (content.equals("1")) {
+            logger.info("Info Message, cnum:"+ cnum +" Update Success");
             response.getWriter().write(content);
+        } else {
+            response.getWriter().write("");
+            logger.error("Error Message, Update false");
         }
     }
 
