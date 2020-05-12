@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css"/>
 		<script src="../public/js/vue.js"></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js"></script>
 
 	</head>
 	<body>
@@ -28,19 +29,19 @@
 			<div class="center_of_right">
 				<div id="top">
 					<div id="identify">
-						<p><img src="img/timg.jpeg" class="img-circle"></p>
+						<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
 						<div id="name_pos">
-							苏若愚/管理员
+							<span class="name" id="userName">名字</span>/<span class="name" id="userPosition">身份</span>
 						</div>
 					</div>
 						<div id="com_region">
 						<h3>商品区</h3>
 						<div id="sort">
 							<select name="select">
-								<option value="all" selected="selected">全部区/瓜果区/生鲜区……</option>
-								<option value="fruit">水果区</option>
-								<option value="vegetable">蔬菜区</option>
-								<option value="fresh">生鲜区</option>
+								<option value="all" selected="selected" id="region">全部区/瓜果区/生鲜区……</option>
+<!--								<option value="fruit">水果区</option>-->
+<!--								<option value="vegetable">蔬菜区</option>-->
+<!--								<option value="fresh">生鲜区</option>-->
 							</select>
 						</div>
 						
@@ -70,10 +71,10 @@
 									<th>经手人</th>	
 								</tr>
 								<tr>
-									<td width="30%"><input type="text" name="num" id="num"  /></td>
-									<td width="15%"><input type="text" name="cnum" id="cnum"  /></td>
+									<td width="30%"><input type="text" name="num" id="num" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
+									<td width="15%"><input type="text" name="cnum" id="cnum" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
 									<td width="30%"><input type="date" name="outdate" id="outdate" /></td>
-									<td width="10%"><input type="text" name="sum" id="sum"  /></td>
+									<td width="10%"><input type="text" name="sum" id="sum"  maxlength="5"/></td>
 									<td width="15%"><input type="text" name="stu_num" id="stu_num"  readonly /></td>
 									
 								</tr>
@@ -110,5 +111,48 @@
 		
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+
+		window.onload = function() {
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/userName",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data != "") {
+						document.getElementById("userName").innerHTML = data;
+					}
+				}
+			})
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/userPosition",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data != "") {
+						document.getElementById("userPosition").innerHTML = data;
+					}
+				}
+			})
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/region",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data == "") {
+						document.getElementById("region").innerHTML = "全部区";
+					} else {
+						document.getElementById("region").innerHTML = data;
+					}
+				}
+			})
+		}
+	</script>
 	</body>
 </html>

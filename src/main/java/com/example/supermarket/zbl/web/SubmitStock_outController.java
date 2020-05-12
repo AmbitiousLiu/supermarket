@@ -19,7 +19,7 @@ public class SubmitStock_outController {
 
     @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response, @RequestBody Stock_out stock_out)throws IOException{
         System.out.println(stock_out.getOutdate());
-       Integer content = stockService.insertStockOut(stock_out.getNum(),stock_out.getCnum(),stock_out.getOutdate(),stock_out.getSum(),stock_out.getStu_num());
+        Integer content = stockService.insertStockOut(stock_out.getNum(),stock_out.getCnum(),stock_out.getOutdate(),stock_out.getSum(),stock_out.getStu_num());
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == 0 ?"0":"1");
     }

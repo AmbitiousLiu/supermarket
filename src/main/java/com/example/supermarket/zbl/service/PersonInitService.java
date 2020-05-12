@@ -17,6 +17,6 @@ public class PersonInitService {
     public String getAllInfo(String useId){
        return   JSON.toJSONString(personMapper.getAllInfo(useId));
     }
-    public Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age){ return  personMapper.modifyAllInfo(name,gender,region,position,stu_num,age);}
+    public Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age,String pas){ return  personMapper.modifyAllInfo(name,gender,region,position,stu_num,age,pas);}
 
 }
