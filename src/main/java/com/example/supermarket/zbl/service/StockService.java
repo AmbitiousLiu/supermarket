@@ -1,6 +1,7 @@
 package com.example.supermarket.zbl.service;
 
 
+import com.alibaba.fastjson.JSON;
 import com.example.supermarket.ljy.domain.Stock_out;
 import com.example.supermarket.zbl.mapper.StockMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +18,7 @@ public class StockService {
 
     public Integer insertStockOut(String num, String cnum, Date date, Integer sum, String stu_num)
     { return  stockMapper.insertStockOut(num,cnum,date,sum,stu_num);};
+
+    public String queryCnum(){return JSON.toJSONString(stockMapper.queryCnum());
+    };
 }

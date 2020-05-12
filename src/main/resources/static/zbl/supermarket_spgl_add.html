@@ -72,8 +72,13 @@
 								</tr>
 								<tr>
 									<td width="30%"><input type="text" name="num" id="num" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
-									<td width="15%"><input type="text" name="cnum" id="cnum" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
-									<td width="30%"><input type="date" name="outdate" id="outdate" /></td>
+									<td width="20%"><input type="text" list="cnumList" name="cnum" id="cnum"  maxlength="15"/></td>
+									<datalist id="cnumList">
+									<option v-for="cnum in cnums">{{cnum}}</option>
+
+								</datalist>
+
+									<td width="25%"><input type="date" name="outdate" id="outdate" /></td>
 									<td width="10%"><input type="text" name="sum" id="sum"  maxlength="5"/></td>
 									<td width="15%"><input type="text" name="stu_num" id="stu_num"  readonly /></td>
 									
@@ -91,11 +96,11 @@
 					<div id="b2">
 						<div id="history">
 							<span id="his"><h4>历史出库单</h4></span>
-							<ul>
-								<li><a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a></li>
+
+								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
 
 
-							</ul>
+
 							<span><h4><a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
 						</div>
 						
@@ -109,6 +114,35 @@
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		var v1 = new Vue({
+			el:'#table',
+			data:{
+				cnums:[]
+			},
+			mounted() {
+				this.getcnums();
+			},
+			methods: {
+				getcnums(){
+					ajax({
+						method: HTTP_METHOD.POST,
+						url: "/stockout/getCnum",
+						async: true,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => {
+							alert(datas);
+							if (datas!="0"){
+							this.cnums = datas;
+
+						}else{
+							alert("商品号查询出错！")
+				}
+						}
+					})
+				}
+			}
+
+		});
 		var v2 = new Vue({
 			el: '#history',
 			data: {
@@ -124,9 +158,11 @@
 						url: "/commodity/initStockOut",
 						async: true,
 						type: HTTP_RESPONSE_TYPE.JSON,
-						callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-							this.stocks = datas
+						callback: (datas) => {
+
+
+								this.stocks = datas;
+
 						}
 					})
 				}
