@@ -1,0 +1,199 @@
+body,html{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
+}
+/******************header*************************/
+.header{
+	width: 100%;
+	height: 16%;
+	border: 2px solid rgb(130,130,130);
+}
+.header p{
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+/*********************center********************/
+.center{
+	height: 84%;
+	width: 100%;
+}
+/*********************center_of_left********************/
+.center_of_left{
+	float: left;
+	width: 17.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+.nav-item {
+	color: orange;
+}
+.nav-item:hover {
+	color: orange;
+}
+.nav-item:focus {
+	color: orange;
+}
+/*********************center_of_right********************/
+.center_of_right{
+	float: left;
+	width: 82.5%;
+	height: 100%;
+}
+#center_up{
+	width: 100%;
+	height: 20%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+#operator{
+	width: 100%;
+	height: 50%;
+	position: relative;
+	top: 25%;
+}
+#operator p,select{
+	display: inline-block;
+	height: 50%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 12%;
+}
+#operator input{
+	display: inline-block;
+	width: 8%;
+	height: 66%;
+	float: right;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 24%;
+	background-color: dodgerblue;
+	border-radius:6% ;
+	border: none;
+}
+#center_goods{
+	width: 100%;
+	height: 80%;
+	overflow: scroll;
+}
+#goods{
+	width: 96%;
+	height: 100%;
+	position: relative;
+	left: 5%;
+}
+#goods ul{
+	margin: 0;
+	padding: 0;
+}
+#goods button{
+	border: none;
+	background-color: dodgerblue;
+	border-radius: 6%;
+}
+#goods ul>li{
+	display: block;
+	list-style: none;
+}
+.goodsbox{
+	width: 30%;
+	height: 400px;
+	border: solid 1px pink;
+	position: relative;
+	margin-left: 2%;
+	margin-top: 2%;
+	float: left;
+}
+.goodsbox:hover{
+	border: solid 2px green;
+}
+
+.goodsbox img{
+	width: 100%;
+	height: 60%;
+}
+.ycapp{
+	position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    background: gainsboro;
+    display: none;
+    z-index: 3;
+}
+.ycapp button{
+	position: absolute;
+	right: 0;
+	top: 0;
+	float: right;
+}
+.put{
+	display: inline-block;
+	position: relative;
+	left: 12%;
+	top: 24%;
+}
+.put label{
+	display: inline-block;
+	width: 45%;
+	height: 8%;
+	line-height: 8%;
+	text-align: justify;
+	text-align-last: justify;
+}
+.put input{
+	width: 50%;
+}
