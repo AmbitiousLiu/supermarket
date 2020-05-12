@@ -6,14 +6,13 @@
     <title>商品入库</title>
     <link rel="stylesheet" type="text/css" href="css/addcommodity.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/grzx.css" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/imageup.js">	</script>
     <script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 </head>
 <body>
-<div class="header">
+		<div class="header">
 			<p>超市管理系统</p>
 		</div>
 		<div class="center">
@@ -28,62 +27,60 @@
 					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 				</div>
 			</div>
-		
-		<div class="content_right">
-        <div class="content_right_down">
-            <form action="" method="post" enctype="multipart/form-data">
-                <div id="up">
-                    <div id="up_left">
-                        <div id="upimg">
-                            <img src="" id="show" >
-                        </div>
-                        <form id="image" action="" method="post" enctype="multipart/form-data">
-                        	<div id="upfile">
-                            	<input id="file" class="filepath" onchange="changepic(this)" type="file">
-                        	</div>
-                        </form>
-                        
-                    </div>
-                    <div id="up_right">
-                        <div id="input_1">
-                            <label >入库单单号:</label>
-                            <input type="text" name="num" id="num" value="" />
-                        </div>
-                        <div id="input_2">
-                            <label >供应商名称:</label>
-                            <input type="text" name="pname" id="pname" value="" />
-                        </div>
-                        <div id="input_3">
-                            <label >商品号:</label>
-                            <input type="text" name="cnum" id="cnum" value="" />
-                        </div>
-                        <div id="input_4">
-                            <label >入库日期:</label>
-                            <input type="date" name="indate" id="indate" value="" />
-                        </div>
-                        <div id="input_5">
-                            <label >数量:</label>
-                            <input type="text" name="sum" id="sum" value="" />
-                        </div>
-                    </div>
-                </div>
-                <div id="down">
-                    <input type="button" class="btn btn-default" name="" id="submit" value="提交" />
-                </div>
-            </form>
-        </div>
-    </div>
-			
-			
-		</div>
-		
+			<div class="center_of_right">
+        		<div class="center_right">
+            		<!--<form id="tab" method="post" enctype="multipart/form-data">-->
+                		<div id="up">
+                    		<div id="up_left">
+                        		<div id="upimg">
+                            		<img src="" id="show" >
+                        		</div>
+                        		<form id="image" method="post" enctype="multipart/form-data">
+                        			<div id="upfile">
+                            			<input id="file" class="filepath" onchange="changepic(this)" type="file" name="file">
+                        			</div>
+                        		</form>
+                    		</div>
+                    		<div id="up_right">
+                        		<div id="input_1">
+                            		<label >入库单单号:</label>
+                            		<input type="text" name="num" id="num" value="" />
+                        		</div>
+                        		<div id="input_2">
+                            		<label >供应商名称:</label>
+                            		<input type="text" name="pname" id="pname" value="" />
+                        		</div>
+                        		<div id="input_3">
+                            		<label >商品号:</label>
+                            		<input type="text" name="cnum" id="cnum" value="" />
+                        		</div>
+                        		<div id="input_4">
+                            		<label >入库日期:</label>
+                            		<input type="date" name="indate" id="indate" value="" />
+                        		</div>
+                        		<div id="input_5">
+                            		<label >数量:</label>
+                            		<input type="text" name="sum" id="sum" value="" />
+                        		</div>
+                        		<input type="button"  name="" id="submit" value="提交" />
+                    		</div>
+                		</div>
+            		<!--</form>-->
+            		<!--<div id="center_right_down">
+            			
+            		</div>-->
+        		</div>
+    		</div>	
+		</div>	
 </body>
 
 <script type="text/javascript">
 	
 	document.getElementById("submit").onclick = function() {
-		document.getElementById("image").action = "http://localhost:8080/image/update/commodity?cnum=" + document.getElementById("cnum").value;
-		document.getElementById("image").submit();
+		var form = $("#image");
+		form.attr("action", "/image/update/commodity?cnum=" + document.getElementById("cnum").value) //+ document.getElementById("cnum").value;
+		form.submit();
+		
 		ajax({
 			method: HTTP_METHOD.POST, 
 	   		url: "/stockIn/add", 

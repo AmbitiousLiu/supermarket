@@ -69,7 +69,7 @@
     	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
     	var page =  unescape(r[2]);
 		
-		$("#page").innerHTML = page
+		document.getElementById("page").innerHTML = page
 		
 		var v1 = new Vue({
 			el: '#tbody',
@@ -94,7 +94,7 @@
 			}
 		})
 		
-		$("#page_up").onclick = function() {
+		document.getElementById("page_up").onclick = function() {
 			if (page > 1) {
 				page--;
 				location.replace("http://localhost:8080/ljy/historyStockOut.html?page="+page);
@@ -103,7 +103,7 @@
 			}
 		}
 		
-		$("#page_down").onclick = function() {
+		document.getElementById("page_down").onclick = function() {
 			if (v1.items.length == 10) {
 				page++;
 				location.replace("http://localhost:8080/ljy/historyStockOut.html?page="+page);

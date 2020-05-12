@@ -14,11 +14,17 @@ public class EmployeeInitService {
     @Resource
     EmployeeMapper employeeMapper;
 
+    public String getAllRegion() { return JSON.toJSONString(employeeMapper.getAllRegion()); }
+
     public String getAllInfo(String region){
         return JSON.toJSONString(employeeMapper.getAllInfo(region));
     }
 
-    public Integer modifyAllInfo(String region, String stu_num, String name, String work, Boolean sign){
-        return employeeMapper.modifyAllInfo(region, stu_num, name, work, sign);
+    public Integer insertInfo(String region, String stu_num, String name, String work, Boolean sign){
+        return employeeMapper.insertInfo(region, stu_num, name, work, sign);
+    }
+
+    public Integer deleteInfo(String stu_num){
+        return employeeMapper.deleteInfo(stu_num);
     }
 }

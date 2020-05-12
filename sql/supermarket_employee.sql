@@ -28,7 +28,6 @@ CREATE TABLE `employee` (
   `work` varchar(20) NOT NULL,
   `sign` tinyint(4) NOT NULL,
   `region` varchar(10) NOT NULL,
-  `date` date NOT NULL,
   PRIMARY KEY (`stu_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../public/js/vue.js" ></script>
-	<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 	<script src="js/param.js"></script>
 </head>
 <body>
@@ -19,27 +19,28 @@
 <div class="center">
 	<div class="center_of_left">
 		<div id="Personal_management">
-			<p>个人中心</p>
+			<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
 		</div>
 		<div id="Commodity_management">
-			<p>商品管理</p>
+			<p><a href="#" class="nav-item">商品管理&gt;</a></p>
 		</div>
 		<div id="Staff_management">
-			<p>员工管理</p>
+			<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 		</div>
 	</div>
 	<div class="center_of_right">
 		<div id="top">
 			<div id="identify">
 				<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
-				<div id="name_pos">
-					苏若愚/管理员
+				<div class="name_pos" >
+					<p style="display: inline;" id="userName">名字</p>
+					<p id="userPosition" style="display: inline;">/职位</p>
 				</div>
 			</div>
 			<div id="catelog">
 				<p>商品区</p>
 				<div id="region">
-					全部/瓜果区/生鲜区/。。。
+					{{sort}}
 				</div>
 			</div>
 		</div>
@@ -52,21 +53,25 @@
 			</div>
 			<div id="center">
 				<div id="Commodity_Name">
-					<p id="cname">商品名：{{cname}}</p>
+					<p style="display: inline;">商品名：</p>
+					<p id="cname" style="display: inline;">{{cname}}</p>
 				</div>
 				<div id="Inventory">
-					<!--库存量<p v-for="store in stores">{{store.sum}}</p>-->
+					<p style="display: inline;">库存量：</p>
+					<p id="store" style="display: inline;">{{store}}</p>
 				</div>
 				<div id="Unit_Price">
-					<p id="cprice">商品价格：{{cprice}}</p>
+					<p style="display: inline;">商品价格：</p>
+					<p id="cprice" style="display: inline;">{{cprice}}</p>
 				</div>
 				<div id="month_total">
-					月销售量/月销售总额/月利润
+					<p style="display: inline;">利润：</p>
+					<p id="lirun" style="display: inline;">{{lirun}}</p>
 				</div>
 			</div>
 			<div id="right">
 				<div id="modify">
-					修改
+					修改商品名
 				</div>
 				<div id="change_unit_price">
 					修改单价
@@ -87,7 +92,9 @@
 		el: "#center",
 		data:{
 			cname: "name",
-			cprice: "price"
+			cprice: "price",
+			lirun: "lirun",
+			store: "store",
 		},
 		mounted(){
 			this.getData();
@@ -101,7 +108,34 @@
 					type: HTTP_RESPONSE_TYPE.JSON,
 					callback: (datas) => {
 						this.cname = datas.name
-						this.cprice = datas.price
+						this.cprice = datas.price_out
+						this.lirun = datas.price_out - datas.price_in
+						this.store = datas.stock_count
+						console.log(datas)
+					}
+				})
+			}
+		}
+	})
+	
+	var v2 = new Vue({
+		el: "#region",
+		data:{
+			sort: "全部/瓜果区/生鲜区/。。。"
+		},
+		mounted(){
+			this.getInfo();
+		},
+		methods:{
+			getInfo(){
+				ajax({
+					method: HTTP_METHOD.GET,
+					url: "/deal/commodityByCnum?cnum="+cnum,
+					async: true,
+					type: HTTP_RESPONSE_TYPE.JSON,
+					callback: (datas) => {
+						this.sort = datas.sort
+						console.log(datas)
 					}
 				})
 			}
@@ -124,7 +158,97 @@
 		    },        
 		   });
 		}
-
+	}
+	$(function() { 
+		$("#modify").click(function() { 
+			var cname = $("#cname"); 
+			var cprice = $("#cprice");
+			var txt = cname.text(); 
+			var input = $("<input type='text'value='" + txt + "'/>"); 
+			cname.html(input); 
+			input.click(function() { return false; }); 
+			input.trigger("focus"); 
+			input.blur(function() { 
+				var newtxt = $(this).val(); 
+				if (newtxt != txt) { 
+					cname.html(newtxt); 
+					var jsonstr = {"cnum": cnum ,"name": newtxt,"price_out": cprice.text()};
+					$.ajax({
+						type:"PUT",
+					    url:"/deal/update?cnum="+cnum+"&name="+newtxt+"&price_out="+cprice.text(),
+					    contentType:"application/json",//设置请求参数类型为json字符串
+					    data:JSON.stringify(jsonstr),//将json对象转换成json字符串发送
+					    dataType:"json",
+					    success:function(result){
+								alert("修改成功");
+					    },
+					            
+					   });
+				}
+				else 
+				{ 
+					cname.html(newtxt); 
+				} 
+			}); 
+		}); 
+	}); 
+	$(function() {
+		$("#change_unit_price").click(function() { 
+			var cname = $("#cname"); 
+			var cprice = $("#cprice");
+			var txt = cprice.text(); 
+			var input = $("<input type='text'value='" + txt + "'/>"); 
+			cprice.html(input); 
+			input.click(function() { return false; }); 
+			input.trigger("focus"); 
+			input.blur(function() { 
+				var newtxt = $(this).val(); 
+				if (newtxt != txt) { 
+					cprice.html(newtxt); 
+					var jsonstr = {"cnum": cnum ,"name": newtxt,"price_out": cprice.text()};
+					$.ajax({
+						type:"PUT",
+					    url:"/deal/update?cnum="+cnum+"&name="+cname.text()+"&price_out="+newtxt,
+					    contentType:"application/json",
+					    data:JSON.stringify(jsonstr),
+					    dataType:"json",
+					    success:function(result){
+								alert("修改成功");
+					    },
+					   });
+				}
+				else 
+				{ 
+					cprice.html(newtxt); 
+				} 
+			}); 
+		}); 
+	});
+	window.onload = function() {
+		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/deal/userName", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: (data) => { 
+	   			if (data != "") {
+	   				document.getElementById("userName").innerHTML = data;
+	   			}
+	   		}
+		})
+		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/deal/userPosition", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.TEXT, 
+	   		callback: (data) => { 
+	   			if (data != "") {
+	   				document.getElementById("userPosition").innerHTML = data;
+	   			}
+	   		}
+		})
 	}
 	/*var v2 = new Vue({
 			el: "#center",

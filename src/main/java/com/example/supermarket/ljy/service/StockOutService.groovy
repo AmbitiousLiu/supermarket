@@ -1,6 +1,7 @@
 package com.example.supermarket.ljy.service
 
 import com.alibaba.fastjson.JSON
+
 import com.example.supermarket.ljy.mapper.StockOutMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -24,7 +25,6 @@ class StockOutService {
 
     String moreStockOutByPerson(String stu_num, int page, int size) {
         int begin = (page - 1) * size
-        println stu_num
         return JSON.toJSONString(stockOutMapper.moreStockOutByPerson(stu_num, begin, size))
     }
 

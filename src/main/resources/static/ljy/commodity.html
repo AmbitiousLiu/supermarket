@@ -38,9 +38,8 @@
 					<div class="head-item">
 						<div class="shangpingqu">商品区：</div>
 						<div class="qu">
-							<select name="select">
-								<option value="all" selected="selected" id="region">全部区/瓜果区/生鲜区……</option>
-							</select>
+								<span value="all" id="region" style="border: 1px solid black;">全部区/瓜果区/生鲜区……</span>
+							
 						</div>
 					</div>
 					<div class="head-item">
@@ -79,14 +78,11 @@
 					<div class="content-right">
 						<div class="sum">
 							<div class="">总商品量：<span id="c_count"></span></div>
-							<div class="">总销售量：</div>
-							<div class="">总销售额：</div>
-							<div class="">总利润：</div>
 						</div>
 						<div class="sum">
 							<div class="history">历史出库单：</div>
-							<div class="history" id="history">
-								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}</a><br />
+							<div class="history" id="history" >
+								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
 							</div>
 							<div class="history">
 								<a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
@@ -171,7 +167,7 @@
 		   		type: HTTP_RESPONSE_TYPE.TEXT, 
 		   		callback: (data) => { 
 		   			if (data != "") {
-		   				document.getElementById("region")
+		   				document.getElementById("userName").innerHTML = data;
 		   			}
 		   		}
 	   		})

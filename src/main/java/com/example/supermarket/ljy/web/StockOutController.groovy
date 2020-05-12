@@ -34,9 +34,9 @@ class StockOutController {
             return
         }
         response.setContentType("text/json;charset=utf-8")
-        if (position.equals("president")) {
+        if (position == "总经理" || position == "副经理") {
             response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), SIZE))
-        } else if (position.equals("manager")) {
+        } else if (position == "库房管理人员") {
             response.getWriter().write(stockOutService.moreStockOutByPerson(session.getAttribute("stu_num").toString(), Integer.parseInt(page), SIZE))
         }
     }

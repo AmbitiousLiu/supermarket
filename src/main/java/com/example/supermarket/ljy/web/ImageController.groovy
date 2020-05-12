@@ -1,5 +1,7 @@
 package com.example.supermarket.ljy.web
 
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -18,7 +20,7 @@ class ImageController {
 
     @RequestMapping(value = "/person")
     void getPersonalImage(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+                          HttpServletResponse response) {
         def session = request.getSession()
         String value
         if (session != null) {
@@ -26,7 +28,12 @@ class ImageController {
         } else {
             value = "default"
         }
-        def fis = new FileInputStream(new File("images/person/" + (value ?: "default") + ".jpg"))
+        def fis
+        try {
+            fis = new FileInputStream(new File("images/person/" + (value ?: "default") + ".jpg"))
+        } catch (IOException e) {
+            fis = new FileInputStream(new File("images/person/" + "default" + ".jpg"))
+        }
         int len = 0
         response.setContentType("multipart/form-data")
         def out = response.getOutputStream()
@@ -39,9 +46,14 @@ class ImageController {
 
     @RequestMapping(value = "/commodity")
     void getCommodityImage(@RequestParam(value = "cnum", required = false) String value,
-                           HttpServletResponse response) throws IOException {
+                           HttpServletResponse response) {
         "".equals(value) ? value = "default" : value
-        def fis = new FileInputStream(new File("images/commodity/" + (value ?: "default") + ".jpg"))
+        def fis
+        try {
+            fis = new FileInputStream(new File("images/commodity/" + (value ?: "default") + ".jpg"))
+        } catch (IOException e) {
+            fis = new FileInputStream(new File("images/commodity/" + "default" + ".jpg"))
+        }
         int len = 0
         response.setContentType("multipart/form-data")
         def out = response.getOutputStream()
@@ -76,9 +88,9 @@ class ImageController {
         return true
     }
 
-    @RequestMapping(value = "/update/commodity")
-    boolean updateCommodityImage(MultipartFile file,
-                                 @RequestParam(value = "cnum", required = false) String value) {
+    @PostMapping(value = "/update/commodity")
+    boolean updateCommodityImage(@RequestBody MultipartFile file,
+                                 @RequestParam(value = "cnum") String value) {
         if (value == null || value == "") {
             return false
         }

@@ -16,4 +16,8 @@ public class Stuffservicelmp {
     public Stuff findStuff(String stu_num, String password) {
         return stuffMapper.findStuff(stu_num,password);
     }
+
+    public Stuff findStuffByName(String stu_num) {
+        return stuffMapper.findStuffByName(stu_num);
+    }
 }

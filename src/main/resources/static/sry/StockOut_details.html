@@ -33,13 +33,13 @@
 <div class="center">
 	<div class="center_of_left">
 		<div id="Personal_management">
-			<p>个人中心</p>
+			<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
 		</div>
 		<div id="Commodity_management">
-			<p>商品管理</p>
+			<p><a href="#" class="nav-item">商品管理&gt;</a></p>
 		</div>
 		<div id="Staff_management">
-			<p>员工管理</p>
+			<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 		</div>
 	</div>
 	<div class="center_of_right" id="main">
@@ -49,20 +49,12 @@
 				<td id="num">{{item.num}}</td>
 			</tr>
 			<tr v-for="item in items">
-				<th>商品名</th>
-				<td id="cname">{{item.pname}}</td>
-			</tr>
-			<tr v-for="item in items">
 				<th>商品号</th>
 				<td id="cnum">{{item.cnum}}</td>
 			</tr>
 			<tr v-for="item in items">
 				<th>出库日期</th>
 				<td id="outdate">{{item.outdate}}</td>
-			</tr>
-			<tr v-for="item in items">
-				<th>价格</th>
-				<td id="cprice">{{item.price}}</td>
 			</tr>
 			<tr v-for="item in items">
 				<th>出库数量</th>
