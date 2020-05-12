@@ -142,8 +142,11 @@ $(function(){
 
                         for (var  i = 0 ; i < alljson.length; i++){
 
-                           // if(i == 2) { goPage(1, 3); $("#category").click(); console.log(1); }
-                            if(i == 2) { goPage(1, 3); }
+                           if(i == 2) { goPage(1, 3); }
+                           //  if(i == 2) { goPage(1, 3); }
+
+                            var start = (new Date().getTime());
+                            while(new Date().getTime() - start < 100) { $("#category").click(); console.log(1); }
 
                             this.employee_name.push(alljson[i].name);
                             if (alljson[i].sign == true){
