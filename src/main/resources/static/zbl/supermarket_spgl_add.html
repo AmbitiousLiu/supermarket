@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css"/>
 		<script src="../public/js/vue.js"></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js"></script>
 
 	</head>
 	<body>
@@ -28,19 +29,19 @@
 			<div class="center_of_right">
 				<div id="top">
 					<div id="identify">
-						<p><img src="img/timg.jpeg" class="img-circle"></p>
+						<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
 						<div id="name_pos">
-							苏若愚/管理员
+							<span class="name" id="userName">名字</span>/<span class="name" id="userPosition">身份</span>
 						</div>
 					</div>
 						<div id="com_region">
 						<h3>商品区</h3>
 						<div id="sort">
 							<select name="select">
-								<option value="all" selected="selected">全部区/瓜果区/生鲜区……</option>
-								<option value="fruit">水果区</option>
-								<option value="vegetable">蔬菜区</option>
-								<option value="fresh">生鲜区</option>
+								<option value="all" selected="selected" id="region">全部区/瓜果区/生鲜区……</option>
+<!--								<option value="fruit">水果区</option>-->
+<!--								<option value="vegetable">蔬菜区</option>-->
+<!--								<option value="fresh">生鲜区</option>-->
 							</select>
 						</div>
 						
@@ -70,10 +71,10 @@
 									<th>经手人</th>	
 								</tr>
 								<tr>
-									<td width="30%"><input type="text" name="num" id="num"  /></td>
-									<td width="15%"><input type="text" name="cnum" id="cnum"  /></td>
+									<td width="30%"><input type="text" name="num" id="num" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
+									<td width="15%"><input type="text" name="cnum" id="cnum" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
 									<td width="30%"><input type="date" name="outdate" id="outdate" /></td>
-									<td width="10%"><input type="text" name="sum" id="sum"  /></td>
+									<td width="10%"><input type="text" name="sum" id="sum"  maxlength="5"/></td>
 									<td width="15%"><input type="text" name="stu_num" id="stu_num"  readonly /></td>
 									
 								</tr>
@@ -91,14 +92,11 @@
 						<div id="history">
 							<span id="his"><h4>历史出库单</h4></span>
 							<ul>
-								<li><a href="#">20201.1->商品名</a></li>
-								<li><a href="#">20201.2->商品名</a></li>
-								<li><a href="#">20201.3->商品名</a></li>
-								<li><a href="#">20201.4->商品名</a></li>
-				
-								
+								<li><a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a></li>
+
+
 							</ul>
-							<span><h4><a href="">查看更多出库单...</a></h4></span>
+							<span><h4><a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
 						</div>
 						
 					</div>
@@ -110,5 +108,71 @@
 		
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var v2 = new Vue({
+			el: '#history',
+			data: {
+				stocks: []
+			},
+			mounted() {
+				this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET,
+						url: "/commodity/initStockOut",
+						async: true,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+							this.stocks = datas
+						}
+					})
+				}
+			}
+		})
+
+		window.onload = function() {
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/userName",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data != "") {
+						document.getElementById("userName").innerHTML = data;
+					}
+				}
+			})
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/userPosition",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data != "") {
+						document.getElementById("userPosition").innerHTML = data;
+					}
+				}
+			})
+
+			ajax({
+				method: HTTP_METHOD.GET,
+				url: "/commodity/region",
+				async: true,
+				type: HTTP_RESPONSE_TYPE.TEXT,
+				callback: (data) => {
+					if (data == "") {
+						document.getElementById("region").innerHTML = "全部区";
+					} else {
+						document.getElementById("region").innerHTML = data;
+					}
+				}
+			})
+		}
+	</script>
 	</body>
 </html>

@@ -13,6 +13,15 @@ public class Person {
     Double salary;//工资
     Integer age;//年龄
     Integer seniority;//工龄
+    String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public String toString() {

@@ -60,14 +60,14 @@ $(function(){
 			
 		})
 		
-//		if(flag == true){
-//				$("#num").val("");
-//				$("#cnum").val("");
-//				$("#outdate").val("");
-//				$("#sum").val("");
-//				$("#stu_num").val("");
-//		}
-//		
+		if(flag == true){
+				$("#num").val("");
+				$("#cnum").val("");
+				$("#outdate").val("");
+				$("#sum").val("");
+				$("#stu_num").val("");
+		}
+		
 		
 		
 		

@@ -8,6 +8,7 @@
 		<script src="../public/js/ajaxUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../public/js/vue.js"></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		<script src="js/supermarket_pcenter.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
 	<body>
@@ -29,7 +30,10 @@
 			<div id="center_of_right" class="center_of_right">
 				<div id="top">
 					<div id="identify">
-						<p><img src="http://localhost:8080/image/person" class="img-circle"></p>
+						<p>
+							<!--<input type="image" src="http://localhost:8080/image/person" class="img-circle" id="fig"  />-->
+							<img src="http://localhost:8080/image/person" class="img-circle" id="fig" >
+						</p>
 						<div id="name_pos">
 							{{vname}}
 						</div>
@@ -87,15 +91,20 @@
 					<div id="modify_choice">
 						<div class="modiinfo">
 							<span>姓名:</span>
-							<input type="text" name="modi_name" id="modi_name" value="" v-model="mname" />
+							<input type="text" name="modi_name" id="modi_name" value="" v-model="mname" maxlength="10"/>
 						</div>
 						<div class="modiinfo">
 							<span>性别:</span>
-							<input type="text" name="modi_gender" id="modi_gender" value="" v-model="mgender"/>
+							<input type="text" list="gender_list" name="modi_gender" id="modi_gender" value="" v-model="mgender"/>
+							 <datalist id="gender_list">
+							 	<option value="Male"></option>
+							 	<option value="Female"></option>
+							 	
+							 </datalist>
 						</div>
 						<div class="modiinfo">
 							<span>年龄:</span>
-							<input type="text" name="modi_age" id="modi_age" value="" v-model="mage"/>
+							<input type="text" name="modi_age" id="modi_age"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" value="" v-model="mage" maxlength="2"/>
 						</div>
 						<div class="modiinfo">
 							<span>工龄:</span>
@@ -103,26 +112,32 @@
 						</div>
 						<div class="modiinfo">
 							<span>负责区域:</span>
-							<input type="text" name="modi_region" id="modi_region" value="" v-model="mregion"/>
+							<input type="text" name="modi_region" id="modi_region" value="" v-model="mregion" maxlength="10"/>
 						</div>
 						<div class="modiinfo">
 							<span>职位:</span>
-							<input type="text" name="modi_pos" id="modi_pos" value="" v-model="mposition"/>
+							<input type="text" name="modi_pos" id="modi_pos" value="" v-model="mposition" maxlength="10"/>
 						</div>
 						<div class="modiinfo">
-							<span>工号:</span>
-							<input type="text" name="modi_pos" id="modi_num" value="" v-model="mstu_num" readonly/>
+							<span>修改密码:</span>
+							<input type="text" name="modi_pas" id="modi_pas" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" value="" v-model="mstu_num" maxlength="20"/>
 						</div>
 
 
 					</div>
+					<a id="figa">上传头像
+						<input id="upFigure" onchange="changepic(this)" type="file">
+					</a>
 					<button id="modify">修改</button>
+
+
+
 
 				</div>
 
 		</div>
 		</div>
-		<script src="js/supermarket_pcenter.js" type="text/javascript" charset="utf-8"></script>
+
 	</body>
 </html>
 <!--src="http://localhost:8080/image/person"-->

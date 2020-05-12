@@ -1,4 +1,29 @@
+function changepic(obj) {
+	//console.log(obj.files[0]);//这里可以获取上传文件的name
+	var newsrc=getObjectURL(obj.files[0]);
+	document.getElementById('fig').src=newsrc;
+}
+//建立一個可存取到該file的url
+function getObjectURL(file) {
+	var url = null ;
+	// 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+
 $(function(){
+
+//	$("#fig").click(function(){
+//		
+//		alert("hello");
+//		console.log("hello")
+//	})
 	
 	var v1 = new Vue({
 		el:"#center_of_right",
@@ -33,6 +58,7 @@ $(function(){
 
 		},
 		methods:{
+
 			getInfo(){
 				ajax({
 					method:HTTP_METHOD.POST,
@@ -56,7 +82,7 @@ $(function(){
 						this.mage    = json[0].age;
 
 						this.vstu_num= json[0].stu_num;
-						this.mstu_num= json[0].stu_num;
+						this.mstu_num= json[0].password;
 
 						this.vseniority = json[0].seniority;
 						this.mseniority = json[0].seniority;
@@ -106,7 +132,8 @@ $(function(){
 		var seniority = $("#modi_senoirity").val();
 		var region = $("#modi_region").val();
 		var position = $("#modi_pos").val();
-		var stu_num = $("#modi_num").val();
+		var stu_num = $("#stu_num").val();
+		var password = $("#modi_pas").val();
 
 
 
@@ -121,8 +148,11 @@ $(function(){
 			"region": region,
 			"stu_num": stu_num,
 			"position": position,
+			"password":password,
 			"salary": "0"
 		};
+		$("#upFigure").action = "http://localhost:8080/image/update/person";
+		$("#upFigure").submit();
 
 		$.ajax({
 				type: "post",

@@ -17,8 +17,8 @@ public interface PersonMapper {
 
     @Update("update stuff " +
             "set name = #{name},gender = #{gender},region = #{region}," +
-            "position = #{position},age = #{age}" +
+            "position = #{position},age = #{age},password = #{pas}" +
             " where stuff.stu_num = #{stu_num}")
-    Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age);
+    Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age,String pas);
 
 }

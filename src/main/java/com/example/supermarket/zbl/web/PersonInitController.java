@@ -19,6 +19,7 @@ public class PersonInitController {
 
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
+//
         response.setContentType("text/json;charset=utf-8");
 //        System.out.println(1);
         response.getWriter().write(content==null ?"":content);
@@ -28,7 +29,7 @@ public class PersonInitController {
     @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestBody Person person )throws IOException{
 
 
-        Integer integer = personInitService.modifyAllInfo(person.getName(),person.getGender(),person.getRegion(),person.getPosition(),person.getStu_num(),person.getAge());
+        Integer integer = personInitService.modifyAllInfo(person.getName(),person.getGender(),person.getRegion(),person.getPosition(),person.getStu_num(),person.getAge(),person.getPassword());
 
         response.setContentType("text/json;charset=utf-8");
 
