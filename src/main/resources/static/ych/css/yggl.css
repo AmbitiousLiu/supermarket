@@ -54,7 +54,7 @@ body, html{
 	float: left;
     width: 17.5%;
 	/* width: 17.5%; */
-	height: 120%;
+	height: 110%;
 	border: solid 1px rgb(130,130,130);
 }
 
@@ -116,12 +116,16 @@ body, html{
 }
 
 #above{
-    height: 185px;
+    height: 175px;
     /* border: solid 5px; */
+    border-bottom: solid 1px rgb(130,130,130);
 }
 
 #plogo{
+    border-radius: 100%;
     float: left;
+    width: 100px;
+    height: 180px;
     margin-left: 15px;
     margin-top: 15px;
 }
