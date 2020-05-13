@@ -47,7 +47,7 @@
 							<td>{{item.cnum}}</td>
 							<td>{{item.outdate}}</td>
 							<td>
-								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${item.num}`">详情</a>
+								<a :href="`/sry/StockOut_details.html?num=${item.num}`">详情</a>
 							</td>
 						</tr>
 					</tbody>
@@ -97,7 +97,7 @@
 		document.getElementById("page_up").onclick = function() {
 			if (page > 1) {
 				page--;
-				location.replace("http://localhost:8080/ljy/historyStockOut.html?page="+page);
+				location.replace("/ljy/historyStockOut.html?page="+page);
 			} else {
 				
 			}
@@ -106,7 +106,7 @@
 		document.getElementById("page_down").onclick = function() {
 			if (v1.items.length == 10) {
 				page++;
-				location.replace("http://localhost:8080/ljy/historyStockOut.html?page="+page);
+				location.replace("/ljy/historyStockOut.html?page="+page);
 			} else {
 				
 			}

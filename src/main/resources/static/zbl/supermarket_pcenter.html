@@ -21,7 +21,7 @@
 					<p><a href="#" >个人中心&gt;</a></p>
 				</div>
 				<div id="Commodity_management">
-					<p><a href="http://localhost:8080/ljy/commodity.html">商品管理&gt;</a></p>
+					<p><a href="/ljy/commodity.html">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
 					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
@@ -32,7 +32,7 @@
 					<div id="identify">
 						<p>
 							<!--<input type="image" src="http://localhost:8080/image/person" class="img-circle" id="fig"  />-->
-							<img src="http://localhost:8080/image/person" class="img-circle" id="fig" >
+							<img src="/image/person" class="img-circle" id="fig" >
 						</p>
 						<div id="name_pos">
 							{{vname}}
@@ -125,9 +125,12 @@
 
 
 					</div>
-					<a id="figa">上传头像
-						<input id="upFigure" onchange="changepic(this)" type="file">
-					</a>
+					<form id="image" method="post" enctype="multipart/form-data">
+						<a id="figa">上传头像
+							<input id="upFigure" onchange="changepic(this)" type="file">
+						</a>
+					</form>
+
 					<button id="modify">修改</button>
 
 
