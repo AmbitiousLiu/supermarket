@@ -22,19 +22,33 @@ function goPage(pno, psize) {
             irow.style.display = "none";
         }
     }
+
     var tempStr = "";
+
     if (currentPage > 1) {
+        $("a").click(function(){
+            $("#category").unbind();
+        });
         tempStr += "<a href=\"#\" onClick=\"goPage(" + (currentPage - 1) + "," + psize + ")\"><上一页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>"
         for (var j = 1; j <= totalPage; j++) {
+            $("a").click(function(){
+                $("#category").unbind();
+            });
             tempStr += "<a href=\"#\" onClick=\"goPage(" + j + "," + psize + ")\">" + j + "&nbsp;&nbsp;&nbsp;</a>"
         }
     } else {
         tempStr += "<上一页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
         for (var j = 1; j <= totalPage; j++) {
+            $("a").click(function(){
+                $("#category").unbind();
+            });
             tempStr += "<a href=\"#\" onClick=\"goPage(" + j + "," + psize + ")\">" + j + "&nbsp;&nbsp;&nbsp;</a>"
         }
     }
     if (currentPage < totalPage) {
+        $("a").click(function(){
+            $("#category").unbind();
+        });
         tempStr += "<a href=\"#\" onClick=\"goPage(" + (currentPage + 1) + "," + psize + ")\">下一页>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
         for (var j = 1; j <= totalPage; j++) {
         }
@@ -141,18 +155,26 @@ $(function(){
                         this.num = alljson.length;
 
                         for (var  i = 0 ; i < alljson.length; i++){
-
-                           if(i == 2) { goPage(1, 3); }
+                            goPage(1, 3);
+                           // Ajax异步，若无点击事件则模拟点击事件
+                           if(i == 2) {
+                               $("#category").dblclick();
+                               $("a").click(function () {
+                                   $("#category").unbind();
+                               })
+                           }
                            //  if(i == 2) { goPage(1, 3); }
 
-                            var start = (new Date().getTime());
-                            while(new Date().getTime() - start < 100) { $("#category").click(); console.log(1); }
+
+
+                            // var start = (new Date().getTime());
+                            // while(new Date().getTime() - start < 1) { $("#category").click(); console.log(1); }
 
                             this.employee_name.push(alljson[i].name);
                             if (alljson[i].sign == true){
-                                this.employee_signin.push("已打卡");
+                                this.employee_signin.push("已持有");
                             }else{
-                                this.employee_signin.push("未打卡");
+                                this.employee_signin.push("未持有");
                             }
                             this.employee_num.push(alljson[i].stu_num);
                             this.employee_job.push(alljson[i].work);
@@ -198,9 +220,9 @@ $(function(){
                             this.employee_job.push(work);
                             // this.employee_signin.push(this.dfsignin);
                             if (this.dfsignin){
-                                this.employee_signin.push("已打卡");
+                                this.employee_signin.push("已持有");
                             }else{
-                                this.employee_signin.push("未打卡");
+                                this.employee_signin.push("未持有");
                             }
                         }
                     },

@@ -116,8 +116,9 @@ body, html{
 }
 
 #above{
-    height: 185px;
+    height: 175px;
     /* border: solid 5px; */
+    border-bottom: solid 1px rgb(130,130,130);
 }
 
 #plogo{
