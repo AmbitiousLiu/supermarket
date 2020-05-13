@@ -62,7 +62,7 @@ $(function(){
 			getInfo(){
 				ajax({
 					method:HTTP_METHOD.POST,
-					url:"http://localhost:8080/Info/getInfo",
+					url:"/Info/getInfo",
 					async:true,
 					type:HTTP_RESPONSE_TYPE.JSON,
 					callback:(data)=>{
@@ -151,12 +151,12 @@ $(function(){
 			"password":password,
 			"salary": "0"
 		};
-		$("#upFigure").action = "http://localhost:8080/image/update/person";
-		$("#upFigure").submit();
+		$("#image").action = "/image/update/person";
+		$("#image").submit();
 
 		$.ajax({
 				type: "post",
-				url: "http://localhost:8080/Info/modifyInfo",
+				url: "/Info/modifyInfo",
 				contentType:'application/json',
 				data: JSON.stringify(person) ,
 

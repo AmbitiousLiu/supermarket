@@ -18,8 +18,8 @@ public class PersonInitController {
     @Autowired PersonInitService personInitService;
 
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
-        String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
-//
+        String content = personInitService.getAllInfo("1");
+//session.getAttribute("stu_num").toString()
         response.setContentType("text/json;charset=utf-8");
 //        System.out.println(1);
         response.getWriter().write(content==null ?"":content);
