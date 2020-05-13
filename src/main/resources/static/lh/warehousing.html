@@ -6,6 +6,7 @@
     <title>商品入库</title>
     <link rel="stylesheet" type="text/css" href="css/warehousing.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
@@ -42,19 +43,19 @@
 					<div id="goods">
 						<ul v-for="item in items">
 							<li>
-								<div class="goodsbox app1">
+								<div class="goodsbox app">
 									<img :src="`http://localhost:8080/image/commodity?cnum=${item.cnum}`"/>
 									<h3>{{item.cname}}</h3>
 									<p class="ms">供应商:<span id="pname">{{item.pname}}</span></p>
 									<p class="bh">商品编号:<span id="cnum">{{item.cnum}}</span></p>
-									<button class="show1" >购入&gt;&gt;</button>
+									<button id="show" >购入&gt;&gt;</button>
 								</div>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<div id="vapp1" class="ycapp">
+			<div id="vapp" class="ycapp">
 				<span id="">
 					<div class="put">
 						<div class="put_1">
@@ -71,7 +72,7 @@
 						</div>
 						<input type="button" name="" id="submit" value="提交" />
 					</div>
-					<button id="hide1">close</button>
+					<button id="hide">close</button>
 				</span>
 			</div>
 		</div>	
@@ -102,19 +103,22 @@
 			}
 		}
 	})
-	 $(document).ready(function(){
-  		$("#hide1").click(function(){
-    		$("#vapp1").hide();
-  			});
-  		$(".app1").click(function(){
-    		$("#vapp1").show();
-  		});
-	});
+	
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+  $("#hide").click(function(){
+    $("#vapp").hide();
+  });
+  $("#show").click(function(){
+    $("#vapp").show();
+  });
+});
 </script>
 
 <script language="JavaScript"> 
 var today=new Date();
-var submitTime=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
+var submitTime=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
 $("#date").attr('value',submitTime);
 </script> 
 
