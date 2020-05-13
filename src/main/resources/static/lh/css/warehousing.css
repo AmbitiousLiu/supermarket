@@ -172,13 +172,16 @@ body,html{
     top: 25%;
     background: gainsboro;
     display: none;
-    z-index: 3;
+    z-index: 1000;
 }
 .ycapp button{
 	position: absolute;
 	right: 0;
 	top: 0;
 	float: right;
+	border: none;
+	background-color: dodgerblue;
+	border-radius: 6%;
 }
 .put{
 	display: inline-block;
