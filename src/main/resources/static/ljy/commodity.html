@@ -32,7 +32,7 @@
 			<div id="center_of_right">
 				<div id="head">
 					<div class="head-item">
-						<img src="http://localhost:8080/image/person" id="head-img"/>
+						<img src="/image/person" id="head-img"/>
 						<span class="name" id="userName">名字</span>  /  <span class="name" id="userPosition">身份</span>
 					</div>
 					<div class="head-item">
@@ -60,7 +60,7 @@
 						<div class="comodity-item" v-for="item in items">
 							<div style="display: flex;" @click="link(item.cnum)">
 								<div>
-									<img :src="`http://localhost:8080/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
+									<img :src="`/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
 								</div>
 								<div>
 									<div class="item-text">商品号：{{item.cnum}}</div>
@@ -82,10 +82,10 @@
 						<div class="sum">
 							<div class="history">历史出库单：</div>
 							<div class="history" id="history" >
-								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
+								<a :href="`/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
 							</div>
 							<div class="history">
-								<a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
+								<a href="/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
 							</div>
 						</div>
 						
@@ -124,7 +124,7 @@
 			   		})
 				},
 				link(cnum) {
-					window.location.href = "http://localhost:8080/sry/supermarket_deal.html?cnum="+cnum;
+					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum;
 				},
 				pushInfo() {
 					document.getElementById("c_count").innerHTML = this.items.length
@@ -200,11 +200,11 @@
 		}
 
 		document.getElementById("c_up").onclick = function() {
-			window.location.href = "http://localhost:8080/zbl/supermarket_spgl_add.html";
+			window.location.href = "/zbl/supermarket_spgl_add.html";
 		}
 		
 		document.getElementById("c_in").onclick = function() {
-			window.location.href = "http://localhost:8080/lh/addcommodity.html";
+			window.location.href = "/lh/addcommodity.html";
 		}
 		
 		
