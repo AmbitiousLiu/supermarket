@@ -32,10 +32,10 @@
         <div id="above">
             <div id="plogo"><img src="image/mango.jpg" class="img-circle" alt=""></div>
             <div id="branch"><div class="dropdown">
-                <button class="dropbtn">请选择你的管辖区域</button>
+                <button class="dropbtn" title="请双击您选择的区域">请选择你的管辖区域</button>
                 <div class="dropdown-content">
 <!--                    <span @click = "display()"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>-->
-                    <span id="category" @click = "getEpInfo()"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>
+                    <span id="category" @click = "getEpInfo()" title="请双击"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>
                     <script>
                         const btn = document.getElementById('category');
                         simulateClick();
@@ -62,7 +62,7 @@
                             <th width=25%>员工工号</th>
                             <th width=25%>员工姓名</th>
                             <th width=25%>工作</th>
-                            <th width=25%>今日打卡情况</th>
+                            <th width=25%>绿码情况</th>
                         </tr>
                     </table>
                 </div>
