@@ -65,18 +65,18 @@ class ImageController {
     }
 
     @RequestMapping(value = "/update/person")
-    boolean updatePersonalImage(MultipartFile file,
+    void updatePersonalImage(MultipartFile file,
                                 HttpServletRequest request) {
         def session = request.getSession()
         if (session == null) {
-            return false
+            return
         }
         if (file.isEmpty()) {
-            return false
+            return
         }
         String name = session.getAttribute("stu_num")
         if (name == null) {
-            return false
+            return
         }
         String outputFile="images/person/"+name+".jpg"
         File outFile = new File(outputFile)
@@ -85,17 +85,16 @@ class ImageController {
         out.write(file.getBytes())
         out.flush()
         out.close()
-        return true
     }
 
     @PostMapping(value = "/update/commodity")
-    boolean updateCommodityImage(@RequestBody MultipartFile file,
+    void updateCommodityImage(@RequestBody MultipartFile file,
                                  @RequestParam(value = "cnum") String value) {
         if (value == null || value == "") {
-            return false
+            return
         }
         if (file.isEmpty()) {
-            return false
+            return
         }
         String outputFile="images/commodity/"+value+".jpg"
         File outFile = new File(outputFile)
@@ -104,7 +103,6 @@ class ImageController {
         out.write(file.getBytes())
         out.flush()
         out.close()
-        return true
     }
 
 }
