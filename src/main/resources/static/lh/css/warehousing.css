@@ -166,19 +166,22 @@ body,html{
 }
 .ycapp{
 	position: absolute;
-    width: 50%;
+    width: 36%;
     height: 50%;
     left: 25%;
     top: 25%;
     background: gainsboro;
     display: none;
-    z-index: 3;
+    z-index: 1000;
 }
-.ycapp button{
+.hidediv{
 	position: absolute;
+	float: right;
 	right: 0;
 	top: 0;
-	float: right;
+	border: none;
+	background-color: dodgerblue;
+	border-radius: 6%;
 }
 .put{
 	display: inline-block;
