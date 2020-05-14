@@ -127,9 +127,10 @@
 					</div>
 
 						<a id="figa">上传头像
-							<form id="image" method="post" enctype="multipart/form-data">
+							<form id="image" method="post" enctype="multipart/form-data" target="nm_iframe">
 							<input id="upFigure" onchange="changepic(this)" type="file" name="file">
 								</form>
+							<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
 						</a>
 
 					<button id="modify">修改</button>
