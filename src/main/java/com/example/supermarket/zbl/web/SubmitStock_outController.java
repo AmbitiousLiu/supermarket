@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RestController
@@ -18,9 +19,10 @@ public class SubmitStock_outController {
     @Resource
     StockService stockService;
 
-    @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response, @RequestBody Stock_out stock_out)throws IOException{
+    @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response, @RequestBody Stock_out stock_out, HttpSession session)throws IOException{
+        String stu_num = session.getAttribute("stu_num").toString();
         System.out.println(stock_out.getOutdate());
-        Integer content = stockService.insertStockOut(stock_out.getNum(),stock_out.getCnum(),stock_out.getOutdate(),stock_out.getSum(),stock_out.getStu_num());
+        Integer content = stockService.insertStockOut(stock_out.getNum(),stock_out.getCnum(),stock_out.getOutdate(),stock_out.getSum(),stu_num);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == 0 ?"0":"1");
     }

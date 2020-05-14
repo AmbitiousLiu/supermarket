@@ -68,19 +68,19 @@
 									<th>商品号</th>
 									<th>出库日期</th>
 									<th>数量</th>
-									<th>经手人</th>	
+<!--									<th>经手人</th>	-->
 								</tr>
 								<tr>
 									<td width="30%"><input type="text" name="num" id="num" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="15"/></td>
-									<td width="20%"><input type="text" list="cnumList" name="cnum" id="cnum"  maxlength="15"/></td>
+									<td width="25%"><input type="text" list="cnumList" name="cnum" id="cnum"  maxlength="15"/></td>
 									<datalist id="cnumList">
 									<option v-for="cnum in cnums">{{cnum}}</option>
 
 								</datalist>
 
-									<td width="25%"><input type="date" name="outdate" id="outdate" /></td>
-									<td width="10%"><input type="text" name="sum" id="sum"  maxlength="5"/></td>
-									<td width="15%"><input type="text" name="stu_num" id="stu_num"  readonly /></td>
+									<td width="30%"><input type="date" name="outdate" id="outdate" /></td>
+									<td width="15%"><input type="text" name="sum" id="sum"  maxlength="5"/></td>
+<!--									<td width="15%"><input type="text" name="stu_num" id="stu_num"  readonly /></td>-->
 									
 								</tr>
 							</table>
@@ -130,7 +130,7 @@
 						async: true,
 						type: HTTP_RESPONSE_TYPE.JSON,
 						callback: (datas) => {
-							alert(datas);
+							// alert(datas);
 							if (datas!="0"){
 							this.cnums = datas;
 

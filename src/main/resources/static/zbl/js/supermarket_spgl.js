@@ -6,7 +6,7 @@ $(function(){
 	// $.ajax({
 	// 	type:"post",
 	// 	url:"",
-	// 	// data:"",
+	// 	data:"",
 	// 	contentType:'application/json',
 	// 	success: function (data) {
 	// 				if (data == "") {
