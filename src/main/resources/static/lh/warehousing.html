@@ -48,14 +48,14 @@
 									<h3>{{item.cname}}</h3>
 									<p class="ms">供应商:<span id="pname">{{item.pname}}</span></p>
 									<p class="bh">商品编号:<span id="cnum">{{item.cnum}}</span></p>
-									<button id="show" >购入&gt;&gt;</button>
+									<button class="showdiv" >购入&gt;&gt;</button>
 								</div>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<div id="vapp" class="ycapp">
+			<div class="ycapp vapp">
 				<span id="">
 					<div class="put">
 						<div class="put_1">
@@ -72,7 +72,7 @@
 						</div>
 						<input type="button" name="" id="submit" value="提交" />
 					</div>
-					<button id="hide">close</button>
+					<button class="hidediv" >关闭&gt;&gt;</button>
 				</span>
 			</div>
 		</div>	
@@ -107,11 +107,11 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
-  $("#hide").click(function(){
-    $("#vapp").hide();
+  $(".hidediv").click(function(){
+    $(".vapp").hide();
   });
-  $("#show").click(function(){
-    $("#vapp").show();
+  $(".showdiv").click(function(){
+    $(".vapp").show();
   });
 });
 </script>
