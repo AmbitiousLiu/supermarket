@@ -125,11 +125,12 @@
 
 
 					</div>
-					<form id="image" method="post" enctype="multipart/form-data">
+
 						<a id="figa">上传头像
-							<input id="upFigure" onchange="changepic(this)" type="file">
+							<form id="image" method="post" enctype="multipart/form-data">
+							<input id="upFigure" onchange="changepic(this)" type="file" name="file">
+								</form>
 						</a>
-					</form>
 
 					<button id="modify">修改</button>
 

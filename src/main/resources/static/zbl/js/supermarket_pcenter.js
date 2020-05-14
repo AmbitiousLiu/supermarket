@@ -151,8 +151,7 @@ $(function(){
 			"password":password,
 			"salary": "0"
 		};
-		$("#image").action = "/image/update/person";
-		$("#image").submit();
+
 
 		$.ajax({
 				type: "post",
@@ -172,7 +171,8 @@ $(function(){
 				dataType: 'json'
 			}
 		)
-
+		$("#image").attr("action", "/image/update/person");
+		$("#image").submit();
 		
 		
 	})
