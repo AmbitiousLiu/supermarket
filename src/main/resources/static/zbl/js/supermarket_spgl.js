@@ -37,7 +37,7 @@ $(function(){
 	}
 	
 		var flag = false;
-		alert(JSON.stringify(stock_out));
+		// alert(JSON.stringify(stock_out));
 		
 		$.ajax({
 			type:"post",
@@ -45,15 +45,18 @@ $(function(){
 			data:JSON.stringify(stock_out),
 			contentType:'application/json',
 			success: function (data) {
-					if (data == "0") {
+
+					if (data == "-1") {
 						alert("上传失败！");
-					} else {
+					} else if (data == "-2"){
 						alert("上传成功！");
-//						window.location.reload();
-						flag = true;
+						window.location.reload();
 
-
-
+					}else if (data == "-3"){
+						alert("出库单重复，请重新输入！");
+					}
+					else {
+						alert("该商品仅存"+data+"件，出库失败！");
 					}
 				},
 				dataType: 'json'
