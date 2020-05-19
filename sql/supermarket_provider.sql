@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `provider`;
 CREATE TABLE `provider` (
   `pnum` varchar(15) NOT NULL,
   `pname` varchar(15) NOT NULL,
-  `padd` varchar(15) NOT NULL,
+  `padd` varchar(50) NOT NULL,
   `ptel` varchar(20) NOT NULL,
   `pmail` varchar(25) NOT NULL,
   `trust` varchar(15) NOT NULL,
-  `account` smallint(6) NOT NULL,
+  `cnum` varchar(15) NOT NULL,
+  `cname` varchar(50) NOT NULL,
   PRIMARY KEY (`pnum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

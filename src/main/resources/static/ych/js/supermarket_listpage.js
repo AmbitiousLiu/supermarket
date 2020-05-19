@@ -1,4 +1,3 @@
-<script>
 function goPage(pno, psize) {
     var itable = document.getElementById("table_result");//通过ID找到表格
     var num = itable.rows.length;//表格所有行数(所有记录数)
@@ -46,4 +45,3 @@ function goPage(pno, psize) {
     }
     document.getElementById("barcon").innerHTML = tempStr;
 }
-</script>

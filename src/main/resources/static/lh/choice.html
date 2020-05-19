@@ -99,7 +99,7 @@
 							<td><span >养殖场</span></td>
 							<td><span ><input class="innum" type="text" name="" id="" value="" /></span></td>
 							<td class="bton"><input type="text" class="txt" id="" value="1" /></td>
-							<td><input class="datein" type="date" /></td>
+							<td><input id="date" class="datein" type="date" /></td>
 							<td><button class="bton-1">入库</button></td>
 						</tr>
 						<tr>
@@ -139,5 +139,11 @@
  
         }
    }
+   
 </script>
+<script language="JavaScript"> 
+var today=new Date();
+var submitTime=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
+$("#date").attr('value',submitTime);
+</script> 
 </html>
