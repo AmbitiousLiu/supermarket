@@ -97,11 +97,11 @@
 						<div id="history">
 							<span id="his"><h4>历史出库单</h4></span>
 
-								<a :href="`http://localhost:8080/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
+								<a :href="`/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
 
 
 
-							<span><h4><a href="http://localhost:8080/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
+							<span><h4><a href="/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
 						</div>
 						
 					</div>
