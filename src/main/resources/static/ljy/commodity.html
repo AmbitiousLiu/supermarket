@@ -107,7 +107,6 @@
 			},
 			mounted() {
 				this.getInfo();
-				this.pushInfo();
 			},
 			methods: {
 				getInfo() {
@@ -120,15 +119,12 @@
 				   			console.log(datas)
 				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 				   			this.items = datas
+							document.getElementById("c_count").innerHTML = this.items.length
 				   		}
 			   		})
 				},
 				link(cnum) {
 					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum;
-				},
-				pushInfo() {
-					document.getElementById("c_count").innerHTML = this.items.length
-					
 				}
 			}
 		})
