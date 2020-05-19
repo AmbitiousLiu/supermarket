@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <title>员工管理</title>
     <link rel="stylesheet" type="text/css" href="css/yggl.css"/>
-    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.css"/>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="public/js/vue.js"></script>
     <script src="public/js/ajaxUtil.js"></script>
     <script type="text/javascript" src="public/js/jquery-1.12.4.js" ></script>
     <script src="js/supermarket_listpage.js"></script>
     <script src="js/supermarket_yggl.js"></script>
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
 </head>
 <body>
 <header class="header">
@@ -36,18 +36,6 @@
                 <div class="dropdown-content">
 <!--                    <span @click = "display()"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>-->
                     <span id="category" @click = "getEpInfo()" title="请双击"> <a href="javascript:;" v-for="(item,index) in branch" @click="changeBranch(branch[index]) ">{{ item }}</a></span>
-                    <script>
-                        const btn = document.getElementById('category');
-                        simulateClick();
-                        function simulateClick() {
-                            const event = new MouseEvent('click', {
-                                view: window,
-                                bubbles: true,
-                                cancelable: true
-                            });
-                            btn.dispatchEvent(event);
-                        }
-                    </script>
                 </div>
             </div>
             </div>
