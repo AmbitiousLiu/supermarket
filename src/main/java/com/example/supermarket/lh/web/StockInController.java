@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
 import java.sql.Date;
 
@@ -36,8 +37,10 @@ public class StockInController {
                          @RequestParam(value = "cnum", required = false) String cnum,
                          @RequestParam(value = "indate", required = false) Date indate,
                          @RequestParam(value = "sum", required = false) Integer sum,
-                         @RequestParam(value = "stu_num", required = false) String stu_num,
-                         HttpServletResponse response) {
+                         HttpServletResponse response,
+                         HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String stu_num = (String) session.getAttribute("stu_num");
         stockInService.addStock(num, pname,cnum, indate, sum, stu_num);
     }
 
