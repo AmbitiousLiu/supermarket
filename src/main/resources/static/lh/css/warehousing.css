@@ -76,6 +76,17 @@ body,html{
 	top: 50%;
 	transform: translateX(-50%)  translateY(-50%);
 }
+#Supply_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+#Supply_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
 .nav-item {
 	color: orange;
 }
@@ -97,10 +108,11 @@ body,html{
 	border-bottom: solid 1px rgb(130,130,130);
 }
 #operator{
-	width: 100%;
+	width: 50%;
 	height: 50%;
 	position: relative;
 	top: 25%;
+	float:left ;
 }
 #operator p,select{
 	display: inline-block;
@@ -123,80 +135,53 @@ body,html{
 	border-radius:6% ;
 	border: none;
 }
+#addSupply{
+	width: 50%;
+	height: 100%;
+	position: relative;
+	float: left;
+	text-align: center;
+	/*border: 1px solid black;*/
+}
+#addSupply a{
+	text-decoration: none;
+	font-weight: bold;
+	border: 1px solid grey;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
 #center_goods{
 	width: 100%;
 	height: 80%;
+}
+.center_commodity{
+	width: 100%;
+	height: 100%;
 	overflow: scroll;
 }
-#goods{
-	width: 96%;
+.center_commodity table{
+	width: 100%;
 	height: 100%;
 	position: relative;
-	left: 5%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	text-align: center;
 }
-#goods ul{
-	margin: 0;
-	padding: 0;
+.center_commodity table td{
+	width: 13%;
+	height: 24%;
 }
-#goods button{
-	border: none;
-	background-color: dodgerblue;
-	border-radius: 6%;
+.center_commodity input{
+	width: 36%;
 }
-#goods ul>li{
-	display: block;
-	list-style: none;
-}
-.goodsbox{
-	width: 30%;
-	height: 400px;
-	border: solid 1px pink;
-	position: relative;
-	margin-left: 2%;
-	margin-top: 2%;
-	float: left;
-}
-.goodsbox:hover{
-	border: solid 2px green;
-}
-
-.goodsbox img{
+.center_commodity img{
 	width: 100%;
-	height: 60%;
+	height: 50%;
 }
-.ycapp{
-	position: absolute;
-    width: 36%;
-    height: 50%;
-    left: 25%;
-    top: 25%;
-    background: gainsboro;
-    display: none;
-    z-index: 1000;
-}
-.hidediv{
-	position: absolute;
-	float: right;
-	right: 0;
-	top: 0;
+.bton{
 	border: none;
+	outline: none;
 	background-color: dodgerblue;
-	border-radius: 6%;
-}
-.put{
-	display: inline-block;
-	position: relative;
-	left: 12%;
-	top: 24%;
-}
-.put label{
-	display: inline-block;
-	width: 45%;
-	height: 8%;
-	line-height: 8%;
-	text-align: justify;
-	text-align-last: justify;
-}
-.put input{
-	width: 50%;
+	border-radius: 3px;
 }
