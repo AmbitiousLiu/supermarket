@@ -1,10 +1,9 @@
 package com.example.supermarket.lh.web;
 
+import com.example.supermarket.lh.domain.Provider;
 import com.example.supermarket.lh.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,9 +19,26 @@ public class ProviderController {
      * @return
      */
     @GetMapping(value = "/provider")
-    public void initCommodity(HttpServletResponse response) throws IOException {
+    public void getAllProviders(HttpServletResponse response) throws IOException {
         String content;
         content = providerService.getAllProviders();
+        response.setContentType("text/json;charset=utf-8");
+        if (content.equals("null")) {
+            response.getWriter().write("");
+        } else {
+            response.getWriter().write(content);
+        }
+    }
+
+    /**
+     * POST:/commodity/deal
+     * @return
+     */
+    @PostMapping(value = "/add")
+    public void addProvider(@RequestBody Provider provider,
+                            HttpServletResponse response)throws IOException{
+        String content;
+        content = providerService.addProvider(provider.getPnum(),provider.getPname(),provider.getPadd(),provider.getPtel(),provider.getPmail(),provider.getTrust(),provider.getCnum(),provider.getCname());
         response.setContentType("text/json;charset=utf-8");
         if (content.equals("null")) {
             response.getWriter().write("");
