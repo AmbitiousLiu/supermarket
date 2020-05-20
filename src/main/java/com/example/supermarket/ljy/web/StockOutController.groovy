@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpSession
 
 /**
  * @author jleo
@@ -43,9 +44,10 @@ class StockOutController {
 
     @RequestMapping(value = "/detail")
     checkStockOut(@RequestParam(value = "num", required = true) String num,
-                  HttpServletResponse response) {
+                  HttpServletResponse response,
+                  HttpSession session) {
         response.setContentType("text/json;charset=utf-8")
-        response.getWriter().write(stockOutService.stockOutDetail(num))
+        response.getWriter().write(stockOutService.stockOutDetail(num, session) ?: "请不要越权操作！")
     }
 
 }
