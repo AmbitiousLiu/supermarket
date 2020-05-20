@@ -177,6 +177,18 @@ $(function(){
 		
 	})
 
+	$("#logOut").click(function(){
+		ajax({
+			method:HTTP_METHOD.GET,
+			url:"/logout",
+			async:true,
+			type:HTTP_RESPONSE_TYPE.JSON,
+			callback:(data)=>{
+				
+			}
+		})
+		window.location.href = "/zbl/supermarket_pcenter.html";
+	})
 	
 })
 
