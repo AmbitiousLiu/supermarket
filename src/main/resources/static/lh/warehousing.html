@@ -24,7 +24,7 @@
 					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
-					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
+					<p>	<a href="./addcommodity.html">员工管理&gt;</a></p>
 				</div>
 			</div>
 			<div class="center_of_right">
@@ -57,12 +57,12 @@
 								<td>{{item.pname}}</td>
 								<td><input type="text" v-model="item.num" placeholder="请输入"/></td>
 								<td>
-									<button class="bton" @click="reduce(index)">-</button>
-									<input type="text" v-model="item.sum" />
-									<button class="bton" @click="add(index)">+</button>
+									<button class="bton-ar" @click="reduce(index)">-</button>
+									<input type="text" :id="index"  value="0"/>
+									<button class="bton-ar" @click="add(index)">+</button>
 								</td>
-								<td class="Time"></td>
-								<td><input type="button" class="push" value="购入"></td>
+								<td class="Time" v-model="item.indate"></td>
+								<td><input type="button" class="push" value="购入" @click="set(item.cnum, item.pname,item.num,index,item.indate)"></td>
 							</tr>
 						</table>
 					</div>
@@ -71,33 +71,55 @@
 		</div>	
 </body>
 <script type="text/javascript">
-		var v1 = new Vue({
+		new Vue({
 				el:"#center_goods",
 				/*name:"innum",*/
 				data:{
 					listInfo:[],
+					
 				},
 				mounted() {
 					this.getInfo();
 			},
 				methods:{
 					add:function(index){//增加数量
-						this.listInfo[index].sum++
-						 
+						//this.listInfo[index].sum++
+						var v=document.getElementById(index).value;
+						var v1=parseInt(v)+1;
+						document.getElementById(index).value=v1;
 					},
 					reduce:function(index){//减少数量
-						if(this.listInfo[index].sum<=0){
+						/*if(this.listInfo[index].sum<=0){
 							this.listInfo[index].sum = 0
 						}else {
 							this.listInfo[index].sum--
+						}*/
+						if(document.getElementById(index).value<=0){
+							document.getElementById(index).value==0;
 						}
-						
+						else{
+							document.getElementById(index).value-=1;
+						}
 					},
 					getInfo() {
 					ajax({
 						method: HTTP_METHOD.GET, 
 				   		url: "/provider/provider",
 				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			console.log(datas)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.listInfo = datas
+				   		}
+			   		})
+				}
+				set(a, b, c, d,e){
+					ajax({
+						method: HTTP_METHOD.POST, 
+				   		url: "/stockIn/add",
+				   		async: true, 
+				   		params: "cnum="+a+"&pname="+b+"&num="+c+"&sum="+d+"&indate="+e,
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 				   			console.log(datas)
@@ -132,17 +154,7 @@
 	    setInterval(getDate, 1000);
 	});
 </script>
-<script type="text/javascript">
-	//经手人获取数据
-	function displayOperator(obj){
-    var selector = document.getElementById("operatorInfo");
-    for(var i=0;i<obj.length;i++){
-        var option = new Option(obj[i].operatorName, obj[i].id);
-        selector.options.add(option);
-    }
-}
-</script>
-<script type="text/javascript">
+<!--<script type="text/javascript">
 $(function(){
     $(".push").click(function(){
         var stockin_num = this.parentNode.parentNode.getElementsByTagName("td")[3].getElementsByTagName("input");
@@ -167,5 +179,15 @@ $(function(){
         	});
         })
     }),1000)
+</script>-->
+<script type="text/javascript">
+	//经手人获取数据
+	function displayOperator(obj){
+    var selector = document.getElementById("operatorInfo");
+    for(var i=0;i<obj.length;i++){
+        var option = new Option(obj[i].operatorName, obj[i].id);
+        selector.options.add(option);
+    }
+}
 </script>
 </html>
