@@ -61,8 +61,8 @@
 									<input type="text" :id="index"  value="0"/>
 									<button class="bton-ar" @click="add(index)">+</button>
 								</td>
-								<td class="Time" v-model="item.indate"></td>
-								<td><input type="button" class="push" value="购入" @click="set(item.cnum, item.pname,item.num,index,item.indate)"></td>
+								<td class="Time"></td>
+								<td><input type="button" class="push" value="购入" ></td>
 							</tr>
 						</table>
 					</div>
@@ -114,7 +114,7 @@
 				   		}
 			   		})
 				}
-				set(a, b, c, d,e){
+				/*set(a, b, c, d,e){
 					ajax({
 						method: HTTP_METHOD.POST, 
 				   		url: "/stockIn/add",
@@ -127,7 +127,7 @@
 				   			this.listInfo = datas
 				   		}
 			   		})
-				}
+				}*/
 			}
 		})
 </script>
@@ -154,7 +154,7 @@
 	    setInterval(getDate, 1000);
 	});
 </script>
-<!--<script type="text/javascript">
+<script type="text/javascript">
 $(function(){
     $(".push").click(function(){
         var stockin_num = this.parentNode.parentNode.getElementsByTagName("td")[3].getElementsByTagName("input");
@@ -179,7 +179,7 @@ $(function(){
         	});
         })
     }),1000)
-</script>-->
+</script>
 <script type="text/javascript">
 	//经手人获取数据
 	function displayOperator(obj){
