@@ -84,7 +84,9 @@
 				methods:{
 					add:function(index){//增加数量
 						//this.listInfo[index].sum++
-						document.getElementById(index).value += 1;
+						var v=document.getElementById(index).value;
+						var v1=parseInt(v)+1;
+						document.getElementById(index).value=v1;
 					},
 					reduce:function(index){//减少数量
 						/*if(this.listInfo[index].sum<=0){
