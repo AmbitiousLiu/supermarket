@@ -6,9 +6,8 @@
     <title>商品入库</title>
     <link rel="stylesheet" type="text/css" href="css/warehousing.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
 </head>
@@ -32,94 +31,103 @@
 				<div id="center_up">
 					<div id="operator">
 						<p><strong>经手人:</strong></p>
-						<select name="">
-							<option value="1">liuhai</option>
-							<option value="2">liujianyong</option>
-							<option value="3">shuruoyu</option>
+						<select name="" id="operatorInfo">
+							<option value="-1">请选择</option>
 						</select>
+					</div>
+					<div id="addSupply">
+						<a href="/ych/supermarket_manager.html">添加供应商&gt;</a>
 					</div>
 				</div>
 				<div id="center_goods">
-					<div id="goods">
-						<ul v-for="item in items">
-							<li>
-								<div class="goodsbox app">
-									<img :src="`http://localhost:8080/image/commodity?cnum=${item.cnum}`"/>
-									<h3>{{item.cname}}</h3>
-									<p class="ms">供应商:<span id="pname">{{item.pname}}</span></p>
-									<p class="bh">商品编号:<span id="cnum">{{item.cnum}}</span></p>
-									<button class="showdiv" >购入&gt;&gt;</button>
-								</div>
-							</li>
-						</ul>
+					<div class="center_commodity">
+						<table border="" cellspacing="" cellpadding="">
+							<tr class="title">
+								<td>商品编号</td>
+								<td>商品</td>
+								<td>供应商</td>
+								<td>入库单单号</td>
+								<td>数量</td>
+								<td>入库日期</td>
+								<td>点击入库</td>
+							</tr>
+							<tr v-for="(item,index) in listInfo">
+								<td>{{item.cnum}}</td>
+								<td><img :src="`/image/commodity?cnum=${item.cnum}`"/></td>
+								<td>{{item.pname}}</td>
+								<td><input type="text" v-model="item.num" placeholder="请输入"/></td>
+								<td>
+									<button class="bton" @click="reduce(index)">-</button>
+									<input type="text" v-model="item.sum" />
+									<button class="bton" @click="add(index)">+</button>
+								</td>
+								<td>{{item.indate}}</td>
+								<td><button class="bton" @click="set(item.cnum, item.sum, item.num)">入库</button></td>
+							</tr>
+						</table>
 					</div>
 				</div>
-			</div>
-			<div class="ycapp vapp">
-				<span id="">
-					<div class="put">
-						<div class="put_1">
-							<label >入库单单号:</label>
-							<input type="text" name="num" id="num" value="" />
-						</div>
-						<div class="put_2">
-							<label >数量:</label>
-							<input type="text" name="sum" id="sum" value="" />
-						</div>
-						<div class="put_3">
-							<label >入库日期:</label>
-							<input id="date" type="date" name="indate" value="" />
-						</div>
-						<input type="button" name="" id="submit" value="提交" />
-					</div>
-					<button class="hidediv" >关闭&gt;&gt;</button>
-				</span>
-			</div>
+			</div>	
 		</div>	
 </body>
-
 <script type="text/javascript">
-	var v1 = new Vue({
-		el: '#center_goods',
-		data: {
-			items: []
-		},
-		mounted() {
-			this.getInfo();
-		},
-		methods: {
-			getInfo() {
-				ajax({
-					method: HTTP_METHOD.GET, 
-			   		url: "/provider/provider", 
-			   		async: true, 
-			   		type: HTTP_RESPONSE_TYPE.JSON, 
-			   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-			   			console.log(datas)
-			   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-			   			this.items = datas
-			   		}
-		   		})
-			}
-		}
-	})
-	
+		new Vue({
+				el:"#center_goods",
+				/*name:"innum",*/
+				data:{
+					listInfo:[],
+				},
+				mounted() {
+					this.getInfo();
+			},
+				methods:{
+					add:function(index){//增加数量
+						this.listInfo[index].sum++
+						 
+					},
+					reduce:function(index){//减少数量
+						if(this.listInfo[index].sum<=0){
+							this.listInfo[index].sum = 0
+						}else {
+							this.listInfo[index].sum--
+						}
+						
+					},
+					getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET, 
+				   		url: "/provider/add", 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			console.log(datas)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.items = datas
+				   		}
+			   		})
+				},
+				set:function(item.cnum, item.sum, item.num) {
+					ajax({
+						method: HTTP_METHOD.POST, 
+				   		url: "/provider/add", 
+				   		async: true, 
+				   		params: "sum=item.sum&num=item.num", 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: function(data) {
+				   			alert("it's OK!");
+				   		}
+					})
+				}
+			})
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){
-  $(".hidediv").click(function(){
-    $(".vapp").hide();
-  });
-  $(".showdiv").click(function(){
-    $(".vapp").show();
-  });
-});
+	//经手人获取数据
+	function displayOperator(obj){
+    var selector = document.getElementById("operatorInfo");
+    for(var i=0;i<obj.length;i++){
+        var option = new Option(obj[i].operatorName, obj[i].id);
+        selector.options.add(option);
+    }
+}
 </script>
-
-<script language="JavaScript"> 
-var today=new Date();
-var submitTime=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
-$("#date").attr('value',submitTime);
-</script> 
-
 </html>
