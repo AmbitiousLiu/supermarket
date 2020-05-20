@@ -84,9 +84,10 @@
 				methods:{
 					add:function(index){//增加数量
 						//this.listInfo[index].sum++
-						var v=document.getElementById(index).value;
-						var v1=parseInt(v)+1;
-						document.getElementById(index).value=v1;
+						//document.getElementById(index).value;
+						if(document.getElementById(index).value>=0){
+							document.getElementById(index).value+=1;
+						}
 					},
 					reduce:function(index){//减少数量
 						/*if(this.listInfo[index].sum<=0){
@@ -114,20 +115,6 @@
 				   		}
 			   		})
 				}
-				/*set(a, b, c, d,e){
-					ajax({
-						method: HTTP_METHOD.POST, 
-				   		url: "/stockIn/add",
-				   		async: true, 
-				   		params: "cnum="+a+"&pname="+b+"&num="+c+"&sum="+d+"&indate="+e,
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			console.log(datas)
-				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-				   			this.listInfo = datas
-				   		}
-			   		})
-				}*/
 			}
 		})
 </script>
