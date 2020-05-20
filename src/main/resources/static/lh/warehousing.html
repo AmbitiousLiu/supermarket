@@ -36,7 +36,7 @@
 						</select>
 					</div>
 					<div id="addSupply">
-						<a href="/ych/supermarket_manager.html">添加供应商&gt;</a>
+						<a href="./addcommodity.html">添加供应商&gt;</a>
 					</div>
 				</div>
 				<div id="center_goods">
@@ -55,14 +55,15 @@
 								<td>{{item.cnum}}</td>
 								<td><img :src="`/image/commodity?cnum=${item.cnum}`"/></td>
 								<td>{{item.pname}}</td>
-								<td><input type="text" class="in1" v-model="item.num" placeholder="请输入"/></td>
+								<td><input type="text"  v-model="item.num" placeholder="请输入"/></td>
 								<td>
 									<button class="bton-ar" @click="reduce(index)">-</button>
-									<input type="text" :id="index" class="in2" value="0"/>
+									<input type="text"  v-model="item.sum" />
 									<button class="bton-ar" @click="add(index)">+</button>
 								</td>
-								<td class="Time"></td>
-								<td><input type="button" class="push" @click="huifu()" value="购入"></td>
+								<td>{{item.indate}}</td>
+								
+								<td><input type="button" class="push" @click="submitTable()" value="购入"></td>
 							</tr>
 						</table>
 					</div>
@@ -82,30 +83,28 @@
 					this.getInfo();
 			},
 				methods:{
-					huifu:function(){
-						var inn1 = $(".in1").val();
-						var inn2 = $(".in2").val();
-						var tim = $(".Time").val();
-						console.log("数量》"+inn1);
-						console.log("数量》"+inn2);
-						console.log("数量》"+tim);
-					},
 					add:function(index){//增加数量
-						//this.listInfo[index].sum++
-						document.getElementById(index).value += 1;
+						this.listInfo[index].sum++
 					},
 					reduce:function(index){//减少数量
-						/*if(this.listInfo[index].sum<=0){
+						if(this.listInfo[index].sum<=0){
 							this.listInfo[index].sum = 0
 						}else {
 							this.listInfo[index].sum--
-						}*/
-						if(document.getElementById(index).value<=0){
-							document.getElementById(index).value==0;
 						}
-						else{
-							document.getElementById(index).value-=1;
-						}
+					},
+					submitTable(){
+					ajax({
+						method: HTTP_METHOD.POST, 
+				   		url: "/stockIn/add",
+				   		async: true, 
+				   		params: this.listInfo
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			console.log(datas)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			}
+			   			})
 					},
 					getInfo() {
 					ajax({
@@ -117,74 +116,26 @@
 				   			console.log(datas)
 				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 				   			this.listInfo = datas
+				   			for(let item of this.listInfo){
+				   				item.sum=0;
+				   				item.indate=this.getDate();
+				   			}
 				   		}
 			   		})
 				}
-				/*set(a, b, c, d){
-					ajax({
-						method: HTTP_METHOD.POST, 
-				   		url: "/stockIn/add",
-				   		async: true, 
-				   		params: "cnum="+a+"&pname="+b+"&num="+c+"&sum="+d,
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			console.log(datas)
-				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-				   			this.listInfo = datas
-				   		}
-			   		})
-				}*/
 			}
 		})
 </script>
 <script type="text/javascript" charset="utf-8">
-	getDate()
-	
 	function getDate() {
-	
-	    var timezone = 8;
-	    var offset_GMT = new Date().getTimezoneOffset();
-	    var nowDate = new Date().getTime();
-	
-	    var today = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
-	    var date = today.getFullYear() + "-" + twoDigits(today.getMonth() + 1) + "-" + twoDigits(today.getDate());
-	    var time = twoDigits(today.getHours()) + ":" + twoDigits(today.getMinutes()) + ":" + twoDigits(today.getSeconds());
-	    $(".Time").html(date);
-	}
-	
-	function twoDigits(val) {
-	    if (val < 10) return "0" + val;
-	    return val;
-	}
-	$(function() {
-	    setInterval(getDate, 1000);
-	});
-</script>
-<script type="text/javascript">
-$(function(){
-    $(".push").click(function(){
-        var stockin_num = this.parentNode.parentNode.getElementsByTagName("td")[3].getElementsByTagName("input");
-        var stockin_pname = this.parentNode.parentNode.getElementsByTagName("td")[2];
-        var stockin_cnum = this.parentNode.parentNode.getElementsByTagName("td")[0];
-        var stockin_indate = this.parentNode.parentNode.getElementsByTagName("td")[5];
-		var stockin_sum = this.parentNode.parentNode.getElementsByTagName("td")[4].getElementsByTagName("input");
-
-        	$.ajax({
-        		type:'POST',
-				url :'/stockIn/add',
-				data:{
-					num:stockin_num.innerHTML,
-					pname:stockin_pname.innerHTML,
-					cnum:stockin_cnum.innerHTML,
-					indate:stockin_indate.innerHTML,
-					sum:stockin_sum.innerHTML
-				},
-				success:function(data){
-					alert("入库成功")
-				},
-        	});
-        })
-    }),1000)
+		var timeStr = '-';
+		var curDate = new Date();
+		var curYear = curDate.getFullYear();//获取当前年分
+		var curMonth = curDate.getMonth()+1;//获取当前月份（0-11,0代表1月）
+		var curDay = curDate.getDate();//获取当前日
+		var today = curYear + timeStr + curMonth + timeStr + curDay;
+		return today;
+	  }
 </script>
 <script type="text/javascript">
 	//经手人获取数据
