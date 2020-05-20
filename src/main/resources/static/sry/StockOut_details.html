@@ -89,8 +89,13 @@
 					async: true,
 					type: HTTP_RESPONSE_TYPE.JSON,
 					callback: (datas) => {
-						this.items = datas
-						console.log(datas)
+						if (datas == "") {
+							alert("请不要越权操作！")
+						} else {
+							this.items = datas
+							console.log(datas)
+						}
+
 					}
 				})
 			}

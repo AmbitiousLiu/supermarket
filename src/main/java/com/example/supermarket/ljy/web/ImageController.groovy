@@ -68,9 +68,6 @@ class ImageController {
     void updatePersonalImage(MultipartFile file,
                                 HttpServletRequest request) {
         def session = request.getSession()
-        if (session == null) {
-            return
-        }
         if (file.isEmpty()) {
             return
         }

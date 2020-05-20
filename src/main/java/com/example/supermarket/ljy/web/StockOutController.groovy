@@ -47,7 +47,7 @@ class StockOutController {
                   HttpServletResponse response,
                   HttpSession session) {
         response.setContentType("text/json;charset=utf-8")
-        response.getWriter().write(stockOutService.stockOutDetail(num, session) ?: "请不要越权操作！")
+        response.getWriter().write(stockOutService.stockOutDetail(num, session) ?: "")
     }
 
 }
