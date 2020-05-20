@@ -67,9 +67,13 @@
                             		<input type="text" name="trust" id="trust" value="" />
                         		</div>
                         		<div id="input_7">
-                            		<label >贷款结算:</label>
-                            		<input type="text" name="account" id="account" value="" />
+                            		<label >商品号:</label>
+                            		<input type="text" name="cnum" id="cnum" value="" />
                         		</div>
+								<div id="input_8">
+									<label >商品名:</label>
+									<input type="text" name="cname" id="cname" value="" />
+								</div>
                     		</div>
                 		</div>
             		</form>
@@ -82,31 +86,46 @@
 </body>
 
 <script type="text/javascript">
-	
-	document.getElementById("submit").onclick = function() {
-		alert("123");
-		$("#image").action = "http://localhost:8080/image/update/commodity?cnum=" //+ document.getElementById("cnum").value;
-		alert(document.getElementById("image").action);
-		document.getElementById("image").submit();
 
-		ajax({
-			method: HTTP_METHOD.POST, 
-	   		url: "/stockIn/add", 
-	   		async: true, 
-	   		params: "pnum=" + document.getElementById("pnum").value + 
-	   				"&pname=" + document.getElementById("pname").value + 
-	   				"&padd=" + document.getElementById("padd").value + 
-	   				"&ptel=" + document.getElementById("ptel").value + 
-	   				"&pmail=" + document.getElementById("pmail").value + 
-	   				"&trust=" + document.getElementById("trust").value + 
-	   				"&account=" + document.getElementById("account").value,
-	   		type: HTTP_RESPONSE_TYPE.TEXT, 
-	   		callback: function(data) {
-	   			alert("入库成功！");
-   			}
+	$(function(){
+		$("#submit").click(function(){
+
+			var pnum = $("#pnum").val();
+			var pname = $("#pname").val();
+			var padd = $("#padd").val();
+			var pmail = $("#pmail").val();
+			var ptel = $("#ptel").val();
+			var trust = $("#trust").val();
+			var cnum = $("#cnum").val();
+			var cname = $("#cname").val();
+			alert(pname);
+
+			var provider = {
+				"pnum" :pnum,
+				"pname" : pname,
+				"padd" : padd,
+				"pmail" : pmail,
+				"ptel" : ptel,
+				"trust" : trust,
+				"cnum" : cnum,
+				"cname" : cname,
+			}
+
+			$.ajax({
+				type:"post",
+				url:"/provider/add",
+				data:JSON.stringify(provider),
+				contentType:'application/json',
+				success: function (data) {
+					alert("上传成功！");
+					window.location.reload();
+				},
+				dataType: 'json'
+
+			})
 		})
-	}
-	
+	})
+
 </script>
 
 </html>
