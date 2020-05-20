@@ -71,7 +71,7 @@
 		</div>	
 </body>
 <script type="text/javascript">
-		new Vue({
+		var v1 = new Vue({
 				el:"#center_goods",
 				/*name:"innum",*/
 				data:{
@@ -96,29 +96,18 @@
 					getInfo() {
 					ajax({
 						method: HTTP_METHOD.GET, 
-				   		url: "/provider/add", 
+				   		url: "/provider/provider",
 				   		async: true, 
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 				   			console.log(datas)
 				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-				   			this.items = datas
+				   			this.listInfo = datas
 				   		}
 			   		})
-				},
-				set:function(item.cnum, item.sum, item.num) {
-					ajax({
-						method: HTTP_METHOD.POST, 
-				   		url: "/provider/add", 
-				   		async: true, 
-				   		params: "sum=item.sum&num=item.num", 
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: function(data) {
-				   			alert("it's OK!");
-				   		}
-					})
 				}
-			})
+			}
+		})
 </script>
 <script type="text/javascript">
 	//经手人获取数据
