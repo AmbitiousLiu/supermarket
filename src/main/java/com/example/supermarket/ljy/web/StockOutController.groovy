@@ -27,9 +27,6 @@ class StockOutController {
                  HttpServletResponse response,
                  @RequestParam(value = "page", required = true) String page) {
         def session = request.getSession();
-        if (session == null) {
-            return
-        }
         String position = session.getAttribute("position")
         if (position == null) {
             return
