@@ -57,9 +57,9 @@
 								<td>{{item.pname}}</td>
 								<td><input type="text" v-model="item.num" placeholder="请输入"/></td>
 								<td>
-									<button class="bton" @click="reduce(index)">-</button>
-									<input type="text" v-model="item.sum" />
-									<button class="bton" @click="add(index)">+</button>
+									<button class="bton-ar" @click="reduce(index)">-</button>
+									<input type="text" v-model="item.sum" value="0"/>
+									<button class="bton-ar" @click="add(index)">+</button>
 								</td>
 								<td class="Time"></td>
 								<td><input type="button" class="push" value="购入"></td>
@@ -71,11 +71,12 @@
 		</div>	
 </body>
 <script type="text/javascript">
-		var v1 = new Vue({
+		new Vue({
 				el:"#center_goods",
 				/*name:"innum",*/
 				data:{
 					listInfo:[],
+					
 				},
 				mounted() {
 					this.getInfo();
@@ -133,16 +134,6 @@
 	});
 </script>
 <script type="text/javascript">
-	//经手人获取数据
-	function displayOperator(obj){
-    var selector = document.getElementById("operatorInfo");
-    for(var i=0;i<obj.length;i++){
-        var option = new Option(obj[i].operatorName, obj[i].id);
-        selector.options.add(option);
-    }
-}
-</script>
-<script type="text/javascript">
 $(function(){
     $(".push").click(function(){
         var stockin_num = this.parentNode.parentNode.getElementsByTagName("td")[3].getElementsByTagName("input");
@@ -167,5 +158,15 @@ $(function(){
         	});
         })
     }),1000)
+</script>
+<script type="text/javascript">
+	//经手人获取数据
+	function displayOperator(obj){
+    var selector = document.getElementById("operatorInfo");
+    for(var i=0;i<obj.length;i++){
+        var option = new Option(obj[i].operatorName, obj[i].id);
+        selector.options.add(option);
+    }
+}
 </script>
 </html>
