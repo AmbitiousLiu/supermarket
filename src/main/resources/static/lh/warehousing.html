@@ -61,8 +61,8 @@
 									<input type="text" v-model="item.sum" />
 									<button class="bton" @click="add(index)">+</button>
 								</td>
-								<td>{{item.indate}}</td>
-								<td><button class="bton" @click="set(item.cnum, item.sum, item.num)">入库</button></td>
+								<td class="Time"></td>
+								<td><input type="button" class="push" value="购入"></td>
 							</tr>
 						</table>
 					</div>
@@ -109,6 +109,29 @@
 			}
 		})
 </script>
+<script type="text/javascript" charset="utf-8">
+	getDate()
+	
+	function getDate() {
+	
+	    var timezone = 8;
+	    var offset_GMT = new Date().getTimezoneOffset();
+	    var nowDate = new Date().getTime();
+	
+	    var today = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
+	    var date = today.getFullYear() + "-" + twoDigits(today.getMonth() + 1) + "-" + twoDigits(today.getDate());
+	    var time = twoDigits(today.getHours()) + ":" + twoDigits(today.getMinutes()) + ":" + twoDigits(today.getSeconds());
+	    $(".Time").html(date);
+	}
+	
+	function twoDigits(val) {
+	    if (val < 10) return "0" + val;
+	    return val;
+	}
+	$(function() {
+	    setInterval(getDate, 1000);
+	});
+</script>
 <script type="text/javascript">
 	//经手人获取数据
 	function displayOperator(obj){
@@ -118,5 +141,31 @@
         selector.options.add(option);
     }
 }
+</script>
+<script type="text/javascript">
+$(function(){
+    $(".push").click(function(){
+        var stockin_num = this.parentNode.parentNode.getElementsByTagName("td")[3].getElementsByTagName("input");
+        var stockin_pname = this.parentNode.parentNode.getElementsByTagName("td")[2];
+        var stockin_cnum = this.parentNode.parentNode.getElementsByTagName("td")[0];
+        var stockin_indate = this.parentNode.parentNode.getElementsByTagName("td")[5];
+		var stockin_sum = this.parentNode.parentNode.getElementsByTagName("td")[4].getElementsByTagName("input");
+
+        	$.ajax({
+        		type:'POST',
+				url :'/stockIn/add',
+				data:{
+					num:stockin_num.innerHTML,
+					pname:stockin_pname.innerHTML,
+					cnum:stockin_cnum.innerHTML,
+					indate:stockin_indate.innerHTML,
+					sum:stockin_sum.innerHTML
+				},
+				success:function(data){
+					alert("入库成功")
+				},
+        	});
+        })
+    }),1000)
 </script>
 </html>
