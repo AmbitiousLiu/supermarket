@@ -2,6 +2,7 @@ package com.example.supermarket.ws.security;
 
 import com.example.supermarket.ws.domain.Stuff;
 import com.example.supermarket.ws.service.Stuffservicelmp;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author jleo
@@ -22,6 +25,7 @@ public class UserAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
 
     @Autowired
     Stuffservicelmp stuffservicelmp;
+    private static Logger logger = Logger.getLogger(UserAuthenticationSuccessHandler.class);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -38,5 +42,7 @@ public class UserAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
         session.setAttribute("salary", stuff.salary);
         session.setAttribute("position", stuff.position);
         session.setAttribute("region", stuff.region);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        logger.info("User:" + stuff.name + "login in supermarket management in " + df.format(new Date()));
     }
 }

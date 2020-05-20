@@ -97,7 +97,7 @@ $(function(){
     getLogger() {
                 ajax({
                     method:HTTP_METHOD.POST,
-                    url:"http://localhost:8080/Info/getInfo",
+                    url:"/Info/getInfo",
                     async:true,
                     type:HTTP_RESPONSE_TYPE.JSON,
                     callback:(data)=>{
@@ -110,7 +110,7 @@ $(function(){
             getRegion() {
                 ajax({
                     method:HTTP_METHOD.GET,
-                    url:"http://localhost:8080/Info_employee/getAllRegion",
+                    url:"/Info_employee/getAllRegion",
                     async:true,
                     type:HTTP_RESPONSE_TYPE.JSON,
 
@@ -138,7 +138,7 @@ $(function(){
                 let region = $("#choice").text().split(":")[1].replace(/(^\s*)/g,"");
                 ajax({
                     method: HTTP_METHOD.POST,
-                    url: "http://localhost:8080/Info_employee/getAllInfo",
+                    url: "/Info_employee/getAllInfo",
                     // contentType:'application/json',
                     async: true,
                     params:  "region="+region,
@@ -207,7 +207,7 @@ $(function(){
                 };
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:8080/Info_employee/insertInfo",
+                    url: "/Info_employee/insertInfo",
                     contentType:'application/json',
                     data: JSON.stringify(employee),
                     success: function (data) {
@@ -245,7 +245,7 @@ $(function(){
                 if(stu_num=="") { alert("员工工号必填！"); filler = 0; }
                 $.ajax({
                         type: "post",
-                        url: "http://localhost:8080/Info_employee/deleteInfo?stu_num="+stu_num,
+                        url: "/Info_employee/deleteInfo?stu_num="+stu_num,
                         async: true,
                         // params:  "stu_num="+stu_num,
                         contentType:'application/json',
