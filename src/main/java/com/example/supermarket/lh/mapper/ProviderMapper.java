@@ -10,9 +10,16 @@ import java.util.List;
 @Mapper
 public interface ProviderMapper {
         /**
-         * get all commodities
+         * get all providers
          * @return
          */
         @Select("select * from provider")
         List<Provider> getAllProviders();
+
+        /**
+         * insert provider
+         * @return
+         */
+        @Insert("insert into provider(pnum,pname,padd,ptel,pmail,trust,cnum,cname) values(#{pnum},#{pname},#{padd},#{ptel},#{pmail},#{trust},#{cnum},#{cname})")
+        Integer addProvider(String pnum, String pname, String padd, String ptel, String pmail, String trust, String cnum, String cname);
 }

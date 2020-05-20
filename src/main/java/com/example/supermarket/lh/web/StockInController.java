@@ -28,7 +28,6 @@ public class StockInController {
      * @param cnum: it's not required
      * @param indate: it's not required
      * @param sum: it's not required
-     * @param response: json string if commodities's data
      * @return
      */
     @PostMapping(value = "/add")
@@ -37,7 +36,6 @@ public class StockInController {
                          @RequestParam(value = "cnum", required = false) String cnum,
                          @RequestParam(value = "indate", required = false) Date indate,
                          @RequestParam(value = "sum", required = false) Integer sum,
-                         HttpServletResponse response,
                          HttpServletRequest request) {
         HttpSession session = request.getSession();
         String stu_num = (String) session.getAttribute("stu_num");

@@ -15,4 +15,7 @@ public class ProviderService {
     public String getAllProviders() {
         return JSON.toJSONString(providerMapper.getAllProviders());
     }
+    public String addProvider(String pnum, String pname, String padd, String ptel, String pmail, String trust, String cnum, String cname){
+        return JSON.toJSONString(providerMapper.addProvider(pnum,pname,padd,ptel,pmail,trust,cnum,cname));
+    }
 }
