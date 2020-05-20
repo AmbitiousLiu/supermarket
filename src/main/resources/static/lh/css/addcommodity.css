@@ -1,0 +1,172 @@
+body,html{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
+}
+/******************header*************************/
+.header{
+	width: 100%;
+	height: 16%;
+	border: 2px solid rgb(130,130,130);
+}
+.header p{
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+/*********************center********************/
+.center{
+	height: 84%;
+	width: 100%;
+}
+/*********************center_of_left********************/
+.center_of_left{
+	float: left;
+	width: 17.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+.nav-item {
+	color: orange;
+}
+.nav-item:hover {
+	color: orange;
+}
+.nav-item:focus {
+	color: orange;
+}
+/*********************center_of_right********************/
+.center_of_right{
+	width: 82.5%;
+	height: 100%;
+	border: 1px solid black;
+	float: left;
+}
+.center_right{
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;
+}
+#tab{
+	width: 80%;
+	height: 80%;
+	border: 1px solid black;
+	margin-left: 10%;
+}
+#up{
+	width: 100%;
+	height: 100%;
+}
+#up_left{
+	position: relative;
+	width: 25%;
+	height: 100%;
+	float: left;
+}
+#upimg{
+	width: 80%;
+	height: 36%;
+	margin-left: 10% ;
+	margin-top: 10%;
+}
+#upimg img{
+	width: 100%;
+	height: 100%;
+	border: 1px dashed black;
+}
+#image{
+	width: 100%;
+	height: 50%;
+}
+#upfile{
+	width: 80%;
+	height: 8%;
+	margin-left: 10%;
+	margin-top: 10%;
+	position: relative;
+}
+#up_right{
+	position: relative;
+	width: 75%;
+	height: 100%;
+	float: left;
+	border-left: 1px dashed cadetblue;
+}
+#input_1,#input_2,#input_3,#input_4,#input_5,#input_6,#input_7{
+	padding-left: 3%;
+	width: 100%;
+	height: 10%;
+}
+#up_right input{
+	width: 30%;
+}
+
+#up_right  label{
+	display: inline-block;
+	width: 24%;
+	height: 8%;
+	line-height: 8%;
+	text-align: justify;
+	text-align-last: justify;
+}
+#center_right_down{
+	width: 100%;
+	height: 16%;
+}
+#center_right_down input{
+	width: 10%;
+	height: 36%;
+	margin-left: 45%;
+	margin-top: 2%;
+}
+
