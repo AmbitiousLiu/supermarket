@@ -49,7 +49,7 @@ public class SubmitStock_outController {
                         response.getWriter().write("-1");
                     } else {
                         stockService.updateSum(stock_out.getCnum(), sum - stock_out.getSum());
-                        stockService.updateCom(stock_out.getSum());
+                        stockService.updateCom(stock_out.getSum(),stock_out.getCnum());
                         response.getWriter().write("-2");
                     }
 

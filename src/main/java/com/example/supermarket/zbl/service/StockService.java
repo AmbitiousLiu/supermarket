@@ -42,5 +42,5 @@ public class StockService {
         return stockMapper.queryCnum();
     }
     //修改commodity
-    public Integer updateCom(Integer sum){return stockMapper.updateCom(sum);}
+    public Integer updateCom(Integer sum,String cnum){return stockMapper.updateCom(sum,cnum);}
 }

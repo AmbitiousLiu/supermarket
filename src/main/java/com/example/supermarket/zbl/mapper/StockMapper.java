@@ -31,6 +31,6 @@ public interface StockMapper {
     Integer updateSum(String cnum,Integer sum);
 
     //修改commodity
-    @Update("update commodity set stock_count = stock_count + #{sum}")
-    Integer updateCom(Integer sum);
+    @Update("update commodity set stock_count = stock_count + #{sum} where cnum = #{cnum}")
+    Integer updateCom(Integer sum,String cnum);
 }
