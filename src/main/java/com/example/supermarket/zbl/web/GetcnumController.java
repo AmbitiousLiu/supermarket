@@ -12,10 +12,10 @@ import java.io.IOException;
 @RestController
 public class GetcnumController {
 
+    //获得用户名
     @GetMapping (value = "/userName")
     void initUsername(HttpServletRequest request ,HttpServletResponse response )throws IOException {
         String name = request.getSession().getAttribute("name").toString();
-//        return name == null? "":name;
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(name==null ?"":name);
 

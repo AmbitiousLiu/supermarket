@@ -114,6 +114,7 @@
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		//获得商品号信息
 		var v1 = new Vue({
 			el:'#table',
 			data:{
@@ -143,6 +144,7 @@
 			}
 
 		});
+		//历史出库单内容
 		var v2 = new Vue({
 			el: '#history',
 			data: {
@@ -168,7 +170,7 @@
 				}
 			}
 		})
-
+		//加载用户名，职位，超市分区
 		window.onload = function() {
 
 			ajax({

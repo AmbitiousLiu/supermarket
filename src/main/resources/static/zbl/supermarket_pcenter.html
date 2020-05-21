@@ -15,6 +15,7 @@
 		<div class="header">
 			<p>超市管理系统</p>
 		</div>
+<!--		导航栏          -->
 		<div class="center">
 			<div class="center_of_left">
 				<div id="Personal_management">
@@ -27,6 +28,7 @@
 					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
 				</div>
 			</div>
+<!--			信息显示栏      -->
 			<div id="center_of_right" class="center_of_right">
 				<div id="top">
 					<div id="identify">
@@ -86,6 +88,8 @@
 						</div>
 					</div>
 				</div>
+
+<!--				信息修改栏     -->
 				<div id="bottom">
 					<h3>信息修改：</h3>
 					<div id="modify_choice">
@@ -125,14 +129,14 @@
 
 
 					</div>
-
-						<a id="figa">上传头像
+<!--							头像修改  -->
+						<a id="figa">修改头像
 							<form id="image" method="post" enctype="multipart/form-data" target="nm_iframe">
 							<input id="upFigure" onchange="changepic(this)" type="file" name="file">
 								</form>
 							<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
 						</a>
-
+<!--						上传修改信息 -->
 					<button id="modify">修改</button>
 
 
@@ -145,4 +149,3 @@
 
 	</body>
 </html>
-<!--src="http://localhost:8080/image/person"-->

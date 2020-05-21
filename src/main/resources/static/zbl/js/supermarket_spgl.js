@@ -2,23 +2,8 @@ $(function(){
 	
 	
 	
-	
-	// $.ajax({
-	// 	type:"post",
-	// 	url:"",
-	// 	data:"",
-	// 	contentType:'application/json',
-	// 	success: function (data) {
-	// 				if (data == "") {
-	// 					$("#stu_num").val("");
-	// 				} else {
-	// 					$("#stu_num").val(data);
-	//
-	// 				}
-	// 			},
-	// 			dataType: 'json'
-	// })
-	
+
+	//提交出库单
 	$("#submit").click(function(){
 		
 		var num = $("#num").val();
@@ -32,12 +17,10 @@ $(function(){
 		"cnum" : cnum,
 		"outdate" : outdate,
 		"sum" : sum,
-		// "stu_num" : stu_num
 		"stu_num" : "01"
 	}
 	
 		var flag = false;
-		// alert(JSON.stringify(stock_out));
 		
 		$.ajax({
 			type:"post",
@@ -54,6 +37,8 @@ $(function(){
 
 					}else if (data == "-3"){
 						alert("出库单重复，请重新输入！");
+					}else if(data == "-4"){
+						alert("该商品号不存在，请重新填写！")
 					}
 					else {
 						alert("该商品仅存"+data+"件，出库失败！");

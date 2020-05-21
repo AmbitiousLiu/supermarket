@@ -18,13 +18,7 @@ function getObjectURL(file) {
 }
 
 $(function(){
-
-//	$("#fig").click(function(){
-//		
-//		alert("hello");
-//		console.log("hello")
-//	})
-	
+	//获取员工信息
 	var v1 = new Vue({
 		el:"#center_of_right",
 		data:{
@@ -101,27 +95,8 @@ $(function(){
 			
 
 	})
-//	
-//	$.post(
-//	"http://localhost:8080/Info/getInfo",
-//	{},
-//	function(data){
-//
-//		var json = eval(data);
-//
-//		$("#name_pos").text(json[0].name+"/"+json[0].position)
-//		$("#gender").val(json[0].gender);
-//		$("#position").val(json[0].position);
-//		$("#age").val(json[0].age);
-//		$("#stu_num").val(json[0].stu_num);
-//		$("#seniority").val(json[0].seniority);
-//		$("#region").val(json[0].region);
-//		$("#salary").val(json[0].salary);
-//	},
-//		"json"
-//	
-//)
 
+//上传修改信息内容
 
 	$("#modify").click(function(){
 
@@ -176,7 +151,7 @@ $(function(){
 		
 		
 	})
-
+//登出
 	$("#logOut").click(function(){
 		ajax({
 			method:HTTP_METHOD.GET,
