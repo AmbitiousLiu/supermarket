@@ -71,7 +71,6 @@ public class SubmitStock_outController {
     void  getCnum(HttpServletResponse response)throws IOException{
         String content = stockService.queryCnum();
         response.setContentType("text/json;charset=utf-8");
-        System.out.println(content);
         response.getWriter().write(content == null ?"0":content);
     }
 
