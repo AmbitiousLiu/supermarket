@@ -57,9 +57,9 @@
 								<td>{{item.pname}}</td>
 								<td><input type="text"  v-model="item.num" placeholder="请输入"/></td>
 								<td>
-									<button class="bton-ar" @click="reduce(index)">-</button>
-									<input type="text"  v-model="item.sum"/>
-									<button class="bton-ar" @click="add(index)">+</button>
+									<!--<button class="bton-ar" @click="reduce(index)">-</button>-->
+									<input type="text"  v-model="item.sum"  placeholder="数量"/>
+									<!--<button class="bton-ar" @click="add(index)">+</button>-->
 								</td>
 								<td><input type="date"  v-model="item.indate"/></td>
 								
@@ -83,8 +83,10 @@
 					this.getInfo();
 			},
 				methods:{
+					/*
 					add:function(index){//增加数量
 						this.listInfo[index].sum++;
+						//document.getElementById("index").value+=1;
 					},
 					reduce:function(index){//减少数量
 						if(this.listInfo[index].sum<=0){
@@ -92,18 +94,21 @@
 						}else {
 							this.listInfo[index].sum--;
 						}
-					},
+						/*if(document.getElementById("index").value<=0){
+							document.getElementById("index").value = 0;
+						}else {
+							document.getElementById("index").value-=1;
+						}*/
+					//},
 					submitTable(){
 					ajax({
 						method: HTTP_METHOD.POST, 
 				   		url: "/stockIn/add",
 				   		async: true, 
-				   		params: JSON.stringify(this.listInfo),
-						contentType:'application/json',
+				   		params: this.listInfo
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 				   			console.log(datas)
-				   			alert("success！");
 				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 				   			}
 			   			})
@@ -120,11 +125,7 @@
 				   			this.listInfo = datas
 				   			/*for(let item of this.listInfo){
 				   				item.sum=0;
-				   				item.indate=this.getDate();
 				   			}*/
-				   			for(let index of this.listInfo){
-				   				this.listInfo[index].sum=0;
-				   		}
 			   		})
 				}
 			}
