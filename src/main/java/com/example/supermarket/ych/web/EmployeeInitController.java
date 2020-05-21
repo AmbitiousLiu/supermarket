@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -31,12 +32,12 @@ public class EmployeeInitController {
     @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response, @RequestBody Employee employee)throws IOException{
         Integer integer = employeeInitService.insertInfo(employee.getRegion(), employee.getStu_num(), employee.getName(), employee.getWork(), employee.getSign());
         response.setContentType("text/json;charset=utf-8");
-        response.getWriter().write(integer == 0 ?"1":"0");
+        response.getWriter().write(integer == 0 ?"0":"1");
     }
 
-    @RequestMapping (value = "/deleteInfo") void deleteEmployee(HttpServletResponse response, @RequestBody String stu_num)throws IOException{
-        Integer integer = employeeInitService.deleteInfo(stu_num);
+    @RequestMapping (value = "/deleteInfo") void deleteEmployee(HttpServletResponse response, HttpServletRequest request)throws IOException{
+        Integer integer = employeeInitService.deleteInfo(request.getParameter("stu_num"));
         response.setContentType("text/json;charset=utf-8");
-        response.getWriter().write(integer == 0 ?"1":"0");
+        response.getWriter().write(integer == 0 ?"0":"1");
     }
 }

@@ -105,7 +105,7 @@
 						method: HTTP_METHOD.POST, 
 				   		url: "/stockIn/add",
 				   		async: true, 
-				   		params: this.listInfo
+				   		params: this.listInfo,
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 				   			console.log(datas)
@@ -126,7 +126,7 @@
 				   			/*for(let item of this.listInfo){
 				   				item.sum=0;
 				   			}*/
-			   		})
+			   		}})
 				}
 			}
 		})
