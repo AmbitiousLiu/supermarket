@@ -20,7 +20,7 @@
 					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
 				</div>
 				<div id="Commodity_management">
-					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
+					<p><a href="/ljy/commodity.html" class="nav-item">商品管理&gt;</a></p>
 				</div>
 				<div id="Staff_management">
 					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
@@ -95,12 +95,12 @@
 					</div>
 					<div id="b2">
 						<div id="history">
-							<span id="his"><h4>历史出库单</h4></span>
-
+							<span id="his"><h4>历史出库单</h4>
 								<a :href="`/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
-
-
-
+							
+							</span>
+							
+								
 							<span><h4><a href="/ljy/historyStockOut.html?page=1">查看更多出库单...</a></h4></span>
 						</div>
 						
@@ -114,6 +114,7 @@
 		</div>
 		<script src="js/supermarket_spgl.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		//获得商品号信息
 		var v1 = new Vue({
 			el:'#table',
 			data:{
@@ -143,6 +144,7 @@
 			}
 
 		});
+		//历史出库单内容
 		var v2 = new Vue({
 			el: '#history',
 			data: {
@@ -168,7 +170,7 @@
 				}
 			}
 		})
-
+		//加载用户名，职位，超市分区
 		window.onload = function() {
 
 			ajax({

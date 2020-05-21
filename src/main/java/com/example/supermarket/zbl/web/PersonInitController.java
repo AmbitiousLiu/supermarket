@@ -17,15 +17,14 @@ import java.io.IOException;
 public class PersonInitController {
     @Autowired PersonInitService personInitService;
 
+    //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
-//
         response.setContentType("text/json;charset=utf-8");
-//        System.out.println(1);
         response.getWriter().write(content==null ?"":content);
 
     }
-
+    //修改用户信息
     @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, @RequestBody Person person )throws IOException{
 
 

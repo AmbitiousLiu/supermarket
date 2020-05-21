@@ -10,11 +10,12 @@ import java.util.List;
 
 @Mapper
 public interface PersonMapper {
-
+    //查询员工信息
     @Select("select * from stuff" +
             " where stuff.stu_num = #{useId}")
     List<Person>getAllInfo(String useId);
 
+    //修改员工信息
     @Update("update stuff " +
             "set name = #{name},gender = #{gender},region = #{region}," +
             "position = #{position},age = #{age},password = #{pas}" +

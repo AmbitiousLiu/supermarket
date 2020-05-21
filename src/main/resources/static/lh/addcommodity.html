@@ -33,7 +33,7 @@
                 		<div id="up">
                     		<div id="up_left">
                         		<div id="upimg">
-                            		<img src="" id="show" >
+                            		<img src="/image/update/commodity" id="show" >
                         		</div>
                         		<form id="image" enctype="multipart/form-data">
                         			<div id="upfile">
@@ -98,6 +98,8 @@
 			var trust = $("#trust").val();
 			var cnum = $("#cnum").val();
 			var cname = $("#cname").val();
+			$("#image").attr("action", "/image/update/commodity?cnum="+cnum);
+			$("#image").submit();
 			alert(pname);
 
 			var provider = {

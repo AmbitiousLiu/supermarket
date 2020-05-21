@@ -1,16 +1,15 @@
 package com.example.supermarket.lh.web;
 
+import com.example.supermarket.lh.domain.Stock_in;
 import com.example.supermarket.lh.service.StockInService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.sql.Date;
 
 
@@ -23,23 +22,21 @@ public class StockInController {
 
     /**
      * POST:/commodity/deal
-     * @param num: it's not required
-     * @param pname: it's not required
-     * @param cnum: it's not required
-     * @param indate: it's not required
-     * @param sum: it's not required
      * @return
      */
     @PostMapping(value = "/add")
-    public void addStock(@RequestParam(value = "num", required = false) String num,
-                         @RequestParam(value = "pname", required = false) String pname,
-                         @RequestParam(value = "cnum", required = false) String cnum,
-                         @RequestParam(value = "indate", required = false) Date indate,
-                         @RequestParam(value = "sum", required = false) Integer sum,
-                         HttpServletRequest request) {
+    public void addStock(@RequestBody Stock_in stock_in,
+                         HttpServletResponse response,
+                         HttpServletRequest request) throws IOException {
         HttpSession session = request.getSession();
         String stu_num = (String) session.getAttribute("stu_num");
-        stockInService.addStock(num, pname,cnum, indate, sum, stu_num);
+        String content = null;
+        stockInService.addStock(stock_in.getNum(),stock_in.getPname(),stock_in.getCnum(),stock_in.getIndate(),stock_in.getSum(),stu_num);
+        response.setContentType("text/json;charset=utf-8");
+        if (content.equals("null")) {
+            response.getWriter().write("");
+        } else {
+            response.getWriter().write(content);
+        }
     }
-
 }
