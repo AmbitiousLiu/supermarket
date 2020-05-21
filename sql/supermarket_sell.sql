@@ -26,8 +26,7 @@ CREATE TABLE `sell` (
   `cnum` varchar(15) NOT NULL,
   `count` int(11) NOT NULL,
   `date` date NOT NULL,
-  `price_in` smallint(4) NOT NULL,
-  `price_out` smallint(4) NOT NULL,
+  `price` smallint(6) NOT NULL,
   PRIMARY KEY (`cnum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 16:58:25
+-- Dump completed on 2020-05-21 22:58:07

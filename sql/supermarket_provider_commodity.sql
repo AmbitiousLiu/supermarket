@@ -16,29 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `provider`
+-- Table structure for table `provider_commodity`
 --
 
-DROP TABLE IF EXISTS `provider`;
+DROP TABLE IF EXISTS `provider_commodity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `provider` (
+CREATE TABLE `provider_commodity` (
   `pnum` varchar(15) NOT NULL,
-  `pname` varchar(15) NOT NULL,
-  `padd` varchar(15) NOT NULL,
-  `ptel` varchar(15) NOT NULL,
-  `pmail` varchar(15) NOT NULL,
+  `cnum` varchar(15) NOT NULL,
+  `cname` varchar(15) NOT NULL,
+  `price` int(11) NOT NULL,
+  `region` varchar(15) NOT NULL,
+  `p_date` date NOT NULL,
+  `safe_date` date NOT NULL,
   PRIMARY KEY (`pnum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `provider`
+-- Dumping data for table `provider_commodity`
 --
 
-LOCK TABLES `provider` WRITE;
-/*!40000 ALTER TABLE `provider` DISABLE KEYS */;
-/*!40000 ALTER TABLE `provider` ENABLE KEYS */;
+LOCK TABLES `provider_commodity` WRITE;
+/*!40000 ALTER TABLE `provider_commodity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `provider_commodity` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-21 22:58:09
+-- Dump completed on 2020-05-21 22:58:11

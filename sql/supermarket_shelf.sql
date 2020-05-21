@@ -16,34 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `commodity`
+-- Table structure for table `shelf`
 --
 
-DROP TABLE IF EXISTS `commodity`;
+DROP TABLE IF EXISTS `shelf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `commodity` (
+CREATE TABLE `shelf` (
   `cnum` varchar(15) NOT NULL,
   `name` varchar(15) NOT NULL,
-  `sort` varchar(15) NOT NULL,
+  `region` varchar(15) NOT NULL,
   `p_date` date NOT NULL,
   `safe_date` date NOT NULL,
-  `stock_count` int(11) NOT NULL,
-  `shelf_count` int(11) NOT NULL,
-  `price_in` smallint(4) NOT NULL,
-  `price_out` smallint(4) NOT NULL,
+  `price_out` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
   PRIMARY KEY (`cnum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `commodity`
+-- Dumping data for table `shelf`
 --
 
-LOCK TABLES `commodity` WRITE;
-/*!40000 ALTER TABLE `commodity` DISABLE KEYS */;
-INSERT INTO `commodity` VALUES ('001','草莓','123','2020-05-05','2020-05-05',0,0,0,0),('002','西瓜','123','2020-05-03','2020-05-03',0,0,0,0);
-/*!40000 ALTER TABLE `commodity` ENABLE KEYS */;
+LOCK TABLES `shelf` WRITE;
+/*!40000 ALTER TABLE `shelf` DISABLE KEYS */;
+/*!40000 ALTER TABLE `shelf` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 16:58:28
+-- Dump completed on 2020-05-21 22:58:08

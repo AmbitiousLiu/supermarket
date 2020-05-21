@@ -1,5 +1,6 @@
 package com.example.supermarket.ljy.web
 
+import com.example.supermarket.ljy.hadoop.Hdfs
 import com.example.supermarket.ljy.service.CommodityInitService
 import com.example.supermarket.ljy.service.StockOutService
 import org.springframework.beans.factory.annotation.Autowired
