@@ -43,6 +43,6 @@ public class UserAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
         session.setAttribute("position", stuff.position);
         session.setAttribute("region", stuff.region);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        logger.info("User:" + stuff.name + "login in supermarket management in " + df.format(new Date()));
+        logger.info("ip: " + request.getRemoteAddr() + " User:" + stuff.name + " login in supermarket management in " + df.format(new Date()));
     }
 }

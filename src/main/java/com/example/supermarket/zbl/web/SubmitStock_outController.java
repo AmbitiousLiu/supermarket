@@ -3,6 +3,7 @@ package com.example.supermarket.zbl.web;
 
 import com.example.supermarket.ljy.domain.Stock_out;
 import com.example.supermarket.zbl.service.StockService;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 public class SubmitStock_outController {
     @Resource
     StockService stockService;
-
+    private static Logger logger = Logger.getLogger(SubmitStock_outController.class);
     @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response, @RequestBody Stock_out stock_out, HttpSession session)throws IOException {
        String stu_num = session.getAttribute("stu_num").toString();
 
@@ -43,7 +44,7 @@ public class SubmitStock_outController {
                 //当出库数量小于入库数量时，出库成功
                 if (stock_out.getSum() <= sum) {
                     Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num);
-                    System.out.println(content);
+
                     if (content == 0) {
                         response.getWriter().write("-1");
                     } else {
