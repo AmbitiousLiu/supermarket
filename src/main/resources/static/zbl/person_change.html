@@ -60,30 +60,33 @@
 	    	
 	    	<div class="layui-card">
 	    		<div class="layui-card-body">
-	    			<form>
-	    				<img src="/image/person" style="height: 100px; width: 100px;" />
-	    				<input type="file" />
-	    			</form>
+	    			<div class="layui-upload">
+					  <div class="layui-upload-list">
+					    <img src="/image/person" class="layui-upload-img" id="image-img" style="height: 100px; width: 100px; border-radius: 50px;">
+					    <p id="demoText"></p>
+					    <button type="button" class="layui-btn" id="image-btn">修改头像</button>
+					  </div>
+					</div> 
 	    		</div>
 	    	<div class="layui-card-body" style="padding-top: 40px;">
-	    	<form class="layui-form" action="">
+	    	<form class="layui-form" action="/Info/modifyInfo" method="post">
 			  <div class="layui-form-item">
 			    <div class="layui-inline">
 			      <label class="layui-form-label" style="width: 100px;">职工号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="stu_num" class="layui-input" disabled="disabled" value="123">
+			        <input type="text" name="stu_num" class="layui-input" disabled="disabled" id="stu_num">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">姓名：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+			        <input type="text" name="name" id="name" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 100px;">原始密码：</label>
+			      <label class="layui-form-label"  style="width: 100px;">职位：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+			        <input type="text" name="rname" id="rname" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -92,19 +95,19 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">性别：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="gender" id="gender" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">年龄：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="age" id="age" lay-verify="age" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 100px;">新密码：</label>
+			      <label class="layui-form-label"  style="width: 100px;">所属区：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+			        <input type="text" name="region" id="region" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -113,40 +116,19 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">工龄：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="seniority" id="seniority" lay-verify="seniority" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">工资：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-			      </div>
-			    </div>
-			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 100px;">确认密码：</label>
-			      <div class="layui-input-inline">
-			        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
-			      </div>
-			    </div>
-			  </div>
-			  
-			  <div class="layui-form-item">
-			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 100px;">职位：</label>
-			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-			      </div>
-			    </div>
-			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 100px;">所属区：</label>
-			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="salary" id="salary" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">身份证：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="pid" id="pid" lay-verify="identity" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -155,7 +137,7 @@
 			    <div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 100px;">
-			      		<input type="submit" class="layui-btn" value="提交修改" style="margin-left: 85px;"/>
+			      		<input type="submit" class="layui-btn" lay-submit="" value="提交修改" style="margin-left: 85px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -172,12 +154,83 @@
 	  var element = layui.element;
 	  
 	});
+	
+	layui.use('form', function() {
+		var form = layui.form;
+		
+		form.verify({
+		    age: function(value) {
+		    	if (Number(value) < 18 || Number(value) > 65) {
+		    		return '年龄未在18岁到65岁之间，不符合规定！';
+		    	}
+		    }
+		    ,seniority: function(value) {
+		    	if (Number(value) < 0 || Number(value) > 47) {
+		    		return '工龄不符合规范！';
+		    	}
+		    }
+		});
+	})
+	
+	layui.use('upload', function(){
+	  var $ = layui.jquery
+	  ,upload = layui.upload;
+	  
+	  //普通图片上传
+	  var uploadInst = upload.render({
+	    elem: '#image-btn'
+	    ,url: '/image/update/person' //改成您自己的上传接口
+	    ,before: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	        $('#image-img').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	      //如果上传失败
+	      if(res.code > 0){
+	        return layer.msg('上传失败');
+	      }
+	      //上传成功
+	    }
+	    ,error: function(){
+	      //演示失败状态，并实现重传
+	      var demoText = $('#demoText');
+	      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+	      demoText.find('.demo-reload').on('click', function(){
+	        uploadInst.upload();
+	      });
+	    }
+	  });
+	});
+	
+	
 	</script>
 </body>
 	
 	<script type="text/javascript">
 		
-		
+		window.onload = function() {
+			ajax({
+				method:HTTP_METHOD.POST,
+				url:"/Info/getInfo",
+				async:true,
+				type:HTTP_RESPONSE_TYPE.JSON,
+				callback:(data)=>{
+					var json = eval(data);
+					// alert(json[0].name);
+					$("#name").text(json[0].name);
+					$("#stu_num").text(json[0].stu_num);
+					$("#gender").text(json[0].gender);
+					$("#age").text(json[0].age);
+					$("#seniority").text(json[0].seniority);
+					$("#salary").text(json[0].salary);
+					$("#rname").text(json[0].rname) ;
+					$("#region").text(json[0].region) ;
+					$("#pid").text(json[0].pid.substring(0, 6)+"********"+json[0].pid.substring(14, 18))
+				}
+			})
+		}
 		
 	</script>
 	

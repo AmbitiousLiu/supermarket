@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<title>超市管理系统</title>
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/supermarket_deal.css"/>
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
@@ -57,29 +58,18 @@
 	  <div class="layui-body" style="background: #F0F0F0; margin-bottom: -45px;">
 	    <!-- 内容主体区域 -->
 	    <div style="padding: 15px;">
-	    	
-	    	<div class="layui-card">
-			  <div class="layui-card-header">
-			  	商品详情：
-			  </div>
-			  <div class="layui-card-body">
 			  	
-			  	<div class="layui-row">
-				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
-				      <div class="grid-demo grid-demo-bg1">
-				      	<div class="layui-form-item">
-				      		<img src="img/shucai.jpg" id="cimg" style="height: 200px; width: 200px;">
-				      	</div>
-				      	<div class="layui-form-item">
-				      		<input type="button" id="Lower_shelf"  class="layui-btn" onclick="del()" value="下架" style="width: 100px;"/>
-				      	</div>
-				      </div>
-				    </div>
-				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
-				      <div class="grid-demo layui-bg-red">
-				      	<div id="Commodity_Name">
+			  	<div id="butoom">
+					<div id="left">
+						<img src="img/shucai.jpg" class="img-thumbnail" id="cimg">
+						<div id="Lower_shelf" onclick="del()">
+							下架
+						</div>
+					</div>
+					<div id="center">
+						<div id="Commodity_Name">
 							<p style="display: inline;">商品名：</p>
-							<p id="cname" style="display: inline;" >{{cname}}</p>
+							<p id="cname" style="display: inline;">{{cname}}</p>
 						</div>
 						<div id="Inventory">
 							<p style="display: inline;">库存量：</p>
@@ -87,29 +77,22 @@
 						</div>
 						<div id="Unit_Price">
 							<p style="display: inline;">商品价格：</p>
-							<p id="cprice" style="display: inline;"  class="layui-input">{{cprice}}</p>
+							<p id="cprice" style="display: inline;">{{cprice}}</p>
 						</div>
 						<div id="month_total">
 							<p style="display: inline;">利润：</p>
-							<p id="lirun" style="display: inline;"  class="layui-input">{{lirun}}</p>
+							<p id="lirun" style="display: inline;">{{lirun}}</p>
 						</div>
-				      </div>
-				    </div>
-				    <div class="layui-col-xs4 layui-col-sm12 layui-col-md4">
-				      <div class="grid-demo layui-bg-blue">
-				      	<div class="layui-input-inline">
-					        <div style="margin: 20px;">
-					        	<input id="modify" class="layui-btn" value="修改商品名" style="width: 150px;" />
-							</div>
-							<div style="margin: 20px;">
-								<input id="change_unit_price" class="layui-btn" value="修改单价" style="width: 150px;" />
-							</div>
-					    </div>
-				      </div>
-				    </div>
+					</div>
+					<div id="right">
+						<div id="modify">
+							修改商品名
+						</div>
+						<div id="change_unit_price">
+							修改单价
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
 	    	
 	    </div>
 	  </div>
