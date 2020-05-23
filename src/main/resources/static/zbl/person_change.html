@@ -137,7 +137,7 @@
 			    <div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 100px;">
-			      		<input type="submit" class="layui-btn" lay-submit="" value="提交修改" style="margin-left: 85px;"/>
+			      		<input type="submit" class="layui-btn" lay-submit="" lay-filter="change" value="提交修改" style="margin-left: 85px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -169,6 +169,13 @@
 		    		return '工龄不符合规范！';
 		    	}
 		    }
+		});
+		
+		form.on('submit(change)', function(data){
+		    layer.alert(JSON.stringify(data.field), {
+		      title: '最终的提交信息'
+		    })
+		    return false;
 		});
 	})
 	
