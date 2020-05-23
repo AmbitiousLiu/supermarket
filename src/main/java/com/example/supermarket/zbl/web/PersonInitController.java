@@ -31,14 +31,14 @@ public class PersonInitController {
     //修改用户信息
     @RequestMapping (value = "/modifyInfo") void modifyPerson(HttpServletResponse response, HttpServletRequest request, @RequestParam(value = "name")String name,
                                                               @RequestParam(value = "gender")String gender, @RequestParam(value = "age")String age,
-                                                              @RequestParam(value = "pid")String pid, @RequestParam(value = "password")String password)throws IOException{
+                                                              @RequestParam(value = "pid")String pid)throws IOException{
 
         HttpSession session  = request.getSession();
 
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
-        Integer integer = personInitService.modifyAllInfo(name,gender,pid,stu_num,Integer.parseInt(age),password);
+        Integer integer = personInitService.modifyAllInfo(name,gender,pid,stu_num,Integer.parseInt(age));
         System.out.println(integer);
         response.setContentType("text/json;charset=utf-8");
 

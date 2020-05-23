@@ -218,16 +218,17 @@
 				type:HTTP_RESPONSE_TYPE.JSON,
 				callback:(data)=>{
 					var json = eval(data);
-					// alert(json[0].name);
-					$("#name").text(json[0].name);
-					$("#stu_num").text(json[0].stu_num);
-					$("#gender").text(json[0].gender);
-					$("#age").text(json[0].age);
-					$("#seniority").text(json[0].seniority);
-					$("#salary").text(json[0].salary);
-					$("#rname").text(json[0].rname) ;
-					$("#region").text(json[0].region) ;
-					$("#pid").text(json[0].pid.substring(0, 6)+"********"+json[0].pid.substring(14, 18))
+					 // alert(json[0].name);
+
+					$("#name").val(json[0].name);
+					$("#stu_num").val(json[0].stu_num);
+					$("#gender").val(json[0].gender);
+					$("#age").val(json[0].age);
+					$("#seniority").val(json[0].seniority);
+					$("#salary").val(json[0].salary);
+					$("#rname").val(json[0].rname) ;
+					$("#region").val(json[0].region) ;
+					$("#pid").val(json[0].pid.substring(0, 6)+"********"+json[0].pid.substring(14, 18))
 				}
 			})
 		}
