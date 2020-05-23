@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>超市管理系统</title>
+		<link rel="stylesheet" href="css/commodity.css" />
+		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
+	</head>
+	
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="./img/haiwenxiang.jpg" class="layui-nav-img">
+	      </li>
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="javascript:;">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;上架商品</a></dd>
+	            <dd><a href="javascript:;">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="background: #F0F0F0; margin-bottom: -45px;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 15px;">
+	    	
+	    	<div class="layui-row">
+	    		
+		      	<div class="comodity-item" v-for="item in items">
+					<div style="display: flex;" @click="link(item.cnum)">
+						<div>
+							<img :src="`/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
+						</div>
+						<div>
+							<div class="item-text">商品号：{{item.cnum}}</div>
+							<div class="item-text">商品名：{{item.name}}</div>
+							<div class="item-text">类别：{{item.sort}}</div>
+							<div class="item-text">单价：{{item.price_out}}</div>
+							<div class="item-text">生产日期：{{item.p_date}}</div>
+							<div class="item-text">保质期至：{{item.safe_date}}</div>
+						</div>
+					</div>
+				</div>
+					
+			</div>
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	</script>
+</body>
+	
+	<script type="text/javascript">
+		
+		var v1 = new Vue({
+			el: '#commodity',
+			data: {
+				items: []
+			},
+			mounted() {
+				this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET, 
+				   		url: "/commodity/commodity", 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			console.log(datas)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.items = datas
+							document.getElementById("c_count").innerHTML = this.items.length
+				   		}
+			   		})
+				},
+				link(cnum) {
+					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum;
+				}
+			}
+		})
+		
+		var v2 = new Vue({
+			el: '#history',
+			data: {
+				stocks: []
+			},
+			mounted() {
+					this.getInfo();
+			},
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.GET, 
+				   		url: "/commodity/initStockOut", 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			this.stocks = datas
+				   		}
+			   		})
+				}
+			}
+		})
+		
+		
+		window.onload = function() {
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/userName", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			if (data != "") {
+		   				document.getElementById("userName").innerHTML = data;
+		   			}
+		   		}
+	   		})
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/userPosition", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			if (data != "") {
+		   				document.getElementById("userPosition").innerHTML = data;
+		   			}
+		   		}
+	   		})
+			
+			ajax({
+				method: HTTP_METHOD.GET, 
+		   		url: "/commodity/region", 
+		   		async: true, 
+		   		type: HTTP_RESPONSE_TYPE.TEXT, 
+		   		callback: (data) => { 
+		   			if (data == "") {
+		   				document.getElementById("region").innerHTML = "全部区";
+		   			} else {
+		   				document.getElementById("region").innerHTML = data;
+		   			}
+		   		}
+	   		})
+		}
+
+		document.getElementById("c_up").onclick = function() {
+			window.location.href = "/zbl/supermarket_spgl_add.html";
+		}
+		
+		document.getElementById("c_in").onclick = function() {
+			window.location.href = "/lh/warehousing.html";
+		}
+		
+		
+	</script>
+	
+</html>

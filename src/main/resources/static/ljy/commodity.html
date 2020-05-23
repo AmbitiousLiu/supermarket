@@ -2,101 +2,120 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>commodity</title>
+		<title>超市管理系统</title>
 		<link rel="stylesheet" type="text/css" href="css/grzx.css"/>
 		<link rel="stylesheet" href="css/commodity.css" />
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
 	</head>
 	
-	<body>
-		<div class="header">
-			<p>超市管理系统</p>
-		</div>
-		<div class="center">
-			<div class="center_of_left">
-				<div id="Personal_management">
-					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
-				</div>
-				<div id="Commodity_management">
-					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
-				</div>
-				<div id="Staff_management">
-					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
-				</div>
-			</div>
-		
-		
-			<div id="center_of_right">
-				<div id="head">
-					<div class="head-item">
-						<img src="/image/person" id="head-img"/>
-						<span class="name" id="userName">名字</span>  /  <span class="name" id="userPosition">身份</span>
-					</div>
-					<div class="head-item">
-						<div class="shangpingqu">商品区：</div>
-						<div class="qu">
-								<span value="all" id="region" style="border: 1px solid black;">全部区/瓜果区/生鲜区……</span>
-							
-						</div>
-					</div>
-					<div class="head-item">
-						<div class="up">
-							<button class="btn btn-info" id="c_up">上架商品</button>
-						</div>
-					</div>
-					<div class="head-item">
-						<div class="add">
-							<button class="btn btn-info" id="c_in">购入商品</button>
-						</div>
-					</div>
-				</div>
-				
-				<div class="content">
-					<div class="content-left" id="commodity">
-						
-						<div class="comodity-item" v-for="item in items">
-							<div style="display: flex;" @click="link(item.cnum)">
-								<div>
-									<img :src="`/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
-								</div>
-								<div>
-									<div class="item-text">商品号：{{item.cnum}}</div>
-									<div class="item-text">商品名：{{item.name}}</div>
-									<div class="item-text">类别：{{item.sort}}</div>
-									<div class="item-text">单价：{{item.price_out}}</div>
-									<div class="item-text">生产日期：{{item.p_date}}</div>
-									<div class="item-text">保质期至：{{item.safe_date}}</div>
-								</div>
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="./img/haiwenxiang.jpg" class="layui-nav-img">
+	      </li>
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="javascript:;">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;上架商品</a></dd>
+	            <dd><a href="javascript:;">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="background: #F0F0F0; margin-bottom: -45px;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 15px;">
+	    	
+	    	<div class="layui-row">
+			    <div class="layui-col-xs12 layui-col-md8">
+			      <div class="grid-demo grid-demo-bg1">
+			      	
+			      	<div class="comodity-item" v-for="item in items">
+						<div style="display: flex;" @click="link(item.cnum)">
+							<div>
+								<img :src="`/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
+							</div>
+							<div>
+								<div class="item-text">商品号：{{item.cnum}}</div>
+								<div class="item-text">商品名：{{item.name}}</div>
+								<div class="item-text">类别：{{item.sort}}</div>
+								<div class="item-text">单价：{{item.price_out}}</div>
+								<div class="item-text">生产日期：{{item.p_date}}</div>
+								<div class="item-text">保质期至：{{item.safe_date}}</div>
 							</div>
 						</div>
-						
 					</div>
 					
-					<div class="content-right">
-						<div class="sum">
+			      </div>
+			    </div>
+			    
+			    <div class="layui-col-xs6 layui-col-md4">
+			      <div class="grid-demo">
+			      	<div class="sum">
 							<div class="">总商品量：<span id="c_count"></span></div>
 						</div>
 						<div class="sum">
-							<div class="history">历史出库单：</div>
+							<div class="history">最近出库单：</div>
 							<div class="history" id="history" >
-								<a :href="`/sry/StockOut_details.html?num=${stock.num}`" v-for="stock in stocks">{{stock.outdate}} -> {{stock.cnum}}<br /></a>
+								<p>日期：<span id="date">123</span></p>
+								<p>商品：<span id="cname">草莓</span></p>
+								<p>类别：<span id="region">水果</span></p>
+								<p>数量：<span id="sum">123</span></p>
+								<p>经手人：<span id="name">ljy</span></p>
 							</div>
 							<div class="history">
 								<a href="/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
 							</div>
 						</div>
-						
-					</div>
-				</div>
-				
+			      </div>
+			    </div>
 			</div>
-			
-		</div>
-		
-	</body>
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	</script>
+</body>
 	
 	<script type="text/javascript">
 		

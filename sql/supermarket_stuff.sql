@@ -29,9 +29,9 @@ CREATE TABLE `stuff` (
   `age` smallint(2) NOT NULL,
   `seniority` smallint(2) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `salary` smallint(5) DEFAULT NULL,
-  `position` varchar(10) DEFAULT NULL,
-  `region` varchar(10) DEFAULT NULL,
+  `salary` smallint(5) NOT NULL,
+  `position` varchar(15) NOT NULL,
+  `region` varchar(10) NOT NULL,
   PRIMARY KEY (`stu_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,6 +42,7 @@ CREATE TABLE `stuff` (
 
 LOCK TABLES `stuff` WRITE;
 /*!40000 ALTER TABLE `stuff` DISABLE KEYS */;
+INSERT INTO `stuff` VALUES ('01','ljy','男',21,123,'123',123,'ROLE_库房管理人员','水果区'),('02','jleo','男',20,123,'123',123,'ROLE_总经理','全部区'),('03','nil','nan',10,123,'123',123,'ROLE_USER','');
 /*!40000 ALTER TABLE `stuff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 16:58:27
+-- Dump completed on 2020-05-21 22:58:08

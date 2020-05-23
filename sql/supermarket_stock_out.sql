@@ -28,6 +28,7 @@ CREATE TABLE `stock_out` (
   `outdate` date NOT NULL,
   `sum` smallint(5) NOT NULL,
   `stu_num` varchar(15) NOT NULL,
+  `region` varchar(15) NOT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +39,7 @@ CREATE TABLE `stock_out` (
 
 LOCK TABLES `stock_out` WRITE;
 /*!40000 ALTER TABLE `stock_out` DISABLE KEYS */;
-INSERT INTO `stock_out` VALUES ('001','001','2020-05-03',123,'123'),('002','002','2020-05-02',123,'123');
+INSERT INTO `stock_out` VALUES ('001','001','2020-05-03',123,'01',''),('002','002','2020-05-02',123,'01',''),('1','001','2020-05-06',1,'01',''),('2','1','1970-01-01',1,'01',''),('3','1','2020-05-07',1,'01',''),('4','1','2020-05-07',1,'01',''),('5','1','2020-05-07',1,'01',''),('6','1','2020-05-07',1,'01',''),('7','1','2020-05-07',11,'01',''),('8','1','2020-05-07',1,'01',''),('9','1','2020-05-07',1,'01','');
 /*!40000 ALTER TABLE `stock_out` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 16:58:31
+-- Dump completed on 2020-05-21 22:58:12

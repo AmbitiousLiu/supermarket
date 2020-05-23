@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>超市管理系统</title>
+		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
+	</head>
+	
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="./img/haiwenxiang.jpg" class="layui-nav-img">
+	      </li>
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="javascript:;">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;上架商品</a></dd>
+	            <dd><a href="javascript:;">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="margin-bottom: -45px;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 30px;">
+	    	
+	    	<ul class="layui-timeline">
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis"></i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">有句话叫啥来着？对，叫冤家路窄！</div>
+			      <div>
+			      <div class="layui-collapse" lay-filter="test">
+					  <div class="layui-colla-item">
+					    <h2 class="layui-colla-title">听不懂？说的就是下面的那几个。</h2>
+					    <div class="layui-colla-content">
+					      <p>酥弱🐟: 既酥，又弱，还多余。</p>
+					      <p>流海: 发际线再高都不怕。</p>
+					      <p>哇塞: 和帅是近亲，就是仅仅是近音的关系。</p>
+					      <p>羊成耗: 不放过你，仅仅是因为你的性别。</p>
+					      <p>周憨皮: 就是人如其名。</p>
+					      <p>刘囧: 不希望太囧的囧。</p>
+					    </div>
+					  </div>
+					  <div class="layui-colla-item">
+					    <h2 class="layui-colla-title">他们这是要干嘛？</h2>
+					    <div class="layui-colla-content">
+					      <p>很简单，就是菜鸡互啄。</p>
+					    </div>
+					  </div>
+				  </div>
+				  </div>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis"></i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">这么弱鸡，我们才不要他们联系方式呢。</div>
+			      <div>
+			      	<button class="layui-btn site-demo-layim" data-type="add">点击删除好友</button>
+			      </div>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis"></i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">2016年，layui 首个版本发布</div>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis"></i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">2015年，layui 孵化</div>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-timeline-axis"></i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">更久前，轮子时代。维护几个独立组件：layer等</div>
+			    </div>
+			  </li>
+			</ul>
+	    	
+	    	
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	</script>
+	
+	<script>
+	layui.use('layim', function(){
+	  var $ = layui.jquery, active = {
+	    
+	    add: function(){
+	      //实际使用时数据由动态获得
+	      layim.add({
+	        type: 'friend'
+	        ,username: 'sry'
+	        ,avatar: './img/haiwenxiang.jpg'
+	        ,submit: function(group, remark, index){
+	          layer.msg('好友删除申请已发送，请等待对方拒绝', {
+	            icon: 1
+	            ,shade: 0.5
+	          }, function(){
+	            layer.close(index);
+	          });
+	          
+	          //通知对方
+	          /*
+	          $.post('/im-applyFriend/', {
+	            uid: info.uid
+	            ,from_group: group
+	            ,remark: remark
+	          }, function(res){
+	            if(res.status != 0){
+	              return layer.msg(res.msg);
+	            }
+	            layer.msg('好友申请已发送，请等待对方确认', {
+	              icon: 1
+	              ,shade: 0.5
+	            }, function(){
+	              layer.close(index);
+	            });
+	          });
+	          */
+	        }
+	      });
+	    }
+	    ,addqun: function(){
+	      layim.add({
+	        type: 'group'
+	        ,username: 'LayIM会员群'
+	        ,avatar: '//tva2.sinaimg.cn/crop.0.0.180.180.50/6ddfa27bjw1e8qgp5bmzyj2050050aa8.jpg'
+	        ,submit: function(group, remark, index){
+	          layer.msg('申请已发送，请等待管理员确认', {
+	            icon: 1
+	            ,shade: 0.5
+	          }, function(){
+	            layer.close(index);
+	          });
+	          
+	          //通知对方
+	          /*
+	          $.post('/im-applyGroup/', {
+	            uid: info.uid
+	            ,from_group: group
+	            ,remark: remark
+	          }, function(res){
+	          
+	          });
+	          */
+	        }
+	      });
+	    }
+	    ,addFriend: function(){
+	      var user = {
+	        type: 'friend'
+	        ,id: 1234560
+	        ,username: '李彦宏' //好友昵称，若申请加群，参数为：groupname
+	        ,avatar: '//tva4.sinaimg.cn/crop.0.0.996.996.180/8b2b4e23jw8f14vkwwrmjj20ro0rpjsq.jpg' //头像
+	        ,sign: '全球最大的中文搜索引擎'
+	      }
+	      layim.setFriendGroup({
+	        type: user.type
+	        ,username: user.username
+	        ,avatar: user.avatar
+	        ,group: layim.cache().friend //获取好友列表数据
+	        ,submit: function(group, index){
+	          //一般在此执行Ajax和WS，以通知对方已经同意申请
+	          //……
+	          
+	          //同意后，将好友追加到主面板
+	          layim.addList({
+	            type: user.type
+	            ,username: user.username
+	            ,avatar: user.avatar
+	            ,groupid: group //所在的分组id
+	            ,id: user.id //好友ID
+	            ,sign: user.sign //好友签名
+	          });
+	          
+	          layer.close(index);
+	        }
+	      });
+	    }
+	    ,addGroup: function(){
+	      layer.msg('已成功把[Angular开发]添加到群组里', {
+	        icon: 1
+	      });
+	      //增加一个群组
+	      layim.addList({
+	        type: 'group'
+	        ,avatar: "//tva3.sinaimg.cn/crop.64.106.361.361.50/7181dbb3jw8evfbtem8edj20ci0dpq3a.jpg"
+	        ,groupname: 'Angular开发'
+	        ,id: "12333333"
+	        ,members: 0
+	      });
+	    }
+	    ,removeFriend: function(){
+	      layer.msg('已成功删除[凤姐]', {
+	        icon: 1
+	      });
+	      //删除一个好友
+	      layim.removeList({
+	        id: 121286
+	        ,type: 'friend'
+	      });
+	    }
+	    ,removeGroup: function(){
+	      layer.msg('已成功删除[前端群]', {
+	        icon: 1
+	      });
+	      //删除一个群组
+	      layim.removeList({
+	        id: 101
+	        ,type: 'group'
+	      });
+	    }
+	    //置灰离线好友
+	    ,setGray: function(){
+	      layim.setFriendStatus(168168, 'offline');
+	      
+	      layer.msg('已成功将好友[马小云]置灰', {
+	        icon: 1
+	      });
+	    }
+	    //取消好友置灰
+	    ,unGray: function(){
+	      layim.setFriendStatus(168168, 'online');
+	      
+	      layer.msg('成功取消好友[马小云]置灰状态', {
+	        icon: 1
+	      });
+	    }
+	    //移动端版本
+	    ,mobile: function(){
+	      var device = layui.device();
+	      var mobileHome = '/layim/demo/mobile.html';
+	      if(device.android || device.ios){
+	        return location.href = mobileHome;
+	      }
+	      var index = layer.open({
+	        type: 2
+	        ,title: '移动版演示 （或手机扫右侧二维码预览）'
+	        ,content: mobileHome
+	        ,area: ['375px', '667px']
+	        ,shadeClose: true
+	        ,shade: 0.8
+	        ,end: function(){
+	          layer.close(index + 2);
+	        }
+	      });
+	      layer.photos({
+	        photos: {
+	          "data": [{
+	            "src": "http://cdn.layui.com/upload/2016_12/168_1481056358469_50288.png",
+	          }]
+	        }
+	        ,anim: 0
+	        ,shade: false
+	        ,success: function(layero){
+	          layero.css('margin-left', '350px');
+	        }
+	      });
+	    }
+	  };
+	  $('.site-demo-layim').on('click', function(){
+	    var type = $(this).data('type');
+	    active[type] ? active[type].call(this) : '';
+	  });
+	});
+	</script>
+	
+</body>
+	
+	
+	
+</html>

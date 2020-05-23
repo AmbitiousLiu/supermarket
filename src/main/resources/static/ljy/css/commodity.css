@@ -57,12 +57,14 @@
 	width: 320px;
 	margin-top: 20px;
 	margin-left: 20px;
-	border: 1px solid dodgerblue;
+	box-shadow: 0 0 15px -5px ;
+	background-color: white
 }
 
 .comodity-img {
-	width: 158px;
-	height: 158px;
+	width: 160px;
+	height: 160px;
+	margin-right: 5px;
 }
 
 .item-text {

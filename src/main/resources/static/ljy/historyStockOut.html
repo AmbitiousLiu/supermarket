@@ -1,116 +1,103 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>history</title>
-		<title>commodity</title>
-		<link rel="stylesheet" type="text/css" href="css/grzx.css"/>
-		<link rel="stylesheet" href="css/commodity.css" />
+		<meta charset="utf-8" />
+		<title>超市管理系统</title>
 		<link rel="stylesheet" href="../public/css/bootstrap.css" />
 		<script type="text/javascript" src="../public/js/vue.js" ></script>
 		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
 		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
 	</head>
-	<body>
-		
-		<div class="header">
-			<p>超市管理系统</p>
-		</div>
-		
-		<div class="center">
-			<div class="center_of_left">
-				<div id="Personal_management">
-					<p><a href="/zbl/supermarket_pcenter.html" >个人中心&gt;</a></p>
-				</div>
-				<div id="Commodity_management">
-					<p><a href="#" class="nav-item">商品管理&gt;</a></p>
-				</div>
-				<div id="Staff_management">
-					<p>	<a href="/ych/supermarket_manager.html">员工管理&gt;</a></p>
-				</div>
-			</div>
-		
-		
-			<div id="center_of_right" style="display: flex;">
-				<table class="table table-hover table-striped">
-					<thead>
-						<tr>
-							<th>出库单号</th>
-							<th>出库商品号</th>
-							<th>出库日期</th>
-							<th>查看详情</th>
-						</tr>
-					</thead>
-					<tbody id="tbody">
-						<tr v-for="item in items">
-							<td>{{item.num}}</td>
-							<td>{{item.cnum}}</td>
-							<td>{{item.outdate}}</td>
-							<td>
-								<a :href="`/sry/StockOut_details.html?num=${item.num}`">详情</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			<div>
-				<button class="btn btn-success" id="page_up">上一页</button>
-				第<span style="margin: 10px;" id="page">1</span>页
-				<button class="btn btn-success" id="page_down">下一页</button>
-			</div>
-			
-		</div>
-	</body>
+	
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="./img/haiwenxiang.jpg" class="layui-nav-img">
+	      </li>
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="javascript:;">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;上架商品</a></dd>
+	            <dd><a href="javascript:;">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="background: #F0F0F0; margin-bottom: -45px;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 15px;">
+	    	
+	    	<div id="history"></div>
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	// 元素动态样式
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	
+	// 分页查询
+	layui.use('table', function(){
+	  var table = layui.table;
+	  
+	  //第一个实例
+	  table.render({
+	    elem: '#history'
+	    ,height: 312
+	    ,url: '/stockOut/history' //数据接口
+	    ,limit: 10
+	    ,page: true //开启分页
+	    ,cols: [[ //表头
+	      {field: 'num', title: '出库单号', width:230, fixed: 'left'}
+	      ,{field: 'cnum', title: '商品号', width:200}
+	      ,{field: 'region', title: '类别', width: 200}
+	      ,{field: 'sum', title: '数量', width:100, sort: true} 
+	      ,{field: 'outdate', title: '出库日期', width:220, sort: true}
+	      ,{field: 'stu_num', title: '经手人', width: 180}
+	    ]]
+	  });
+	  
+	});
+	</script>
+</body>
 	
 	<script type="text/javascript">
 		
-    	var reg = new RegExp("(^|&)" + "page" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    	var page =  unescape(r[2]);
-		
-		document.getElementById("page").innerHTML = page
-		
-		var v1 = new Vue({
-			el: '#tbody',
-			data: {
-				items: []
-			},
-			mounted() {
-					this.getInfo();
-			},
-			methods: {
-				getInfo() {
-					ajax({
-						method: HTTP_METHOD.GET, 
-				   		url: "/stockOut/history?page="+page, 
-				   		async: true, 
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => {
-				   			this.items = datas
-				   		}
-			   		})
-				}
-			}
-		})
-		
-		document.getElementById("page_up").onclick = function() {
-			if (page > 1) {
-				page--;
-				location.replace("/ljy/historyStockOut.html?page="+page);
-			} else {
-				
-			}
-		}
-		
-		document.getElementById("page_down").onclick = function() {
-			if (v1.items.length == 10) {
-				page++;
-				location.replace("/ljy/historyStockOut.html?page="+page);
-			} else {
-				
-			}
-		}
 		
 	</script>
 	

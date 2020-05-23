@@ -86,7 +86,7 @@ class ImageController {
 
     @PostMapping(value = "/update/commodity")
     void updateCommodityImage(@RequestBody MultipartFile file,
-                                 @RequestParam(value = "cnum") String value) {
+                                 @RequestParam(value = "cnum", required = false) String value) {
         if (value == null || value == "") {
             return
         }
