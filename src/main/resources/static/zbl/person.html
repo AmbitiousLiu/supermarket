@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>超市管理系统</title>
+		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
+	</head>
+	
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="./img/haiwenxiang.jpg" class="layui-nav-img">
+	      </li>
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="javascript:;">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;上架商品</a></dd>
+	            <dd><a href="javascript:;">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="javascript:;">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="javascript:;">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="background: #F0F0F0; margin-bottom: -45px;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 50px; padding-top: 100px;">
+	    	
+	    	<div class="layui-card">
+			  <div class="layui-card-header">
+			  	个人信息：
+			  </div>
+			  <div class="layui-card-body">
+			  	<img src="/image/person" style="height: 100px; width: 100px; border-radius: 50px;"/>
+			    &emsp;<span>姓名: </span><span id="name">xingming</span>
+			  </div>
+			  <div class="layui-card-body">
+			  	
+			  	<div class="layui-row">
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo grid-demo-bg1">
+				      	<i class="layui-icon layui-icon-username" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>职工号: </span><span id="stu_num">xingming</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo">
+				      	<i class="layui-icon layui-icon-male" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>性别: </span><span id="gender">gender</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo grid-demo-bg1">
+				      	<i class="layui-icon layui-icon-light" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>年龄: </span><span id="age">age</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo">
+				      	<i class="layui-icon layui-icon-template-1" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>工龄: </span><span id="seniority">seniority</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				</div>
+			  	
+			  </div>
+			  <div class="layui-card-body">
+			  	
+			  	<div class="layui-row">
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo grid-demo-bg1">
+				      	<i class="layui-icon layui-icon-form" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>工资: </span><span id="salary">salary</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo">
+				      	<i class="layui-icon layui-icon-group" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>职位: </span><span id="rname">rname</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo grid-demo-bg1">
+				      	<i class="layui-icon layui-icon-note" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>所属区: </span><span id="region">region</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				    <div class="layui-col-xs3">
+				      <div class="grid-demo">
+				      	<i class="layui-icon layui-icon-layer" style="font-size: 30px; color: #1E9FFF; margin: 30px;"></i>
+			  			<span>身份证: </span><span id="pid">pid</span>&emsp;&emsp;
+				      </div>
+				    </div>
+				</div>
+			  	
+			  </div>
+			</div>
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	</script>
+</body>
+	
+	<script type="text/javascript">
+		
+		window.onload = function() {
+			ajax({
+				method:HTTP_METHOD.POST,
+				url:"/Info/getInfo",
+				async:true,
+				type:HTTP_RESPONSE_TYPE.JSON,
+				callback:(data)=>{
+					$("#name").innerHTML = data[0].name
+					$("#stu_num").innerHTML = data[0].stu_num
+					$("#gender").innerHTML = data[0].gender
+					$("#age").innerHTML = data[0].age
+					$("#seniority").innerHTML = data[0].seniority
+					$("#salary").innerHTML = data[0].salary
+					$("#rname").innerHTML = data[0].rname
+					$("#region").innerHTML = data[0].region
+					$("#pid").innerHTML = data[0].pid.substring(0, 6)+"********"+data[0].pid.substring(14, -1)
+				}
+			})
+		}
+		
+	</script>
+	
+</html>
