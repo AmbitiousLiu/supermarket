@@ -11,15 +11,16 @@ import java.util.List;
 @Mapper
 public interface PersonMapper {
     //查询员工信息
-    @Select("select * from stuff" +
-            " where stuff.stu_num = #{useId}")
+    @Select("select * from stuff and role" +
+            " where stuff.rnum = role.rnum" +
+            " and stuff.stu_num = #{useId}")
     List<Person>getAllInfo(String useId);
 
     //修改员工信息
     @Update("update stuff " +
-            "set name = #{name},gender = #{gender},region = #{region}," +
-            "position = #{position},age = #{age},password = #{pas}" +
+            "set name = #{name},gender = #{gender},pid = #{pid}," +
+            "age = #{age},password = #{pas}" +
             " where stuff.stu_num = #{stu_num}")
-    Integer modifyAllInfo(String name,String gender,String region,String position,String stu_num,Integer age,String pas);
+    Integer modifyAllInfo(String name,String gender,String pid,String stu_num,Integer age,String pas);
 
 }

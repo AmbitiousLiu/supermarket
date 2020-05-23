@@ -7,13 +7,35 @@ import java.sql.Date;
 public class Person {
     String name ;//员工姓名
     String gender; //性别
-    String position;//职位
+    String rname;//角色
     String stu_num;//工号
     String region;//所属区域
     Double salary;//工资
     Integer age;//年龄
     Integer seniority;//工龄
-    String password;
+    String password;//密码
+    String PID;//身份证号
+
+    public Person(String name, String gender, String position, String stu_num, String region, Double salary, Integer age, Integer seniority, String password, String PID) {
+        this.name = name;
+        this.gender = gender;
+        this.rname = position;
+        this.stu_num = stu_num;
+        this.region = region;
+        this.salary = salary;
+        this.age = age;
+        this.seniority = seniority;
+        this.password = password;
+        this.PID = PID;
+    }
+
+    public String getPID() {
+        return PID;
+    }
+
+    public void setPID(String PID) {
+        this.PID = PID;
+    }
 
     public String getPassword() {
         return password;
@@ -28,7 +50,7 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
-                ", position='" + position + '\'' +
+                ", position='" + rname + '\'' +
                 ", stu_num='" + stu_num + '\'' +
                 ", region='" + region + '\'' +
                 ", salary=" + salary +
@@ -54,11 +76,11 @@ public class Person {
     }
 
     public String getPosition() {
-        return position;
+        return rname;
     }
 
     public void setPosition(String position) {
-        this.position = position;
+        this.rname = position;
     }
 
     public String getStu_num() {

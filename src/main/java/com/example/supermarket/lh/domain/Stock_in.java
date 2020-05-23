@@ -7,13 +7,30 @@ import java.sql.Date;
 @Data
 public class Stock_in {
     String num;
+    String pnum;
+    String cnum;
+    Date indate;
+    Date p_date;
+    Date safe_date;
+    Integer sum;
+    String stu_num;
+    String region;
+    Integer price;
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     public void setNum(String num) {
         this.num = num;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setPname(String pnum) {
+        this.pnum = pnum;
     }
 
     public void setCnum(String cnum) {
@@ -32,18 +49,51 @@ public class Stock_in {
         this.stu_num = stu_num;
     }
 
-    String pname;
-    String cnum;
-    Date indate;
-    Integer sum;
-    String stu_num;
+
+
+    public Date getP_date() {
+        return p_date;
+    }
+
+    public void setP_date(Date p_date) {
+        this.p_date = p_date;
+    }
+
+    public Date getSafe_date() {
+        return safe_date;
+    }
+
+    public void setSafe_date(Date safe_date) {
+        this.safe_date = safe_date;
+    }
+
+    public Stock_in(String num, String pnum, String cnum, Date indate, Date p_date, Date safe_date, Integer sum, String stu_num, String region,Integer price) {
+        this.num = num;
+        this.pnum = pnum;
+        this.cnum = cnum;
+        this.indate = indate;
+        this.p_date = p_date;
+        this.safe_date = safe_date;
+        this.sum = sum;
+        this.stu_num = stu_num;
+        this.region = region;
+        this.price = price;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     public String getNum() {
         return num;
     }
 
-    public String getPname() {
-        return pname;
+    public String getPnum() {
+        return pnum;
     }
 
     public String getCnum() {

@@ -20,11 +20,12 @@ class StockOutController {
 
     @Autowired StockOutService stockOutService
 
-    def SIZE = 10
+//    def SIZE = 10
 
     @RequestMapping(value = "/history")
     moreStockOut(HttpServletRequest request,
                  HttpServletResponse response,
+                 @RequestParam(value = "limit", required = true) String size,
                  @RequestParam(value = "page", required = true) String page) {
         def session = request.getSession();
         String position = session.getAttribute("position")
@@ -33,9 +34,9 @@ class StockOutController {
         }
         response.setContentType("text/json;charset=utf-8")
         if (position == "ROLE_总经理" || position == "ROLE_副经理") {
-            response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), SIZE))
+            response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), Integer.parseInt(size)))
         } else if (position == "ROLE_库房管理人员") {
-            response.getWriter().write(stockOutService.moreStockOutByPerson(session.getAttribute("stu_num").toString(), Integer.parseInt(page), SIZE))
+            response.getWriter().write(stockOutService.moreStockOutByPerson(session.getAttribute("stu_num").toString(), Integer.parseInt(page), Integer.parseInt(size)))
         }
     }
 

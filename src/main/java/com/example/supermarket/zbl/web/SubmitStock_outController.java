@@ -4,15 +4,13 @@ package com.example.supermarket.zbl.web;
 import com.example.supermarket.ljy.domain.Stock_out;
 import com.example.supermarket.zbl.service.StockService;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -21,17 +19,28 @@ public class SubmitStock_outController {
     @Resource
     StockService stockService;
     private static Logger logger = Logger.getLogger(SubmitStock_outController.class);
-    @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response, @RequestBody Stock_out stock_out, HttpSession session)throws IOException {
+    @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response,
+                                                                 @RequestParam(value = "num")String num, @RequestParam(value = "region")String region,
+                                                                 @RequestParam(value = "price")String price,@RequestParam(value = "cnum")String cnum,
+                                                                 @RequestParam(value = "sum")String sum,
+                                                                 HttpSession session)throws IOException {
+        //生成出库日期
+        long time = System.currentTimeMillis();
+        Date outdate = new Date(time);
+
        String stu_num = session.getAttribute("stu_num").toString();
+        Stock_out stock_out = new Stock_out(num,cnum,outdate,Integer.parseInt(sum),stu_num,region);
+
 
         response.setContentType("text/json;charset=utf-8");
-        Integer sum = stockService.querySum(stock_out.getCnum());
-        String num = stockService.queryNum(stock_out.getNum());
+        //查询商品库存数量
+        Integer sums = stockService.querySum(stock_out.getCnum());
+//        String num = stockService.queryNum(stock_out.getNum());
         List<String> cnums = stockService.queryCnums();
         Boolean flag = false;
 
-        for (String cnum:cnums){
-            if (cnum.equals(stock_out.getCnum())){
+        for (String cnu:cnums){
+            if (cnu.equals(stock_out.getCnum())){
                 flag = true;
             }
         }
@@ -42,14 +51,25 @@ public class SubmitStock_outController {
             //判断出库单中的商品号是否存在
             if (flag){
                 //当出库数量小于入库数量时，出库成功
-                if (stock_out.getSum() <= sum) {
+                if (stock_out.getSum() <= sums) {
                     Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num);
 
                     if (content == 0) {
                         response.getWriter().write("-1");
                     } else {
-                        stockService.updateSum(stock_out.getCnum(), sum - stock_out.getSum());
-                        stockService.updateCom(stock_out.getSum(),stock_out.getCnum());
+                        stockService.updateSum(stock_out.getCnum(), sums - stock_out.getSum());
+                        //如果架上商品没有该出库商品，则架上新增商品，有则更新架上商品数量和售价
+                        if (stockService.queryShelfcnum(cnum) == null){
+                            String name = stockService.queryName(cnum);
+                            Date p_date = stockService.queryPdate(cnum);
+                            Date safe_date = stockService.querySafedate(cnum);
+                            //上架新商品
+                            stockService.addCommodity(cnum,name,region,p_date,safe_date,Integer.parseInt(price),Integer.parseInt(sum));
+                        }else{
+                            //更新架上商品数量和价格
+                            stockService.updateCom(stock_out.getSum(),stock_out.getCnum(),Integer.parseInt(price));
+                        }
+
                         response.getWriter().write("-2");
                     }
 
@@ -72,6 +92,26 @@ public class SubmitStock_outController {
         String content = stockService.queryCnum();
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ?"0":content);
+    }
+    //拿到出库单数据数量
+    @RequestMapping(value = "/getRows")
+    void getRows(HttpServletResponse response,HttpSession session)throws IOException{
+        //获得账号
+        String stu_num = session.getAttribute("stu_num").toString();
+
+        //获得角色号
+        String rnum = stockService.queryRnum(stu_num);
+        //定义数据量
+        Integer content = 0;
+        //如果是总经理或副总经理,则拿到所有数据
+        if ("01".equals(rnum)||"02".equals(rnum)){
+            content = stockService.queryStockoutRows();
+            //如果是仓库管理员，则拿到自己经手的出库单数据
+        }else {
+            content = stockService.queryStockoutRowsByStu(stu_num);
+        }
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content == 0 ? 0 :content);
     }
 
 }

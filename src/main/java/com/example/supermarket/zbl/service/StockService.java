@@ -4,6 +4,7 @@ package com.example.supermarket.zbl.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.ljy.domain.Stock_out;
 import com.example.supermarket.zbl.mapper.StockMapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,41 @@ public class StockService {
         return stockMapper.queryCnum();
     }
     //修改commodity
-    public Integer updateCom(Integer sum,String cnum){return stockMapper.updateCom(sum,cnum);}
+    public Integer updateCom(Integer sum,String cnum,Integer price){return stockMapper.updateCom(sum,cnum,price);}
+    //查询商品进价
+    public Integer queryPrice(String num){
+        return stockMapper.queryPrice(num);
+    };
+    //新增架上商品
+    public Integer addCommodity(String cnum,String name,String region,Date p_date,Date safe_date,Integer price_out,Integer count){
+        return stockMapper.addCommodity(cnum, name, region, p_date, safe_date,price_out, count);
+    };
+    //查询架上商品商品号
+    public String queryShelfcnum(String cnum){
+        return stockMapper.queryShelfcnum(cnum);
+    };
+    //查询商品名
+    public String queryName(String cnum){
+        return stockMapper.queryName(cnum);
+    };
+    //查询生产日期
+    public Date queryPdate(String cnum){
+        return stockMapper.queryPdate( cnum);
+    };
+    //查询保质期
+    public Date querySafedate(String cnum){
+        return stockMapper.querySafedate(cnum);
+    }
+    //查询出库单数据数量
+    public Integer queryStockoutRows(){
+        return stockMapper.queryStockoutRows();
+    };
+    //仓库管理员查询其出库单数量
+    public Integer queryStockoutRowsByStu(String stu_num){
+        return stockMapper.queryStockoutRowsByStu(stu_num);
+    };
+    //查询角色号
+    public String queryRnum(String stu_num){
+        return stockMapper.queryRnum(stu_num);
+    };
 }
