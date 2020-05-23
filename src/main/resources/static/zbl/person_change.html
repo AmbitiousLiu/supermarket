@@ -128,7 +128,7 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">身份证：</label>
 			      <div class="layui-input-inline">
-			        <input type="password" name="pid" id="pid" lay-verify="identity" autocomplete="off" class="layui-input">
+			        <input type="text" name="pid" id="pid" lay-verify="identity" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -228,7 +228,7 @@
 					$("#salary").val(json[0].salary);
 					$("#rname").val(json[0].rname) ;
 					$("#region").val(json[0].region) ;
-					$("#pid").val(json[0].pid.substring(0, 6)+"********"+json[0].pid.substring(14, 18))
+					$("#pid").val(json[0].pid)
 				}
 			})
 		}
