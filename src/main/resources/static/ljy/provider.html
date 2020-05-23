@@ -59,20 +59,19 @@
 	    <!-- 内容主体区域 -->
 	    <div style="padding: 15px;">
 	    	
-	    	<div class="layui-row">
+	    	<div class="layui-row" id="provider">
 	    		
 		      	<div class="comodity-item" v-for="item in items">
-					<div style="display: flex;" @click="link(item.cnum)">
+					<div style="display: flex;" @click="link(item.pnum)">
 						<div>
-							<img :src="`/image/commodity?cnum=${item.cnum}`"  class="comodity-img" />
+							<img :src="`/image/provider?pnum=${item.pnum}`"  class="comodity-img" />
 						</div>
 						<div>
-							<div class="item-text">商品号：{{item.cnum}}</div>
-							<div class="item-text">商品名：{{item.name}}</div>
-							<div class="item-text">类别：{{item.sort}}</div>
-							<div class="item-text">单价：{{item.price_out}}</div>
-							<div class="item-text">生产日期：{{item.p_date}}</div>
-							<div class="item-text">保质期至：{{item.safe_date}}</div>
+							<div class="item-text">供应商号：{{item.pnum}}</div>
+							<div class="item-text">供应商名：{{item.pname}}</div>
+							<div class="item-text">地址：{{item.padd}}</div>
+							<div class="item-text">电话：{{item.ptel}}</div>
+							<div class="item-text">邮箱：{{item.pmail}}</div>
 						</div>
 					</div>
 				</div>
@@ -94,7 +93,7 @@
 	<script type="text/javascript">
 		
 		var v1 = new Vue({
-			el: '#commodity',
+			el: '#provider',
 			data: {
 				items: []
 			},
@@ -105,96 +104,20 @@
 				getInfo() {
 					ajax({
 						method: HTTP_METHOD.GET, 
-				   		url: "/commodity/commodity", 
+				   		url: "/provider/provider", 
 				   		async: true, 
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			console.log(datas)
-				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+				   			
 				   			this.items = datas
-							document.getElementById("c_count").innerHTML = this.items.length
 				   		}
 			   		})
 				},
-				link(cnum) {
-					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum;
+				link(pnum) {
+					window.location.href = "/ljy/provider_commodity.html?pnum="+pnum;
 				}
 			}
 		})
-		
-		var v2 = new Vue({
-			el: '#history',
-			data: {
-				stocks: []
-			},
-			mounted() {
-					this.getInfo();
-			},
-			methods: {
-				getInfo() {
-					ajax({
-						method: HTTP_METHOD.GET, 
-				   		url: "/commodity/initStockOut", 
-				   		async: true, 
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-				   			this.stocks = datas
-				   		}
-			   		})
-				}
-			}
-		})
-		
-		
-		window.onload = function() {
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/userName", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data != "") {
-		   				document.getElementById("userName").innerHTML = data;
-		   			}
-		   		}
-	   		})
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/userPosition", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data != "") {
-		   				document.getElementById("userPosition").innerHTML = data;
-		   			}
-		   		}
-	   		})
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/region", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data == "") {
-		   				document.getElementById("region").innerHTML = "全部区";
-		   			} else {
-		   				document.getElementById("region").innerHTML = data;
-		   			}
-		   		}
-	   		})
-		}
-
-		document.getElementById("c_up").onclick = function() {
-			window.location.href = "/zbl/supermarket_spgl_add.html";
-		}
-		
-		document.getElementById("c_in").onclick = function() {
-			window.location.href = "/lh/warehousing.html";
-		}
 		
 		
 	</script>
