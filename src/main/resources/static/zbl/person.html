@@ -149,15 +149,18 @@
 				async:true,
 				type:HTTP_RESPONSE_TYPE.JSON,
 				callback:(data)=>{
-					$("#name").innerHTML = data[0].name
-					$("#stu_num").innerHTML = data[0].stu_num
-					$("#gender").innerHTML = data[0].gender
-					$("#age").innerHTML = data[0].age
-					$("#seniority").innerHTML = data[0].seniority
-					$("#salary").innerHTML = data[0].salary
-					$("#rname").innerHTML = data[0].rname
-					$("#region").innerHTML = data[0].region
-					$("#pid").innerHTML = data[0].pid.substring(0, 6)+"********"+data[0].pid.substring(14, -1)
+
+					var json = eval(data);
+					// alert(json[0].name);
+					$("#name").text(json[0].name);
+					$("#stu_num").text(json[0].stu_num);
+					$("#gender").text(json[0].gender);
+					$("#age").text(json[0].age);
+					$("#seniority").text(json[0].seniority);
+					$("#salary").text(json[0].salary);
+					$("#rname").text(json[0].rname) ;
+					$("#region").text(json[0].region) ;
+					$("#pid").text(json[0].pid.substring(0, 6)+"********"+json[0].pid.substring(14, 18))
 				}
 			})
 		}

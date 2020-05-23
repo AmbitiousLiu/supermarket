@@ -20,8 +20,11 @@ public class PersonInitController {
 
     //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
+        session.setAttribute("stu_num","202000001");
+//        System.out.println(session.getAttribute("stu_num").toString());
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
         response.setContentType("text/json;charset=utf-8");
+        System.out.println(content);
         response.getWriter().write(content==null ?"":content);
 
     }
@@ -31,11 +34,12 @@ public class PersonInitController {
                                                               @RequestParam(value = "pid")String pid, @RequestParam(value = "password")String password)throws IOException{
 
         HttpSession session  = request.getSession();
+
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
         Integer integer = personInitService.modifyAllInfo(name,gender,pid,stu_num,Integer.parseInt(age),password);
-
+        System.out.println(integer);
         response.setContentType("text/json;charset=utf-8");
 
         response.getWriter().write(integer == 0 ?"0":"1");
