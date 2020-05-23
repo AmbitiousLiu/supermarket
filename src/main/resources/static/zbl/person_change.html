@@ -157,14 +157,20 @@
 	
 	layui.use('form', function() {
 		var form = layui.form;
-		
+		var reg = /^\d+$|^\d+[.]?\d+$/;
 		form.verify({
 		    age: function(value) {
+		    	if(!value.match(reg)) {
+		    		return '请输入规范数值！';
+		    	}
 		    	if (Number(value) < 18 || Number(value) > 65) {
 		    		return '年龄未在18岁到65岁之间，不符合规定！';
 		    	}
 		    }
 		    ,seniority: function(value) {
+		    	if(!value.match(reg)) {
+		    		return '请输入规范数值！';
+		    	}
 		    	if (Number(value) < 0 || Number(value) > 47) {
 		    		return '工龄不符合规范！';
 		    	}
