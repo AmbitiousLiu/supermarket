@@ -52,7 +52,7 @@ public class ProviderController {
                               HttpServletResponse response)throws IOException{
         System.out.println(pnum);
         String content = providerService.getProvidersByPnum(pnum);
-        System.out.println(content);
+//        System.out.println(content);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null? "" : content);
     }

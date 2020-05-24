@@ -23,4 +23,8 @@ public interface PersonMapper {
             " where stuff.stu_num = #{stu_num}")
     Integer modifyAllInfo(String name,String seniority,String pid,String stu_num,Integer age);
 
+    //修改账号密码
+    @Update("update stuff set password = #{password} where stu_num = #{stu_num}")
+    Integer modifyPassword(String stu_num,String password);
+
 }

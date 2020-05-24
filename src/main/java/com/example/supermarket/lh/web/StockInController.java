@@ -32,6 +32,7 @@ public class StockInController {
                          HttpServletRequest request) throws IOException {
         response.setContentType("text/json;charset=utf-8");
         HttpSession session = request.getSession();
+        session.setAttribute("stu_num","202000001");
 
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
@@ -47,7 +48,7 @@ public class StockInController {
         //查询生产日期
         Date p_date= stockInService.queryPdate(pnum, cnum);
         //查询保质期
-        Date safe_date= stockInService.querySafedate(pnum, cnum);
+        String safe_date= stockInService.querySafedate(pnum, cnum);
         //查询商品名称
         String pname = stockInService.queryPname(pnum, cnum);
         //查询商品所属区域
@@ -63,7 +64,8 @@ public class StockInController {
                 stock_in.getRegion(),stock_in.getP_date(),stock_in.getSafe_date(),stock_in.getPrice());
         if (content != 0 ){
             //判断数据库内是否有该商品，没有则添加该商品，有则更新商品数量
-            if (stockInService.queryCnum(stock_in.getCnum()) == null){
+//            System.out.println(stockInService.queryCnum(stock_in.getCnum()));
+            if (stockInService.queryCnum(stock_in.getCnum()).isEmpty()){
                 //添加库存
                 stockInService.addStore(stock_in.getCnum(),pname,stock_in.getRegion(),stock_in.getSum(),
                         stock_in.getP_date(),stock_in.getSafe_date(),stock_in.getPrice());

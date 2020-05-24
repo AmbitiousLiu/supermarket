@@ -70,7 +70,7 @@
 							<div class="item-text">商品号：{{item.cnum}}</div>
 							<div class="item-text">商品名：{{item.cname}}</div>
 							<div class="item-text">类别：{{item.region}}</div>
-							<div class="item-text">单价：{{item.price}}</div>
+							<div class="item-text">单价：{{item.price }}</div>
 							<div class="item-text">生产日期：{{item.p_date}}</div>
 							<div class="item-text">保质期：{{item.safe_date}}</div>
 						</div>
@@ -122,7 +122,7 @@
 			   		})
 				},
 				link(cnum) {
-					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum+"&pnum="+pnum;
+					window.location.href = "/ljy/stock_in.html?cnum="+cnum+"&pnum="+pnum;
 				}
 			}
 		})

@@ -16,12 +16,12 @@ public class StockInService {
     public StockInMapper stockInMapper;
     //添加入库表
     public Integer addStock(String num, String pnum, String cnum, Date indate, Integer sum,
-                            String stu_num,String region,Date p_date,Date safe_date,Integer price) {
+                            String stu_num,String region,Date p_date,String safe_date,Integer price) {
         return stockInMapper.addStock(num, pnum, cnum, indate, sum, stu_num, region, p_date, safe_date, price);
     }
     //插入库存
     public  Integer addStore(String cnum,String name,String region,Integer count,
-                             Date p_date,Date safe_date,Integer price_in){
+                             Date p_date,String safe_date,Integer price_in){
         return stockInMapper.addStore(cnum, name, region, count, p_date, safe_date, price_in);
     }
     //查询库存是否有该商品
@@ -42,7 +42,7 @@ public class StockInService {
         return stockInMapper.queryPdate(pnum, cnum);
     };
     //查询保质期
-    public Date querySafedate(String pnum,String cnum){
+    public String querySafedate(String pnum,String cnum){
         return stockInMapper.querySafedate(pnum, cnum);
     }
     //查询商品所属区域

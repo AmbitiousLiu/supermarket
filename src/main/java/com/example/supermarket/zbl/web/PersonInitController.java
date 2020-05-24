@@ -39,11 +39,33 @@ public class PersonInitController {
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
         Integer integer = personInitService.modifyAllInfo(name,seniority,pid,stu_num,Integer.parseInt(age));
-        System.out.println(integer);
+//        System.out.println(integer);
         response.setContentType("text/json;charset=utf-8");
         //返回1则修改成功，0则失败
         response.getWriter().write(integer == 0 ?"0":"1");
 //        response.sendRedirect("/zbl/person_change.html");
+    }
+    //修改密码功能
+    @RequestMapping(value = "/modifyPas")
+    void modifyPassword(HttpServletResponse response, HttpServletRequest request
+            ,@RequestParam(value = "password")String password,@RequestParam(value = "old")String old)throws IOException{
+        HttpSession session  = request.getSession();
+        session.setAttribute("stu_num","202000001");
+        //获得账号
+        String stu_num = session.getAttribute("stu_num").toString();
+        //获得旧密码
+        String oldPassword = personInitService.getInfo(stu_num).get(0).getPassword();
+
+        response.setContentType("text/json;charset=utf-8");
+        //如果旧密码验证成功则可以修改密码
+        if(old.equals(oldPassword)){
+            Integer integer = personInitService.modifyPassword(stu_num,password);
+            //返回1则修改成功
+            response.getWriter().write("1");
+        }else {
+            //旧密码验证失败则无法修改
+            response.getWriter().write("0");
+        }
     }
 
 }
