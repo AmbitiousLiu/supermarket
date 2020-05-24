@@ -67,7 +67,10 @@ public class Stock_in {
         this.safe_date = safe_date;
     }
 
-    public Stock_in(String num, String pnum, String cnum, Date indate, Date p_date, String safe_date, Integer sum, String stu_num, String region,Integer price) {
+    public Stock_in() {
+    }
+
+    public Stock_in(String num, String pnum, String cnum, Date indate, Date p_date, String safe_date, Integer sum, String stu_num, String region, Integer price) {
         this.num = num;
         this.pnum = pnum;
         this.cnum = cnum;

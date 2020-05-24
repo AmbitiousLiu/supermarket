@@ -1,5 +1,6 @@
 package com.example.supermarket.lh.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.lh.domain.Stock_in;
 import com.example.supermarket.lh.service.StockInService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,63 @@ public class StockInController {
             //插入出库单失败
             response.getWriter().write("0");
         }
+    }
 
+    @RequestMapping(value = "/history")
+    public  String  queryHistory( HttpServletResponse response, HttpServletRequest request ,
+                                @RequestParam(value = "limit", required = true) String size,
+                                @RequestParam(value = "page", required = true) String page) throws IOException{
+        HttpSession session = request.getSession();
+        response.setContentType("text/json;charset=utf-8");
+        session.setAttribute("stu_num","202000001");
+        //生成经手人
+        String stu_num = (String) session.getAttribute("stu_num");
+        //查找经手人角色
+        String position = stockInService.queryRnum(stu_num);
+        //定义数据量
+        Integer content = 0;
+        System.out.println(size);
+        System.out.println(page);
 
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code",0 );
+        jsonObject.put("msg","");
+        //如果经手人是总经理或者副总经理
+        if ("01".equals(position) || "02".equals(position)){
+            System.out.println(stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
+            content = stockInService.queryStockInRows();
+            jsonObject.put("count",content);
+            jsonObject.put("data",stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
+            return  jsonObject.toString();
+            //            response.getWriter().write(jsonObject);
+        }else {
+            //如果经手人是仓库管理员
+            content = stockInService.queryStockInRowsByStu(stu_num);
+            jsonObject.put("count",content);
+            jsonObject.put("data",stockInService.moreStockInByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)));
+            return  jsonObject.toString();
+            //response.getWriter().write(stockInService.moreStockInByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)));
+
+        }
+    }
+    @RequestMapping(value = "/getRows")
+    public void getRows(HttpServletResponse response, HttpSession session)throws IOException{
+        response.setContentType("text/json;charset=utf-8");
+        session.setAttribute("stu_num","202000001");
+        //生成经手人
+        String stu_num = (String) session.getAttribute("stu_num");
+        //获得角色号
+        String rnum = stockInService.queryRnum(stu_num);
+        //定义数据量
+        Integer content = 0;
+        //如果是总经理或副总经理,则拿到所有数据
+        if ("01".equals(rnum)||"02".equals(rnum)){
+            content = stockInService.queryStockInRows();
+            //如果是仓库管理员，则拿到自己经手的出库单数据
+        }else {
+            content = stockInService.queryStockInRowsByStu(stu_num);
+        }
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content == 0 ? 0 :content);
     }
 }

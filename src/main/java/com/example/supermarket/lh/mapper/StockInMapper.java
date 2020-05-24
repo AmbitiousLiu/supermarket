@@ -1,9 +1,8 @@
 package com.example.supermarket.lh.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.example.supermarket.lh.domain.Stock_in;
+import com.example.supermarket.ljy.domain.Stock_out;
+import org.apache.ibatis.annotations.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -41,4 +40,19 @@ public interface StockInMapper {
     //查询商品进价
     @Select("select price from provider_commodity where pnum = #{pnum} and cnum = #{cnum}")
     Integer queryPrice(String pnum,String cnum);
+    //查询历史入库单
+    @Select("select * from stock_in order by indate desc limit #{begin}, #{size}")
+    List<Stock_in> moreStockIn(@Param("begin") Integer begin, @Param("size") Integer size);
+    //查询历史入库单根据角色查询
+    @Select("select * from stock_in where stu_num = #{stu_num} order by indate desc limit #{begin}, #{size}")
+    List<Stock_in> moreStockInByPerson(@Param("stu_num") String stu_num, @Param("begin") Integer begin, @Param("size") Integer size);
+    //查询角色号
+    @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
+    String queryRnum(String stu_num);
+    //查看出库单数量
+    @Select("select count(*) from stock_in")
+    Integer queryStockInRows();
+    //仓库管理员查询其出库单数量
+    @Select("select count(*) from stock_in where stu_num = #{stu_num}")
+    Integer queryStockInRowsByStu(String stu_num);
 }

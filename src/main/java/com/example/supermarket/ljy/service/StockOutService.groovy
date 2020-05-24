@@ -38,7 +38,7 @@ class StockOutService {
     String stockOutDetail(String num, HttpSession session) {
         def stock_out = stockOutMapper.stockOutDetail(num)
         def position = session.getAttribute("position")
-        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
+        if (position == "总经理" || position == "副总经理") {
             return JSON.toJSONString(stock_out)
         } else {
             if (session.getAttribute("stu_num") == stock_out.stu_num) {

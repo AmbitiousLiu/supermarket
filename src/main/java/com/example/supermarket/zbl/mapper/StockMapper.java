@@ -59,7 +59,7 @@ public interface StockMapper {
     @Select("select count(*) from stock_out where stu_num = #{stu_num}")
     Integer queryStockoutRowsByStu(String stu_num);
     //查询角色号
-    @Select("select rnum from stock_out where stu_num = #{stu_num}")
+    @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
     String queryRnum(String stu_num);
 
 }

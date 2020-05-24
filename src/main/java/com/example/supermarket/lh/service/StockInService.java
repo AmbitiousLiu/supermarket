@@ -1,7 +1,10 @@
 package com.example.supermarket.lh.service;
 
 import com.alibaba.fastjson.JSON;
+import com.example.supermarket.lh.domain.Stock_in;
 import com.example.supermarket.lh.mapper.StockInMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +56,28 @@ public class StockInService {
     public Integer queryPrice(String pnum,String cnum){
         return stockInMapper.queryPrice(pnum, cnum);
     }
+    //查询历史入库单
+    public String moreStockIn(Integer page, Integer size)
+    {
+        int begin = (page - 1) * size;
+        return JSON.toJSONString(stockInMapper.moreStockIn(begin, size));
+    };
+    //查询历史入库单根据角色查询
+    public String moreStockInByPerson(String stu_num,Integer page,Integer size){
+        int begin = (page - 1) * size;
+        return  JSON.toJSONString(stockInMapper.moreStockInByPerson(stu_num, begin, size));
+    };
+    //查询角色号
+    public String queryRnum(String stu_num){
+        return stockInMapper.queryRnum(stu_num);
+    };
+    //查询出库单数据数量
+    public Integer queryStockInRows(){
+        return stockInMapper.queryStockInRows();
+    };
+    //仓库管理员查询其出库单数量
+    public Integer queryStockInRowsByStu(String stu_num){
+        return stockInMapper.queryStockInRowsByStu(stu_num);
+    };
+
 }

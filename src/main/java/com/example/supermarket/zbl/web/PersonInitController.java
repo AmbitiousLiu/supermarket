@@ -48,7 +48,7 @@ public class PersonInitController {
     //修改密码功能
     @RequestMapping(value = "/modifyPas")
     void modifyPassword(HttpServletResponse response, HttpServletRequest request
-            ,@RequestParam(value = "password")String password,@RequestParam(value = "old")String old)throws IOException{
+            ,@RequestParam(value = "password_new")String password,@RequestParam(value = "password_old")String old)throws IOException{
         HttpSession session  = request.getSession();
         session.setAttribute("stu_num","202000001");
         //获得账号
