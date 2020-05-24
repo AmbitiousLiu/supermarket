@@ -79,7 +79,7 @@
 	  table.render({
 	    elem: '#history'
 	    ,height: 312
-	    ,url: '/stockOut/history' //数据接口
+	    ,url: '/stockIn/history' //数据接口
 	    ,limit: 10
 	    ,page: true //开启分页
 	    ,cols: [[ //表头
@@ -92,6 +92,17 @@
 	      ,{field: 'stu_num', title: '经手人', width: 180}
 	    ]]
 	  });
+	  
+	  ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/stockIn/getRows", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.JSON, 
+	   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+	   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+	   			table.count = datas
+	   		}
+   		})
 	  
 	});
 	</script>
