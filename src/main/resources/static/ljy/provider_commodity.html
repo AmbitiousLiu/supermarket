@@ -68,11 +68,11 @@
 						</div>
 						<div>
 							<div class="item-text">商品号：{{item.cnum}}</div>
-							<div class="item-text">商品名：{{item.name}}</div>
-							<div class="item-text">类别：{{item.sort}}</div>
-							<div class="item-text">单价：{{item.price_out}}</div>
+							<div class="item-text">商品名：{{item.cname}}</div>
+							<div class="item-text">类别：{{item.region}}</div>
+							<div class="item-text">单价：{{item.price}}</div>
 							<div class="item-text">生产日期：{{item.p_date}}</div>
-							<div class="item-text">保质期至：{{item.safe_date}}</div>
+							<div class="item-text">保质期：{{item.safe_date}}</div>
 						</div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 				getInfo() {
 					ajax({
 						method: HTTP_METHOD.GET, 
-				   		url: "/commodity/commodity", 
+				   		url: "/providerCom/getCommodities?pnum="+pnum,
 				   		async: true, 
 				   		type: HTTP_RESPONSE_TYPE.JSON, 
 				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)

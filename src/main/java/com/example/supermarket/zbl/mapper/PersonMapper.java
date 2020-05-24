@@ -18,9 +18,9 @@ public interface PersonMapper {
 
     //修改员工信息
     @Update("update stuff " +
-            "set name = #{name},gender = #{gender},pid = #{pid}," +
-            "age = #{age}" +
+            "set name = #{name},pid = #{pid}," +
+            "age = #{age},seniority = #{seniority}" +
             " where stuff.stu_num = #{stu_num}")
-    Integer modifyAllInfo(String name,String gender,String pid,String stu_num,Integer age);
+    Integer modifyAllInfo(String name,String seniority,String pid,String stu_num,Integer age);
 
 }

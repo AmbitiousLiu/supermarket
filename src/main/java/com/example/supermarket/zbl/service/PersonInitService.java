@@ -20,7 +20,7 @@ public class PersonInitService {
     }
 
     //修改员工信息
-    public Integer modifyAllInfo(String name,String gender,String pid,String stu_num,Integer age){
-        return  personMapper.modifyAllInfo(name,gender,pid,stu_num,age);}
+    public Integer modifyAllInfo(String name,String seniority,String pid,String stu_num,Integer age){
+        return  personMapper.modifyAllInfo(name,seniority,pid,stu_num,age);}
 
 }

@@ -46,4 +46,14 @@ public class ProviderController {
             response.getWriter().write(content);
         }
     }
+    @GetMapping(value = "/getInfo")
+    //根据商家号查询商家信息
+    public void getInfoByPnum(@RequestParam(value = "pnum")String pnum,
+                              HttpServletResponse response)throws IOException{
+        System.out.println(pnum);
+        String content = providerService.getProvidersByPnum(pnum);
+        System.out.println(content);
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content == null? "" : content);
+    }
 }

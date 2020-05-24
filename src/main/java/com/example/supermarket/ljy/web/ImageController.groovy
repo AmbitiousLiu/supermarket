@@ -1,5 +1,6 @@
 package com.example.supermarket.ljy.web
 
+import com.alibaba.fastjson.JSONObject
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -43,6 +44,25 @@ class ImageController {
         }
         out.flush()
     }
+    @RequestMapping(value = "/provider")
+    void getProviderImage(@RequestParam(value = "pnum",required = false)String value,
+                            HttpServletResponse response)    {
+        "".equals(value)? value = "default" : value
+        def fis
+        try {
+            fis = new FileInputStream(new File("images/provider/" + (value ?:"default") + ".jpg"))
+        } catch(IOException e){
+            fis = new FileInputStream(new File("images/provider/" + "default" + ".jpg"))
+        }
+        int len = 0
+        response.setContentType("multipart/form-data")
+        def out = response.getOutputStream()
+        byte [] buffer = new byte[1024 *10]
+        while ((len = fis.read(buffer)) != -1){
+            out.write(buffer,0,len)
+        }
+        out.flush()
+    }
 
     @RequestMapping(value = "/commodity")
     void getCommodityImage(@RequestParam(value = "cnum", required = false) String value,
@@ -65,23 +85,33 @@ class ImageController {
     }
 
     @RequestMapping(value = "/update/person")
-    void updatePersonalImage(MultipartFile file,
+    String updatePersonalImage(MultipartFile file,
                                 HttpServletRequest request) {
+        JSONObject res = new JSONObject()
+
         def session = request.getSession()
+        //文件夹为空
         if (file.isEmpty()) {
-            return
+            res.put("code",1)
+            res.put("msg","不能上传空文件！")
+            return res.toString()
         }
         String name = session.getAttribute("stu_num")
         if (name == null) {
-            return
+            res.put("code",1)
+            res.put("msg","上传失败！")
+            return res.toString()
         }
         String outputFile="images/person/"+name+".jpg"
         File outFile = new File(outputFile)
         outFile.createNewFile()
         def out = new FileOutputStream(outFile)
         out.write(file.getBytes())
+        res.put("code",0)
+        res.put("msg","上传成功！")
         out.flush()
         out.close()
+        return res.toString()
     }
 
     @PostMapping(value = "/update/commodity")
