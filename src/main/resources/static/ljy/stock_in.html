@@ -65,43 +65,55 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 120px;">入库单号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="num" id="num" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 120px;">供应商家号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="pnum" id="pnum" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
-			  </div>
-			  
-			  <div class="layui-form-item">
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 120px;">供应商名称：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-			      </div>
-			    </div>
-			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 120px;">商品号：</label>
-			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="pname" id="pname" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
 			  
 			  <div class="layui-form-item">
 			    <div class="layui-inline">
-			      <label class="layui-form-label"  style="width: 120px;">数量：</label>
+			      <label class="layui-form-label"  style="width: 120px;">商品号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="cnum" id="cnum" disabled="disabled" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 120px;">商品名：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="cname" id="cname" disabled="disabled" class="layui-input">
+			      </div>
+			    </div>
+			    <div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 120px;">进价：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="price" id="price" disabled="disabled" class="layui-input">
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			  	<div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 120px;">类别：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="region" id="region" disabled="disabled" class="layui-input">
+			      </div>
+			    </div>
+			    <div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 120px;">数量：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="sum" id="sum" lay-verify="required|number" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -117,7 +129,7 @@
 			    <div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 120px;">
-			      		<input type="submit" class="btn-link" value="查看更多历史出库单" style="margin-left: 225px;"/>
+			      		<input class="btn-link" value="查看更多历史入库单" style="margin-left: 225px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -139,7 +151,45 @@
 	
 	<script type="text/javascript">
 		
+		var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		var cnum = unescape(r[2]); //返回参数值
 		
+		var reg1 = new RegExp("(^|&)" + "pnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r1 = window.location.search.substr(1).match(reg1);  //匹配目标参数
+		var pnum = unescape(r1[2]); //返回参数值
+		
+		function guid() {
+			return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				var r = Math.random() * 16 | 0,
+					v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
+		
+		$("#num").val(guid());
+		$("#pnum").val(pnum);
+		ajax({
+			method:HTTP_METHOD.GET,
+			url:"/provider/getInfo?pnum="+pnum,
+			async:true,
+			type:HTTP_RESPONSE_TYPE.JSON,
+			callback:(data)=>{
+				$("#pname").val(data[0].pname);
+			}
+		})
+		$("#cnum").val(cnum);
+		ajax({
+			method:HTTP_METHOD.GET,
+			url:"/providerCom/getComInfo?cnum="+cnum,
+			async:true,
+			type:HTTP_RESPONSE_TYPE.JSON,
+			callback:(data)=>{
+				$("#cname").val(data[0].cname);
+				$("#price").val(data[0].price);
+				$("#region").val(data[0].region);
+			}
+		})
 		
 	</script>
 	

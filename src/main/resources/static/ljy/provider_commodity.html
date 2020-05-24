@@ -59,7 +59,7 @@
 	    <!-- 内容主体区域 -->
 	    <div style="padding: 15px;">
 	    	
-	    	<div class="layui-row">
+	    	<div class="layui-row" id="commodity">
 	    		
 		      	<div class="comodity-item" v-for="item in items">
 					<div style="display: flex;" @click="link(item.cnum)">
@@ -93,6 +93,11 @@
 	
 	<script type="text/javascript">
 		
+		var reg = new RegExp("(^|&)" + "pnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		var pnum = unescape(r[2]); //返回参数值
+		
+		
 		var v1 = new Vue({
 			el: '#commodity',
 			data: {
@@ -117,7 +122,7 @@
 			   		})
 				},
 				link(cnum) {
-					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum;
+					window.location.href = "/sry/supermarket_deal.html?cnum="+cnum+"&pnum="+pnum;
 				}
 			}
 		})
