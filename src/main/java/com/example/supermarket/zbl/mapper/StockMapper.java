@@ -10,10 +10,11 @@ import java.util.List;
 @Mapper
 public interface StockMapper {
     //插入出库单
-    @Insert("insert into stock_out(num,cnum,outdate,sum,stu_num)" +
+    @Insert("insert into stock_out(num,cnum,outdate,sum,stu_num,region,name,cname)" +
             "values (#{num},#{cnum},#{outdate}," +
-            "#{sum},#{stu_num})")
-    Integer insertStockOut(String num, String cnum,  Date outdate, Integer sum, String stu_num);
+            "#{sum},#{stu_num},#{region},#{name},#{cname})")
+    Integer insertStockOut(String num, String cnum,  Date outdate, Integer sum, String stu_num,String region,
+                            String name,String cname);
 
     //查询商品号
     @Select("select cnum from stock_in")
@@ -32,7 +33,7 @@ public interface StockMapper {
     Integer updateSum(String cnum,Integer sum);
 
     //修改架上商品数量
-    @Update("update shelf set count = count + #{sum} and price_out = price where cnum = #{cnum}")
+    @Update("update shelf set count = count + #{sum} , price_out = #{price} where cnum = #{cnum}")
     Integer updateCom(Integer sum,String cnum,Integer price);
     //新增架上商品
     @Insert("insert into shelf(cnum,name,region,p_date,safe_date,price_out,count) " +

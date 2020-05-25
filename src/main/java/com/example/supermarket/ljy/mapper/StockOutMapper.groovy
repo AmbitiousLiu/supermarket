@@ -26,4 +26,10 @@ interface StockOutMapper {
 
     @Select("select * from stock_out where num = #{num}")
     Stock_out stockOutDetail(String num)
+    //查看出库单数量
+    @Select("select count(*) from stock_out")
+    Integer queryStockoutRows();
+    //仓库管理员查询其出库单数量
+    @Select("select count(*) from stock_out where stu_num = #{stu_num}")
+    Integer queryStockoutRowsByStu(String stu_num);
 }

@@ -48,7 +48,7 @@ public class SubmitStock_outController {
             System.out.println(sums);
         System.out.println(stock_out.toString());
 
-                Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num);
+                Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num,region,stock_out.getName(),stock_out.getCname());
                 System.out.println(content);
                 if (content == 0) {
                     response.getWriter().write("-1");

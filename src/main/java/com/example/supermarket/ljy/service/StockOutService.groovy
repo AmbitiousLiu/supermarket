@@ -25,14 +25,14 @@ class StockOutService {
         return JSON.toJSONString(stockOutMapper.initStockOut())
     }
 
-    String moreStockOutByPerson(String stu_num, int page, int size) {
+    List<Stock_out> moreStockOutByPerson(String stu_num, int page, int size) {
         int begin = (page - 1) * size
-        return JSON.toJSONString(stockOutMapper.moreStockOutByPerson(stu_num, begin, size))
+        return stockOutMapper.moreStockOutByPerson(stu_num, begin, size)
     }
 
-    String moreStockOut(int page, int size) {
+    List<Stock_out> moreStockOut(int page, int size) {
         int begin = (page - 1) * size
-        return JSON.toJSONString(stockOutMapper.moreStockOut(begin, size))
+        return stockOutMapper.moreStockOut(begin, size)
     }
 
     String stockOutDetail(String num, HttpSession session) {
@@ -49,5 +49,14 @@ class StockOutService {
         }
 
     }
+    //查询出库单数据数量
+    Integer queryStockoutRows(){
+        return stockOutMapper.queryStockoutRows();
+    };
+    //仓库管理员查询其出库单数量
+    Integer queryStockoutRowsByStu(String stu_num){
+        return stockOutMapper.queryStockoutRowsByStu(stu_num);
+    };
+
 
 }

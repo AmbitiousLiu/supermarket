@@ -95,20 +95,18 @@ public class StockInController {
         String position = stockInService.queryRnum(stu_num);
         //定义数据量
         Integer content = 0;
-        System.out.println(size);
-        System.out.println(page);
+//        System.out.println(size);
+//        System.out.println(page);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
         //如果经手人是总经理或者副总经理
         if ("01".equals(position) || "02".equals(position)){
-            System.out.println(stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
+//            System.out.println(stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
             content = stockInService.queryStockInRows();
             jsonObject.put("count",content);
             jsonObject.put("data",stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
-            System.out.println(jsonObject.toString());
-
             return  jsonObject.toString();
             //            response.getWriter().write(jsonObject);
         }else {

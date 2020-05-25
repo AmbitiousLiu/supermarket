@@ -20,8 +20,9 @@ public class StockService {
     StockMapper stockMapper;
 
     //插入出库单
-    public Integer insertStockOut(String num, String cnum, Date date, Integer sum, String stu_num) {
-        return  stockMapper.insertStockOut(num,cnum,date,sum,stu_num);
+    public Integer insertStockOut(String num, String cnum,  Date outdate, Integer sum, String stu_num,String region,
+                                  String name,String cname) {
+        return  stockMapper.insertStockOut(num, cnum, outdate, sum, stu_num, region, name, cname);
     };
     //查询商品号
     public String queryCnum(){

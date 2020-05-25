@@ -1,5 +1,6 @@
 package com.example.supermarket.ljy.web
 
+import com.alibaba.fastjson.JSONObject
 import com.example.supermarket.ljy.service.StockOutService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
@@ -23,20 +24,37 @@ class StockOutController {
 //    def SIZE = 10
 
     @RequestMapping(value = "/history")
-    moreStockOut(HttpServletRequest request,
+    String moreStockOut(HttpServletRequest request,
                  HttpServletResponse response,
                  @RequestParam(value = "limit", required = true) String size,
                  @RequestParam(value = "page", required = true) String page) {
         def session = request.getSession();
-        String position = session.getAttribute("position")
-        if (position == null) {
-            return
-        }
+        session.setAttribute("stu_num","202000001");
+        session.setAttribute("rnum","01")
+        //生成经手人
+        String stu_num = (String) session.getAttribute("stu_num");
+        //查找经手人角色
+        String rnum = session.getAttribute("rnum").toString();
+        //定义数据量
+        Integer content = 0;
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code",0 );
+        jsonObject.put("msg","");
+
         response.setContentType("text/json;charset=utf-8")
-        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
-            response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), Integer.parseInt(size)))
-        } else if (position == "ROLE_库房管理人员") {
-            response.getWriter().write(stockOutService.moreStockOutByPerson(session.getAttribute("stu_num").toString(), Integer.parseInt(page), Integer.parseInt(size)))
+        if ("01".equals(rnum) || "02".equals(rnum)) {
+            content = stockOutService.queryStockoutRows()
+            jsonObject.put("count",content);
+            jsonObject.put("data",stockOutService.moreStockOut(Integer.parseInt(page),Integer.parseInt(size)))
+            return jsonObject.toString()
+//            response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), Integer.parseInt(size)))
+        } else if ("03".equals(rnum)) {
+            content = stockOutService.queryStockoutRowsByStu(stu_num)
+            jsonObject.put("count",content);
+            jsonObject.put("data",stockOutService.moreStockOutByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)))
+            return jsonObject.toString()
+//            response.getWriter().write(stockOutService.moreStockOutByPerson(session.getAttribute("stu_num").toString(), Integer.parseInt(page), Integer.parseInt(size)))
         }
     }
 
