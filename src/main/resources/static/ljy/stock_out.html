@@ -74,6 +74,12 @@
 			        <input type="text" name="cnum" id="cnum" disabled="disabled" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
+			    <div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 100px;">商品名：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="cname" id="cname" disabled="disabled" autocomplete="off" class="layui-input">
+			      </div>
+			    </div>
 			  </div>
 			  
 			  <div class="layui-form-item">
@@ -87,6 +93,12 @@
 			      <label class="layui-form-label"  style="width: 100px;">类别：</label>
 			      <div class="layui-input-inline">
 			        <input type="text" name="region" id="region" disabled="disabled" autocomplete="off" class="layui-input">
+			      </div>
+			    </div>
+			    <div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 100px;">库存量：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="count" id="count" disabled="disabled" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -160,6 +172,7 @@
 					$("#cname").val(data[0].cname);
 					$("#price").val(data[0].price);
 					$("#region").val(data[0].region);
+					$("#count").val(data[0].count);
 				}
 			})
 			
@@ -169,19 +182,19 @@
 					var num = $("#num").val();
 					var price_out = util.escape($("#price_out").val());
 					var cnum = $("#num").val();
+					var region = $("#region").val();
 					ajax({
-						method: HTTP_METHOD.POST,
-						url: "/stockIn/add?cnum="+cnum+"&price_out="+price_out+"&num="+num+"&sum="+sum,
+						method: HTTP_METHOD.GET,
+						url: "/stockout/subStock_out?cnum="+cnum+"&price_out="+price_out+"&num="+num+"&sum="+sum+"&region="+region,
 						async: true,
-						params: this.listInfo,
 						type: HTTP_RESPONSE_TYPE.JSON,
 						callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 							if (datas == "1"){
-								alert("提交入库单成功")
+								layer.alert("提交入库单成功");
 								window.location.reload();
 							}
 							else {
-								alert("提交入库单失败！")
+								layer.alert("提交入库单失败！");
 							}
 							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 						}

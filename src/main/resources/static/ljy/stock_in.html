@@ -150,8 +150,9 @@
 </body>
 	
 	<script type="text/javascript">
-		layui.use('util', function(){
+		layui.use(['util', 'layer'], function(){
 			var util = layui.util;
+			var layer = layui.layer;
 		
 		var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -194,18 +195,17 @@
 							var sum = util.escape($("#sum").val());
 							var num = $("#num").val();
 							ajax({
-								method: HTTP_METHOD.POST,
+								method: HTTP_METHOD.GET,
 								url: "/stockIn/add?cnum="+cnum+"&pnum="+pnum+"&num="+num+"&sum="+sum,
 								async: true,
-								params: this.listInfo,
 								type: HTTP_RESPONSE_TYPE.JSON,
 								callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 									if (datas == "1"){
-										alert("提交入库单成功")
+										layer.alert("提交入库单成功")
 										window.location.reload();
 									}
 									else {
-										alert("提交入库单失败！")
+										layer.alert("提交入库单失败！")
 									}
 									// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 								}
