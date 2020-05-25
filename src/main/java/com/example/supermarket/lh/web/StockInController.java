@@ -107,6 +107,8 @@ public class StockInController {
             content = stockInService.queryStockInRows();
             jsonObject.put("count",content);
             jsonObject.put("data",stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
+            System.out.println(jsonObject.toString());
+
             return  jsonObject.toString();
             //            response.getWriter().write(jsonObject);
         }else {

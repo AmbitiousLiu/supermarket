@@ -57,15 +57,15 @@ public class StockInService {
         return stockInMapper.queryPrice(pnum, cnum);
     }
     //查询历史入库单
-    public String moreStockIn(Integer page, Integer size)
+    public List<Stock_in> moreStockIn(Integer page, Integer size)
     {
         int begin = (page - 1) * size;
-        return JSON.toJSONString(stockInMapper.moreStockIn(begin, size));
+        return stockInMapper.moreStockIn(begin, size);
     };
     //查询历史入库单根据角色查询
-    public String moreStockInByPerson(String stu_num,Integer page,Integer size){
+    public List<Stock_in> moreStockInByPerson(String stu_num,Integer page,Integer size){
         int begin = (page - 1) * size;
-        return  JSON.toJSONString(stockInMapper.moreStockInByPerson(stu_num, begin, size));
+        return  stockInMapper.moreStockInByPerson(stu_num, begin, size);
     };
     //查询角色号
     public String queryRnum(String stu_num){
