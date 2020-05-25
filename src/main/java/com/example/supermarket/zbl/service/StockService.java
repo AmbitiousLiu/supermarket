@@ -3,6 +3,7 @@ package com.example.supermarket.zbl.service;
 
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.ljy.domain.Stock_out;
+import com.example.supermarket.zbl.domain.Stock;
 import com.example.supermarket.zbl.mapper.StockMapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class StockService {
         return stockMapper.queryPrice(num);
     };
     //新增架上商品
-    public Integer addCommodity(String cnum,String name,String region,Date p_date,Date safe_date,Integer price_out,Integer count){
+    public Integer addCommodity(String cnum,String name,String region,Date p_date,String safe_date,Integer price_out,Integer count){
         return stockMapper.addCommodity(cnum, name, region, p_date, safe_date,price_out, count);
     };
     //查询架上商品商品号
@@ -65,7 +66,7 @@ public class StockService {
         return stockMapper.queryPdate( cnum);
     };
     //查询保质期
-    public Date querySafedate(String cnum){
+    public String querySafedate(String cnum){
         return stockMapper.querySafedate(cnum);
     }
     //查询出库单数据数量
@@ -80,4 +81,13 @@ public class StockService {
     public String queryRnum(String stu_num){
         return stockMapper.queryRnum(stu_num);
     };
+    //查询库存
+    public String queryStock(){
+        return JSON.toJSONString(stockMapper.queryStock());
+    };
+    //查询库存详情根据商品号
+    public String queryStockByCnum(String cnum){
+        return JSON.toJSONString(stockMapper.queryStockByCnum(cnum));
+    };
+
 }

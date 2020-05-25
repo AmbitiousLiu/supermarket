@@ -19,11 +19,13 @@ public class SubmitStock_outController {
     @Resource
     StockService stockService;
     private static Logger logger = Logger.getLogger(SubmitStock_outController.class);
-    @RequestMapping(value = "/subStock_out")void  submitStockout(HttpServletResponse response,
-                                                                 @RequestParam(value = "num")String num, @RequestParam(value = "region")String region,
-                                                                 @RequestParam(value = "price")String price,@RequestParam(value = "cnum")String cnum,
-                                                                 @RequestParam(value = "sum")String sum,
-                                                                 HttpSession session)throws IOException {
+    @RequestMapping(value = "/subStock_out")
+    public void  submitStockout(HttpServletResponse response, @RequestParam(value = "num")String num,
+                                @RequestParam(value = "region")String region, @RequestParam(value = "price_out")String price,@RequestParam(value = "cnum")String cnum,
+                                @RequestParam(value = "sum")String sum, HttpSession session)
+            throws IOException {
+        session.setAttribute("name", "小苏");
+        session.setAttribute("stu_num", "202000001");
         //生成出库日期
         long time = System.currentTimeMillis();
         Date outdate = new Date(time);
@@ -31,73 +33,59 @@ public class SubmitStock_outController {
         String name = session.getAttribute("name").toString();
         //拿到经手人账号
         String stu_num = session.getAttribute("stu_num").toString();
-        Stock_out stock_out = new Stock_out(num,cnum,outdate,Integer.parseInt(sum),stu_num,region,name,stockService.queryName(cnum));
+        Stock_out stock_out = new Stock_out(num, cnum, outdate, Integer.parseInt(sum), stu_num, region, name, stockService.queryName(cnum));
 
 
         response.setContentType("text/json;charset=utf-8");
         //查询商品库存数量
+        System.out.println(stock_out.getCnum());
         Integer sums = stockService.querySum(stock_out.getCnum());
-//        String num = stockService.queryNum(stock_out.getNum());
+
         List<String> cnums = stockService.queryCnums();
-        Boolean flag = false;
-
-        for (String cnu:cnums){
-            if (cnu.equals(stock_out.getCnum())){
-                flag = true;
-            }
-        }
-
 
         //判断出库单号是否重复
-        if ( num == null) {
-            //判断出库单中的商品号是否存在
-            if (flag){
-                //当出库数量小于入库数量时，出库成功
-                if (stock_out.getSum() <= sums) {
-                    Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num);
+//        System.out.println(Integer.parseInt(sum));
+            System.out.println(sums);
+        System.out.println(stock_out.toString());
 
-                    if (content == 0) {
-                        response.getWriter().write("-1");
+                Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num);
+                System.out.println(content);
+                if (content == 0) {
+                    response.getWriter().write("-1");
+                } else {
+                    stockService.updateSum(stock_out.getCnum(), sums - stock_out.getSum());
+                    //如果架上商品没有该出库商品，则架上新增商品，有则更新架上商品数量和售价
+                    if (stockService.queryShelfcnum(cnum) == null) {
+                        String cname = stockService.queryName(cnum);
+                        Date p_date = stockService.queryPdate(cnum);
+                        String safe_date = stockService.querySafedate(cnum);
+                        //上架新商品
+                        stockService.addCommodity(cnum, cname, region, p_date, safe_date, Integer.parseInt(price), Integer.parseInt(sum));
                     } else {
-                        stockService.updateSum(stock_out.getCnum(), sums - stock_out.getSum());
-                        //如果架上商品没有该出库商品，则架上新增商品，有则更新架上商品数量和售价
-                        if (stockService.queryShelfcnum(cnum) == null){
-                            String cname = stockService.queryName(cnum);
-                            Date p_date = stockService.queryPdate(cnum);
-                            Date safe_date = stockService.querySafedate(cnum);
-                            //上架新商品
-                            stockService.addCommodity(cnum,cname,region,p_date,safe_date,Integer.parseInt(price),Integer.parseInt(sum));
-                        }else{
-                            //更新架上商品数量和价格
-                            stockService.updateCom(stock_out.getSum(),stock_out.getCnum(),Integer.parseInt(price));
-                        }
-
-                        response.getWriter().write("-2");
+                        //更新架上商品数量和价格
+                        stockService.updateCom(stock_out.getSum(), stock_out.getCnum(), Integer.parseInt(price));
                     }
 
-                }//否则失败
-                else {
-                    response.getWriter().write(sum.toString());
+                    response.getWriter().write("1");
                 }
-            }else {
-                response.getWriter().write("-4");
-            }
 
 
-        }else {
-            response.getWriter().write("-3");
+
         }
-    }
+
+
+
+
     //拿到商品号
     @RequestMapping(value = "/getCnum")
-    void  getCnum(HttpServletResponse response)throws IOException{
+    public void  getCnum(HttpServletResponse response)throws IOException{
         String content = stockService.queryCnum();
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ?"0":content);
     }
     //拿到出库单数据数量
     @RequestMapping(value = "/getRows")
-    void getRows(HttpServletResponse response,HttpSession session)throws IOException{
+    public void getRows(HttpServletResponse response,HttpSession session)throws IOException{
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
 
@@ -115,5 +103,26 @@ public class SubmitStock_outController {
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == 0 ? 0 :content);
     }
+
+    @RequestMapping(value = "stock")
+    public void queryStock(HttpServletResponse response,HttpSession session)throws IOException{
+
+//        session.setAttribute("name","小苏");
+        String content = stockService.queryStock();
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content);
+
+    }
+    @RequestMapping(value = "stockInfo")
+    public void queryStockByCnum(HttpServletResponse response, HttpSession session
+                                    , @RequestParam(value = "cnum")String cnum)throws IOException{
+
+//        session.setAttribute("name","小苏");
+        String content = stockService.queryStockByCnum(cnum);
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(content);
+
+    }
+
 
 }

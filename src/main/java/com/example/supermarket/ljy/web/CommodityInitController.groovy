@@ -61,7 +61,6 @@ class CommodityInitController {
         }
         response.setContentType("text/json;charset=utf-8")
         if ( "01".equals(rnum)|| "02".equals(rnum)) {
-            System.out.println(stockOutService.initStockOut())
             response.getWriter().write(stockOutService.initStockOut())
         } else  {
             response.getWriter().write(stockOutService.initStockOutByPerson(stu_num));

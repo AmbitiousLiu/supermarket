@@ -26,7 +26,7 @@ public class StockInController {
      * POST:/commodity/deal
      * @return
      */
-    @PostMapping(value = "/add")
+    @RequestMapping(value = "/add")
     public void addStock(@RequestParam(value = "pnum")String pnum,@RequestParam(value = "sum")String sum,
                          @RequestParam(value = "cnum")String cnum,@RequestParam(value = "num")String stockin_id,
                          HttpServletResponse response,

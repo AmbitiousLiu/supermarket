@@ -1,7 +1,8 @@
 package com.example.supermarket.zbl.mapper;
 
+import com.example.supermarket.zbl.domain.Stock;
 import org.apache.ibatis.annotations.*;
-import com.example.supermarket.ljy.domain.Stock_out;
+
 
 import java.sql.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ public interface StockMapper {
     List<String> queryCnum();
 
     //查询库存表商品余额
-    @Select("select sum from store where cnum = #{cnum}")
+    @Select("select count from stock where cnum = #{cnum}")
     Integer querySum(String cnum);
 
     //查询出库单号
@@ -27,7 +28,7 @@ public interface StockMapper {
     String queryNum(String num);
 
     //修改库存表商品数量
-    @Update("update store set sum = #{sum} where cnum = #{cnum}")
+    @Update("update stock set count = #{sum} where cnum = #{cnum}")
     Integer updateSum(String cnum,Integer sum);
 
     //修改架上商品数量
@@ -36,7 +37,7 @@ public interface StockMapper {
     //新增架上商品
     @Insert("insert into shelf(cnum,name,region,p_date,safe_date,price_out,count) " +
             "values(#{cnum},#{name},#{region},#{p_date},#{safe_date},#{price_out},#{count})")
-    Integer addCommodity(String cnum,String name,String region,Date p_date,Date safe_date,Integer price_out,Integer count);
+    Integer addCommodity(String cnum,String name,String region,Date p_date,String safe_date,Integer price_out,Integer count);
     //查询商品进价
     @Select("select price from stock_in where num = #{num}")
     Integer queryPrice(String num);
@@ -47,11 +48,11 @@ public interface StockMapper {
     @Select("select name from stock where cnum = #{cnum}")
     String queryName(String cnum);
     //查询生产日期
-    @Select("select p_date from store where  cnum = #{cnum}")
+    @Select("select p_date from stock where  cnum = #{cnum}")
     Date queryPdate(String cnum);
     //查询保质期
     @Select("select safe_date from provider_commodity where cnum = #{cnum}")
-    Date querySafedate(String cnum);
+    String querySafedate(String cnum);
     //查看出库单数量
     @Select("select count(*) from stock_out")
     Integer queryStockoutRows();
@@ -61,5 +62,11 @@ public interface StockMapper {
     //查询角色号
     @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
     String queryRnum(String stu_num);
+    //查询库存
+    @Select("select * from stock")
+    List<Stock> queryStock();
+    //查询库存详情根据商品号
+    @Select("select * from stock where cnum = #{cnum}")
+    List<Stock> queryStockByCnum(String cnum);
 
 }
