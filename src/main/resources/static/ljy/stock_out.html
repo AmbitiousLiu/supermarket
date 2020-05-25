@@ -180,7 +180,7 @@
 			
 			form.verify({
 				sum: function(value) {
-			    	if(value > $("#count").val()) {
+			    	if(Number(value) > Number($("#count").val())) {
 			    		return '库存不足！';
 			    	}
 			    }
