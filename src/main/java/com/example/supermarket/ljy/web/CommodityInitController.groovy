@@ -31,15 +31,16 @@ class CommodityInitController {
      */
     @GetMapping(value = "/commodity") initCommodity(HttpServletRequest request, HttpServletResponse response) {
         def session = request.getSession()
-        String position = session.getAttribute("position")
+
+//        String position = session.getAttribute("position")
         def content
-        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
+//        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
             content = commodityInitService.getAllCommodities()
-        } else if (position == "ROLE_库房管理人员") {
-            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
-        } else {
-            return
-        }
+//        } else if (position == "ROLE_库房管理人员") {
+//            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
+//        } else {
+//            return
+//        }
         response.setContentType("text/json;charset=utf-8")
         response.getWriter().write(content ?: "")
     }

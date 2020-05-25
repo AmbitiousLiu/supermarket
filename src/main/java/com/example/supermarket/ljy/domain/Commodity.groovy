@@ -12,11 +12,9 @@ import java.sql.Date
 class Commodity {
     String cnum
     String name
-    String sort
+    String region
     Date p_date
-    Date safe_date
-    Integer stock_count
-    Integer shelf_count
-    Integer price_in
+    String safe_date
+    Integer count
     Integer price_out
 }
