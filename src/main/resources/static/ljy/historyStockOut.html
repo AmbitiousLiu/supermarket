@@ -78,17 +78,17 @@
 	  //第一个实例
 	  table.render({
 	    elem: '#history'
-	    ,height: 312
+	    ,height: 500
 	    ,url: '/stockOut/history' //数据接口
 	    ,limit: 10
 	    ,page: true //开启分页
 	    ,cols: [[ //表头
-	      {field: 'num', title: '出库单号', width:230, fixed: 'left'}
-	      ,{field: 'cnum', title: '商品号', width:200}
-	      ,{field: 'region', title: '类别', width: 200}
-	      ,{field: 'sum', title: '数量', width:100, sort: true} 
-	      ,{field: 'outdate', title: '出库日期', width:220, sort: true}
-	      ,{field: 'stu_num', title: '经手人', width: 180}
+	      {field: 'num', title: '出库单号', fixed: 'left'}
+	      ,{field: 'cnum', title: '商品号'}
+	      ,{field: 'region', title: '类别'}
+	      ,{field: 'sum', title: '数量', sort: true} 
+	      ,{field: 'outdate', title: '出库日期', sort: true}
+	      ,{field: 'stu_num', title: '经手人'}
 	    ]]
 	  });
 	  

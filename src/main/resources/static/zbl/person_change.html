@@ -179,9 +179,9 @@
 	        ,success: function(layero){
 	          var btn = layero.find('.layui-layer-btn');
 	          btn.find('.layui-layer-btn0').click(function() {
-	          	var password_old = $("#password_old").val();
-	          	var password_new = $("#password_new").val();
-	          	var password_con = $("#password_con").val();
+	          	var password_old = util.escape($("#password_old").val());
+	          	var password_new = util.escape($("#password_new").val());
+	          	var password_con = util.escape($("#password_con").val());
 	          	if (password_new != password_con) {
 	          		layer.alert("确认密码不一致");
 	          		return
@@ -218,8 +218,9 @@
 	  
 	});
 	
-	layui.use('form', function() {
+	layui.use(['form','util'], function() {
 		var form = layui.form;
+		var util = layui.util;
 		var reg = /^\d+$|^\d+[.]?\d+$/;
 		form.verify({
 		    age: function(value) {
@@ -245,10 +246,10 @@
 		});
 		
 		form.on('submit(L_submit)', function(data) {
-			var age=$("#age").val();
-			var name=$("#name").val();
-			var seniority=$("#seniority").val();
-			var pid=$("#pid").val();
+			var age=util.escape($("#age").val());
+			var name=util.escape($("#name").val());
+			var seniority=util.escape($("#seniority").val());
+			var pid=util.escape($("#pid").val());
 			
 			$.ajax({
 				type:'POST',

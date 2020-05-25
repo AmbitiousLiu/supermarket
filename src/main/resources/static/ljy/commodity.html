@@ -98,7 +98,7 @@
 								<p>经手人：<span id="name">ljy</span></p>
 							</div>
 							<div class="history">
-								<a href="/ljy/historyStockOut.html?page=1">查看更多历史出库单-></a>
+								<a href="/ljy/historyStockOut.html">查看更多历史出库单-></a>
 							</div>
 						</div>
 			      </div>
@@ -148,80 +148,21 @@
 			}
 		})
 		
-		var v2 = new Vue({
-			el: '#history',
-			data: {
-				stocks: []
-			},
-			mounted() {
-					this.getInfo();
-			},
-			methods: {
-				getInfo() {
-					ajax({
-						method: HTTP_METHOD.GET, 
-				   		url: "/commodity/initStockOut", 
-				   		async: true, 
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-				   			this.stocks = datas
-				   		}
-			   		})
-				}
-			}
-		})
-		
-		
-		window.onload = function() {
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/userName", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data != "") {
-		   				document.getElementById("userName").innerHTML = data;
-		   			}
-		   		}
-	   		})
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/userPosition", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data != "") {
-		   				document.getElementById("userPosition").innerHTML = data;
-		   			}
-		   		}
-	   		})
-			
-			ajax({
-				method: HTTP_METHOD.GET, 
-		   		url: "/commodity/region", 
-		   		async: true, 
-		   		type: HTTP_RESPONSE_TYPE.TEXT, 
-		   		callback: (data) => { 
-		   			if (data == "") {
-		   				document.getElementById("region").innerHTML = "全部区";
-		   			} else {
-		   				document.getElementById("region").innerHTML = data;
-		   			}
-		   		}
-	   		})
-		}
 
-		document.getElementById("c_up").onclick = function() {
-			window.location.href = "/zbl/supermarket_spgl_add.html";
-		}
-		
-		document.getElementById("c_in").onclick = function() {
-			window.location.href = "/lh/warehousing.html";
-		}
-		
+		ajax({
+			method: HTTP_METHOD.GET, 
+	   		url: "/commodity/initStockOut", 
+	   		async: true, 
+	   		type: HTTP_RESPONSE_TYPE.JSON, 
+	   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+	   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+	   			$("#date").text(datas[0].date);
+	   			$("#cname").text(datas[0].cname);
+	   			$("#region").text(datas[0].region);
+	   			$("#sum").text(datas[0].sum);
+	   			$("#name").text(datas[0].name);
+	   		}
+   		})
 		
 	</script>
 	
