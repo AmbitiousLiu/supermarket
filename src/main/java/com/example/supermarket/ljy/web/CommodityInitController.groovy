@@ -51,15 +51,20 @@ class CommodityInitController {
         if (session == null) {
             return
         }
-        String position = session.getAttribute("position")
-        if (position == null) {
+        session.setAttribute("rnum","01");
+        //拿到角色
+        String rnum = (String) session.getAttribute("rnum");
+        String stu_num = (String) session.getAttribute("rnum");
+//        String position = session.getAttribute("position")
+        if (rnum == null) {
             return
         }
         response.setContentType("text/json;charset=utf-8")
-        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
+        if ( "01".equals(rnum)|| "02".equals(rnum)) {
+            System.out.println(stockOutService.initStockOut())
             response.getWriter().write(stockOutService.initStockOut())
-        } else if (position == "ROLE_库房管理人员") {
-            response.getWriter().write(stockOutService.initStockOutByPerson(session.getAttribute("stu_num").toString()))
+        } else  {
+            response.getWriter().write(stockOutService.initStockOutByPerson(stu_num));
         }
     }
 

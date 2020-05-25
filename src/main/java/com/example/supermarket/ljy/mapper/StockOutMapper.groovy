@@ -15,7 +15,7 @@ interface StockOutMapper {
     @Select("select * from stock_out where stu_num = #{stu_num} order by outdate desc limit 4")
     List<Stock_out> initStockOutByPerson(String stu_num)
 
-    @Select("select *from stock_out order by outdate desc limit 4")
+    @Select("select *from stock_out order by outdate desc limit 1")
     List<Stock_out> initStockOut()
 
     @Select("select * from stock_out where stu_num = #{stu_num} order by outdate desc limit #{begin}, #{size}")

@@ -156,11 +156,11 @@
 	   		type: HTTP_RESPONSE_TYPE.JSON, 
 	   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
 	   			// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
-	   			$("#date").text(datas[0][0].date);
-	   			$("#cname").text(datas[0][0].cname);
-	   			$("#region").text(datas[0][0].region);
-	   			$("#sum").text(datas[0][0].sum);
-	   			$("#name").text(datas[0][0].name);
+	   			$("#date").text(datas[0].outdate);
+	   			$("#cname").text(datas[0].cname);
+	   			$("#region").text(datas[0].region);
+	   			$("#sum").text(datas[0].sum);
+	   			$("#name").text(datas[0].name);
 	   		}
    		})
 		

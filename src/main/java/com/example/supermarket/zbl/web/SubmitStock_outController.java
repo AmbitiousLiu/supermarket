@@ -27,9 +27,11 @@ public class SubmitStock_outController {
         //生成出库日期
         long time = System.currentTimeMillis();
         Date outdate = new Date(time);
-
-       String stu_num = session.getAttribute("stu_num").toString();
-        Stock_out stock_out = new Stock_out(num,cnum,outdate,Integer.parseInt(sum),stu_num,region);
+        //拿到经手人姓名
+        String name = session.getAttribute("name").toString();
+        //拿到经手人账号
+        String stu_num = session.getAttribute("stu_num").toString();
+        Stock_out stock_out = new Stock_out(num,cnum,outdate,Integer.parseInt(sum),stu_num,region,name,stockService.queryName(cnum));
 
 
         response.setContentType("text/json;charset=utf-8");
@@ -60,11 +62,11 @@ public class SubmitStock_outController {
                         stockService.updateSum(stock_out.getCnum(), sums - stock_out.getSum());
                         //如果架上商品没有该出库商品，则架上新增商品，有则更新架上商品数量和售价
                         if (stockService.queryShelfcnum(cnum) == null){
-                            String name = stockService.queryName(cnum);
+                            String cname = stockService.queryName(cnum);
                             Date p_date = stockService.queryPdate(cnum);
                             Date safe_date = stockService.querySafedate(cnum);
                             //上架新商品
-                            stockService.addCommodity(cnum,name,region,p_date,safe_date,Integer.parseInt(price),Integer.parseInt(sum));
+                            stockService.addCommodity(cnum,cname,region,p_date,safe_date,Integer.parseInt(price),Integer.parseInt(sum));
                         }else{
                             //更新架上商品数量和价格
                             stockService.updateCom(stock_out.getSum(),stock_out.getCnum(),Integer.parseInt(price));

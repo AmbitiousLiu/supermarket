@@ -16,13 +16,20 @@ class Stock_out {
     Integer sum
     String stu_num
     String region
+    String name;
+    String cname;
 
-    Stock_out(String num, String cnum, Date outdate, Integer sum, String stu_num,String region) {
+    Stock_out() {
+    }
+
+    Stock_out(String num, String cnum, Date outdate, Integer sum, String stu_num, String region, String name, String cname) {
         this.num = num
         this.cnum = cnum
         this.outdate = outdate
         this.sum = sum
         this.stu_num = stu_num
         this.region = region
+        this.name = name
+        this.cname = cname
     }
 }
