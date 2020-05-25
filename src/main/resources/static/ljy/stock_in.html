@@ -129,7 +129,7 @@
 			    <div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 120px;">
-			      		<input class="btn-link" value="查看更多历史入库单" style="margin-left: 225px;"/>
+			      		<input id="historyStockIn" class="btn-link" value="查看更多历史入库单" style="margin-left: 225px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -150,6 +150,8 @@
 </body>
 	
 	<script type="text/javascript">
+		layui.use('util', function(){
+			var util = layui.util;
 		
 		var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -189,7 +191,7 @@
 		}),
 				$("#upload").click(
 						function submitTable(){
-							var sum = $("#sum").val();
+							var sum = util.escape($("#sum").val());
 							var num = $("#num").val();
 							ajax({
 								method: HTTP_METHOD.POST,
@@ -209,6 +211,12 @@
 								}
 							})
 						})
+				
+		})
+		
+		document.getElementById("historyStockIn").onclick = function() {
+			window.location.href = "/ljy/historyStockIn.html";
+		}
 		
 	</script>
 	

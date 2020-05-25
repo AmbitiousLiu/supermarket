@@ -65,13 +65,13 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">出库单号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="num" id="num" disabled="disabled" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">商品号：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="cnum" id="cnum" disabled="disabled" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -80,38 +80,44 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">数量：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="sum" id="sum" lay-verify="required|number" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">类别：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        <input type="text" name="region" id="region" disabled="disabled" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
 			  
 			  <div class="layui-form-item">
+			  	<div class="layui-inline">
+			      <label class="layui-form-label"  style="width: 100px;">进价：</label>
+			      <div class="layui-input-inline">
+			        <input type="text" name="price" id="price" disabled="disabled" lay-verify="required|number" autocomplete="off" class="layui-input">
+			      </div>
+			    </div>
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">售价：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-			      </div>
-			    </div>
-			    <div class="layui-inline">
-			      <div class="layui-input-inline">
-			      	<label class="layui-form-label"  style="width: 100px;">
-			      		<input type="submit" class="layui-btn" value="提交" style="margin-left: 85px;"/>
-			      	</label>
+			        <input type="text" name="price_out" id="price_out" lay-verify="required|number" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
 			  
 			  <div class="layui-form-item">
+			  	<div class="layui-inline">
+			      <div class="layui-input-inline">
+			      	<label class="layui-form-label"  style="width: 100px;">
+			      		<input type="button" id="upload" class="layui-btn" value="提交" style="margin-left: 85px;"/>
+			      	</label>
+			      </div>
+			    </div>
 			    <div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 100px;">
-			      		<input type="submit" class="btn-link" value="查看更多历史出库单" style="margin-left: 85px;"/>
+			      		<input type="button" id="historyStockOut" class="btn-link" value="查看更多历史出库单" style="margin-left: 185px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -132,8 +138,62 @@
 </body>
 	
 	<script type="text/javascript">
-		
-		
+		layui.use('util', function(){
+			
+			var reg = new RegExp("(^|&)" + "cnum" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			var cnum = unescape(r[2]); //返回参数值
+			
+			function guid() {
+				var time = new Date();
+				return time.getTime();
+			}
+			
+			$("#num").val(guid());
+			$("#cnum").val(cnum);
+			ajax({
+				method:HTTP_METHOD.GET,
+				url:"/providerCom/getComInfo?cnum="+cnum,
+				async:true,
+				type:HTTP_RESPONSE_TYPE.JSON,
+				callback:(data)=>{
+					$("#cname").val(data[0].cname);
+					$("#price").val(data[0].price);
+					$("#region").val(data[0].region);
+				}
+			})
+			
+			$("#upload").click(
+				function submitTable(){
+					var sum = util.escape($("#sum").val());
+					var num = $("#num").val();
+					var price_out = util.escape($("#price_out").val());
+					var cnum = $("#num").val();
+					ajax({
+						method: HTTP_METHOD.POST,
+						url: "/stockIn/add?cnum="+cnum+"&price_out="+price_out+"&num="+num+"&sum="+sum,
+						async: true,
+						params: this.listInfo,
+						type: HTTP_RESPONSE_TYPE.JSON,
+						callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+							if (datas == "1"){
+								alert("提交入库单成功")
+								window.location.reload();
+							}
+							else {
+								alert("提交入库单失败！")
+							}
+							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
+						}
+					})
+				}
+			)
+			
+			document.getElementById("historyStockOut").onclick = function() {
+				window.location.href = "/ljy/historyStockOut.html";
+			}
+			
+		})
 		
 	</script>
 	
