@@ -140,7 +140,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
+					      		<input type="button" id="upload1" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -227,7 +227,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
+					      		<input type="button" id="upload2" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -256,6 +256,8 @@
 	  table.render({
 	    elem: '#table'
 	    ,url:'/Info_employee/getAllInfo'
+	    ,page: true
+	    ,limit: 10
 	    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 	    ,cols: [[
 	      {field:'stu_num', title: '职工号', sort: true, align: 'center'}
@@ -274,8 +276,9 @@
 	
 	<script type="text/javascript">
 		
-		layui.use(['form'], function(){
+		layui.use(['form', 'util'], function(){
 			var form = layui.form;
+			var util = layui.util;
 			
 		var region_select = document.getElementById("region");
 
@@ -293,8 +296,7 @@
 			error:function() {
 				layer.alert("数据加载失败！");
 			}
-		});
-		return false;
+		})
 			
 			
 			
@@ -327,7 +329,7 @@
 		    }
 		});
 		
-		$("#L_submit").click(function(){
+		document.getElementById("upload1").onclick = function() {
 			var stu_num = util.escape($("#stu_num").val());
 			var age=util.escape($("#age").val());
 			var name=util.escape($("#name").val());
@@ -359,9 +361,10 @@
 					layer.alert("添加失败！");
 				}
 			});
-		})
+		}
 		
-		$("#p_submit").click(function(){
+		document.getElementById("upload2").onclick = function() {
+			alert("123")
 			var caozuo_select = document.getElementById("caozuo");
 			var index = caozuo_select.selectedIndex;
 			var caozuo = caozuo_select.options[index].value;
@@ -413,8 +416,7 @@
 					}
 				});
 			}
-		})
-			
+		}
 			
 			
 		})
