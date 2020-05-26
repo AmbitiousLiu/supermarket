@@ -40,12 +40,17 @@ public class EmployeeInitController {
         return jsonObject.toString();
     }
 
-    @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response,@RequestBody Employee employee
+    @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response,@RequestParam(value = "stu_num", required = true) String stu_num,
+                                                                @RequestParam(value = "age", required = true) String age,
+                                                                @RequestParam(value = "name", required = true) String name,
+                                                                @RequestParam(value = "seniority", required = true) String seniority,
+                                                                @RequestParam(value = "sex", required = true) String sex,
+                                                                @RequestParam(value = "salary", required = true) String salary,
+                                                                @RequestParam(value = "region", required = true) String region
                                                                 )throws IOException{
-//        Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
-//        Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
+        Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
+//      Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
         response.setContentType("text/json;charset=utf-8");
-
 //        response.getWriter().write(integer == 0 ?"0":"1");
     }
 
