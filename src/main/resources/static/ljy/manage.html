@@ -131,7 +131,7 @@
 					  <div class="layui-form-item">
 					  	<div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">所属区：</label>
-					      <div class="layui-input-inline">
+					      <div class="layui-input-inline layui-form">
 					        <select name="region" lay-verify="required" lay-search="" id="region">
 					          <option value="">直接选择或搜索选择</option>
 					        </select>
@@ -278,15 +278,17 @@
 			var form = layui.form;
 			
 		var region_select = document.getElementById("region");
-			
+
 		$.ajax({
 			type:'GET',
 			url:'/Info_employee/getAllRegion',
 			success:function(data){
-				for (var d in data) {
-					region_select.add(new Option(d.region, d.region));
+				for (var i = 0;i < data.length;i++) {
+					$("#region").append("<option >"+data[i].region+"</option>")
 				}
- 				
+ 				layui.form.render("select");
+				// let labArr = data[0].region;
+				// selectRender(labArr); // 在success 里面调用该事件
 			},
 			error:function() {
 				layer.alert("数据加载失败！");

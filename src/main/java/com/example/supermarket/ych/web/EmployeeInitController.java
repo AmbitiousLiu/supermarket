@@ -20,7 +20,7 @@ public class EmployeeInitController {
 
     @RequestMapping (value = "/getAllRegion") void selectRegion(HttpServletResponse response)throws IOException {
         String content = employeeInitService.getAllRegion();
-//        System.out.println(content);
+        System.out.println(content);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content==null ?"":content);
     }
