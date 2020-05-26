@@ -94,12 +94,6 @@
 					        <input type="text" name="name" id="name" lay-verify="required" class="layui-input">
 					      </div>
 					    </div>
-					    <div class="layui-inline">
-					      <label class="layui-form-label"  style="width: 100px;">职位：</label>
-					      <div class="layui-input-inline">
-					        <input type="text" name="rname" id="rname" class="layui-input" value="普通员工" disabled="disabled">
-					      </div>
-					    </div>
 					  </div>
 					  
 					  <div class="layui-form-item">
@@ -116,14 +110,7 @@
 					        <input type="text" name="age" id="age" lay-verify="required|number|age" class="layui-input">
 					      </div>
 					    </div>
-					    <div class="layui-inline">
-					      <label class="layui-form-label"  style="width: 100px;">所属区：</label>
-					      <div class="layui-input-inline">
-					        <select name="region" lay-verify="required" lay-search="" id="region">
-					          <option value="">直接选择或搜索选择</option>
-					        </select>
-					      </div>
-					    </div>
+					    
 					  </div>
 					  
 					  <div class="layui-form-item">
@@ -139,15 +126,17 @@
 					        <input type="text" name="salary" id="salary" lay-verify="required|number" class="layui-input">
 					      </div>
 					    </div>
-					    <div class="layui-inline">
-					      <label class="layui-form-label"  style="width: 100px;">身份证：</label>
-					      <div class="layui-input-inline">
-					        <input type="text" name="pid" id="pid" lay-verify="identity" autocomplete="off" class="layui-input">
-					      </div>
-					    </div>
 					  </div>
 					  
 					  <div class="layui-form-item">
+					  	<div class="layui-inline">
+					      <label class="layui-form-label"  style="width: 100px;">所属区：</label>
+					      <div class="layui-input-inline">
+					        <select name="region" lay-verify="required" lay-search="" id="region">
+					          <option value="">直接选择或搜索选择</option>
+					        </select>
+					      </div>
+					    </div>
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
@@ -176,7 +165,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">1.操作：</label>
 					      <div class="layui-input-inline">
-					        <select name="modules" lay-verify="required" lay-search="">
+					        <select name="modules" lay-verify="required" id="caozuo" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
 					          <option value="update">批量修改</option>
 					          <option value="delete">删除</option>
@@ -187,7 +176,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">2.条件：</label>
 					      <div class="layui-input-inline">
-					        <select name="modules" lay-verify="required" lay-search="">
+					        <select name="modules" lay-verify="required" id="tiaojian" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
 					          <option value="stu_num">职工号</option>
 					          <option value="name">姓名</option>
@@ -203,7 +192,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">3.条件值：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="salary" id="salary" class="layui-input">
+					        <input type="text" name="tiaojianzhi" id="tiaojianzhi" lay-verify="required" class="layui-input">
 					      </div>
 					    </div>
 					  </div>
@@ -212,7 +201,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">4.改信息：</label>
 					      <div class="layui-input-inline">
-					        <select name="modules" lay-verify="required" lay-search="">
+					        <select name="modules" id="gaixinxi" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
 					          <option value="stu_num">职工号</option>
 					          <option value="name">姓名</option>
@@ -228,7 +217,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">5.修改值：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="salary" id="salary" class="layui-input">
+					        <input type="text" name="xiugaizhi" id="xiugaizhi" class="layui-input">
 					      </div>
 					    </div>
 					  </div>
@@ -238,7 +227,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="submit" class="layui-btn" lay-submit="" lay-filter="L_submit" value="提交" style="margin-left: 85px;"/>
+					      		<input type="submit" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -294,7 +283,7 @@
 			type:'GET',
 			url:'/Info_employee/getAllRegion',
 			success:function(data){
-				for (var d in data[0]) {
+				for (var d in data) {
 					region_select.add(new Option(d.region, d.region));
 				}
  				
@@ -341,14 +330,12 @@
 			var age=util.escape($("#age").val());
 			var name=util.escape($("#name").val());
 			var seniority=util.escape($("#seniority").val());
-			var pid=util.escape($("#pid").val());
 			var sex = $("input[name='sex']:checked").val();
 			
 			var index = region_select.selectedIndex;
 			var region = region_select.options[index].value;
 			
 			var salary = util.escape($("#salary").val());
-			var rname = util.escape($("#rname").val());
 
 			
 			$.ajax({
@@ -359,21 +346,50 @@
 					age:age,
 					name:name, 
 					seniority:seniority, 
-					pid:pid, 
 					sex:sex,
 					region:region,
-					salary:salary,
-					rname:rname
+					salary:salary
 				},
 				success:function(data){
-					layer.alert("修改成功！");
+					layer.alert("添加成功！");
 				},
 				error:function() {
-					layer.alert("修改失败！");
+					layer.alert("添加失败！");
 				}
 			});
 			return false;
 		});
+		
+		form.on('submit(p_submit)', function(data) {
+			var caozuo_select = document.getElementById("caozuo");
+			var index = caozuo_select.selectedIndex;
+			var caozuo = options[index].value;
+			if (caozuo == "delete") {
+				$.ajax({
+					type:'POST',
+					url:'/Info/modifyInfo',
+					data:{
+						stu_num:stu_num,
+						age:age,
+						name:name, 
+						seniority:seniority, 
+						pid:pid, 
+						sex:sex,
+						region:region,
+						salary:salary,
+						rname:rname
+					},
+					success:function(data){
+						layer.alert("添加成功！");
+					},
+					error:function() {
+						layer.alert("添加失败！");
+					}
+				});
+			} else {
+				
+			}
+		})
 			
 			
 			
