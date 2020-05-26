@@ -346,12 +346,25 @@
 			
 			var index = region_select.selectedIndex;
 			var region = region_select.options[index].value;
+			
+			var salary = util.escape($("#salary").val());
+			var rname = util.escape($("#rname").val());
 
 			
 			$.ajax({
 				type:'POST',
 				url:'/Info/modifyInfo',
-				data:{age:age, name:name, seniority:seniority, pid:pid},
+				data:{
+					stu_num:stu_num,
+					age:age,
+					name:name, 
+					seniority:seniority, 
+					pid:pid, 
+					sex:sex,
+					region:region,
+					salary:salary,
+					rname:rname
+				},
 				success:function(data){
 					layer.alert("修改成功！");
 				},
