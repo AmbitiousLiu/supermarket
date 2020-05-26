@@ -85,13 +85,13 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">职工号：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="stu_num" class="layui-input" id="stu_num">
+					        <input type="text" name="stu_num" id="stu_num" lay-verify="required" class="layui-input" id="stu_num">
 					      </div>
 					    </div>
 					    <div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">姓名：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="name" id="name" class="layui-input">
+					        <input type="text" name="name" id="name" lay-verify="required" class="layui-input">
 					      </div>
 					    </div>
 					    <div class="layui-inline">
@@ -113,7 +113,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">年龄：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="age" id="age" lay-verify="age" class="layui-input">
+					        <input type="text" name="age" id="age" lay-verify="required|number|age" class="layui-input">
 					      </div>
 					    </div>
 					    <div class="layui-inline">
@@ -156,7 +156,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label"  style="width: 100px;">工资：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="salary" id="salary" class="layui-input">
+					        <input type="text" name="salary" id="salary" lay-verify="required|number" class="layui-input">
 					      </div>
 					    </div>
 					    <div class="layui-inline">
@@ -286,7 +286,7 @@
 	  
 	  table.render({
 	    elem: '#table'
-	    ,url:'/demo/table/user/'
+	    ,url:'Info_employee/getAllInfo'
 	    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 	    ,cols: [[
 	      {field:'stu_num', title: '职工号', sort: true, align: 'center'}
@@ -305,7 +305,67 @@
 	
 	<script type="text/javascript">
 		
+		layui.use(['form'], function(){
+			var form = layui.form;
+			
+		form.verify({
+		    age: function(value) {
+		    	if(!value.match(reg)) {
+		    		return '请输入规范数值！';
+		    	}
+		    	if (Number(value) < 18 || Number(value) > 65) {
+		    		return '年龄未在18岁到65岁之间，不符合规定！';
+		    	}
+		    }
+		    ,stu_num: function(value) {
+		    	if(value.length > 15) {
+		    		return '职工号不符合规范！';
+		    	}
+		    }
+		    ,name: function(value) {
+		    	if(value.length > 10) {
+		    		return '名字最长10个字符！';
+		    	}
+		    }
+		    ,seniority: function(value) {
+		    	if(!value.match(reg)) {
+		    		return '请输入规范数值！';
+		    	}
+		    	if (Number(value) < 0 || Number(value) > 47) {
+		    		return '工龄不符合规范！';
+		    	}
+		    }
+		});
 		
+		form.on('submit(L_submit)', function(data) {
+			var stu_num = util.escape($("#stu_num").val());
+			var age=util.escape($("#age").val());
+			var name=util.escape($("#name").val());
+			var seniority=util.escape($("#seniority").val());
+			var pid=util.escape($("#pid").val());
+			var sex = $("input[name='sex']:checked").val();
+			var region_select = document.getElementById("region");
+			var index = region_select.selectedIndex;
+			var region = region_select.options[index].value;
+
+			
+			$.ajax({
+				type:'POST',
+				url:'/Info/modifyInfo',
+				data:{age:age, name:name, seniority:seniority, pid:pid},
+				success:function(data){
+					layer.alert("修改成功！");
+				},
+				error:function() {
+					layer.alert("修改失败！");
+				}
+			});
+			return false;
+		});
+			
+			
+			
+		})
 		
 	</script>
 	
