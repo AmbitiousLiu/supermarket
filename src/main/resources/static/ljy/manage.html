@@ -140,7 +140,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
+					      		<input type="button" id="L_submit" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -227,7 +227,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
+					      		<input type="button" id="p_submit" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -274,8 +274,9 @@
 	
 	<script type="text/javascript">
 		
-		layui.use(['form'], function(){
+		layui.use(['form', 'util'], function(){
 			var form = layui.form;
+			var util = layui.util;
 			
 		var region_select = document.getElementById("region");
 
@@ -362,6 +363,7 @@
 		})
 		
 		$("#p_submit").click(function(){
+			alert("123")
 			var caozuo_select = document.getElementById("caozuo");
 			var index = caozuo_select.selectedIndex;
 			var caozuo = caozuo_select.options[index].value;
