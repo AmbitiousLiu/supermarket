@@ -51,7 +51,7 @@ public class EmployeeInitController {
         Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
 //      Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
         response.setContentType("text/json;charset=utf-8");
-//        response.getWriter().write(integer == 0 ?"0":"1");
+        response.getWriter().write(integer == 0 ?"0":"1");
     }
 
     @RequestMapping (value = "/deleteInfo") void deleteEmployee(HttpServletResponse response, HttpServletRequest request)throws IOException{

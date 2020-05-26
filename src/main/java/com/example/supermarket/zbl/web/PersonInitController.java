@@ -82,12 +82,25 @@ public class PersonInitController {
         return  jsonObject.toString();
     }//根据姓名修改权限
     @RequestMapping(value = "/updateRInfo")
-    public void updateRInfo (HttpServletResponse response, @RequestParam(value = "name", required = true) String name,
-                                                   @RequestParam(value = "rname", required = true) String rname)throws  IOException {
+    public Integer updateRInfo (HttpServletResponse response, @RequestParam(value = "condition", required = true) String name,
+                                                   @RequestParam(value = "role", required = true) String rname)throws  IOException {
 
-        String rnum = personInitService.queryRnum(rname);
-        Integer integer = personInitService.updateRnum(rnum,name);
+//        System.out.println(rname);
+//        String rnum = personInitService.queryRnum(rname);
+//        System.out.println(rnum);
+        Integer integer = personInitService.updateRnum(rname,name);
         response.setContentType("text/json;charset=utf-8");
+//        response.getWriter().write(integer);
+        return integer;
+
+    }
+    @RequestMapping(value = "/getName")
+    public void getName (HttpServletResponse response)throws  IOException{
+        String content = personInitService.queryName();
+        response.setContentType("text/json;charset=utf-8");
+        System.out.println(content);
+        response.getWriter().write(content==null ?"":content);
+
     }
 
 }

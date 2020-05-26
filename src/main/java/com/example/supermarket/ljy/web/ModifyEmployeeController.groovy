@@ -40,7 +40,11 @@ class ModifyEmployeeController {
                @RequestParam("gaixinxi") String gaixinxi,
                @RequestParam("xiugaizhi") String xiugaizhi,
                HttpServletResponse response) {
-        println 123
+
+        println(tiaojian)
+        println(tiaojianzhi)
+        println(gaixinxi)
+        println(xiugaizhi)
         def i = modifyEmployeeService.update(tiaojian, tiaojianzhi, gaixinxi, xiugaizhi)
         def json = new JSONObject()
         response.setContentType("text/json;charset=utf-8")

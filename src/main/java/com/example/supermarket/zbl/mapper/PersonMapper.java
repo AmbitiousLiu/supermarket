@@ -38,4 +38,7 @@ public interface PersonMapper {
     //查询rnum
     @Select("select rnum from role where rname = #{rname}")
     String queryRnum(String rname);
+    //查询姓名
+    @Select("select name from stuff")
+    List<String> queryName();
 }

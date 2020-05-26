@@ -50,5 +50,8 @@ public class PersonInitService {
     public String queryRnum(String rname){
         return personMapper.queryRnum(rname);
     };
-
+    //查询姓名
+    public String queryName(){
+        return JSON.toJSONString(personMapper.queryName());
+    };
 }
