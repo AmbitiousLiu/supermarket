@@ -327,7 +327,7 @@
 		    }
 		});
 		
-		form.on('submit(L_submit)', function(data) {
+		$("#L_submit").click(function(){
 			var stu_num = util.escape($("#stu_num").val());
 			var age=util.escape($("#age").val());
 			var name=util.escape($("#name").val());
@@ -359,10 +359,9 @@
 					layer.alert("添加失败！");
 				}
 			});
-			return false;
-		});
+		})
 		
-		form.on('submit(p_submit)', function(data) {
+		$("#p_submit").click(function(){
 			var caozuo_select = document.getElementById("caozuo");
 			var index = caozuo_select.selectedIndex;
 			var caozuo = caozuo_select.options[index].value;
@@ -414,7 +413,6 @@
 					}
 				});
 			}
-			return false;
 		})
 			
 			
