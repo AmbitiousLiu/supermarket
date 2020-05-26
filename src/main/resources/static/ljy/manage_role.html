@@ -105,7 +105,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">2.条件值：</label>
 					      <div class="layui-input-inline">
-					      	<input type="text" name="result" id="result" class="layui-input">
+					      	<input type="text" name="result" id="result" lay-verify="required" class="layui-input">
 					      </div>
 					    </div>
 					    
@@ -155,7 +155,7 @@
 	  
 	  table.render({
 	    elem: '#table'
-	    ,url:'/demo/table/user/'
+	    ,url:'/Info/getRInfo'
 	    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 	    ,cols: [[
 	      {field:'stu_num', title: '职工号', sort: true, align: 'center'}
@@ -175,7 +175,35 @@
 	
 	<script type="text/javascript">
 		
-		
+		layui.use(['form'], function() {
+			var form = layui.form;
+			
+			form.on('submit(L_submit)', function(data) {
+				var condition_select = document.getElementById("condition");
+				var condition = condition_select.options[condition_select.selectedIndex].value;
+				var result = document.getElementById("result").value;
+				var role_select = document.getElementById("role");
+				var role = role_select.options[role_select.selectedIndex].value;
+				
+				$.ajax({
+					type:'POST',
+					url:'/Info/modifyInfo',
+					data:{
+						condition:condition,
+						result:result,
+						role:role
+					},
+					success:function(data){
+						layer.alert("修改成功！");
+					},
+					error:function() {
+						layer.alert("修改失败！");
+					}
+				});
+				return false;
+			});
+			
+		})
 		
 	</script>
 	
