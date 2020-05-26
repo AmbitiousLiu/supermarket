@@ -2,11 +2,9 @@ package com.example.supermarket.zbl.service;
 
 
 import com.alibaba.fastjson.JSON;
-import com.example.supermarket.ljy.domain.Stock_out;
-import com.example.supermarket.zbl.domain.Stock;
+
 import com.example.supermarket.zbl.mapper.StockMapper;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

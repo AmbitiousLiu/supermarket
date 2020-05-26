@@ -3,6 +3,7 @@ package com.example.supermarket.zbl.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.mapper.PersonMapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,14 @@ public class PersonInitService {
     //修改账号密码
     public Integer modifyPassword(String stu_num,String password){
         return personMapper.modifyPassword(stu_num, password)   ;
+    };
+    //查询stuff表
+    public List<Person>getInfo(){
+        return personMapper.getInfo();
+    };
+    //查询stuff表数据量
+    public Integer getCounts(){
+        return  personMapper.getCounts();
     };
 
 }

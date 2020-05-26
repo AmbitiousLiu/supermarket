@@ -26,5 +26,10 @@ public interface PersonMapper {
     //修改账号密码
     @Update("update stuff set password = #{password} where stu_num = #{stu_num}")
     Integer modifyPassword(String stu_num,String password);
-
+    //查询stuff表
+    @Select("select * from stuff,role where stuff.rnum = role.rnum")
+    List<Person>getInfo();
+    //查询stuff表数据量
+    @Select("select count(*) from stuff ")
+    Integer getCounts();
 }

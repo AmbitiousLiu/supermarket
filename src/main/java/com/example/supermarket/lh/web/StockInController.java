@@ -38,10 +38,6 @@ public class StockInController {
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
 
-        //生成入库单号
-//        String s = UUID.randomUUID().toString();
-//        String stockin_id = s.substring(0,8)+s.substring(9,13)+s.substring(14,18)+s.substring(19,23)+s.substring(24);
-
         //生成入库日期
         long time = System.currentTimeMillis();
         Date indate = new Date(time);
@@ -65,7 +61,6 @@ public class StockInController {
                 stock_in.getRegion(),stock_in.getP_date(),stock_in.getSafe_date(),stock_in.getPrice());
         if (content != 0 ){
             //判断数据库内是否有该商品，没有则添加该商品，有则更新商品数量
-//            System.out.println(stockInService.queryCnum(stock_in.getCnum()));
             if (stockInService.queryCnum(stock_in.getCnum()).isEmpty()){
                 //添加库存
                 stockInService.addStore(stock_in.getCnum(),pname,stock_in.getRegion(),stock_in.getSum(),
@@ -109,7 +104,7 @@ public class StockInController {
             jsonObject.put("data",stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
             return  jsonObject.toString();
             //            response.getWriter().write(jsonObject);
-        }else {
+        }else if ("03".equals(position) ){
             //如果经手人是仓库管理员
             content = stockInService.queryStockInRowsByStu(stu_num);
             jsonObject.put("count",content);
@@ -118,7 +113,9 @@ public class StockInController {
             //response.getWriter().write(stockInService.moreStockInByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)));
 
         }
+        return null;
     }
+
     @RequestMapping(value = "/getRows")
     public void getRows(HttpServletResponse response, HttpSession session)throws IOException{
         response.setContentType("text/json;charset=utf-8");

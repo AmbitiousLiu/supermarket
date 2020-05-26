@@ -1,9 +1,9 @@
 package com.example.supermarket.zbl.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.ljy.domain.Commodity;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/Info")
@@ -66,6 +67,18 @@ public class PersonInitController {
             //旧密码验证失败则无法修改
             response.getWriter().write("0");
         }
+    }
+    @RequestMapping(value = "getRInfo")
+    public String getRInfo(HttpServletResponse response)throws  IOException{
+        response.setContentType("text/json;charset=utf-8");
+        List<Person> list = personInitService.getInfo();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code",0 );
+        jsonObject.put("msg","");
+        jsonObject.put("count",personInitService.getCounts());
+        jsonObject.put("data",list);
+        return  jsonObject.toString();
     }
 
 }
