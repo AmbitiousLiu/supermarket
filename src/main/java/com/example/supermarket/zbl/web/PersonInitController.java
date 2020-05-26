@@ -67,11 +67,12 @@ public class PersonInitController {
             //旧密码验证失败则无法修改
             response.getWriter().write("0");
         }
-    }
-    @RequestMapping(value = "getRInfo")
-    public String getRInfo(HttpServletResponse response)throws  IOException{
+    }//获得角色表stuff表联查信息
+    @RequestMapping(value = "/getRInfo")
+    public String getRInfo(HttpServletResponse response, @RequestParam(value = "limit", required = true) String size,
+                           @RequestParam(value = "page", required = true) String page)throws  IOException{
         response.setContentType("text/json;charset=utf-8");
-        List<Person> list = personInitService.getInfo();
+        List<Person> list = personInitService.getInfo(Integer.parseInt(page),Integer.parseInt(size));
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
@@ -79,6 +80,14 @@ public class PersonInitController {
         jsonObject.put("count",personInitService.getCounts());
         jsonObject.put("data",list);
         return  jsonObject.toString();
+    }//根据姓名修改权限
+    @RequestMapping(value = "/updateRInfo")
+    public void updateRInfo (HttpServletResponse response, @RequestParam(value = "name", required = true) String name,
+                                                   @RequestParam(value = "rname", required = true) String rname)throws  IOException {
+
+        String rnum = personInitService.queryRnum(rname);
+        Integer integer = personInitService.updateRnum(rnum,name);
+        response.setContentType("text/json;charset=utf-8");
     }
 
 }

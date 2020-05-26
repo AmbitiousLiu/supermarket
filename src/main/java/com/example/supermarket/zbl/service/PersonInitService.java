@@ -34,12 +34,21 @@ public class PersonInitService {
         return personMapper.modifyPassword(stu_num, password)   ;
     };
     //查询stuff表
-    public List<Person>getInfo(){
-        return personMapper.getInfo();
+    public List<Person>getInfo(Integer page,Integer size){
+        Integer begin = (page - 1) * size;
+        return personMapper.getInfo(begin,size);
     };
     //查询stuff表数据量
     public Integer getCounts(){
         return  personMapper.getCounts();
+    };
+    //修改权限
+    public Integer updateRnum(String rnum,String name){
+        return personMapper.updateRnum(rnum, name);
+    };
+    //查询rnum
+    public String queryRnum(String rname){
+        return personMapper.queryRnum(rname);
     };
 
 }

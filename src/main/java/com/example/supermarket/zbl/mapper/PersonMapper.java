@@ -27,9 +27,15 @@ public interface PersonMapper {
     @Update("update stuff set password = #{password} where stu_num = #{stu_num}")
     Integer modifyPassword(String stu_num,String password);
     //查询stuff表
-    @Select("select * from stuff,role where stuff.rnum = role.rnum")
-    List<Person>getInfo();
+    @Select("select * from stuff,role where stuff.rnum = role.rnum order by stuff.rnum desc limit #{begin}, #{size}")
+    List<Person>getInfo(Integer begin,Integer size);
     //查询stuff表数据量
     @Select("select count(*) from stuff ")
     Integer getCounts();
+    //修改权限
+    @Update("update stuff set rnum = #{rnum} where name = #{name}")
+    Integer updateRnum(String rnum,String name);
+    //查询rnum
+    @Select("select rnum from role where rname = #{rname}")
+    String queryRnum(String rname);
 }
