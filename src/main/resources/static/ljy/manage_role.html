@@ -78,7 +78,7 @@
 			    <div class="layui-tab-item">
 			    	
 			    	<fieldset class="layui-elem-field layui-field-title" style="margin: 20px;">
-					  <legend style="font-size: larger;">说明：1.选择条件；2.输入符合条件的值；3.选择修改后的职位（请严格按照规范操作，否则后果自负）</legend>
+					  <legend style="font-size: larger;">说明：1.选择职员；2.选择修改后的职位（请严格按照规范操作，否则后果自负）</legend>
 					</fieldset>
 					
 					<div class="layui-card">
@@ -87,30 +87,15 @@
 					  <div class="layui-form-item">
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">1.条件：</label>
-					      <div class="layui-input-inline">
+					      <div class="layui-input-inline layui-form">
 					        <select name="condition" id="condition" lay-verify="required" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
-					          <option value="stu_num">职工号</option>
-					          <option value="name">姓名</option>
-					          <option value="gender">性别</option>
-					          <option value="age">年龄</option>
-					          <option value="seniority">工龄</option>
-					          <option value="salary">工资</option>
-					          <option value="region">所属区</option>
-					          <option value="region">职位</option>
 					        </select>
 					      </div>
 					    </div>
 					    
 					    <div class="layui-inline">
-					      <label class="layui-form-label" style="width: 100px;">2.条件值：</label>
-					      <div class="layui-input-inline">
-					      	<input type="text" name="result" id="result" lay-verify="required" class="layui-input">
-					      </div>
-					    </div>
-					    
-					    <div class="layui-inline">
-					      <label class="layui-form-label"  style="width: 100px;">3.职位：</label>
+					      <label class="layui-form-label"  style="width: 100px;">2.职位：</label>
 					      <div class="layui-input-inline">
 					        <select name="role" id="role" lay-verify="required" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
@@ -175,22 +160,36 @@
 	
 	<script type="text/javascript">
 		
+		$.ajax({
+			type:'GET',
+			url:'/Info/getName',
+			success:function(data){
+				for (var i = 0;i < data.length;i++) {
+					$("#condition").append("<option >"+data[i].region+"</option>")
+				}
+ 				layui.form.render("select");
+				// let labArr = data[0].region;
+				// selectRender(labArr); // 在success 里面调用该事件
+			},
+			error:function() {
+				layer.alert("数据加载失败！");
+			}
+		})
+		
 		layui.use(['form'], function() {
 			var form = layui.form;
 			
 			form.on('submit(L_submit)', function(data) {
 				var condition_select = document.getElementById("condition");
 				var condition = condition_select.options[condition_select.selectedIndex].value;
-				var result = document.getElementById("result").value;
 				var role_select = document.getElementById("role");
 				var role = role_select.options[role_select.selectedIndex].value;
 				
 				$.ajax({
 					type:'POST',
-					url:'/Info/modifyInfo',
+					url:'/Info/updateRInfo',
 					data:{
 						condition:condition,
-						result:result,
 						role:role
 					},
 					success:function(data){
