@@ -20,6 +20,7 @@ public class EmployeeInitController {
 
     @RequestMapping (value = "/getAllRegion") void selectRegion(HttpServletResponse response)throws IOException {
         String content = employeeInitService.getAllRegion();
+//        System.out.println(content);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content==null ?"":content);
     }
@@ -37,11 +38,18 @@ public class EmployeeInitController {
 
         response.setContentType("text/json;charset=utf-8");
         return jsonObject.toString();
-//        response.getWriter().write(content==null ?"":content);
     }
 
-    @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response, @RequestBody Employee employee)throws IOException{
-//        Integer integer = employeeInitService.insertInfo(employee.getRegion(), employee.getStu_num(), employee.getName(), employee.getWork(), employee.getSign());
+    @RequestMapping (value = "/insertInfo") void insertEmployee(HttpServletResponse response,@RequestParam(value = "stu_num", required = true) String stu_num,
+                                                                @RequestParam(value = "age", required = true) String age,
+                                                                @RequestParam(value = "name", required = true) String name,
+                                                                @RequestParam(value = "seniority", required = true) String seniority,
+                                                                @RequestParam(value = "sex", required = true) String sex,
+                                                                @RequestParam(value = "salary", required = true) String salary,
+                                                                @RequestParam(value = "region", required = true) String region
+                                                                )throws IOException{
+        Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
+//        Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
         response.setContentType("text/json;charset=utf-8");
 //        response.getWriter().write(integer == 0 ?"0":"1");
     }
