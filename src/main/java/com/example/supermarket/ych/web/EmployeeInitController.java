@@ -49,7 +49,7 @@ public class EmployeeInitController {
                                                                 @RequestParam(value = "region", required = true) String region
                                                                 )throws IOException{
         Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
-//        Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
+//      Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
         response.setContentType("text/json;charset=utf-8");
 //        response.getWriter().write(integer == 0 ?"0":"1");
     }
