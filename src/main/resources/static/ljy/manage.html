@@ -140,7 +140,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="submit" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
+					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="L_submit" value="新增" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -227,7 +227,7 @@
 					    <div class="layui-inline">
 					      <div class="layui-input-inline">
 					      	<label class="layui-form-label"  style="width: 100px;">
-					      		<input type="submit" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
+					      		<input type="button" class="layui-btn" lay-submit="" lay-filter="p_submit" value="提交" style="margin-left: 85px;"/>
 					      	</label>
 					      </div>
 					    </div>
@@ -365,32 +365,56 @@
 		form.on('submit(p_submit)', function(data) {
 			var caozuo_select = document.getElementById("caozuo");
 			var index = caozuo_select.selectedIndex;
-			var caozuo = options[index].value;
+			var caozuo = caozuo_select.options[index].value;
+			var tiaojian_select = document.getElementById("tiaojian");
+			var tiaojian = tiaojian_select.options[tiaojian_select.selectedIndex].value;
+			var tiaojianzhi = document.getElementById("tiaojianzhi").value;
 			if (caozuo == "delete") {
 				$.ajax({
 					type:'POST',
-					url:'/Info/modifyInfo',
+					url:'/modify/delete',
 					data:{
-						stu_num:stu_num,
-						age:age,
-						name:name, 
-						seniority:seniority, 
-						pid:pid, 
-						sex:sex,
-						region:region,
-						salary:salary,
-						rname:rname
+						tiaojian:tiaojian,
+						tiaojianzhi:tiaojianzhi
 					},
 					success:function(data){
-						layer.alert("添加成功！");
+						if (data.code == 0) {
+							layer.alert("删除成功！");
+						} else {
+							layer.alert("删除失败！");
+						}
 					},
 					error:function() {
-						layer.alert("添加失败！");
+						layer.alert("删除失败！");
 					}
 				});
-			} else {
-				
 			}
+			if (caozuo == "update") {
+				var gaixinxi_select = document.getElementById("gaixinxi");
+				var gaixinxi = gaixinxi_select.options[gaixinxi_select.selectedIndex].value;
+				var xiugaizhi = document.getElementById("xiugaizhi").value;
+				$.ajax({
+					type:'POST',
+					url:'/modify/update',
+					data:{
+						tiaojian:tiaojian,
+						tiaojianzhi:tiaojianzhi,
+						gaixinxi:gaixinxi,
+						xiugaizhi:xiugaizhi
+					},
+					success:function(data){
+						if (data.code == 0) {
+							layer.alert("修改成功！");
+						} else {
+							layer.alert("修改失败！");
+						}
+					},
+					error:function() {
+						layer.alert("修改失败！");
+					}
+				});
+			}
+			return false;
 		})
 			
 			
