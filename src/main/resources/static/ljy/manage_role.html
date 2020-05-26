@@ -165,7 +165,7 @@
 			url:'/Info/getName',
 			success:function(data){
 				for (var i = 0;i < data.length;i++) {
-					$("#condition").append("<option >"+data[i].name+"</option>")
+					$("#condition").append("<option >"+data[i]+"</option>")
 				}
  				layui.form.render("select");
 				// let labArr = data[0].region;
