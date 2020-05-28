@@ -19,11 +19,11 @@ public class UserController {
             stuffServicelmpl.checkLogin(username, password);
             System.out.println("---登录成功---");
 
-            return "person";
+            return "../static/zbl/person";
         }catch (Exception e)
         {
             System.out.println("登录失败");
-            return "login";
+            return "../static/ws/login";
         }
 
     }

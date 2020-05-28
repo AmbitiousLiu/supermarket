@@ -40,7 +40,6 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println(stu_num);
         Set<String> rolename=roleService.queryRoleNameByStunum(stu_num);
         //根据用户名查询当前用户的权限列表
-        System.out.println("123456");
         Set<String> ps=permissionServicelmpl.queryPermissionsByStunum(stu_num);
         System.out.println(rolename);
         System.out.println(ps);

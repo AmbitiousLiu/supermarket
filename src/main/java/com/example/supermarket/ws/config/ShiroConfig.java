@@ -1,6 +1,7 @@
 package com.example.supermarket.ws.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.realm.text.IniRealm;
@@ -21,13 +22,25 @@ public class ShiroConfig {
     {
         return new ShiroDialect();
     }
+    @Bean
+    public HashedCredentialsMatcher getHashedCredentialsMatcher()
+    {
+        HashedCredentialsMatcher matcher=new HashedCredentialsMatcher();
+
+        matcher.setHashAlgorithmName("md5");
+        matcher.setHashIterations(1);
+
+        return matcher;
+    }
 
     @Bean
-    public  MyRealm getMyRealm()
+    public  MyRealm getMyRealm(HashedCredentialsMatcher matcher)
     {
         MyRealm myRealm =new MyRealm();
+        myRealm.setCredentialsMatcher(matcher);
         return myRealm;
     }
+
 
     @Bean
     public DefaultWebSecurityManager getDefaultWebSecurityManager(MyRealm myRealm){
@@ -52,14 +65,15 @@ public class ShiroConfig {
         filterMap.put("/ws/**","anon");
         filterMap.put("/ws/user/login","anon");
         filterMap.put("ws/user/login","anon");
-        filterMap.put("/static/**","anon");
+        filterMap.put("/layui/**","anon");
         filterMap.put("/person.html","authc");
+
 
 
 
         filter.setFilterChainDefinitionMap(filterMap);
         //默认登录页面
-        filter.setLoginUrl("/person.html");
+        filter.setLoginUrl("/ws/login.html");
         //设置未授权访问的页面路径
         filter.setUnauthorizedUrl("/ws/login.html");
         return filter;
