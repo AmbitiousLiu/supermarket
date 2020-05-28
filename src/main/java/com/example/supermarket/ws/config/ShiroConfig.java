@@ -5,8 +5,10 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.realm.text.IniRealm;
+import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -40,12 +42,19 @@ public class ShiroConfig {
         myRealm.setCredentialsMatcher(matcher);
         return myRealm;
     }
+    @Bean
+    public DefaultWebSessionManager getDefaultWebSessionManager()
+    {
+        DefaultWebSessionManager sessionManager =new DefaultWebSessionManager();
 
+        return sessionManager;
+    }
 
     @Bean
     public DefaultWebSecurityManager getDefaultWebSecurityManager(MyRealm myRealm){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         securityManager.setRealm(myRealm);
+        securityManager.setSessionManager(getDefaultWebSessionManager());
         return securityManager;
     }
     @Bean
@@ -57,8 +66,8 @@ public class ShiroConfig {
         //anon匿名用户可访问
         //authc认证用户可访问
         //user使用RememberMe的用户看访问
-        //perms对应权限可访问
-
+        //perms[]对应权限可访问
+        //
         Map<String,String> filterMap= new HashMap<>();
 
         filterMap.put("/","anon");
@@ -66,6 +75,7 @@ public class ShiroConfig {
         filterMap.put("/ws/user/login","anon");
         filterMap.put("ws/user/login","anon");
         filterMap.put("/layui/**","anon");
+        filterMap.put("/ws/login.html","logout");
         filterMap.put("/person.html","authc");
 
 
