@@ -18,7 +18,7 @@
 
 <u>单元测试</u>：junit
 
-<u>权限控制框架</u>：spring security
+<u>权限控制框架</u>：Shiro
 
 <u>数据库</u>：mysql+redis
 
