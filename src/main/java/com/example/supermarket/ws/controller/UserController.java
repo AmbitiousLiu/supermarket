@@ -23,7 +23,7 @@ public class UserController {
         }catch (Exception e)
         {
             System.out.println("登录失败");
-            return "login";
+            return "../static/ws/login";
         }
 
     }
