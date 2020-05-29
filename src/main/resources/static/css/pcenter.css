@@ -1,0 +1,235 @@
+.clearfix:after {     
+    content: ".";     
+    display: block;  
+    clear: both;     
+    visibility: hidden;     
+    height: 0;   
+    font-size:0;   
+}
+
+body, html{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+/******************header******************/
+.header{
+	height: 16%;
+	width: 100%;
+	border: solid 2px rgb(130,130,130);
+}
+
+.header p{
+	font-size: 30px;    
+	text-align: center;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+/*******************center********************/
+.center{
+	height: 84%;
+	width: 100%;
+}
+
+.center_of_left{
+	float: left;
+	width: 17.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#Personal_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Personal_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Commodity_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Commodity_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+#Staff_management{
+	text-align: center;
+	height: 8%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+#Staff_management p{
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)  translateY(-50%);
+}
+
+.center_of_right{
+	float: left;
+	width: 82.5%;
+	height: 100%;
+	border: solid 1px rgb(130,130,130);
+}
+
+#top{
+	height: 24%;
+	border-bottom: solid 1px rgb(130,130,130);
+}
+
+.img-circle{
+	height: 40%;
+	width: 40%;
+	cursor: pointer;
+}
+
+#identify{
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+
+#name_pos{
+	border: solid 1px rgb(130,130,130);
+	border-radius: 10%;
+	width: 50%;
+	position: relative;	
+	left: 50%;
+	transform: translateX(-50%);
+}
+.center_of_left a{
+	padding:5px 15px;
+	font-size:15px;
+	text-decoration:none;
+	margin-left:10px;
+	display:block;
+
+}
+#Personal_management a {
+	color: orange;
+}
+.center_of_left a:hover {
+	color: orange;
+}
+.center_of_left a:focus {
+	color: orange;
+}
+
+/*信息显示栏*/
+.info{
+	height: 100%;
+	width: 18%;
+	float: left;
+	margin-left: 5px;
+	/*border-right: 1px solid red;*/
+}
+.info input{
+	height: 30px;
+	width: 120px;
+}
+.info span{
+	float: left;
+	width: 100px;
+	font-size: 120%;
+	font-family: "KaiTi";
+}
+.infotop{
+	margin-top: 10%;
+}
+.infobottom{
+	margin-top: 18%;
+}
+
+
+#modify_choice{
+	width: 100%;
+	height: 320px;
+}
+
+.modiinfo{
+	width: 100%;
+	height: 35px;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-family: "KaiTi";
+}
+#bottom span{
+	float: left;
+	width: 100px;
+	font-size: 120%;
+}
+#bottom h3{
+	margin-left: 10px;
+	margin-bottom: 30px;
+}
+
+ input{
+                border: 1px solid #ccc;
+                padding: 7px 0px;
+                border-radius: 3px;
+                padding-left:5px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+ input:focus{
+                    border-color: #66afe9;
+                    outline: 0;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+            }
+#modify{
+	background: #D0EEFF;
+	border: 1px solid #99D3F5;
+	border-radius: 4px;
+	color: #1E88C7;
+	height: 30px;
+	/*margin-top: 10px;*/
+	margin-right: 10px;
+	float: left;
+}
+#figa{
+
+	position: relative;
+	display: inline-block;
+	background: #D0EEFF;
+	border: 1px solid #99D3F5;
+	border-radius: 4px;
+	padding: 4px 12px;
+	overflow: hidden;
+	color: #1E88C7;
+	text-decoration: none;
+	text-indent: 0;
+	/*line-height: 20px;*/
+}
+#figa:hover{
+	background: #AADFFD;
+	border-color: #78C3F3;
+	color: #004974;
+	text-decoration: none;
+}
+#figa input{
+	position: absolute;
+	font-size: 100px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+}

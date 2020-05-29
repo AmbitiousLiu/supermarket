@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface PersonMapper {
     //查询员工信息
-    @Select("select * from stuff ,role" +
-            " where stuff.rnum = role.rnum" +
+    @Select("select * from stuff ,stuff_role,stuff_roles" +
+            " where stuff.stu_num = stuff._role.sid" +
             " and stuff.stu_num = #{useId}")
     List<Person>getAllInfo(String useId);
 
