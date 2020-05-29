@@ -77,7 +77,7 @@ public class StockService {
         return stockMapper.queryStockoutRowsByStu(stu_num);
     };
     //查询角色号
-    public String queryRnum(String stu_num){
+    public Integer queryRnum(String stu_num){
         return stockMapper.queryRnum(stu_num);
     };
     //查询库存

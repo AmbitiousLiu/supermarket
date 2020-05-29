@@ -21,7 +21,7 @@ public class PersonInitController {
 
     //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
-        session.setAttribute("stu_num","202000001");
+        session.setAttribute("stu_num","10001");
 //        System.out.println(session.getAttribute("stu_num").toString());
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
         response.setContentType("text/json;charset=utf-8");
@@ -35,7 +35,7 @@ public class PersonInitController {
                                                               @RequestParam(value = "pid")String pid)throws IOException{
 
         HttpSession session  = request.getSession();
-        session.setAttribute("stu_num","202000001");
+        session.setAttribute("stu_num","10001");
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
@@ -51,7 +51,7 @@ public class PersonInitController {
     void modifyPassword(HttpServletResponse response, HttpServletRequest request
             ,@RequestParam(value = "password_new")String password,@RequestParam(value = "password_old")String old)throws IOException{
         HttpSession session  = request.getSession();
-        session.setAttribute("stu_num","202000001");
+        session.setAttribute("stu_num","10001");
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //获得旧密码
@@ -83,12 +83,14 @@ public class PersonInitController {
     }//根据姓名修改权限
     @RequestMapping(value = "/updateRInfo")
     public Integer updateRInfo (HttpServletResponse response, @RequestParam(value = "condition", required = true) String name,
-                                                   @RequestParam(value = "role", required = true) String rname)throws  IOException {
+                                                   @RequestParam(value = "role", required = true) String rnum)throws  IOException {
 
 //        System.out.println(rname);
 //        String rnum = personInitService.queryRnum(rname);
-//        System.out.println(rnum);
-        Integer integer = personInitService.updateRnum(rname,name);
+        //根据姓名查询账号sid
+        String sid = personInitService.queryStunumByName(name) ;
+        //修改stuff_role表账号权限信息
+        Integer integer = personInitService.updateRnum(Integer.parseInt(rnum),sid);
         response.setContentType("text/json;charset=utf-8");
 //        response.getWriter().write(integer);
         return integer;

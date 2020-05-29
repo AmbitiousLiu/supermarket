@@ -32,4 +32,7 @@ interface StockOutMapper {
     //仓库管理员查询其出库单数量
     @Select("select count(*) from stock_out where stu_num = #{stu_num}")
     Integer queryStockoutRowsByStu(String stu_num);
+    //查询角色号
+    @Select("select rid from stuff_role where  sid = #{stu_num}  limit 0,1")
+    Integer queryRnum(String stu_num);
 }

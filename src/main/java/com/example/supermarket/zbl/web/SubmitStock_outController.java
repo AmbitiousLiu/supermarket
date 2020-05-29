@@ -24,8 +24,9 @@ public class SubmitStock_outController {
                                 @RequestParam(value = "region")String region, @RequestParam(value = "price_out")String price,@RequestParam(value = "cnum")String cnum,
                                 @RequestParam(value = "sum")String sum, HttpSession session)
             throws IOException {
-        session.setAttribute("name", "小苏");
-        session.setAttribute("stu_num", "202000001");
+        session.setAttribute("name", "苏若愚");
+        session.setAttribute("stu_num", "10001");
+        System.out.println(num);
         //生成出库日期
         long time = System.currentTimeMillis();
         Date outdate = new Date(time);
@@ -88,13 +89,14 @@ public class SubmitStock_outController {
     public void getRows(HttpServletResponse response,HttpSession session)throws IOException{
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
+        System.out.println(stu_num);
 
         //获得角色号
-        String rnum = stockService.queryRnum(stu_num);
+        String rnum = stockService.queryRnum(stu_num).toString();
         //定义数据量
         Integer content = 0;
         //如果是总经理或副总经理,则拿到所有数据
-        if ("01".equals(rnum)||"02".equals(rnum)){
+        if ("1".equals(rnum)||"2".equals(rnum)){
             content = stockService.queryStockoutRows();
             //如果是仓库管理员，则拿到自己经手的出库单数据
         }else {

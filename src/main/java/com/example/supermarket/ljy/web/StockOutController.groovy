@@ -29,12 +29,12 @@ class StockOutController {
                  @RequestParam(value = "limit", required = true) String size,
                  @RequestParam(value = "page", required = true) String page) {
         def session = request.getSession();
-        session.setAttribute("stu_num","202000001");
-        session.setAttribute("rnum","01")
+        session.setAttribute("stu_num","10001");
+//        session.setAttribute("rnum","01")
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
         //查找经手人角色
-        String rnum = session.getAttribute("rnum").toString();
+        String rnum = stockOutService.queryRnum(stu_num).toString();
         //定义数据量
         Integer content = 0;
 
@@ -43,13 +43,13 @@ class StockOutController {
         jsonObject.put("msg","");
 
         response.setContentType("text/json;charset=utf-8")
-        if ("01".equals(rnum) || "02".equals(rnum)) {
+        if ("1".equals(rnum) || "2".equals(rnum)) {
             content = stockOutService.queryStockoutRows()
             jsonObject.put("count",content);
             jsonObject.put("data",stockOutService.moreStockOut(Integer.parseInt(page),Integer.parseInt(size)))
             return jsonObject.toString()
 //            response.getWriter().write(stockOutService.moreStockOut(Integer.parseInt(page), Integer.parseInt(size)))
-        } else if ("03".equals(rnum)) {
+        } else if ("3".equals(rnum)) {
             content = stockOutService.queryStockoutRowsByStu(stu_num)
             jsonObject.put("count",content);
             jsonObject.put("data",stockOutService.moreStockOutByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)))

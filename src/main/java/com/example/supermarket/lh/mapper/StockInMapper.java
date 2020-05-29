@@ -47,8 +47,8 @@ public interface StockInMapper {
     @Select("select * from stock_in where stu_num = #{stu_num} order by indate desc limit #{begin}, #{size}")
     List<Stock_in> moreStockInByPerson(@Param("stu_num") String stu_num, @Param("begin") Integer begin, @Param("size") Integer size);
     //查询角色号
-    @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
-    String queryRnum(String stu_num);
+    @Select("select rid from stuff_role where  sid = #{stu_num}  limit 0,1")
+    Integer queryRnum(String stu_num);
     //查看出库单数量
     @Select("select count(*) from stock_in")
     Integer queryStockInRows();

@@ -42,9 +42,9 @@ public class PersonInitService {
     public Integer getCounts(){
         return  personMapper.getCounts();
     };
-    //修改权限
-    public Integer updateRnum(String rnum,String name){
-        return personMapper.updateRnum(rnum, name);
+    //修改stuff_role表账号对应的权限
+    public Integer updateRnum(Integer rnum,String sid){
+        return personMapper.updateRnum(rnum, sid);
     };
     //查询rnum
     public String queryRnum(String rname){
@@ -53,5 +53,9 @@ public class PersonInitService {
     //查询姓名
     public String queryName(){
         return JSON.toJSONString(personMapper.queryName());
+    };
+    //查询账号根据姓名
+    public String queryStunumByName(String name){
+        return personMapper.queryStunumByName(name);
     };
 }

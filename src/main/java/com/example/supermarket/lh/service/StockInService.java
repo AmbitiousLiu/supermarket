@@ -68,7 +68,7 @@ public class StockInService {
         return  stockInMapper.moreStockInByPerson(stu_num, begin, size);
     };
     //查询角色号
-    public String queryRnum(String stu_num){
+    public Integer queryRnum(String stu_num){
         return stockInMapper.queryRnum(stu_num);
     };
     //查询出库单数据数量
