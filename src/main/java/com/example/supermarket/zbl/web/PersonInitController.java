@@ -21,7 +21,7 @@ public class PersonInitController {
 
     //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
-        session.setAttribute("stu_num","10001");
+        session.getAttribute("stu_num");
 //        System.out.println(session.getAttribute("stu_num").toString());
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
         response.setContentType("text/json;charset=utf-8");
@@ -35,7 +35,7 @@ public class PersonInitController {
                                                               @RequestParam(value = "pid")String pid)throws IOException{
 
         HttpSession session  = request.getSession();
-        session.setAttribute("stu_num","10001");
+        session.getAttribute("stu_num");
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
@@ -51,7 +51,7 @@ public class PersonInitController {
     void modifyPassword(HttpServletResponse response, HttpServletRequest request
             ,@RequestParam(value = "password_new")String password,@RequestParam(value = "password_old")String old)throws IOException{
         HttpSession session  = request.getSession();
-        session.setAttribute("stu_num","10001");
+        session.getAttribute("stu_num");
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
         //获得旧密码

@@ -46,7 +46,6 @@ public class ShiroConfig {
     public DefaultWebSessionManager getDefaultWebSessionManager()
     {
         DefaultWebSessionManager sessionManager =new DefaultWebSessionManager();
-
         return sessionManager;
     }
 
@@ -76,7 +75,7 @@ public class ShiroConfig {
         filterMap.put("ws/user/login","anon");
         filterMap.put("/layui/**","anon");
         filterMap.put("/ws/login.html","logout");
-        filterMap.put("/person.html","authc");
+        filterMap.put("/zbl/person.html","authc");
 
 
 

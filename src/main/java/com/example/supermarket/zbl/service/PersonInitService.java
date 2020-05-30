@@ -5,6 +5,7 @@ import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.mapper.PersonMapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +32,8 @@ public class PersonInitService {
 
     //修改账号密码
     public Integer modifyPassword(String stu_num,String password){
-        return personMapper.modifyPassword(stu_num, password)   ;
+        Md5Hash md5Hash =new Md5Hash(password);
+        return personMapper.modifyPassword(stu_num, md5Hash.toString());
     };
     //查询stuff表
     public List<Person>getInfo(Integer page,Integer size){
