@@ -86,7 +86,7 @@ public class StockInController {
         session.setAttribute("stu_num","10001");
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
-        System.out.println(stu_num);
+//        System.out.println(stu_num);
         //查找经手人角色
         String position = stockInService.queryRnum(stu_num).toString();
         //定义数据量
