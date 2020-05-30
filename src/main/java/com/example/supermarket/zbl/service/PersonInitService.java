@@ -36,7 +36,24 @@ public class PersonInitService {
     //查询stuff表
     public List<Person>getInfo(Integer page,Integer size){
         Integer begin = (page - 1) * size;
-        return personMapper.getInfo(begin,size);
+        List<Person> list = personMapper.getInfo(begin,size);
+
+        Person person = list.get(0);
+        for (int i =1;i<list.size();i++){
+            //当list内元素rolename为总经理时
+            if ("总经理".equals(list.get(i).getRole_name())){
+                person = list.get(i);
+                continue;
+            }
+            //list内有重复账号的person类时，移出。
+            if (person.getStu_num().equals(list.get(i).getStu_num())){
+                list.remove(list.get(i));
+                i--;
+            }
+
+
+        }
+        return list;
     };
     //查询stuff表数据量
     public Integer getCounts(){
