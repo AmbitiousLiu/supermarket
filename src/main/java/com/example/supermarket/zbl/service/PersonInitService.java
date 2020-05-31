@@ -3,11 +3,13 @@ package com.example.supermarket.zbl.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.mapper.PersonMapper;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -74,5 +76,9 @@ public class PersonInitService {
     //查询账号根据姓名
     public String queryStunumByName(String name){
         return personMapper.queryStunumByName(name);
+    };
+    //向用户分析表插入数据
+    public Integer insertData(String stu_num, String url, Date qdate){
+        return personMapper.insertData(stu_num, url, qdate);
     };
 }

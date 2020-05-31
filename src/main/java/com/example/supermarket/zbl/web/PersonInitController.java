@@ -25,6 +25,7 @@ public class PersonInitController {
 //        System.out.println(session.getAttribute("stu_num").toString());
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
         response.setContentType("text/json;charset=utf-8");
+//        personInitService.insertData()
 //        System.out.println(content);
         response.getWriter().write(content==null ?"":content);
 

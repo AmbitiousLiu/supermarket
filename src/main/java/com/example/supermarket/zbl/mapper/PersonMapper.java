@@ -2,10 +2,12 @@ package com.example.supermarket.zbl.mapper;
 
 
 import com.example.supermarket.zbl.domain.Person;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.sql.Date;
 import java.util.List;
 
 @Mapper
@@ -46,4 +48,7 @@ public interface PersonMapper {
     //查询账号根据姓名
     @Select("select stu_num from stuff where name = #{name}")
     String queryStunumByName(String name);
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 }
