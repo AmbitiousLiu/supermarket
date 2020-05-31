@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-	   xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<title>超市管理系统</title>
@@ -23,12 +22,9 @@
 	      	<img src="/image/person" class="layui-nav-img">
 	      </li>
 	      <li class="layui-nav-item">
-			  用户：&nbsp;<shiro:principal/>
-			  &nbsp;当前用户角色为：&nbsp;<shiro:hasRole name="mananger">总经理</shiro:hasRole>
-			  <shiro:hasRole name="fmananger">副总经理</shiro:hasRole>
-			  <shiro:hasRole name="kmananger">库管人员</shiro:hasRole>
-		  </li>
-			<li class="layui-nav-item"><a href="/ws/login.html" style="text-decoration-line: none">退出登录</a></li>
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退出登录</a></li>
 	    </ul>
 	  </div>
 	  
@@ -36,26 +32,26 @@
 	    <div class="layui-side-scroll">
 	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 	        <li class="layui-nav-item">
-				<a class="" href="/zbl/person.html" style="text-decoration-line: none">个人中心</a>
-				<dl class="layui-nav-child">
-					<dd><a href="/zbl/person_change.html" style="text-decoration-line: none">&emsp;修改信息</a></dd>
-				</dl>
-			</li>
-			  <li class="layui-nav-item">
-				  <shiro:hasPermission name="sys:c:update"><a href="/ljy/commodity.html" style="text-decoration-line: none">商品管理</a></shiro:hasPermission>
-				  <dl class="layui-nav-child">
-					  <shiro:hasPermission name="sys:c:save"><dd><a href="/ljy/stock.html" style="text-decoration-line: none">&emsp;上架商品</a></dd></shiro:hasPermission>
-					  <shiro:hasPermission name="sys:c:add"><dd><a href="/ljy/provider.html" style="text-decoration-line: none">&emsp;购入商品</a></dd></shiro:hasPermission>
-				  </dl>
-			  </li>
-			  <li class="layui-nav-item">
-				  <shiro:hasPermission name="sys:y:update"><a href="/ljy/manage.html" style="text-decoration-line: none">员工管理</a></shiro:hasPermission>
-				  <dl class="layui-nav-child">
-					  <shiro:hasPermission name="sys:q:find"><dd><a href="/ljy/manage_role.html" style="text-decoration-line: none">&emsp;权限管理</a></dd></shiro:hasPermission>
-				  </dl>
-			  </li>
-
-			  <li class="layui-nav-item"><a href="/ljy/about.html" style="text-decoration-line: none">关于我们</a></li>
+	          <a class="" href="/zbl/person.html">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="/zbl/person_change.html">&emsp;修改信息</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item layui-nav-itemed">
+	          <a href="/ljy/commodity.html">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd class="layui-this"><a href="javascript:return false;">&emsp;上架商品</a></dd>
+	            <dd><a href="/ljy/provider.html">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="/ljy/manage.html">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="/ljy/manage_role.html">&emsp;权限管理</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="/ljy/echarts.html">查看足迹</a></li>
+	        <li class="layui-nav-item"><a href="/ljy/about.html">关于我们</a></li>
 	      </ul>
 	    </div>
 	  </div>
