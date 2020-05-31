@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface FootPrintsMapper {
     //查询足迹所有信息
-    @Select("select * from userbehavior where stu_num = #{stu_num} order by qdate limit #{begin},#{limit}")
+    @Select("select stu_num,url,qdate date from userbehavior where stu_num = #{stu_num} order by qdate limit #{begin},#{limit}")
     List<FootPrints> queryPrints(String stu_num,Integer begin,Integer limit);
     //查询该用户的足迹信息条数
     @Select("select count(*) from userbehavior where stu_num = #{stu_num} ")

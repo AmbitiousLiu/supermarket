@@ -234,13 +234,15 @@
 		// 2加载
 		$.get('/fprints/date', function (datas) {
 			// 解析数据
-			var dates = new Array(datas.length);
-			var values = new Array(datas.length);
+			var dates = new Array(0);
+			var values = new Array(0);
 			for (var i = 0; i < datas.length; i++) {
 				dates.push(datas[i].date);
+
 				values.push(datas[i].count);
 			}
-			
+			// alert(dates);
+			// alert(values);
 		    bar.setOption({
 			    xAxis: {
 			        type: 'category',
