@@ -24,6 +24,7 @@ public class StuffServicelmpl {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         subject.login(token);
+        subject.getSession();
 
     }
 }
