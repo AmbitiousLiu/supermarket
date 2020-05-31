@@ -173,7 +173,7 @@
 		    mychart.setOption({
 		        series : [
 		            {
-		                data: datas.sort(function (a, b) { return a.value - b.value; })
+		                data: JSON.stringify(datas).sort(function (a, b) { return a.value - b.value; })
 		            }
 		        ]
 		    })
