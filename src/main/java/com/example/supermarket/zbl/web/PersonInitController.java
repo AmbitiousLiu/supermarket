@@ -1,7 +1,6 @@
 package com.example.supermarket.zbl.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.supermarket.ljy.domain.Commodity;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -21,11 +21,15 @@ public class PersonInitController {
 
     //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session)throws IOException {
-        session.getAttribute("stu_num");
+//        session.getAttribute("stu_num");
 //        System.out.println(session.getAttribute("stu_num").toString());
         String content = personInitService.getAllInfo(session.getAttribute("stu_num").toString());
         response.setContentType("text/json;charset=utf-8");
-//        personInitService.insertData()
+        //获得时间
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time);
+        //插入足迹
+        personInitService.insertData(session.getAttribute("stu_num").toString(),"个人中心",qdate);
 //        System.out.println(content);
         response.getWriter().write(content==null ?"":content);
 
@@ -70,10 +74,17 @@ public class PersonInitController {
         }
     }//获得角色表stuff表联查信息
     @RequestMapping(value = "/getRInfo")
-    public String getRInfo(HttpServletResponse response, @RequestParam(value = "limit", required = true) String size,
+    public String getRInfo(HttpServletResponse response,HttpSession session, @RequestParam(value = "limit", required = true) String size,
                            @RequestParam(value = "page", required = true) String page)throws  IOException{
+
+
         response.setContentType("text/json;charset=utf-8");
         List<Person> list = personInitService.getInfo(Integer.parseInt(page),Integer.parseInt(size));
+        //获得时间
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time);
+        //插入足迹
+        personInitService.insertData(session.getAttribute("stu_num").toString(),"权限管理",qdate);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );

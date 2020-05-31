@@ -24,8 +24,8 @@ public class SubmitStock_outController {
                                 @RequestParam(value = "region")String region, @RequestParam(value = "price_out")String price,@RequestParam(value = "cnum")String cnum,
                                 @RequestParam(value = "sum")String sum, HttpSession session)
             throws IOException {
-        session.setAttribute("name", "苏若愚");
-        session.setAttribute("stu_num", "10001");
+//        session.setAttribute("name", "苏若愚");
+//        session.setAttribute("stu_num", "10001");
         System.out.println(num);
         //生成出库日期
         long time = System.currentTimeMillis();
@@ -35,7 +35,8 @@ public class SubmitStock_outController {
         //拿到经手人账号
         String stu_num = session.getAttribute("stu_num").toString();
         Stock_out stock_out = new Stock_out(num, cnum, outdate, Integer.parseInt(sum), stu_num, region, name, stockService.queryName(cnum));
-
+        //插入足迹
+        stockService.insertData(session.getAttribute("stu_num").toString(),"上架商品",outdate);
 
         response.setContentType("text/json;charset=utf-8");
         //查询商品库存数量
@@ -108,9 +109,13 @@ public class SubmitStock_outController {
 
     @RequestMapping(value = "stock")
     public void queryStock(HttpServletResponse response,HttpSession session)throws IOException{
+        //生成日期
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time);
 
 //        session.setAttribute("name","小苏");
         String content = stockService.queryStock();
+        stockService.insertData(session.getAttribute("stu_num").toString(),"上架商品",qdate);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content);
 
@@ -118,6 +123,7 @@ public class SubmitStock_outController {
     @RequestMapping(value = "stockInfo")
     public void queryStockByCnum(HttpServletResponse response, HttpSession session
                                     , @RequestParam(value = "cnum")String cnum)throws IOException{
+
 
 //        session.setAttribute("name","小苏");
         String content = stockService.queryStockByCnum(cnum);

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpSession
+import java.sql.Date
 
 /**
  * @author jleo
@@ -29,12 +31,17 @@ class CommodityInitController {
      * @param response: json string of commodities's data
      * @return
      */
-    @GetMapping(value = "/commodity") initCommodity(HttpServletRequest request, HttpServletResponse response) {
-        def session = request.getSession()
+    @GetMapping(value = "/commodity") initCommodity(HttpSession session, HttpServletResponse response) {
+//        def session = request.getSession()
 
 //        String position = session.getAttribute("position")
         def content
 //        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
+//print(session.getAttribute("stu_num").toString())
+        //生成日期
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time)
+        commodityInitService.insertData(session.getAttribute("stu_num").toString(),"商品管理",qdate);
             content = commodityInitService.getAllCommodities()
 //        } else if (position == "ROLE_库房管理人员") {
 //            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())

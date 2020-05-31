@@ -69,5 +69,8 @@ public interface StockMapper {
     //查询库存详情根据商品号
     @Select("select * from stock where cnum = #{cnum}")
     List<Stock> queryStockByCnum(String cnum);
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 
 }

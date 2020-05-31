@@ -55,4 +55,7 @@ public interface StockInMapper {
     //仓库管理员查询其出库单数量
     @Select("select count(*) from stock_in where stu_num = #{stu_num}")
     Integer queryStockInRowsByStu(String stu_num);
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 }

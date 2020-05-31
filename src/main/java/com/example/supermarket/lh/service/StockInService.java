@@ -3,6 +3,7 @@ package com.example.supermarket.lh.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.lh.domain.Stock_in;
 import com.example.supermarket.lh.mapper.StockInMapper;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,8 @@ public class StockInService {
     public Integer queryStockInRowsByStu(String stu_num){
         return stockInMapper.queryStockInRowsByStu(stu_num);
     };
-
+    //向用户分析表插入数据
+    public Integer insertData(String stu_num, String url, Date qdate){
+        return stockInMapper.insertData(stu_num, url, qdate);
+    };
 }

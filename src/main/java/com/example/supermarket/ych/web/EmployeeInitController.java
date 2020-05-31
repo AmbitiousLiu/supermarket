@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -25,10 +27,14 @@ public class EmployeeInitController {
         response.getWriter().write(content==null ?"":content);
     }
 //查询雇员表信息
-    @RequestMapping (value = "/getAllInfo") String initEmployee(HttpServletResponse response
-     ,                                                          @RequestParam(value = "limit", required = true) String size,
+    @RequestMapping (value = "/getAllInfo") String initEmployee(HttpServletResponse response, HttpSession session
+     , @RequestParam(value = "limit", required = true) String size,
                                                                 @RequestParam(value = "page", required = true) String page)throws IOException {
         List<Employee> list = employeeInitService.queryInfo(Integer.parseInt(page),Integer.parseInt(size));
+        //生成入库日期
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time);
+        employeeInitService.insertData(session.getAttribute("stu_num").toString(),"员工管理",qdate);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );

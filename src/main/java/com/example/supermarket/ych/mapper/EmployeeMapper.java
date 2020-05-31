@@ -3,6 +3,7 @@ package com.example.supermarket.ych.mapper;
 import com.example.supermarket.ych.domain.Employee;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Mapper
@@ -27,4 +28,7 @@ public interface EmployeeMapper {
     //查询雇员表数据量
     @Select("select count(*) from employee")
     Integer queryCounts();
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 }

@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.UUID;
 
 
 @RestController
@@ -33,7 +31,8 @@ public class StockInController {
                          HttpServletRequest request) throws IOException {
         response.setContentType("text/json;charset=utf-8");
         HttpSession session = request.getSession();
-        session.setAttribute("stu_num","202000001");
+//        session.setAttribute("stu_num","202000001");
+
 
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
@@ -54,6 +53,9 @@ public class StockInController {
         Integer price = stockInService.queryPrice(pnum, cnum);
         //生成出库单
         Stock_in stock_in = new Stock_in(stockin_id,pnum,cnum,indate,p_date,safe_date,Integer.parseInt(sum),stu_num,region,price);
+
+        //插入足迹
+        stockInService.insertData(session.getAttribute("stu_num").toString(),"购入商品",indate);
 
         //插入入库表
         Integer content = stockInService.addStock(stock_in.getNum(),stock_in.getPnum(),

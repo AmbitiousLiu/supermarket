@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 
 @RestController
 @RequestMapping(value = "/provider")
@@ -19,7 +21,13 @@ public class ProviderController {
      * @return
      */
     @GetMapping(value = "/provider")
-    public void getAllProviders(HttpServletResponse response) throws IOException {
+    public void getAllProviders(HttpServletResponse response, HttpSession session) throws IOException {
+        //生成日期
+        long time = System.currentTimeMillis();
+        Date qdate = new Date(time);
+
+        providerService.insertData(session.getAttribute("stu_num").toString(),"购入商品",qdate);
+
         String content;
         content = providerService.getAllProviders();
         response.setContentType("text/json;charset=utf-8");
