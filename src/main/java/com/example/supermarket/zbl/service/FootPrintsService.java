@@ -1,12 +1,13 @@
 package com.example.supermarket.zbl.service;
 
+import com.example.supermarket.zbl.domain.DateSum;
 import com.example.supermarket.zbl.domain.FootPrints;
 import com.example.supermarket.zbl.domain.Url;
 import com.example.supermarket.zbl.mapper.FootPrintsMapper;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,6 +26,10 @@ public class FootPrintsService {
     //统计用户url各访问情况
     public List<Url> queryUrl(String stu_num){
         return footPrintsMapper.queryUrl(stu_num);
+    };
+    //统计最近七天访问次数
+    public List<DateSum> queryDate(String stu_num){
+      return footPrintsMapper.queryDate(stu_num);
     };
 
 }

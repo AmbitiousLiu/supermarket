@@ -4,6 +4,14 @@ public class Url {
     private String name;
     private Integer value;
 
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                '}';
+    }
+
     public Url(String name, Integer value) {
         this.name = name;
         this.value = value;

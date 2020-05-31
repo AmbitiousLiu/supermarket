@@ -1,5 +1,6 @@
 package com.example.supermarket.zbl.web;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.zbl.service.FootPrintsService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,16 +36,20 @@ public class FootPrintsController {
 
     //访问次数统计
     @RequestMapping(value = "/sum")
-    public String getSum(HttpSession session, HttpServletResponse response) throws IOException{
+    public String getSum(HttpSession session) throws IOException{
         String stu_num = session.getAttribute("stu_num").toString();
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",footPrintsService.queryUrl(stu_num) );
-        return jsonObject.toString();
+        String jsonObject = JSON.toJSONString(footPrintsService.queryUrl(stu_num));
 
+        System.out.println(jsonObject);
+        return jsonObject;
 
-
-
+    }
+    @RequestMapping(value = "/date")
+    public String getDate(HttpSession session) throws IOException{
+        String stu_num = session.getAttribute("stu_num").toString();
+        String jsonObject = JSON.toJSONString(footPrintsService.queryDate(stu_num));
+        return jsonObject;
     }
 
 }
