@@ -3,9 +3,6 @@ package com.example.supermarket.zbl.service;
 import com.alibaba.fastjson.JSON;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.mapper.PersonMapper;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 

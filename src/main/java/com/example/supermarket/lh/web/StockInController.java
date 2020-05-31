@@ -85,16 +85,12 @@ public class StockInController {
                                 @RequestParam(value = "page", required = true) String page) throws IOException{
         HttpSession session = request.getSession();
         response.setContentType("text/json;charset=utf-8");
-        session.setAttribute("stu_num","10001");
         //生成经手人
         String stu_num = (String) session.getAttribute("stu_num");
-//        System.out.println(stu_num);
         //查找经手人角色
         String position = stockInService.queryRnum(stu_num).toString();
         //定义数据量
         Integer content = 0;
-//        System.out.println(size);
-//        System.out.println(page);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
@@ -106,14 +102,12 @@ public class StockInController {
             jsonObject.put("count",content);
             jsonObject.put("data",stockInService.moreStockIn(Integer.parseInt(page),Integer.parseInt(size)));
             return  jsonObject.toString();
-            //            response.getWriter().write(jsonObject);
         }else if ("3".equals(position) ){
             //如果经手人是仓库管理员
             content = stockInService.queryStockInRowsByStu(stu_num);
             jsonObject.put("count",content);
             jsonObject.put("data",stockInService.moreStockInByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)));
             return  jsonObject.toString();
-            //response.getWriter().write(stockInService.moreStockInByPerson(stu_num,Integer.parseInt(page),Integer.parseInt(size)));
 
         }
         return null;
