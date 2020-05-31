@@ -3,6 +3,7 @@ package com.example.supermarket.zbl.web;
 import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,10 +62,12 @@ public class PersonInitController {
         String stu_num = session.getAttribute("stu_num").toString();
         //获得旧密码
         String oldPassword = personInitService.getInfo(stu_num).get(0).getPassword();
-
+        System.out.println(oldPassword);
+        Md5Hash md5Hash =new Md5Hash(old);
+        System.out.println(md5Hash);
         response.setContentType("text/json;charset=utf-8");
         //如果旧密码验证成功则可以修改密码
-        if(old.equals(oldPassword)){
+        if(md5Hash.toString().equals(oldPassword)){
             Integer integer = personInitService.modifyPassword(stu_num,password);
             //返回1则修改成功
             response.getWriter().write("1");
