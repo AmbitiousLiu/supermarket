@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class ShiroConfig {
+public class ShiroConfig {//shiro配置
 
     @Bean
     public ShiroDialect getShiroDialect()
@@ -56,6 +56,7 @@ public class ShiroConfig {
         securityManager.setSessionManager(getDefaultWebSessionManager());
         return securityManager;
     }
+
     @Bean
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean filter =new ShiroFilterFactoryBean();
@@ -76,7 +77,10 @@ public class ShiroConfig {
         filterMap.put("/layui/**","anon");
         filterMap.put("/ws/login.html","logout");
         filterMap.put("/zbl/person.html","authc");
-
+        filterMap.put("/ljy/**","authc");
+        filterMap.put("/zbl/person_change.html","authc");
+        filterMap.put("/ljy/manage_role.html","perms[sys:q:find]");
+        filterMap.put("/ljy/manage.html","perms[sys:y:update]");
 
 
 
@@ -84,7 +88,7 @@ public class ShiroConfig {
         //默认登录页面
         filter.setLoginUrl("/ws/login.html");
         //设置未授权访问的页面路径
-        filter.setUnauthorizedUrl("/ws/login.html");
+        filter.setUnauthorizedUrl("/ws/fault.html");
         return filter;
     }
 }

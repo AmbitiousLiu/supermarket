@@ -2,6 +2,7 @@ package com.example.supermarket.zbl.web;
 
 
 import com.example.supermarket.ljy.domain.Stock_out;
+import com.example.supermarket.ws.service.StuffServicelmpl;
 import com.example.supermarket.zbl.service.StockService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +19,18 @@ import java.util.List;
 public class SubmitStock_outController {
     @Resource
     StockService stockService;
+    @Resource StuffServicelmpl stuffServicelmpl;
     private static Logger logger = Logger.getLogger(SubmitStock_outController.class);
     @RequestMapping(value = "/subStock_out")
     public void  submitStockout(HttpServletResponse response, @RequestParam(value = "num")String num,
                                 @RequestParam(value = "region")String region, @RequestParam(value = "price_out")String price,@RequestParam(value = "cnum")String cnum,
                                 @RequestParam(value = "sum")String sum, HttpSession session)
-            throws IOException {
+            throws Exception {
 //        session.setAttribute("name", "苏若愚");
 //        session.setAttribute("stu_num", "10001");
+        String username=session.getAttribute("stu_num").toString();
+        String password=session.getAttribute("password").toString();
+        stuffServicelmpl.checkLogin(username,password);
         System.out.println(num);
         //生成出库日期
         long time = System.currentTimeMillis();

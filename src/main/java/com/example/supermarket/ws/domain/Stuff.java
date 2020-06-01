@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Stuff implements Serializable {
     private String stu_num;
     private String password;
+    private String name;
 
 
     public String getUsername()
@@ -18,6 +19,7 @@ public class Stuff implements Serializable {
     {
         return password;
     }
+    public String getName(){return name;}
 
 
 
