@@ -47,9 +47,10 @@
 	        <li class="layui-nav-item layui-nav-itemed">
 	          <a href="/ljy/manage.html">员工管理</a>
 	          <dl class="layui-nav-child">
-	            <dd><a href="/ljy/manage_role.html">&emsp;权限管理</a></dd>
+	            <dd class="layui-this"><a href="/javascript:return false;">&emsp;权限管理</a></dd>
 	          </dl>
 	        </li>
+	        <li class="layui-nav-item"><a href="/ljy/echarts.html">查看足迹</a></li>
 	        <li class="layui-nav-item"><a href="/ljy/about.html">关于我们</a></li>
 	      </ul>
 	    </div>
@@ -99,9 +100,9 @@
 					      <div class="layui-input-inline">
 					        <select name="role" id="role" lay-verify="required" lay-search="">
 					          <option value="">直接选择或搜索选择</option>
-					          <option value="01">总经理</option>
-					          <option value="02">副经理</option>
-					          <option value="03">仓库管理员</option>
+					          <option value="1">总经理</option>
+					          <option value="2">副经理</option>
+					          <option value="3">仓库管理员</option>
 					          <option value="11">普通员工</option>
 					        </select>
 					      </div>
@@ -149,7 +150,7 @@
 	      ,{field:'age', title: '年龄', align: 'center'}
 	      ,{field:'seniority', title: '工龄', align: 'center'}
 	      ,{field:'salary', title: '工资', align: 'center'} //单元格内容水平居中
-	      ,{field:'rname', title: '职位', align: 'center'}
+	      ,{field:'role_name', title: '职位', align: 'center'}
 	      ,{field:'region', title: '所属区', sort: true, align: 'center'}
 	    ]]
 	  });
@@ -165,7 +166,7 @@
 			url:'/Info/getName',
 			success:function(data){
 				for (var i = 0;i < data.length;i++) {
-					$("#condition").append("<option >"+data[i].name+"</option>")
+					$("#condition").append("<option >"+data[i]+"</option>")
 				}
  				layui.form.render("select");
 				// let labArr = data[0].region;

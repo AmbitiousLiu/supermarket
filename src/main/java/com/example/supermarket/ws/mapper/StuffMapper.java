@@ -4,13 +4,11 @@ import com.example.supermarket.ws.domain.Stuff;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
 @Mapper
 public interface StuffMapper {
-
-    @Select("select * from stuff where stu_num = #{stu_num} and password = #{password}")
-    Stuff findStuff(String stu_num,String password);
-
-    @Select("select * from stuff where stu_num = #{stu_num}")
-    Stuff findStuffByName(String stu_num);
-
+    @Select("select stu_num,password from stuff where stu_num = #{stu_num}")
+    Stuff findStuffByStunum(String stu_num);
 }

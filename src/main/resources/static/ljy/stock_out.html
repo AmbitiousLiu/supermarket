@@ -39,7 +39,7 @@
 	        <li class="layui-nav-item layui-nav-itemed">
 	          <a href="/ljy/commodity.html">商品管理</a>
 	          <dl class="layui-nav-child">
-	            <dd><a href="/ljy/stock.html">&emsp;上架商品</a></dd>
+	            <dd class="layui-this"><a href="javascript:return false;">&emsp;上架商品</a></dd>
 	            <dd><a href="/ljy/provider.html">&emsp;购入商品</a></dd>
 	          </dl>
 	        </li>
@@ -49,6 +49,7 @@
 	            <dd><a href="/ljy/manage_role.html">&emsp;权限管理</a></dd>
 	          </dl>
 	        </li>
+	        <li class="layui-nav-item"><a href="/ljy/echarts.html">查看足迹</a></li>
 	        <li class="layui-nav-item"><a href="/ljy/about.html">关于我们</a></li>
 	      </ul>
 	    </div>
@@ -187,14 +188,17 @@
 			})
 			
 			
-			form.on('submit(L_submit)', function(data) {
+			// form.on('submit(L_submit)', function(data) {
 			$("#upload").click(
+
+
 				function submitTable(){
 					var sum = util.escape($("#sum").val());
 					var num = $("#num").val();
 					var price_out = util.escape($("#price_out").val());
 					var cnum = $("#cnum").val();
 					var region = $("#region").val();
+					alert(1);
 					ajax({
 						method: HTTP_METHOD.POST,
 						url: "/stockout/subStock_out",
@@ -207,14 +211,15 @@
 								window.location.href = "/ljy/stock.html";
 							}
 							else {
-								layer.alert("提交出库单失败！");
+								// layer.alert("提交出库单失败！");
+								alert("提交出库单失败");
 							}
 							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 						}
 					})
 				}
 			)
-			})
+			// })
 			
 			document.getElementById("historyStockOut").onclick = function() {
 				window.location.href = "/ljy/historyStockOut.html";

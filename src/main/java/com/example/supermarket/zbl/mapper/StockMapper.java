@@ -61,13 +61,16 @@ public interface StockMapper {
     @Select("select count(*) from stock_out where stu_num = #{stu_num}")
     Integer queryStockoutRowsByStu(String stu_num);
     //查询角色号
-    @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
-    String queryRnum(String stu_num);
+    @Select("select rid from stuff_role where  sid = #{stu_num}")
+    Integer queryRnum(String stu_num);
     //查询库存
     @Select("select * from stock")
     List<Stock> queryStock();
     //查询库存详情根据商品号
     @Select("select * from stock where cnum = #{cnum}")
     List<Stock> queryStockByCnum(String cnum);
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 
 }

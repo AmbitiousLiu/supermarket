@@ -7,7 +7,7 @@ import java.sql.Date;
 public class Person {
     private String name ;//员工姓名
     private String gender; //性别
-    private String rname;//角色
+    private String role_name;//角色
     private String stu_num;//工号
     private String region;//所属区域
     private Double salary;//工资
@@ -16,12 +16,15 @@ public class Person {
     private String password;//密码
     private String pid;//身份证号
 
+    public Person() {
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
-                ", rname='" + rname + '\'' +
+                ", role_name='" + role_name + '\'' +
                 ", stu_num='" + stu_num + '\'' +
                 ", region='" + region + '\'' +
                 ", salary=" + salary +
@@ -32,10 +35,10 @@ public class Person {
                 '}';
     }
 
-    public Person(String name, String gender, String rname, String stu_num, String region, Double salary, Integer age, Integer seniority, String password, String pid) {
+    public Person(String name, String gender, String role_name, String stu_num, String region, Double salary, Integer age, Integer seniority, String password, String pid) {
         this.name = name;
         this.gender = gender;
-        this.rname = rname;
+        this.role_name = role_name;
         this.stu_num = stu_num;
         this.region = region;
         this.salary = salary;
@@ -61,12 +64,12 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getRname() {
-        return rname;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setRname(String rname) {
-        this.rname = rname;
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 
     public String getStu_num() {

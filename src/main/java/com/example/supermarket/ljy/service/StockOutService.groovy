@@ -3,6 +3,7 @@ package com.example.supermarket.ljy.service
 import com.alibaba.fastjson.JSON
 import com.example.supermarket.ljy.domain.Stock_out
 import com.example.supermarket.ljy.mapper.StockOutMapper
+import org.apache.ibatis.annotations.Select
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -58,5 +59,8 @@ class StockOutService {
         return stockOutMapper.queryStockoutRowsByStu(stu_num);
     };
 
-
+    //查询角色号
+    public Integer queryRnum(String stu_num){
+        return stockOutMapper.queryRnum(stu_num);
+    };
 }

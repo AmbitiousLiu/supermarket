@@ -47,12 +47,15 @@ public interface StockInMapper {
     @Select("select * from stock_in where stu_num = #{stu_num} order by indate desc limit #{begin}, #{size}")
     List<Stock_in> moreStockInByPerson(@Param("stu_num") String stu_num, @Param("begin") Integer begin, @Param("size") Integer size);
     //查询角色号
-    @Select("select stuff.rnum from role,stuff where stuff.rnum = role.rnum and stu_num = #{stu_num}")
-    String queryRnum(String stu_num);
+    @Select("select rid from stuff_role where  sid = #{stu_num}  limit 0,1")
+    Integer queryRnum(String stu_num);
     //查看出库单数量
     @Select("select count(*) from stock_in")
     Integer queryStockInRows();
     //仓库管理员查询其出库单数量
     @Select("select count(*) from stock_in where stu_num = #{stu_num}")
     Integer queryStockInRowsByStu(String stu_num);
+    //向用户分析表插入数据
+    @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+    Integer insertData(String stu_num, String url, Date qdate);
 }

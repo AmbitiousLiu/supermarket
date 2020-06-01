@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Mapper
@@ -27,5 +28,8 @@ public interface ProviderMapper {
         //根据商家号查询信息
         @Select("select * from provider where pnum = #{pnum}")
         List<Provider> getProvidersByPnum(String pnum);
+        //向用户分析表插入数据
+        @Insert("insert into userBehavior values(#{stu_num},#{url},#{qdate})")
+        Integer insertData(String stu_num, String url, Date qdate);
 
 }

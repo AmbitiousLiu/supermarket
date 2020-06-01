@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.example.supermarket.zbl.mapper.StockMapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -77,7 +78,7 @@ public class StockService {
         return stockMapper.queryStockoutRowsByStu(stu_num);
     };
     //查询角色号
-    public String queryRnum(String stu_num){
+    public Integer queryRnum(String stu_num){
         return stockMapper.queryRnum(stu_num);
     };
     //查询库存
@@ -88,5 +89,8 @@ public class StockService {
     public String queryStockByCnum(String cnum){
         return JSON.toJSONString(stockMapper.queryStockByCnum(cnum));
     };
-
+    //向用户分析表插入数据
+    public Integer insertData(String stu_num, String url, Date qdate){
+        return stockMapper.insertData(stu_num,url,qdate);
+    };
 }

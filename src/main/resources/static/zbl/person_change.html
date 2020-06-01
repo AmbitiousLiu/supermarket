@@ -36,7 +36,7 @@
 	        <li class="layui-nav-item layui-nav-itemed">
 	          <a class="" href="/zbl/person.html">个人中心</a>
 	          <dl class="layui-nav-child">
-	            <dd><a href="/zbl/person_change.html">&emsp;修改信息</a></dd>
+	            <dd class="layui-this"><a href="javascript:return false;">&emsp;修改信息</a></dd>
 	          </dl>
 	        </li>
 	        <li class="layui-nav-item">
@@ -52,6 +52,7 @@
 	            <dd><a href="/ljy/manage_role.html">&emsp;权限管理</a></dd>
 	          </dl>
 	        </li>
+	        <li class="layui-nav-item"><a href="/ljy/echarts.html">查看足迹</a></li>
 	        <li class="layui-nav-item"><a href="/ljy/about.html">关于我们</a></li>
 	      </ul>
 	    </div>
@@ -321,7 +322,7 @@
 					$("#age").val(json[0].age);
 					$("#seniority").val(json[0].seniority);
 					$("#salary").val(json[0].salary);
-					$("#rname").val(json[0].rname) ;
+					$("#rname").val(json[0].role_name) ;
 					$("#region").val(json[0].region) ;
 					$("#pid").val(json[0].pid)
 				}
