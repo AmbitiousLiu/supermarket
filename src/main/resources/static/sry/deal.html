@@ -80,10 +80,6 @@
 							<p style="display: inline;">商品价格：</p>
 							<p id="cprice" style="display: inline;">{{cprice}}</p>
 						</div>
-						<div id="month_total">
-							<p style="display: inline;">利润：</p>
-							<p id="lirun" style="display: inline;">{{lirun}}</p>
-						</div>
 					</div>
 					<div id="right">
 						<div id="modify">
@@ -121,7 +117,6 @@
 		data:{
 			cname: "name",
 			cprice: "price",
-			lirun: "lirun",
 			store: "store",
 		},
 		mounted(){
@@ -137,8 +132,7 @@
 					callback: (datas) => {
 						this.cname = datas.name
 						this.cprice = datas.price_out
-						this.lirun = datas.price_out - datas.price_in
-						this.store = datas.stock_count
+						this.store = datas.count
 						console.log(datas)
 					}
 				})
