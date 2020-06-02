@@ -86,7 +86,8 @@
 	    ,url: '/stockIn/history' //数据接口
 	    ,limit: 10
 	    ,page: true //开启分页
-	    ,cols: [[ //表头
+	    ,cols: [
+	    		[ //表头
 	      {field: 'num', title: '入库单号', fixed: 'left'}
 	      ,{field: 'cnum', title: '商品名'}
 	      ,{field: 'pnum', title: '商家'}
@@ -94,7 +95,8 @@
 	      ,{field: 'sum', title: '数量', sort: true} 
 	      ,{field: 'indate', title: '入库日期', sort: true}
 	      ,{field: 'stu_num', title: '经手人'}
-	    ]]
+	    	]
+		  ]
 	  });
 	  
 	  // ajax({

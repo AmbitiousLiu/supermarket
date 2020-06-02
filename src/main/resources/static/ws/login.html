@@ -20,6 +20,10 @@
     <!--//style sheet end here-->
     <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+
+    <link rel="stylesheet" href="../layui/css/layui.css" />
+    <script type="text/javascript" src="../layui/layui.js" ></script>
 </head>
 <body>
     <h1 class="error">超市商品管理系统</h1>
@@ -33,17 +37,17 @@
             </div>
             <div class="txt-left-side">
                 <h2> 登录 </h2>
-                <form action="/user/login" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/user/login" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return xss()">
                     <div class="form-left-to-w3l">
                         <span class="fa fa-user-o" aria-hidden="true"></span>
-                        <input type="text" name="username" placeholder=" 用户名" required="">
+                        <input type="text" name="username" placeholder=" 用户名" required="" lay-verify="required|number|username" id="username">
 
                         <div class="clear"></div>
                     </div>
                     <div class="form-left-to-w3l ">
 
                         <span class="fa fa-lock" aria-hidden="true"></span>
-                        <input type="password" name="password" placeholder="密码" required="">
+                        <input type="password" name="password" placeholder="密码" required="" lay-verify="required|password" id="password">
                         <div class="clear"></div>
                     </div>
 
@@ -63,5 +67,30 @@
         </p>
     </footer>
 </body>
+<script>
+    layui.use(['util', 'form'], function() {
+        var util = layui.util;
+        var form = layui.form;
 
+        form.verify({
+            password: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,username: [
+                /^[\S]{5,12}$/
+                ,'用户名必须5到12位，且不能出现空格'
+            ]
+        });
+
+        xss = function() {
+            var username = document.getElementById("username");
+            var password = document.getElementById("password");
+
+            username.value = util.escape(username.value);
+            password.value = util.escape(password.value);
+            return true;
+        }
+    })
+</script>
 </html>

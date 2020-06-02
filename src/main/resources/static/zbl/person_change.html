@@ -24,10 +24,11 @@
 			<shiro:user>
 				<li class="layui-nav-item">
 					用户:&nbsp;[<shiro:principal/>]欢迎您！
+					<dl class="layui-nav-child">
+						<dd><a data-method="notice" id="passwd">&nbsp;修改密码</a></dd>
+					</dl>
 				</li>
-				<dl class="layui-nav-child">
-					<dd><a data-method="notice" id="passwd">&nbsp;修改密码</a></dd>
-				</dl>
+
 				<li class="layui-nav-item"><a href="/ws/login.html" style="text-decoration:none">&nbsp;退出登录</a></li>
 			</shiro:user>>
 	      </li>

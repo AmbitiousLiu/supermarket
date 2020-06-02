@@ -39,10 +39,10 @@
 				  <dd><a href="/person/change" style="text-decoration-line: none">&emsp;修改信息</a></dd>
 			  </dl>
 			</li>
-			  <li class="layui-nav-item">
+			  <li class="layui-nav-item layui-nav-itemed">
 				  <shiro:hasPermission name="sys:c:update"> <a href="/ljy/commodity" style="text-decoration-line: none">商品管理</a></shiro:hasPermission>
 				  <dl class="layui-nav-child">
-					  <shiro:hasPermission name="sys:c:save"><dd><a href="javascript:return false;" style="text-decoration-line: none">&emsp;上架商品</a></dd></shiro:hasPermission>
+					  <shiro:hasPermission name="sys:c:save"><dd><a href="javascript:return false;" style="text-decoration-line: none" class="layui-this">&emsp;上架商品</a></dd></shiro:hasPermission>
 					  <shiro:hasPermission name="sys:c:add"><dd><a href="/ljy/provider" style="text-decoration-line: none">&emsp;购入商品</a></dd></shiro:hasPermission>
 				  </dl>
 			  </li>
@@ -86,14 +86,16 @@
 	    ,url: '/stockOut/history' //数据接口
 	    ,limit: 10
 	    ,page: true //开启分页
-	    ,cols: [[ //表头
+	    ,cols: [
+	    		[ //表头
 	      {field: 'num', title: '出库单号', fixed: 'left'}
 	      ,{field: 'cnum', title: '商品号'}
 	      ,{field: 'region', title: '类别'}
 	      ,{field: 'sum', title: '数量', sort: true} 
 	      ,{field: 'outdate', title: '出库日期', sort: true}
 	      ,{field: 'stu_num', title: '经手人'}
-	    ]]
+	    	]
+		  ]
 	  });
 	  
 	});

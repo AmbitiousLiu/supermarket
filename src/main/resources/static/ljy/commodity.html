@@ -41,7 +41,7 @@
 				  <dd><a href="/person/change" style="text-decoration-line: none">&emsp;修改信息</a></dd>
 			  </dl>
 			</li>
-			  <li class="layui-nav-item">
+			  <li class="layui-nav-item layui-nav-itemed">
 				  <shiro:hasPermission name="sys:c:update"> <a href="javascript:return false;" style="text-decoration-line: none" class="layui-this">商品管理</a></shiro:hasPermission>
 				  <dl class="layui-nav-child">
 					  <shiro:hasPermission name="sys:c:save"><dd><a href="/ljy/stock" style="text-decoration-line: none">&emsp;上架商品</a></dd></shiro:hasPermission>
@@ -102,7 +102,7 @@
 								<p>经手人：<span id="name">ljy</span></p>
 							</div>
 							<div class="history">
-								<a href="/ljy/historyStockOut.html">查看更多历史出库单-></a>
+								<a href="/ljy/historyStockOut">查看更多历史出库单-></a>
 							</div>
 						</div>
 			      </div>

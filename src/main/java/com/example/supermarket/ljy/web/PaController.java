@@ -51,7 +51,7 @@ public class PaController {
     {
         return "../static/ljy/provider";
     }
-    @RequestMapping("provide_commodity")
+    @RequestMapping("provider_commodity")
     public String provider_commodity()
     {
         return "../static/ljy/provider_commodity";
