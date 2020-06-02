@@ -18,7 +18,7 @@ class Deal_CommodityInitController {
 
     @Autowired public Deal_CommodityInitService dealCommodityInitService;
     @Autowired public Deal_StuffInitService dealStuffInitService;
-    Redis redis = new Redis();
+   // Redis redis = new Redis();
     private static Logger logger = Logger.getLogger(Deal_CommodityInitController.class);
     /**
      * GET:/deal/Commodity ('content ?: ""' means return "" if content is null)
@@ -28,19 +28,19 @@ class Deal_CommodityInitController {
     @GetMapping(value = "/commodity")
     public void initCommodity(HttpServletResponse response) throws IOException {
         String content;
-        if(redis.exists("cnum_")){
-            logger.info("Info Message, Use Redis to select value in cache");
-            content = redis.get("cnum_");
-        }else{
+//        if(redis.exists("cnum_")){
+//            logger.info("Info Message, Use Redis to select value in cache");
+//            content = redis.get("cnum_");
+//        }else{
             content = dealCommodityInitService.getAllCommodities();
-            redis.set("cnum_",content);
-            redis.expire("cnum_", 3600);
+       //     redis.set("cnum_",content);
+      //      redis.expire("cnum_", 3600);
             logger.info("Info Message, Use Mysql to select value in mysql");
-        }
+       // }
         response.setContentType("text/json;charset=utf-8");
         if (content.equals("null")) {
             response.getWriter().write("");
-            redis.expire("cnum_", 0);
+        //    redis.expire("cnum_", 0);
             logger.error("Error Message, No Commodities in database");
         } else {
             response.getWriter().write(content);
@@ -57,7 +57,7 @@ class Deal_CommodityInitController {
         String content = null;
         if(cnum != null){
             content = dealCommodityInitService.deleteCommodityByCnum(cnum);
-            redis.expire("cnum_"+cnum, 0);
+       //     redis.expire("cnum_"+cnum, 0);
         } else{
             logger.error("Error Message, You must input a cnum");
         }
@@ -80,22 +80,22 @@ class Deal_CommodityInitController {
     public void initCommodityByParam(@RequestParam(value = "cnum") String cnum,
                                                             HttpServletResponse response)  throws IOException  {
         String content;
-        if(redis.exists("cnum_"+cnum)){
-            content = redis.get("cnum_"+cnum);
-            if(content.equals("null")){
-                redis.expire("cnum_"+cnum, 0);
+//        if(redis.exists("cnum_"+cnum)){
+//            content = redis.get("cnum_"+cnum);
+//            if(content.equals("null")){
+             //   redis.expire("cnum_"+cnum, 0);
                 content = dealCommodityInitService.getCommodityByCnum(cnum);
-                redis.set("cnum_"+cnum,content);
-                redis.expire("cnum_"+cnum, 3600);
+            //    redis.set("cnum_"+cnum,content);
+           //     redis.expire("cnum_"+cnum, 3600);
                 logger.info("Info Message, Update Redis to save cnum: " + cnum +" in cache");
-            }
+          //  }
             logger.info("Info Message, Use Redis to select cnum: " + cnum +" in cache");
-        }else{
-            content = dealCommodityInitService.getCommodityByCnum(cnum);
-            redis.set("cnum_"+cnum,content);
-            redis.expire("cnum_"+cnum, 3600);
+        //}//else{
+        //    content = dealCommodityInitService.getCommodityByCnum(cnum);
+        //    redis.set("cnum_"+cnum,content);
+        //    redis.expire("cnum_"+cnum, 3600);
             logger.info("Info Message, Use Mysql to select cnum: " + cnum +" in Mysql");
-        }
+      //  }
         response.setContentType("text/json;charset=utf-8");
         if (content.equals("null")) {
             response.getWriter().write("");
@@ -119,7 +119,7 @@ class Deal_CommodityInitController {
         String content = null;
         if (cnum != null) {
             content = dealCommodityInitService.updateCommodityByCnum(cnum, name, price_out);
-            redis.expire("cnum_"+cnum, 0);
+          //  redis.expire("cnum_"+cnum, 0);
         } else {
             logger.error("Error Message, You must input a cnum");
         }
