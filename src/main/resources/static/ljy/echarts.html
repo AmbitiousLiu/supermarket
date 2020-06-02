@@ -226,11 +226,13 @@
 		    ,page: true
 		    ,limit: 10
 		    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-		    ,cols: [[
+		    ,cols: [
+		    		[
 		      {field:'stu_num', title: '职工号', align: 'center'}
 		      ,{field:'url', title: '页面', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
 		      ,{field:'date', title: '时间', sort: true, align: 'center'}
-		    ]]
+		    	]
+			  ]
 		  });
 		});
 		

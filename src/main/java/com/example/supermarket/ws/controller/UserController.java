@@ -36,7 +36,7 @@ public class UserController extends HttpServlet {//登录验证
         }catch (Exception e)
         {
             System.out.println("登录失败");
-            return "../static/ws/login";
+            return "error";
         }
 
     }

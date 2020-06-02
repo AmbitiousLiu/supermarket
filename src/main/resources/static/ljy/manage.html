@@ -47,8 +47,8 @@
 					  <shiro:hasPermission name="sys:c:add"><dd><a href="/ljy/provider" style="text-decoration-line: none">&emsp;购入商品</a></dd></shiro:hasPermission>
 				  </dl>
 			  </li>
-			  <li class="layui-nav-item">
-				  <shiro:hasPermission name="sys:y:update"><a href="javascript:return false;" style="text-decoration-line: none">员工管理</a></shiro:hasPermission>
+			  <li class="layui-nav-item layui-nav-itemed">
+				  <shiro:hasPermission name="sys:y:update"><a href="javascript:return false;" style="text-decoration-line: none" class="layui-this">员工管理</a></shiro:hasPermission>
 				  <dl class="layui-nav-child">
 					  <shiro:hasPermission name="sys:q:find"><dd><a href="/ljy/manage_role" style="text-decoration-line: none">&emsp;权限管理</a></dd></shiro:hasPermission>
 				  </dl>
@@ -89,7 +89,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label" style="width: 100px;">职工号：</label>
 					      <div class="layui-input-inline">
-					        <input type="text" name="stu_num" id="stu_num" lay-verify="required" class="layui-input" id="stu_num">
+					        <input type="text" name="stu_num" id="stu_num" lay-verify="required" class="layui-input">
 					      </div>
 					    </div>
 					    <div class="layui-inline">
@@ -263,7 +263,8 @@
 	    ,page: true
 	    ,limit: 10
 	    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-	    ,cols: [[
+	    ,cols: [
+	    		[
 	      {field:'stu_num', title: '职工号', sort: true, align: 'center'}
 	      ,{field:'name', title: '姓名', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
 	      ,{field:'gender', title: '性别', sort: true, align: 'center'}
@@ -271,7 +272,8 @@
 	      ,{field:'seniority', title: '工龄', align: 'center'}
 	      ,{field:'salary', title: '工资', align: 'center'} //单元格内容水平居中
 	      ,{field:'region', title: '所属区', sort: true, align: 'center'}
-	    ]]
+	    	]
+		  ]
 	  });
 	});
 	
@@ -362,7 +364,6 @@
 		}
 		
 		document.getElementById("upload2").onclick = function() {
-			alert("123")
 			var caozuo_select = document.getElementById("caozuo");
 			var index = caozuo_select.selectedIndex;
 			var caozuo = caozuo_select.options[index].value;

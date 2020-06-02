@@ -40,11 +40,11 @@
 				  <dd><a href="/person/change" style="text-decoration-line: none">&emsp;修改信息</a></dd>
 			  </dl>
 			</li>
-			  <li class="layui-nav-item">
+			  <li class="layui-nav-item layui-nav-itemed">
 				  <shiro:hasPermission name="sys:c:update"> <a href="/ljy/commodity" style="text-decoration-line: none">商品管理</a></shiro:hasPermission>
 				  <dl class="layui-nav-child">
 					  <shiro:hasPermission name="sys:c:save"><dd><a href="/ljy/stock" style="text-decoration-line: none">&emsp;上架商品</a></dd></shiro:hasPermission>
-					  <shiro:hasPermission name="sys:c:add"><dd><a href="javascript:return false;" style="text-decoration-line: none">&emsp;购入商品</a></dd></shiro:hasPermission>
+					  <shiro:hasPermission name="sys:c:add"><dd><a href="javascript:return false;" style="text-decoration-line: none" class="layui-this">&emsp;购入商品</a></dd></shiro:hasPermission>
 				  </dl>
 			  </li>
 			  <li class="layui-nav-item">
