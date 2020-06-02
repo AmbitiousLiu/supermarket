@@ -22,6 +22,7 @@
 	      <li class="layui-nav-item">
 	      	<img src="/image/person" class="layui-nav-img">
 	      </li>
+<<<<<<< HEAD
 
 			<shiro:user>
 				<li class="layui-nav-item">
@@ -52,10 +53,40 @@
 						<shiro:hasPermission name="sys:y:update"><a href="/ljy/manage" style="text-decoration-line: none">员工管理</a></shiro:hasPermission>
 						<dl class="layui-nav-child">
 							<shiro:hasPermission name="sys:q:find"><dd><a href="/ljy/manage_role" style="text-decoration-line: none">&emsp;权限管理</a></dd></shiro:hasPermission>
+=======
+	      <li class="layui-nav-item">
+	      	<a>姓名</a>
+	      </li>
+	      <li class="layui-nav-item"><a href="" style="text-decoration-line: none">退出登录</a></li>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="/zbl/person.html">个人中心</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="/zbl/person_change.html" style="text-decoration-line: none">&emsp;修改信息</a></dd>
 	          </dl>
 	        </li>
-	        <li class="layui-nav-item"><a href="/ljy/echarts.html">查看足迹</a></li>
-	        <li class="layui-nav-item"><a href="/ljy/about.html">关于我们</a></li>
+	        <li class="layui-nav-item layui-nav-itemed">
+	          <a href="javascript:return false;" class="layui-this" style="text-decoration-line: none">商品管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="/ljy/stock.html" style="text-decoration-line: none">&emsp;上架商品</a></dd>
+	            <dd><a href="/ljy/provider.html" style="text-decoration-line: none">&emsp;购入商品</a></dd>
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item">
+	          <a href="/ljy/manage.html" style="text-decoration-line: none">员工管理</a>
+	          <dl class="layui-nav-child">
+	            <dd><a href="/ljy/manage_role.html" style="text-decoration-line: none">&emsp;权限管理</a></dd>
+>>>>>>> 38070767bd684ff2a1c0996fbdffa430c5cabf03
+	          </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="/ljy/echarts.html" style="text-decoration-line: none">查看足迹</a></li>
+	        <li class="layui-nav-item"><a href="http://localhost:5601" style="text-decoration-line: none">日志查看</a></li>
+	        <li class="layui-nav-item"><a href="/ljy/about.html" style="text-decoration-line: none">关于我们</a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -83,10 +114,6 @@
 						<div id="Unit_Price">
 							<p style="display: inline;">商品价格：</p>
 							<p id="cprice" style="display: inline;">{{cprice}}</p>
-						</div>
-						<div id="month_total">
-							<p style="display: inline;">利润：</p>
-							<p id="lirun" style="display: inline;">{{lirun}}</p>
 						</div>
 					</div>
 					<div id="right">
@@ -125,7 +152,6 @@
 		data:{
 			cname: "name",
 			cprice: "price",
-			lirun: "lirun",
 			store: "store",
 		},
 		mounted(){
@@ -141,8 +167,7 @@
 					callback: (datas) => {
 						this.cname = datas.name
 						this.cprice = datas.price_out
-						this.lirun = datas.price_out - datas.price_in
-						this.store = datas.stock_count
+						this.store = datas.count
 						console.log(datas)
 					}
 				})
