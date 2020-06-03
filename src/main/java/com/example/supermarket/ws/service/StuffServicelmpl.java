@@ -17,14 +17,12 @@ public class StuffServicelmpl {
     StuffMapper stuffMapper;
 
     public Stuff findStuffByStunum(String stu_num) {
-        System.out.println(stuffMapper.findStuffByStunum(stu_num));
         return stuffMapper.findStuffByStunum(stu_num);
     }
     public void checkLogin(String username,String password)throws Exception{
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         subject.login(token);
-        System.out.println("验证login");
         subject.getSession();
 
     }

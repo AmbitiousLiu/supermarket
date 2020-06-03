@@ -2,6 +2,9 @@ package com.example.supermarket.ljy.web
 
 import com.alibaba.fastjson.JSONObject
 import com.example.supermarket.ljy.service.StockOutService
+import com.example.supermarket.zbl.web.GetcnumController
+import org.apache.log4j.Logger
+import org.apache.log4j.spi.LoggingEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -21,6 +24,8 @@ class StockOutController {
 
     @Autowired StockOutService stockOutService
 
+    private static Logger logger = Logger.getLogger(GetcnumController.class);
+    LoggingEvent loggingEvent;
 //    def SIZE = 10
 
     @RequestMapping(value = "/history")
@@ -41,7 +46,7 @@ class StockOutController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
-
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
         response.setContentType("text/json;charset=utf-8")
         if ("1".equals(rnum) || "2".equals(rnum)) {
             content = stockOutService.queryStockoutRows()

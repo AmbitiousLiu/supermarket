@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.ws.service.StuffServicelmpl;
 import com.example.supermarket.zbl.domain.Person;
 import com.example.supermarket.zbl.service.PersonInitService;
+import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.apache.log4j.spi.LoggingEvent;
 
 
 import javax.annotation.Resource;
@@ -22,7 +24,8 @@ import java.util.List;
 public class PersonInitController {
     @Autowired PersonInitService personInitService;
     @Resource StuffServicelmpl stuffServicelmpl;
-
+    private static Logger logger = Logger.getLogger(PersonInitController.class);
+    LoggingEvent loggingEvent;
     //查询用户信息
     @RequestMapping(value = "/getInfo") void initPerson(HttpServletResponse response, HttpSession session) throws Exception {
 //        session.getAttribute("stu_num");
@@ -37,7 +40,12 @@ public class PersonInitController {
         Date qdate = new Date(time);
         //插入足迹
         personInitService.insertData(session.getAttribute("stu_num").toString(),"个人中心",qdate);
-//        System.out.println(content);
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        if (content == null){
+            logger.error("Get user info failed!");
+        } else{
+            logger.info("Get user info success!");
+        }
         response.getWriter().write(content==null ?"":content);
 
     }
@@ -56,11 +64,15 @@ public class PersonInitController {
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
         Integer integer = personInitService.modifyAllInfo(name,seniority,pid,stu_num,Integer.parseInt(age));
-//        System.out.println(integer);
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
         response.setContentType("text/json;charset=utf-8");
         //返回1则修改成功，0则失败
+        if (integer == 0){
+            logger.error("Update user info faile!");
+        } else{
+            logger.info("update user info succuss");
+        }
         response.getWriter().write(integer == 0 ?"0":"1");
-//        response.sendRedirect("/zbl/person_change.html");
     }
     //修改密码功能
     @RequestMapping(value = "/modifyPas")
@@ -75,17 +87,18 @@ public class PersonInitController {
         String stu_num = session.getAttribute("stu_num").toString();
         //获得旧密码
         String oldPassword = personInitService.getInfo(stu_num).get(0).getPassword();
-        System.out.println(oldPassword);
         Md5Hash md5Hash =new Md5Hash(old);
-        System.out.println(md5Hash);
         response.setContentType("text/json;charset=utf-8");
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
         //如果旧密码验证成功则可以修改密码
         if(md5Hash.toString().equals(oldPassword)){
             Integer integer = personInitService.modifyPassword(stu_num,password);
+            logger.info("Update password success!");
             //返回1则修改成功
             response.getWriter().write("1");
         }else {
             //旧密码验证失败则无法修改
+            logger.error("Update password false!");
             response.getWriter().write("0");
         }
     }//获得角色表stuff表联查信息
@@ -101,7 +114,7 @@ public class PersonInitController {
         Date qdate = new Date(time);
         //插入足迹
         personInitService.insertData(session.getAttribute("stu_num").toString(),"权限管理",qdate);
-
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
@@ -119,6 +132,8 @@ public class PersonInitController {
         String sid = personInitService.queryStunumByName(name) ;
         //修改stuff_role表账号权限信息
         Integer integer = personInitService.updateRnum(Integer.parseInt(rnum),sid);
+        HttpSession session = null;
+        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
         response.setContentType("text/json;charset=utf-8");
 //        response.getWriter().write(integer);
         return integer;
@@ -128,7 +143,6 @@ public class PersonInitController {
     public void getName (HttpServletResponse response)throws  IOException{
         String content = personInitService.queryName();
         response.setContentType("text/json;charset=utf-8");
-        System.out.println(content);
         response.getWriter().write(content==null ?"":content);
 
     }

@@ -37,12 +37,9 @@ public class MyRealm extends AuthorizingRealm {
         //获取用户的用户名
         String stu_num=(String) principalCollection.iterator().next();
         //根据用户名查询当前用户的角色列表
-        System.out.println(stu_num);
         Set<String> rolename=roleService.queryRoleNameByStunum(stu_num);
         //根据用户名查询当前用户的权限列表
         Set<String> ps=permissionServicelmpl.queryPermissionsByStunum(stu_num);
-        System.out.println(rolename);
-        System.out.println(ps);
         SimpleAuthorizationInfo info =new SimpleAuthorizationInfo();
         info.setRoles(rolename);
         info.setStringPermissions(ps);
@@ -59,12 +56,9 @@ public class MyRealm extends AuthorizingRealm {
         Stuff stuff=stuffServicelmpl.findStuffByStunum(stu_num);
         if(stuff==null)
         {
-            System.out.println("没查到");
             return null;
         }
-        System.out.println(stuff.getPassword());
         AuthenticationInfo info =new SimpleAuthenticationInfo(stu_num,stuff.getPassword(),getName());
-
         return info;
     }
 }
