@@ -3,6 +3,9 @@ package com.example.supermarket.ljy.web
 import com.example.supermarket.ljy.hadoop.Hdfs
 import com.example.supermarket.ljy.service.CommodityInitService
 import com.example.supermarket.ljy.service.StockOutService
+import com.example.supermarket.zbl.web.GetcnumController
+import org.apache.log4j.Logger
+import org.apache.log4j.spi.LoggingEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -25,29 +28,20 @@ class CommodityInitController {
 
     @Autowired CommodityInitService commodityInitService
     @Autowired StockOutService stockOutService
-
+    private static Logger logger = Logger.getLogger(GetcnumController.class);
+    LoggingEvent loggingEvent;
     /**
      * GET:/commodity/commodity ('content ?: ""' means return "" if content is null)
      * @param response: json string of commodities's data
      * @return
      */
     @GetMapping(value = "/commodity") initCommodity(HttpSession session, HttpServletResponse response) {
-//        def session = request.getSession()
-
-//        String position = session.getAttribute("position")
         def content
-//        if (position == "ROLE_总经理" || position == "ROLE_副经理") {
-//print(session.getAttribute("stu_num").toString())
-        //生成日期
         long time = System.currentTimeMillis();
         Date qdate = new Date(time)
         commodityInitService.insertData(session.getAttribute("stu_num").toString(),"商品管理",qdate);
-            content = commodityInitService.getAllCommodities()
-//        } else if (position == "ROLE_库房管理人员") {
-//            content = commodityInitService.getCommoditiesBySort(session.getAttribute("region")?.toString())
-//        } else {
-//            return
-//        }
+        logger.info("name:" + session.getAttribute("name".toString()));
+        content = commodityInitService.getAllCommodities()
         response.setContentType("text/json;charset=utf-8")
         response.getWriter().write(content ?: "")
     }
@@ -67,9 +61,12 @@ class CommodityInitController {
             return
         }
         response.setContentType("text/json;charset=utf-8")
+        logger.info("name:" + session.getAttribute("name".toString()));
         if ( "01".equals(rnum)|| "02".equals(rnum)) {
+            logger.info("name:" + session.getAttribute("name".toString()) + " is a Manager so get all datas");
             response.getWriter().write(stockOutService.initStockOut())
         } else  {
+            logger.info("name:" + session.getAttribute("name".toString()) + " is a store Manager so get datas that deal by he")
             response.getWriter().write(stockOutService.initStockOutByPerson(stu_num));
         }
     }

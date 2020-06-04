@@ -29,7 +29,6 @@ public class FootPrintsController {
         jsonObject.put("msg","");
         Integer content = footPrintsService.queryRows(stu_num);
         jsonObject.put("count",content);
-        System.out.println(footPrintsService.queryPrints(stu_num,Integer.parseInt(page),Integer.parseInt(limit)));
         jsonObject.put("data",footPrintsService.queryPrints(stu_num,Integer.parseInt(page),Integer.parseInt(limit)));
 
         return jsonObject.toString();

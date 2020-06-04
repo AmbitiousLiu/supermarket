@@ -31,7 +31,6 @@ public class SubmitStock_outController {
         String username=session.getAttribute("stu_num").toString();
         String password=session.getAttribute("password").toString();
         stuffServicelmpl.checkLogin(username,password);
-        System.out.println(num);
         //生成出库日期
         long time = System.currentTimeMillis();
         Date outdate = new Date(time);
@@ -45,18 +44,13 @@ public class SubmitStock_outController {
 
         response.setContentType("text/json;charset=utf-8");
         //查询商品库存数量
-        System.out.println(stock_out.getCnum());
         Integer sums = stockService.querySum(stock_out.getCnum());
 
         List<String> cnums = stockService.queryCnums();
 
         //判断出库单号是否重复
-//        System.out.println(Integer.parseInt(sum));
-            System.out.println(sums);
-        System.out.println(stock_out.toString());
 
                 Integer content = stockService.insertStockOut(stock_out.getNum(), stock_out.getCnum(), stock_out.getOutdate(), stock_out.getSum(), stu_num,region,stock_out.getName(),stock_out.getCname());
-                System.out.println(content);
                 if (content == 0) {
                     response.getWriter().write("-1");
                 } else {
@@ -67,9 +61,11 @@ public class SubmitStock_outController {
                         Date p_date = stockService.queryPdate(cnum);
                         String safe_date = stockService.querySafedate(cnum);
                         //上架新商品
+                        logger.info("The commodity is not on the shelf so add the commodity by cnum:" + cnum + "by name:" + name);
                         stockService.addCommodity(cnum, cname, region, p_date, safe_date, Integer.parseInt(price), Integer.parseInt(sum));
                     } else {
                         //更新架上商品数量和价格
+                        logger.info("The commodity is on the shelf so update the commodity by cnum:" + cnum + "by name:" + name);
                         stockService.updateCom(stock_out.getSum(), stock_out.getCnum(), Integer.parseInt(price));
                     }
 
@@ -95,7 +91,6 @@ public class SubmitStock_outController {
     public void getRows(HttpServletResponse response,HttpSession session)throws IOException{
         //获得账号
         String stu_num = session.getAttribute("stu_num").toString();
-        System.out.println(stu_num);
 
         //获得角色号
         String rnum = stockService.queryRnum(stu_num).toString();
@@ -104,9 +99,11 @@ public class SubmitStock_outController {
         //如果是总经理或副总经理,则拿到所有数据
         if ("1".equals(rnum)||"2".equals(rnum)){
             content = stockService.queryStockoutRows();
+            logger.info("Manager, get all datas");
             //如果是仓库管理员，则拿到自己经手的出库单数据
         }else {
             content = stockService.queryStockoutRowsByStu(stu_num);
+            logger.info("Store manager, get the datas that stock by you");
         }
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == 0 ? 0 :content);

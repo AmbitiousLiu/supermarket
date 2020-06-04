@@ -2,6 +2,9 @@ package com.example.supermarket.lh.web;
 
 
 import com.example.supermarket.lh.service.ProviderCommodityService;
+import com.example.supermarket.zbl.web.GetcnumController;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,8 @@ import java.sql.Date;
 public class ProviderCommodityController {
     @Autowired
     public ProviderCommodityService providerCommodityService;
-
+    private static Logger logger = Logger.getLogger(GetcnumController.class);
+    LoggingEvent loggingEvent;
     @GetMapping(value = "getCommodities")
     //通过商家号查询商家商品
     public void getCommodities(HttpServletResponse response, HttpSession session, @RequestParam(value = "pnum")String pnum)
@@ -28,7 +32,7 @@ public class ProviderCommodityController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time);
         providerCommodityService.insertData(session.getAttribute("stu_num").toString(),"购入商品",qdate);
-
+        logger.info("name:" + session.getAttribute("name".toString()));
         String content = providerCommodityService.getProviderCommodityByPnum(pnum);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ? "" : content);
@@ -41,7 +45,7 @@ public class ProviderCommodityController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time);
         providerCommodityService.insertData(session.getAttribute("stu_num").toString(),"购入商品",qdate);
-
+        logger.info("name:" + session.getAttribute("name".toString()));
         String content = providerCommodityService.getComInfo(cnum);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ? "" : content);

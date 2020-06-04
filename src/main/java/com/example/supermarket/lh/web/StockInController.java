@@ -3,6 +3,9 @@ package com.example.supermarket.lh.web;
 import com.alibaba.fastjson.JSONObject;
 import com.example.supermarket.lh.domain.Stock_in;
 import com.example.supermarket.lh.service.StockInService;
+import com.example.supermarket.zbl.web.GetcnumController;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,8 @@ public class StockInController {
 
     @Autowired
     StockInService stockInService;
+    private static Logger logger = Logger.getLogger(GetcnumController.class);
+    LoggingEvent loggingEvent;
 
     /**
      * POST:/commodity/deal
@@ -56,6 +61,7 @@ public class StockInController {
 
         //插入足迹
         stockInService.insertData(session.getAttribute("stu_num").toString(),"购入商品",indate);
+        logger.info("name:" + session.getAttribute("name".toString()));
 
         //插入入库表
         Integer content = stockInService.addStock(stock_in.getNum(),stock_in.getPnum(),

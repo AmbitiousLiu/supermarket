@@ -2,6 +2,8 @@ package com.example.supermarket.ws.controller;
 
 import com.example.supermarket.ws.domain.Stuff;
 import com.example.supermarket.ws.service.StuffServicelmpl;
+import com.example.supermarket.zbl.web.PersonInitController;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +20,7 @@ import java.io.IOException;
 public class UserController extends HttpServlet {//登录验证
     @Resource
     private StuffServicelmpl stuffServicelmpl;
-
+    private static Logger logger = Logger.getLogger(StuffServicelmpl.class);
     @RequestMapping("login")
     public String login(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
             HttpSession session =request.getSession();
@@ -27,15 +29,14 @@ public class UserController extends HttpServlet {//登录验证
             Stuff stuff=stuffServicelmpl.findStuffByStunum(username);
         try {
             stuffServicelmpl.checkLogin(username, password);
-            System.out.println("---登录成功---");
                 session.setAttribute("stu_num",username);
                 session.setAttribute("password",password);
                 session.setAttribute("name",stuff.getName());
-
+                logger.info("name:" + stuff.getName() + " Login succuss!");
             return "../static/zbl/person";
         }catch (Exception e)
         {
-            System.out.println("登录失败");
+            logger.warn("Someone try to login with wrong!");
             return "error";
         }
 

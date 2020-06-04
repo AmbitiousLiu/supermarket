@@ -3,6 +3,8 @@ package com.example.supermarket.zbl.web;
 
 import com.example.supermarket.ws.service.StuffServicelmpl;
 import org.apache.catalina.Session;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,8 @@ import java.io.IOException;
 public class GetcnumController {
     @Resource
     StuffServicelmpl stuffServicelmpl;
+    private static Logger logger = Logger.getLogger(GetcnumController.class);
+    LoggingEvent loggingEvent;
     //获得用户名
     @GetMapping (value = "/userName")
     void initUsername(HttpServletRequest request ,HttpServletResponse response ) throws Exception {
@@ -26,8 +30,12 @@ public class GetcnumController {
         String password=session.getAttribute("password").toString();
         stuffServicelmpl.checkLogin(username,password);
         response.setContentType("text/json;charset=utf-8");
+        logger.info("name:" + session.getAttribute("name".toString()));
+        if(name == null){
+            logger.info("Get name false!");
+        } else {
+            logger.info("Get name success!");
+        }
         response.getWriter().write(name==null ?"":name);
-
-
     }
 }
