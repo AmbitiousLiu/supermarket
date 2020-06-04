@@ -30,7 +30,7 @@ public class GetcnumController {
         String password=session.getAttribute("password").toString();
         stuffServicelmpl.checkLogin(username,password);
         response.setContentType("text/json;charset=utf-8");
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         if(name == null){
             logger.info("Get name false!");
         } else {

@@ -26,7 +26,7 @@ class ModifyEmployeeController {
     LoggingEvent loggingEvent;
     @RequestMapping("/delete")
     def delete(@RequestParam("tiaojian") String tiaojian, @RequestParam("tiaojianzhi") String tiaojianzhi, HttpServletResponse response) {
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         def i = modifyEmployeeService.delete(tiaojian, tiaojianzhi)
         def json = new JSONObject()
         response.setContentType("text/json;charset=utf-8")
@@ -48,7 +48,7 @@ class ModifyEmployeeController {
                @RequestParam("xiugaizhi") String xiugaizhi,
                HttpServletResponse response) {
 
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         def i = modifyEmployeeService.update(tiaojian, tiaojianzhi, gaixinxi, xiugaizhi)
         def json = new JSONObject()
         response.setContentType("text/json;charset=utf-8")

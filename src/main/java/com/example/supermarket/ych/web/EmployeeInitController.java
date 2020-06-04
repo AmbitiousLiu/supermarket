@@ -38,7 +38,7 @@ public class EmployeeInitController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time);
         employeeInitService.insertData(session.getAttribute("stu_num").toString(),"员工管理",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
@@ -60,7 +60,7 @@ public class EmployeeInitController {
         Integer integer = employeeInitService.insertInfo(region,stu_num,name,sex,seniority,Integer.parseInt(salary),Integer.parseInt(age));
 //      Employee employee = new Employee(region,stu_num,name,Integer.parseInt(age),Integer.parseInt(salary),seniority,sex);
         HttpSession session = null;
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         response.setContentType("text/json;charset=utf-8");
         if (integer == 0){
             logger.error("Insert employee false!");
@@ -72,7 +72,7 @@ public class EmployeeInitController {
 
     @RequestMapping (value = "/deleteInfo") void deleteEmployee(HttpServletResponse response, HttpServletRequest request)throws IOException{
         HttpSession session = null;
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         Integer integer = employeeInitService.deleteInfo(request.getParameter("stu_num"));
         response.setContentType("text/json;charset=utf-8");
         if (integer == 0){

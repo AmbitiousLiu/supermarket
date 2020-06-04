@@ -61,7 +61,7 @@ public class StockInController {
 
         //插入足迹
         stockInService.insertData(session.getAttribute("stu_num").toString(),"购入商品",indate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
 
         //插入入库表
         Integer content = stockInService.addStock(stock_in.getNum(),stock_in.getPnum(),

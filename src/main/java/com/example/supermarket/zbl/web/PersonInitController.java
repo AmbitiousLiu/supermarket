@@ -40,7 +40,7 @@ public class PersonInitController {
         Date qdate = new Date(time);
         //插入足迹
         personInitService.insertData(session.getAttribute("stu_num").toString(),"个人中心",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         if (content == null){
             logger.error("Get user info failed!");
         } else{
@@ -64,7 +64,7 @@ public class PersonInitController {
         String stu_num = session.getAttribute("stu_num").toString();
         //修改用户信息
         Integer integer = personInitService.modifyAllInfo(name,seniority,pid,stu_num,Integer.parseInt(age));
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         response.setContentType("text/json;charset=utf-8");
         //返回1则修改成功，0则失败
         if (integer == 0){
@@ -89,7 +89,7 @@ public class PersonInitController {
         String oldPassword = personInitService.getInfo(stu_num).get(0).getPassword();
         Md5Hash md5Hash =new Md5Hash(old);
         response.setContentType("text/json;charset=utf-8");
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         //如果旧密码验证成功则可以修改密码
         if(md5Hash.toString().equals(oldPassword)){
             Integer integer = personInitService.modifyPassword(stu_num,password);
@@ -114,7 +114,7 @@ public class PersonInitController {
         Date qdate = new Date(time);
         //插入足迹
         personInitService.insertData(session.getAttribute("stu_num").toString(),"权限管理",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
@@ -133,7 +133,7 @@ public class PersonInitController {
         //修改stuff_role表账号权限信息
         Integer integer = personInitService.updateRnum(Integer.parseInt(rnum),sid);
         HttpSession session = null;
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         response.setContentType("text/json;charset=utf-8");
 //        response.getWriter().write(integer);
         return integer;

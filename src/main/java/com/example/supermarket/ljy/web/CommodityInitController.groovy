@@ -40,7 +40,7 @@ class CommodityInitController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time)
         commodityInitService.insertData(session.getAttribute("stu_num").toString(),"商品管理",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         content = commodityInitService.getAllCommodities()
         response.setContentType("text/json;charset=utf-8")
         response.getWriter().write(content ?: "")
@@ -61,7 +61,7 @@ class CommodityInitController {
             return
         }
         response.setContentType("text/json;charset=utf-8")
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         if ( "01".equals(rnum)|| "02".equals(rnum)) {
             logger.info("name:" + session.getAttribute("name".toString()) + " is a Manager so get all datas");
             response.getWriter().write(stockOutService.initStockOut())

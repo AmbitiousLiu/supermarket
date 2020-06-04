@@ -46,7 +46,7 @@ class StockOutController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code",0 );
         jsonObject.put("msg","");
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         response.setContentType("text/json;charset=utf-8")
         if ("1".equals(rnum) || "2".equals(rnum)) {
             content = stockOutService.queryStockoutRows()

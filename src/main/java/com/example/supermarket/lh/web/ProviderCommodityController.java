@@ -32,7 +32,7 @@ public class ProviderCommodityController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time);
         providerCommodityService.insertData(session.getAttribute("stu_num").toString(),"购入商品",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         String content = providerCommodityService.getProviderCommodityByPnum(pnum);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ? "" : content);
@@ -45,7 +45,7 @@ public class ProviderCommodityController {
         long time = System.currentTimeMillis();
         Date qdate = new Date(time);
         providerCommodityService.insertData(session.getAttribute("stu_num").toString(),"购入商品",qdate);
-        logger.info("name:" + session.getAttribute("name".toString()) + " use: " + loggingEvent.getLocationInformation().getMethodName());
+        logger.info("name:" + session.getAttribute("name".toString()));
         String content = providerCommodityService.getComInfo(cnum);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ? "" : content);
