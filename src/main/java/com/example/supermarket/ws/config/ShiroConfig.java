@@ -79,9 +79,13 @@ public class ShiroConfig {//shiro配置
         filterMap.put("/zbl/person.html","authc");
         filterMap.put("/ljy/**","authc");
         filterMap.put("/sry/**","authc");
+        filterMap.put("/person/**","authc");
+        filterMap.put("/person/person","authc");
         filterMap.put("/zbl/person_change.html","authc");
         filterMap.put("/ljy/manage_role","perms[sys:q:find]");
         filterMap.put("/ljy/manage","perms[sys:y:update]");
+        filterMap.put("/ljy/stock","perms[sys:c:save]");
+        filterMap.put("/ljy/provider","perms[sys:c:add]");
 
 
 

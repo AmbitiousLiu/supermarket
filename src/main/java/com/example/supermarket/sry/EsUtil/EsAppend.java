@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class EsAppend extends AppenderSkeleton {
-    private static  EsRestHighLevelClient esClient;//es客户端
+  //  private static  EsRestHighLevelClient esClient;//es客户端
     private String confName;//es配置文件名
     private ExecutorService executorService = Executors.newFixedThreadPool(10);
 
