@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title>超市管理系统</title>
+		<link rel="stylesheet" href="../public/css/bootstrap.css" />
+		<script type="text/javascript" src="../public/js/vue.js" ></script>
+		<script type="text/javascript" src="../public/js/ajaxUtil.js" ></script>
+		<script type="text/javascript" src="../public/js/jquery-1.12.4.js" ></script>
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<link rel="stylesheet" href="css/search.css" />
+		<script type="text/javascript" src="../layui/layui.js" ></script>
+	</head>
+	
+	<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">超市管理系统</div>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	      	<img src="/image/person" class="layui-nav-img">
+	      </li>
+			<shiro:user>
+				<li class="layui-nav-item">
+					用户[<shiro:principal/>]欢迎您！
+				</li>
+				<li class="layui-nav-item"><a href="/ws/login.html" style="text-decoration:none">退出登录</a></li>
+			</shiro:user>
+	    </ul>
+	  </div>
+	  
+	  <div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	        <li class="layui-nav-item">
+	          <a class="" href="/person/person">个人中心</a>
+	          <dl class="layui-nav-child">
+				  <dd><a href="/person/change" style="text-decoration-line: none">&emsp;修改信息</a></dd>
+			  </dl>
+			</li>
+			  <li class="layui-nav-item">
+				  <shiro:hasPermission name="sys:c:update"> <a href="/ljy/commodity" style="text-decoration-line: none">商品管理</a></shiro:hasPermission>
+				  <dl class="layui-nav-child">
+					  <shiro:hasPermission name="sys:c:save"><dd><a href="/ljy/stock" style="text-decoration-line: none">&emsp;上架商品</a></dd></shiro:hasPermission>
+					  <shiro:hasPermission name="sys:c:add"><dd><a href="/ljy/provider" style="text-decoration-line: none">&emsp;购入商品</a></dd></shiro:hasPermission>
+				  </dl>
+			  </li>
+			  <li class="layui-nav-item">
+				  <shiro:hasPermission name="sys:y:update"><a href="/ljy/manage" style="text-decoration-line: none">员工管理</a></shiro:hasPermission>
+				  <dl class="layui-nav-child">
+					  <shiro:hasPermission name="sys:q:find"><dd><a href="/ljy/manage_role" style="text-decoration-line: none">&emsp;权限管理</a></dd></shiro:hasPermission>
+				  </dl>
+			  </li>
+			  <li class="layui-nav-item"><a href="javascript:return false;" style="text-decoration-line: none">查看足迹</a></li>
+			  <li class="layui-nav-item layui-this"><a href="/ljy/search.html" style="text-decoration-line: none">搜一搜</a></li>
+			  <li class="layui-nav-item"><a href="/ljy/about" style="text-decoration-line: none">关于我们</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-body" style="margin-bottom: -45px; background: #F0F0F0;">
+	    <!-- 内容主体区域 -->
+	    <div style="padding: 30px;">
+	    	
+			<!-- 搜索页面 -->
+			<form id="main" class="layui-form-item">
+				
+				<div class="layui-row layui-col-space10">
+				    <div class="layui-col-md11">
+				      <div class="grid-demo grid-demo-bg1">
+				      	<input class="layui-input" type="text" v-model="searchString" placeholder="输入搜索内容" />
+				      </div>
+				    </div>
+				    <div class="layui-col-md1">
+				      <div class="grid-demo">
+				      	<i id="search" class="layui-btn layui-icon layui-icon-search" style="font-size: 15px;" @click="getInfo()"></i>
+				      </div>
+				    </div>
+				</div>
+			 	<hr class="layui-bg-green" style="margin: 30px;">
+			 	<div>
+				 	<div v-for="article in articles" style="margin-top: 20px; padding: 20px;" class="layui-card">
+				 		<a v-bind:href="article.url">
+			            <i class="layui-icon layui-icon-release" style="margin-right: 10px;"></i><span>{{article.title}}</span>
+			            </a>
+				 	</div>
+			 	</div>
+			 
+			</form>
+	    	
+	    </div>
+	  </div>
+
+	</div>
+	<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+	</script>
+	
+</body>
+	
+	<script type="text/javascript">
+		
+		var v1 = new Vue({
+			el: '#main',
+			data: {
+		        searchString: "",
+		 
+		        // 数据模型，返回数据请按照这个格式来
+		        // title：可以显示查询结果的标题，也可以直接显示日志的全部信息。
+		        // url: 如果是业务数据，可以添加相应链接，跳转到相应页面，如果日志，可以不要链接，也可以再加一个查看日志的页面。
+		 
+		        articles: [
+		            {
+		                "title": "What You Need To Know About CSS Variables",
+		                "url": "/ljy/commodity"
+		            },
+		            {
+		                "title": "Freebie: 4 Great Looking Pricing Tables",
+		                "url": ""
+		            },
+		            {
+		                "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
+		                "url": "https://www.runoob.com/css3/css3-tutorial.html"
+		            },
+		            {
+		                "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
+		                "url": "https://www.runoob.com/css3/css3-tutorial.html"
+		            },
+		            {
+		                "title": "Learn SQL In 20 Minutes",
+		                "url": "https://www.runoob.com/sql/sql-tutorial.html"
+		            },
+		            {
+		                "title": "Creating Your First Desktop App With HTML, JS and Electron",
+		                "url": "https://www.runoob.com/js/js-tutorial.html"
+		            }
+		        ]
+		    },
+			methods: {
+				getInfo() {
+					ajax({
+						method: HTTP_METHOD.POST, 
+				   		url: "", 
+				   		params: "text="+this.searchString, 
+				   		async: true, 
+				   		type: HTTP_RESPONSE_TYPE.JSON, 
+				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+				   			
+				   			this.articles = datas
+				   		}
+			   		})
+				}
+			}
+		})
+		
+		
+		
+    
+		
+	</script>
+	
+</html>
