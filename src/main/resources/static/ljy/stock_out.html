@@ -118,7 +118,7 @@
 			    <div class="layui-inline">
 			      <label class="layui-form-label"  style="width: 100px;">售价：</label>
 			      <div class="layui-input-inline">
-			        <input type="text" name="price_out" id="price_out" lay-verify="required|number" autocomplete="off" class="layui-input">
+			        <input type="text" name="price_out" id="price_out" lay-verify="required|number|price" autocomplete="off" class="layui-input">
 			      </div>
 			    </div>
 			  </div>
@@ -127,7 +127,7 @@
 			  	<div class="layui-inline">
 			      <div class="layui-input-inline">
 			      	<label class="layui-form-label"  style="width: 100px;">
-			      		<input type="button" id="upload" lay-submit="" lay-filter="L_submit" class="layui-btn" value="提交" style="margin-left: 85px;"/>
+			      		<input type="button" id="upload" lay-submit lay-filter="L_submit" class="layui-btn" value="提交" style="margin-left: 85px;"/>
 			      	</label>
 			      </div>
 			    </div>
@@ -188,16 +188,22 @@
 			    	if(Number(value) > Number($("#count").val())) {
 			    		return '库存不足！';
 			    	}
+			    },
+			    price: function(value) {
+			    	if (Number(value) <= 0) {
+			    		return '请输入合理的售价！'
+			    	}
 			    }
 			})
 			
 			
-			// form.on('submit(L_submit)', function(data) {
-			$("#upload").click(
+			form.on('submit(L_submit)', function(data) {
+			//$("#upload").click(
 
 
-				function submitTable(){
+				//function submitTable(){
 					var sum = util.escape($("#sum").val());
+					
 					var num = $("#num").val();
 					var price_out = util.escape($("#price_out").val());
 					var cnum = $("#cnum").val();
@@ -220,9 +226,10 @@
 							// 改用箭头函数 ，this 就会与当前环境 上下文保持一致，就是 this 指向是 Vue的实例
 						}
 					})
-				}
-			)
-			// })
+				//}
+			//)
+			return false;
+			})
 			
 			document.getElementById("historyStockOut").onclick = function() {
 				window.location.href = "/ljy/historyStockOut";

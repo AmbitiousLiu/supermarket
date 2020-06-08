@@ -184,7 +184,12 @@
                         radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
                         data:datas.sort(function (a, b) { return a.value - b.value; })
                     }
-                ]
+                ],
+                
+                tooltip: {
+			        trigger: 'item',
+			        formatter: '{a} <br/>{b} : {c} ({d}%)'
+			    },
             });
 		    mychart.hideLoading(); 
 		}, 'json')
@@ -210,9 +215,14 @@
 			        type: 'value'
 			    },
 			    series: [{
+			    	name: '访问数量',
 			        data: values,
 			        type: 'bar'
-			    }]
+			    }],
+			    tooltip: {
+			        trigger: 'item',
+			        formatter: '{a} <br/>{b} : {c}'
+			    },
 			});
 		    bar.hideLoading(); 
 		}, 'json')

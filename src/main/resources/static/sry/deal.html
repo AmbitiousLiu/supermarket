@@ -22,7 +22,6 @@
 	      <li class="layui-nav-item">
 	      	<img src="/image/person" class="layui-nav-img">
 	      </li>
-<<<<<<< HEAD
 
 			<shiro:user>
 				<li class="layui-nav-item">
@@ -53,7 +52,6 @@
 						<shiro:hasPermission name="sys:y:update"><a href="/ljy/manage" style="text-decoration-line: none">员工管理</a></shiro:hasPermission>
 						<dl class="layui-nav-child">
 							<shiro:hasPermission name="sys:q:find"><dd><a href="/ljy/manage_role" style="text-decoration-line: none">&emsp;权限管理</a></dd></shiro:hasPermission>
-=======
 	      <li class="layui-nav-item">
 	      	<a>姓名</a>
 	      </li>
@@ -81,7 +79,6 @@
 	          <a href="/ljy/manage.html" style="text-decoration-line: none">员工管理</a>
 	          <dl class="layui-nav-child">
 	            <dd><a href="/ljy/manage_role.html" style="text-decoration-line: none">&emsp;权限管理</a></dd>
->>>>>>> 38070767bd684ff2a1c0996fbdffa430c5cabf03
 	          </dl>
 	        </li>
 	        <li class="layui-nav-item"><a href="/ljy/echarts.html" style="text-decoration-line: none">查看足迹</a></li>
@@ -98,29 +95,29 @@
 			  	<div id="butoom">
 					<div id="left">
 						<img src="img/shucai.jpg" class="img-thumbnail" id="cimg">
-						<div id="Lower_shelf" onclick="del()">
+						<div id="Lower_shelf" onclick="del()" style="color: black;">
 							下架
 						</div>
 					</div>
 					<div id="center">
 						<div id="Commodity_Name">
-							<p style="display: inline;">商品名：</p>
-							<p id="cname" style="display: inline;">{{cname}}</p>
+							<p style="display: inline;color: black;">商品名：</p>
+							<p id="cname" style="display: inline;color: black;">{{cname}}</p>
 						</div>
 						<div id="Inventory">
-							<p style="display: inline;">库存量：</p>
-							<p id="store" style="display: inline;">{{store}}</p>
+							<p style="display: inline;color: black;">架上数量：</p>
+							<p id="store" style="display: inline;color: black;">{{store}}</p>
 						</div>
 						<div id="Unit_Price">
-							<p style="display: inline;">商品价格：</p>
-							<p id="cprice" style="display: inline;">{{cprice}}</p>
+							<p style="display: inline;color: black;">商品价格：</p>
+							<p id="cprice" style="display: inline;color: black;">{{cprice}}</p>
 						</div>
 					</div>
 					<div id="right">
-						<div id="modify">
+						<div id="modify" style="color: black;">
 							修改商品名
 						</div>
-						<div id="change_unit_price">
+						<div id="change_unit_price" style="color: black;">
 							修改单价
 						</div>
 					</div>
@@ -128,7 +125,7 @@
 	    	
 	    </div>
 	  </div>
-
+		</div>
 	</div>
 	<script>
 	layui.use('element', function(){
