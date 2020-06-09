@@ -67,23 +67,22 @@
 			<form id="main" class="layui-form-item">
 				
 				<div class="layui-row layui-col-space10">
-				    <div class="layui-col-md11">
+				    <div class="layui-col-md9">
 				      <div class="grid-demo grid-demo-bg1">
 				      	<input class="layui-input" type="text" v-model="searchString" placeholder="输入搜索内容" />
 				      </div>
 				    </div>
-				    <div class="layui-col-md1">
+				    <div class="layui-col-md3">
 				      <div class="grid-demo">
-				      	<i id="search" class="layui-btn layui-icon layui-icon-search" style="font-size: 15px;" @click="getInfo()"></i>
+				      	<i id="search" class="layui-btn layui-icon layui-icon-search" style="font-size: 15px;" @click="getData()">搜索数据</i>
+				      	<i id="search" class="layui-btn layui-icon layui-icon-search" style="font-size: 15px;" @click="getInfo()">搜索日志</i>
 				      </div>
 				    </div>
 				</div>
 			 	<hr class="layui-bg-green" style="margin: 30px;">
 			 	<div>
 				 	<div v-for="article in articles" style="margin-top: 20px; padding: 20px;" class="layui-card">
-				 		<a v-bind:href="article.url">
-			            <i class="layui-icon layui-icon-release" style="margin-right: 10px;"></i><span>{{article.title}}</span>
-			            </a>
+			      <i class="layui-icon layui-icon-release" style="margin-right: 10px;"></i><span>{{article}}</span>
 				 	</div>
 			 	</div>
 			 
@@ -103,6 +102,8 @@
 </body>
 	
 	<script type="text/javascript">
+		layui.use('layer', function(){ //独立版的layer无需执行这一句
+	  var $ = layui.jquery, layer = layui.layer;
 		
 		var v1 = new Vue({
 			el: '#main',
@@ -113,52 +114,98 @@
 		        // title：可以显示查询结果的标题，也可以直接显示日志的全部信息。
 		        // url: 如果是业务数据，可以添加相应链接，跳转到相应页面，如果日志，可以不要链接，也可以再加一个查看日志的页面。
 		 
-		        articles: [
-		            {
-		                "title": "What You Need To Know About CSS Variables",
-		                "url": "/ljy/commodity"
-		            },
-		            {
-		                "title": "Freebie: 4 Great Looking Pricing Tables",
-		                "url": ""
-		            },
-		            {
-		                "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
-		                "url": "https://www.runoob.com/css3/css3-tutorial.html"
-		            },
-		            {
-		                "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
-		                "url": "https://www.runoob.com/css3/css3-tutorial.html"
-		            },
-		            {
-		                "title": "Learn SQL In 20 Minutes",
-		                "url": "https://www.runoob.com/sql/sql-tutorial.html"
-		            },
-		            {
-		                "title": "Creating Your First Desktop App With HTML, JS and Electron",
-		                "url": "https://www.runoob.com/js/js-tutorial.html"
-		            }
-		        ]
+		        articles: []
 		    },
+		  mounted() {
+				this.getInit();
+			},
 			methods: {
+				getInit() {
+					$.ajax({
+						type:'POST',
+						url:'http://127.0.0.1:9200/es_supermarket_data/_search',
+						data:{
+							"query": {
+								"match_all": {}
+							}
+						},
+						success: (datas) => {
+							this.articles = datas;
+						},
+						error: () => {
+							this.articles = [];
+							layer.alert("数据加载失败！请待会儿再试试吧!");
+						}
+					});
+				},
+				getData() {
+					$.ajax({
+						type:'POST',
+						url:'http://127.0.0.1:9200/es_supermarket_data/_search',
+						data:{
+							"query": {
+								"bool": {
+									"should": [
+										{"match": {"region": this.searchString}},
+										{"match": {"p_date": this.searchString}},
+										{"match": {"safe_date": this.searchString}},
+										{"match": {"stu_num": this.searchString}},
+										{"match": {"price": this.searchString}},
+										{"match": {"pnum": this.searchString}},
+										{"match": {"num": this.searchString}},
+										{"match": {"cnum": this.searchString}},
+										{"match": {"sum": this.searchString}},
+										{"match": {"indate": this.searchString}},
+										{"match": {"pmail": this.searchString}},
+										{"match": {"padd": this.searchString}},
+										{"match": {"pname": this.searchString}},
+										{"match": {"ptel": this.searchString}},
+										{"match": {"pnum": this.searchString}},
+										{"match": {"name": this.searchString}},
+										{"match": {"cname": this.searchString}}
+									]
+								}
+							}
+						},
+						success: (datas) => {
+							this.articles = datas;
+						},
+						error: () => {
+							this.articles = [];
+							layer.alert("搜索数据出错啦！请待会儿再试试吧!");
+						}
+					});
+				},
 				getInfo() {
-					ajax({
-						method: HTTP_METHOD.POST, 
-				   		url: "", 
-				   		params: "text="+this.searchString, 
-				   		async: true, 
-				   		type: HTTP_RESPONSE_TYPE.JSON, 
-				   		callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-				   			
-				   			this.articles = datas
-				   		}
-			   		})
+					$.ajax({
+						type:'POST',
+						url:'http://127.0.0.1:9200/eslog_supermarket/_search',
+						data:{
+							"query": {
+								"bool": {
+									"should": [
+										{"match": {"data": this.searchString}},
+										{"match": {"level": this.searchString}},
+										{"match": {"methodName": this.searchString}},
+										{"match": {"className": this.searchString}}
+									]
+								}
+							}
+						},
+						success: (datas) => {
+							this.articles = datas;
+						},
+						error: () => {
+							this.articles = [];
+							layer.alert("搜索日志出错啦！请待会儿再试试吧!");
+						}
+					});
 				}
 			}
 		})
 		
 		
-		
+		})
     
 		
 	</script>
