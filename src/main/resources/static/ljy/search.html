@@ -104,7 +104,7 @@
 	<script type="text/javascript">
 		layui.use('layer', function(){ //独立版的layer无需执行这一句
 	  var $ = layui.jquery, layer = layui.layer;
-		
+
 		var v1 = new Vue({
 			el: '#main',
 			data: {
@@ -123,7 +123,7 @@
 				getInit() {
 					$.ajax({
 						type:'POST',
-						url:'http://127.0.0.1:9200/es_supermarket_data/_search',
+						url:'http://localhost:9200/es_supermarket_data/_search?',
 						data:{
 							"query": {
 								"match_all": {}
@@ -141,7 +141,7 @@
 				getData() {
 					$.ajax({
 						type:'POST',
-						url:'http://127.0.0.1:9200/es_supermarket_data/_search',
+						url:'http://localhost:9200/es_supermarket_data/_search?',
 						data:{
 							"query": {
 								"bool": {
@@ -179,7 +179,7 @@
 				getInfo() {
 					$.ajax({
 						type:'POST',
-						url:'http://127.0.0.1:9200/eslog_supermarket/_search',
+						url:'http://localhost:9200/eslog_supermarket/_search?',
 						data:{
 							"query": {
 								"bool": {
