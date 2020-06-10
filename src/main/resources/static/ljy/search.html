@@ -104,7 +104,6 @@
 	<script type="text/javascript">
 		layui.use('layer', function(){ //独立版的layer无需执行这一句
 	  var $ = layui.jquery, layer = layui.layer;
-
 		var v1 = new Vue({
 			el: '#main',
 			data: {
@@ -123,14 +122,15 @@
 				getInit() {
 					$.ajax({
 						type:'POST',
-						url:'http://localhost:9200/es_supermarket_data/_search?',
+						url:'http://localhost:9200/es_supermarket_data/_search',
 						data:{
 							"query": {
 								"match_all": {}
 							}
 						},
+						dataType: 'json',
 						success: (datas) => {
-							this.articles = datas;
+							this.articles = datas.hits.hits;
 						},
 						error: () => {
 							this.articles = [];
@@ -141,34 +141,20 @@
 				getData() {
 					$.ajax({
 						type:'POST',
-						url:'http://localhost:9200/es_supermarket_data/_search?',
-						data:{
-							"query": {
+						url:'http://localhost:9200/es_supermarket_data/_search',
+						contentType: 'application/json',
+						data:JSON.stringify({"query": {
 								"bool": {
 									"should": [
-										{"match": {"region": this.searchString}},
-										{"match": {"p_date": this.searchString}},
-										{"match": {"safe_date": this.searchString}},
-										{"match": {"stu_num": this.searchString}},
-										{"match": {"price": this.searchString}},
-										{"match": {"pnum": this.searchString}},
-										{"match": {"num": this.searchString}},
-										{"match": {"cnum": this.searchString}},
-										{"match": {"sum": this.searchString}},
-										{"match": {"indate": this.searchString}},
-										{"match": {"pmail": this.searchString}},
-										{"match": {"padd": this.searchString}},
-										{"match": {"pname": this.searchString}},
-										{"match": {"ptel": this.searchString}},
-										{"match": {"pnum": this.searchString}},
-										{"match": {"name": this.searchString}},
-										{"match": {"cname": this.searchString}}
+										{"match": {"name": "\"" + this.searchString + "\""}},
+										{"match": {"cnum": "\"" + this.searchString + "\""}},
+										{"match": {"region": "\"" + this.searchString + "\""}},
+										{"match": {"pnum": "\"" + this.searchString + "\""}}
 									]
 								}
-							}
-						},
+							}}),
 						success: (datas) => {
-							this.articles = datas;
+							this.articles = datas.hits.hits;
 						},
 						error: () => {
 							this.articles = [];
@@ -179,25 +165,24 @@
 				getInfo() {
 					$.ajax({
 						type:'POST',
-						url:'http://localhost:9200/eslog_supermarket/_search?',
-						data:{
+						url:'http://localhost:9200/eslog_supermarket/_search',
+						contentType: 'application/json',
+						data:JSON.stringify({
 							"query": {
 								"bool": {
 									"should": [
-										{"match": {"data": this.searchString}},
-										{"match": {"level": this.searchString}},
-										{"match": {"methodName": this.searchString}},
-										{"match": {"className": this.searchString}}
+										{"match": {"data": "\"" + this.searchString + "\""}},
+										{"match": {"level": "\"" + this.searchString + "\""}},
 									]
 								}
 							}
-						},
+						}),
 						success: (datas) => {
-							this.articles = datas;
+							this.articles = datas.hits.hits;
 						},
 						error: () => {
 							this.articles = [];
-							layer.alert("搜索日志出错啦！请待会儿再试试吧!");
+							layer.alert("搜索日志出错啦！请待会儿再试试吧!" + this.searchString);
 						}
 					});
 				}
